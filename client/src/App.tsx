@@ -14,7 +14,7 @@ import CoursePage from "./pages/CoursePage";
 import QuizPage from "./pages/QuizPage";
 import PaywallPage from "./pages/PaywallPage";
 
-function App() {
+function AppContent() {
   const { currentLevel, completedLevels, userLanguage } = useProgress();
 
   const renderAppContent = () => (
@@ -33,6 +33,16 @@ function App() {
   );
 
   return (
+    <Switch>
+      <Route path={"/"} component={Home} />
+      <Route path={"/onboarding"} component={Onboarding} />
+      <Route path={".*"}>{renderAppContent()}</Route>
+    </Switch>
+  );
+}
+
+function App() {
+  return (
     <ErrorBoundary>
       <LanguageProvider>
         <ThemeProvider
@@ -42,11 +52,7 @@ function App() {
           <TooltipProvider>
             <Toaster />
             <ProgressProvider>
-              <Switch>
-                <Route path={"/"} component={Home} />
-                <Route path={"/onboarding"} component={Onboarding} />
-                <Route path={".*"}>{renderAppContent()}</Route>
-              </Switch>
+              <AppContent />
             </ProgressProvider>
           </TooltipProvider>
         </ThemeProvider>
