@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ProgressProvider, useProgress } from "./contexts/ProgressContext";
 import Sidebar from "./components/Sidebar";
+import FloatingAICoach from "./components/FloatingAICoach";
 import Home from "./pages/Home";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
@@ -29,6 +30,7 @@ function AppContent() {
           <Route path={".*"} component={NotFound} /> {/* Fallback for other routes with sidebar */}
         </Switch>
       </main>
+      <FloatingAICoach />
     </div>
   );
 

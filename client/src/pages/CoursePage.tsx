@@ -12,7 +12,6 @@ export default function CoursePage() {
   const [userId, setUserId] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
   const [exerciseCompleted, setExerciseCompleted] = useState(false);
-  const [showExercise, setShowExercise] = useState(false);
 
   const level = params?.level ? parseInt(params.level) : 1;
   const module = getModuleByLevel(level);
@@ -51,7 +50,6 @@ export default function CoursePage() {
     if (!isLastSlide) {
       setCurrentSlide(currentSlide + 1);
       setExerciseCompleted(false);
-      setShowExercise(false);
       window.scrollTo(0, 0);
     }
   };
@@ -60,7 +58,6 @@ export default function CoursePage() {
     if (!isFirstSlide) {
       setCurrentSlide(currentSlide - 1);
       setExerciseCompleted(false);
-      setShowExercise(false);
       window.scrollTo(0, 0);
     }
   };
@@ -102,9 +99,7 @@ export default function CoursePage() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left: Video and Content */}
-          <div className="lg:col-span-2 space-y-8">
+        <div className="space-y-8">
             {/* Video */}
             <Card className="border-0 shadow-sm overflow-hidden">
               <div className="aspect-video bg-black flex items-center justify-center">
@@ -177,64 +172,34 @@ export default function CoursePage() {
                 ))}
               </ul>
             </Card>
-          </div>
-
-          {/* Right: Exercise Sidebar */}
-          <div className="lg:col-span-1">
-            <Card className="p-6 border-0 shadow-sm sticky top-24">
-              <h3 className="font-semibold text-gray-900 mb-4">📝 Exercice Pratique</h3>
-
-              {!showExercise ? (
-                <div className="space-y-4">
-                  <p className="text-sm text-gray-700">
-                    <strong>{slide.exercise.title}</strong>
-                  </p>
-                  <p className="text-xs text-gray-600">{slide.exercise.description}</p>
-                  <p className="text-xs text-gray-500">
-                    ⏱️ {slide.exercise.estimatedTime}
-                  </p>
-                  <Button
-                    onClick={() => setShowExercise(true)}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                  >
-                    <Play size={16} className="mr-2" />
-                    Commencer l'exercice
-                  </Button>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-sm text-gray-900 mb-3">
-                      Étapes:
-                    </h4>
-                    <ol className="space-y-2">
-                      {slide.exercise.steps.map((step: string, idx: number) => (
-                        <li key={idx} className="text-xs text-gray-700">
-                          <span className="font-semibold">{idx + 1}.</span> {step}
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-
-                  <Button
-                    onClick={() => setExerciseCompleted(true)}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white"
-                  >
-                    <CheckCircle size={16} className="mr-2" />
-                    Exercice Terminé
-                  </Button>
-
-                  {exerciseCompleted && (
-                    <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
-                      <p className="text-xs text-green-800 font-semibold">
-                        ✓ Excellent! Tu as complété l'exercice.
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </Card>
-          </div>
+          <Card className="p-6 border-0 shadow-sm">
+            <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+              <h3 className="font-semibold text-gray-900">Exercice pratique</h3>
+              <p className="text-xs text-gray-500">Durée estimée: {slide.exercise.estimatedTime}</p>
+            </div>
+            <p className="text-sm font-semibold text-gray-900 mb-2">{slide.exercise.title}</p>
+            <ol className="space-y-2 mb-5">
+              {slide.exercise.steps.map((step: string, idx: number) => (
+                <li key={idx} className="text-sm text-gray-700">
+                  <span className="font-semibold">{idx + 1}.</span> {step}
+                </li>
+              ))}
+            </ol>
+            <Button
+              onClick={() => setExerciseCompleted(true)}
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
+              <CheckCircle size={16} className="mr-2" />
+              Exercice terminé
+            </Button>
+            {exerciseCompleted && (
+              <div className="p-3 mt-4 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-xs text-green-800 font-semibold">
+                  ✓ Excellent! Tu as complété l'exercice.
+                </p>
+              </div>
+            )}
+          </Card>
         </div>
 
         {/* Navigation */}

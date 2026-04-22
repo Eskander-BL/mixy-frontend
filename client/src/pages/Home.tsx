@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 export default function Home() {
   const [, navigate] = useLocation();
@@ -19,9 +20,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-white to-gray-50 flex items-center justify-center p-4">
       <div className="max-w-2xl text-center">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
-          DJ Academy
-        </h1>
+        <img src={logo} alt="Mixy Logo" className="h-20 w-auto mx-auto mb-4" />
+        <h1 className="text-5xl font-bold text-gray-900 mb-4">Mixy</h1>
         <p className="text-xl text-gray-600 mb-8">
           Apprends à mixer comme un pro. Pas de théorie ennuyeuse, juste de la pratique.
         </p>

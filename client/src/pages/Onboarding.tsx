@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { useLocation } from "wouter";
 import { ChevronRight } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 type OnboardingStep =
   | "language"
@@ -154,7 +155,7 @@ export default function Onboarding() {
   const goalNames: Record<string, string> = {
     fun: "Mixer pour le fun",
     party: "Soirées entre amis",
-    club: "Mixer en club",
+    club: "Apprendre les bases du mix en club",
     pro: "Devenir DJ professionnel",
   };
 
@@ -244,8 +245,9 @@ export default function Onboarding() {
         {step === "name" && (
           <div className="space-y-6 animate-fadeIn">
             <div>
+              <img src={logo} alt="Mixy Logo" className="h-16 w-auto mb-4" />
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Bienvenue sur DJ Academy 🎧
+                Bienvenue sur Mixy 🎧
               </h1>
               <p className="text-gray-600">
                 Commençons par connaître ton nom.

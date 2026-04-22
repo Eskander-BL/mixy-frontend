@@ -667,6 +667,163 @@ export const allModules: CourseModule[] = [
   level3Module,
   level4Module,
   level5Module,
+  {
+    level: 6,
+    title: "Techniques Avancées: Loops et Effets",
+    description: "Développe des transitions créatives avec les outils avancés.",
+    userLevels: ["beginner", "intermediate", "advanced"],
+    totalSlides: 1,
+    estimatedDuration: "20 minutes",
+    slides: [
+      {
+        slideNumber: 1,
+        title: "Loops, FX et timing",
+        subtitle: "Créer une transition expressive sans perdre le groove",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoDescription: "Introduction rapide aux techniques avancées de performance.",
+        content:
+          "Dans ce niveau, tu apprends à manipuler des loops et des effets pour prolonger les transitions et créer des moments marquants.",
+        keyTakeaway: "Un effet bien dosé amplifie l'énergie sans casser le mix.",
+        exercise: {
+          title: "Créer une transition avec loop",
+          description: "Pratique un enchaînement simple avec loop + filtre.",
+          steps: [
+            "Choisis deux morceaux au BPM proche",
+            "Active un loop 4 temps sur la sortie du morceau A",
+            "Lance le morceau B et ajuste le volume progressivement",
+            "Ajoute un filtre léger puis enlève le loop",
+          ],
+          estimatedTime: "8 minutes",
+        },
+        tips: ["Reste subtil", "Évite d'empiler trop d'effets", "Privilégie le timing"],
+      },
+    ],
+  },
+  {
+    level: 7,
+    title: "Lire la Foule",
+    description: "Adapter ton set en temps réel selon la piste.",
+    userLevels: ["beginner", "intermediate", "advanced"],
+    totalSlides: 1,
+    estimatedDuration: "15 minutes",
+    slides: [
+      {
+        slideNumber: 1,
+        title: "Signaux de la piste",
+        subtitle: "Observer pour mieux décider",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoDescription: "Comment choisir le prochain morceau en observant la salle.",
+        content:
+          "Tu vas apprendre à reconnaître les signes d'engagement et à ajuster ton énergie musicale selon la réaction du public.",
+        keyTakeaway: "Un bon DJ lit la foule avant de choisir son prochain move.",
+        exercise: {
+          title: "Décision en 10 secondes",
+          description: "Travaille la prise de décision rapide.",
+          steps: [
+            "Observe 3 indicateurs: danse, déplacements, interactions",
+            "Note si l'énergie monte, stagne ou baisse",
+            "Choisis un morceau qui corrige la dynamique",
+          ],
+          estimatedTime: "5 minutes",
+        },
+        tips: ["Reste flexible", "Prépare des alternatives", "Observe en continu"],
+      },
+    ],
+  },
+  {
+    level: 8,
+    title: "Construction de Set",
+    description: "Organiser une montée d'énergie cohérente.",
+    userLevels: ["beginner", "intermediate", "advanced"],
+    totalSlides: 1,
+    estimatedDuration: "20 minutes",
+    slides: [
+      {
+        slideNumber: 1,
+        title: "Architecture d'un set",
+        subtitle: "Intro, montée, pic, respiration",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoDescription: "Les blocs clés pour structurer une session efficace.",
+        content:
+          "Ce niveau te guide pour structurer ton set avec une logique claire et conserver l'attention du public sur toute la durée.",
+        keyTakeaway: "Un set réussi suit une trajectoire émotionnelle lisible.",
+        exercise: {
+          title: "Plan de set en 4 blocs",
+          description: "Créer un mini plan de 30 minutes.",
+          steps: [
+            "Choisis 2 morceaux d'intro",
+            "Ajoute 3 morceaux de montée",
+            "Place 2 morceaux forts pour le pic",
+            "Prévois 1 morceau de respiration",
+          ],
+          estimatedTime: "10 minutes",
+        },
+        tips: ["Prépare des transitions clés", "Garde une marge d'impro", "Teste ton plan"],
+      },
+    ],
+  },
+  {
+    level: 9,
+    title: "Performance Club",
+    description: "Gérer pression, transitions longues et timing réel.",
+    userLevels: ["beginner", "intermediate", "advanced"],
+    totalSlides: 1,
+    estimatedDuration: "20 minutes",
+    slides: [
+      {
+        slideNumber: 1,
+        title: "Routine live",
+        subtitle: "Rester solide sous pression",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoDescription: "Préparer et exécuter une performance club maîtrisée.",
+        content:
+          "Tu vas cadrer ta routine live: préparation, check rapide, gestion du stress et maintien de la qualité sonore.",
+        keyTakeaway: "La préparation réduit le stress et sécurise la performance.",
+        exercise: {
+          title: "Checklist pré-set",
+          description: "Valide les points critiques avant de jouer.",
+          steps: [
+            "Vérifie niveau de sortie et casque",
+            "Teste un enchaînement de secours",
+            "Prépare 3 morceaux sûrs pour relancer",
+          ],
+          estimatedTime: "6 minutes",
+        },
+        tips: ["Respire", "Reste simple", "Sécurise ton intro"],
+      },
+    ],
+  },
+  {
+    level: 10,
+    title: "Maîtrise Complète",
+    description: "Consolider ta signature artistique et technique.",
+    userLevels: ["beginner", "intermediate", "advanced"],
+    totalSlides: 1,
+    estimatedDuration: "25 minutes",
+    slides: [
+      {
+        slideNumber: 1,
+        title: "Ton style DJ",
+        subtitle: "Construire une identité claire",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoDescription: "Transformer ta technique en identité de performance.",
+        content:
+          "Dernier niveau: tu alignes technique, sélection musicale et storytelling pour créer une identité cohérente.",
+        keyTakeaway: "Le niveau pro, c'est la constance et une identité forte.",
+        exercise: {
+          title: "Mini set signature",
+          description: "Composer un set court qui te ressemble.",
+          steps: [
+            "Sélectionne 5 morceaux qui définissent ton univers",
+            "Écris ton intention d'énergie pour chaque transition",
+            "Répète le set 2 fois en notant les ajustements",
+          ],
+          estimatedTime: "12 minutes",
+        },
+        tips: ["Sois cohérent", "Mets en avant ta couleur", "Répète régulièrement"],
+      },
+    ],
+  },
 ];
 
 export function getModuleByLevel(level: number): CourseModule | null {
