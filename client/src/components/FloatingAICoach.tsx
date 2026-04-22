@@ -57,7 +57,7 @@ export default function FloatingAICoach() {
       {open && (
         <div
           className="fixed z-50 w-[340px] max-w-[calc(100vw-1rem)] rounded-2xl border bg-white shadow-2xl overflow-hidden"
-          style={{ left: "16px", bottom: "80px", right: "auto" }}
+          style={{ right: "16px", bottom: "80px", left: "auto" }}
         >
           <div className="px-4 py-3 border-b bg-white flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -93,7 +93,7 @@ export default function FloatingAICoach() {
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         className="fixed z-50 h-14 w-14 rounded-full p-0 shadow-lg border-2 border-white bg-gradient-to-br from-orange-400 to-blue-600 hover:from-orange-500 hover:to-blue-700"
-        style={{ left: "16px", bottom: "16px", right: "auto" }}
+        style={{ right: "16px", bottom: "16px", left: "auto" }}
         aria-label="Ouvrir le coach IA"
       >
         <span className="text-2xl leading-none">🦊</span>
