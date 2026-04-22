@@ -94,18 +94,24 @@ const Sidebar: React.FC<SidebarProps> = ({
             <Link
               key={level}
               href={`/course/${level}`}
-              className={`flex items-center gap-2 p-2.5 rounded-lg text-sm transition-colors ${
-                isCurrent ? "bg-blue-600 shadow-sm shadow-blue-900/30" : ""
-              } ${status === "locked" ? "opacity-60 cursor-not-allowed" : "hover:bg-gray-700"}`}
+              className={`grid grid-cols-[28px_1fr_16px] items-center gap-2 p-2.5 rounded-lg text-sm transition-colors ${
+                isCurrent ? "bg-blue-600 shadow-sm shadow-blue-900/30 border border-blue-400/30" : "border border-transparent"
+              } ${status === "locked" ? "opacity-60 cursor-not-allowed" : "hover:bg-gray-700/90"}`}
               onClick={(e) => status === "locked" && e.preventDefault()}
             >
-              <span className="text-xs font-semibold w-4 text-center">{level}</span>
-              {!collapsed && <span className="truncate">{renderLevelTitle(level, title)}</span>}
+              <span className="h-6 w-6 rounded-full bg-white/10 text-[11px] font-semibold flex items-center justify-center">
+                {level}
+              </span>
+              {!collapsed && (
+                <span className="text-[12px] leading-4 pr-1">
+                  {renderLevelTitle(level, title)}
+                </span>
+              )}
               {isCompleted && (
-                <CheckCircle2 className="ml-auto h-4 w-4 text-green-400 shrink-0" />
+                <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0 justify-self-end" />
               )}
               {status === "locked" && (
-                <Lock className="ml-auto h-4 w-4 text-gray-300 shrink-0" />
+                <Lock className="h-4 w-4 text-gray-300 shrink-0 justify-self-end" />
               )}
             </Link>
           );

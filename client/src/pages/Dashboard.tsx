@@ -162,13 +162,27 @@ export default function Dashboard() {
           <div className="flex flex-wrap items-center gap-4 mb-6">
             <img src={logo} alt="Mixy Logo" className="h-12 md:h-16 w-auto cursor-pointer hover:opacity-80 transition" onClick={() => navigate("/dashboard")} />
             <div className="ml-auto flex flex-wrap gap-2">
-              <Button variant="outline" size="sm" className="rounded-full border-gray-300 px-4" onClick={() => setShowContactDialog(true)}>
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full border-amber-300 text-amber-700 bg-amber-50 hover:bg-amber-100 px-4"
+                onClick={() => setShowContactDialog(true)}
+              >
                 Contact
               </Button>
-              <Button variant="outline" size="sm" className="rounded-full border-gray-300 px-4" onClick={() => setShowLevelDialog(true)}>
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full border-purple-300 text-purple-700 bg-purple-50 hover:bg-purple-100 px-4"
+                onClick={() => setShowLevelDialog(true)}
+              >
                 Modifier mon niveau
               </Button>
-              <Button size="sm" className="rounded-full px-4 bg-blue-600 hover:bg-blue-700" onClick={() => navigate("/onboarding")}>
+              <Button
+                size="sm"
+                className="rounded-full px-4 bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
+                onClick={() => navigate("/onboarding")}
+              >
                 Revenir à l'onboarding
               </Button>
             </div>
