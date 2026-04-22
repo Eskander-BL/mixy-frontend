@@ -156,12 +156,12 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50/40">
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex flex-wrap items-center gap-4 mb-6">
             <img src={logo} alt="Mixy Logo" className="h-16 w-auto cursor-pointer hover:opacity-80 transition" onClick={() => navigate("/dashboard")} />
-            <div className="ml-auto flex gap-2">
+            <div className="ml-auto flex flex-wrap gap-2">
               <Button variant="outline" onClick={() => setShowContactDialog(true)}>
                 Contact
               </Button>
@@ -196,7 +196,7 @@ export default function Dashboard() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <Card className="p-6 border-0 shadow-sm bg-white">
+        <Card className="p-7 border border-blue-100 shadow-md bg-white/90 backdrop-blur">
           <p className="text-sm font-semibold text-blue-700 mb-2">Niveau actif</p>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
             Niveau {activeLevel} - {activeModule?.title}

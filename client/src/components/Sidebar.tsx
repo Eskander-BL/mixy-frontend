@@ -41,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentLevel, completedLevels, userLa
   }, [completedLevels.length, levels]);
 
   return (
-    <div className={`${collapsed ? "w-16" : "w-72"} bg-gray-900 text-white p-3 transition-all duration-300 space-y-2 border-r border-gray-800`}>
+    <div className={`${collapsed ? "w-16" : "w-72"} bg-gradient-to-b from-gray-900 to-gray-950 text-white p-3 transition-all duration-300 space-y-2 border-r border-gray-800`}>
       <div className="flex items-center justify-between mb-2">
         {!collapsed && <h2 className="text-xl font-bold">Cours DJ</h2>}
         <button
@@ -53,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentLevel, completedLevels, userLa
           {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
         </button>
       </div>
-      <nav className="space-y-1">
+      <nav className="space-y-1.5">
         {levels.map(({ level, title }) => {
           const status = getLevelStatus(level);
           const isCompleted = completedLevels.includes(level);
@@ -63,10 +63,10 @@ const Sidebar: React.FC<SidebarProps> = ({ currentLevel, completedLevels, userLa
             <Link
               key={level}
               href={`/course/${level}`}
-              className={`flex items-center gap-2 p-2 rounded-md text-sm ${
-                isCurrent ? "bg-blue-600" : ""
+              className={`flex items-center gap-2 p-2.5 rounded-lg text-sm transition-colors ${
+                isCurrent ? "bg-blue-600 shadow-sm shadow-blue-900/30" : ""
               } ${status === "locked" ? "opacity-60 cursor-not-allowed" : "hover:bg-gray-700"}`}
-              onClick={(e) => status === 'locked' && e.preventDefault()}
+              onClick={(e) => status === "locked" && e.preventDefault()}
             >
               <span className="text-xs font-semibold">{level}</span>
               {!collapsed && <span className="truncate">{renderLevelTitle(level, title)}</span>}
@@ -81,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentLevel, completedLevels, userLa
         })}
       </nav>
       {!collapsed && (
-        <p className="text-xs text-gray-300 pt-3">
+        <p className="text-xs text-gray-300 pt-3 border-t border-gray-800">
           Temps estimé restant: {remainingMinutes} minutes
         </p>
       )}

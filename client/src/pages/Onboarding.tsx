@@ -183,7 +183,7 @@ export default function Onboarding() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md p-8 border-0 shadow-lg">
+      <Card className="w-full max-w-md p-8 border-0 shadow-xl rounded-2xl">
         {/* Progress Bar */}
         {step !== "summary" && (
           <div className="mb-8">
@@ -244,11 +244,9 @@ export default function Onboarding() {
 
         {step === "name" && (
           <div className="space-y-6 animate-fadeIn">
-            <div>
-              <img src={logo} alt="Mixy Logo" className="h-16 w-auto mb-4" />
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Bienvenue sur Mixy 🎧
-              </h1>
+            <div className="text-center">
+              <img src={logo} alt="Mixy Logo" className="h-20 w-auto mx-auto mb-5" />
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">Bienvenue 🎧</h1>
               <p className="text-gray-600">
                 Commençons par connaître ton nom.
               </p>
