@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
-import { Bot, MessageCircle } from "lucide-react";
+import { Bot, MessageCircle, X } from "lucide-react";
 import { useLocation } from "wouter";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
@@ -9,6 +8,7 @@ import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive"
 
 export default function FloatingAICoach() {
   const [location] = useLocation();
+  const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "system", content: "You are Mixy Coach." },
     {
@@ -53,33 +53,47 @@ export default function FloatingAICoach() {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button
-          size="icon"
-          className="fixed bottom-4 left-4 md:bottom-5 md:left-5 z-50 h-12 w-12 md:h-14 md:w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"
-          aria-label="Ouvrir le coach IA"
-        >
-          <MessageCircle size={20} />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="w-[95vw] md:max-w-2xl p-0 overflow-hidden">
-        <DialogHeader className="px-6 pt-5 pb-2 border-b">
-          <DialogTitle className="flex items-center gap-2">
-            <Bot size={18} />
-            Coach IA Mixy
-          </DialogTitle>
-        </DialogHeader>
-        <div className="p-3 md:p-4">
-          <AIChatBox
-            messages={messages}
-            onSendMessage={handleSendMessage}
-            isLoading={chatMutation.isPending}
-            height={"min(70vh,500px)"}
-            placeholder="Écris ta question DJ..."
-          />
+    <>
+      {open && (
+        <div className="fixed bottom-20 left-3 md:left-6 z-50 w-[340px] max-w-[calc(100vw-1rem)] rounded-2xl border bg-white shadow-2xl overflow-hidden">
+          <div className="px-4 py-3 border-b bg-white flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center">
+                <Bot size={16} />
+              </div>
+              <div>
+                <p className="text-sm font-semibold leading-none">Mixy Coach</p>
+                <p className="text-xs text-gray-500 mt-1">Pose-moi tes questions DJ</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="h-7 w-7 rounded-md hover:bg-gray-100 flex items-center justify-center text-gray-500"
+              aria-label="Fermer le chat"
+            >
+              <X size={15} />
+            </button>
+          </div>
+          <div className="p-2">
+            <AIChatBox
+              messages={messages}
+              onSendMessage={handleSendMessage}
+              isLoading={chatMutation.isPending}
+              height={"440px"}
+              placeholder="Pose ta question..."
+            />
+          </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      )}
+      <Button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        className="fixed bottom-4 left-4 md:bottom-5 md:left-6 z-50 h-14 w-14 rounded-full p-0 shadow-lg border-2 border-white bg-gradient-to-br from-orange-400 to-blue-600 hover:from-orange-500 hover:to-blue-700"
+        aria-label="Ouvrir le coach IA"
+      >
+        <span className="text-2xl leading-none">🦊</span>
+      </Button>
+    </>
   );
 }

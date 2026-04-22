@@ -98,8 +98,19 @@ export default function CoursePage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="space-y-8">
+          <Card className="p-4 bg-blue-50 border border-blue-200 sticky top-20 z-[5]">
+            <p className="text-sm text-blue-900">
+              <strong>Module:</strong> {module.title}
+            </p>
+            <p className="text-sm text-blue-900 mt-1">
+              <strong>Durée totale:</strong> {module.estimatedDuration}
+            </p>
+            <p className="text-sm text-blue-900 mt-1">
+              <strong>Progression:</strong> {currentSlide} / {module.totalSlides} slides
+            </p>
+          </Card>
             {/* Video */}
             <Card className="border-0 shadow-sm overflow-hidden">
               <div className="aspect-video bg-black flex items-center justify-center">
@@ -233,18 +244,6 @@ export default function CoursePage() {
           )}
         </div>
 
-        {/* Module Info */}
-        <div className="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-sm text-blue-900">
-            <strong>Module:</strong> {module.title}
-          </p>
-          <p className="text-sm text-blue-900 mt-1">
-            <strong>Durée totale:</strong> {module.estimatedDuration}
-          </p>
-          <p className="text-sm text-blue-900 mt-1">
-            <strong>Progression:</strong> {currentSlide} / {module.totalSlides} slides
-          </p>
-        </div>
       </div>
     </div>
   );

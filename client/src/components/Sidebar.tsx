@@ -48,6 +48,13 @@ const Sidebar: React.FC<SidebarProps> = ({
     return Math.max(total, 0);
   }, [completedLevels.length, levels]);
 
+  const formatDuration = (minutes: number) => {
+    if (minutes < 60) return `${minutes} min`;
+    const h = Math.floor(minutes / 60);
+    const min = minutes % 60;
+    return min === 0 ? `${h}h` : `${h}h${String(min).padStart(2, "0")}`;
+  };
+
   return (
     <div
       className={`${
@@ -56,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
       }`}
     >
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between mb-2 pb-2 border-b border-gray-800">
         {!collapsed && <h2 className="text-xl font-bold">Cours DJ</h2>}
         <div className="flex items-center gap-2">
           <button
@@ -92,7 +99,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               } ${status === "locked" ? "opacity-60 cursor-not-allowed" : "hover:bg-gray-700"}`}
               onClick={(e) => status === "locked" && e.preventDefault()}
             >
-              <span className="text-xs font-semibold">{level}</span>
+              <span className="text-xs font-semibold w-4 text-center">{level}</span>
               {!collapsed && <span className="truncate">{renderLevelTitle(level, title)}</span>}
               {isCompleted && (
                 <CheckCircle2 className="ml-auto h-4 w-4 text-green-400 shrink-0" />
@@ -105,9 +112,10 @@ const Sidebar: React.FC<SidebarProps> = ({
         })}
       </nav>
       {!collapsed && (
-        <p className="text-xs text-gray-300 pt-3 border-t border-gray-800">
-          Temps estimé restant: {remainingMinutes} minutes
-        </p>
+        <div className="text-xs text-gray-300 pt-3 border-t border-gray-800">
+          <p className="font-medium">Temps estimé restant</p>
+          <p className="mt-1 text-gray-200 text-sm">{formatDuration(remainingMinutes)}</p>
+        </div>
       )}
     </div>
   );

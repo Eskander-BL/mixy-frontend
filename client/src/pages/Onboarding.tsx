@@ -122,6 +122,12 @@ export default function Onboarding() {
   const handleSaveOnboarding = () => {
     if (!userId) return;
 
+    const progressPayload = {
+      currentLevel: 1,
+      completedLevels: [],
+      scores: {},
+    };
+
     saveOnboardingMutation.mutate(
       {
         userId,
@@ -135,11 +141,12 @@ export default function Onboarding() {
       },
       {
         onSuccess: () => {
-          localStorage.setItem("userProgress", JSON.stringify({
-            currentLevel: 1,
-            completedLevels: [],
-            scores: {},
-          }));
+          localStorage.setItem("userProgress", JSON.stringify(progressPayload));
+          navigate("/dashboard");
+        },
+        onError: () => {
+          // Fallback UX: l'utilisateur ne reste pas bloqué sur le dernier écran.
+          localStorage.setItem("userProgress", JSON.stringify(progressPayload));
           navigate("/dashboard");
         },
       }
