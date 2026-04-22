@@ -7,9 +7,17 @@ interface SidebarProps {
   currentLevel: number;
   completedLevels: number[];
   userLanguage: "en" | "fr";
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ currentLevel, completedLevels, userLanguage }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  currentLevel,
+  completedLevels,
+  userLanguage,
+  mobileOpen = false,
+  onCloseMobile,
+}) => {
   const [collapsed, setCollapsed] = useState(false);
   const levels = allModules.map((module) => ({
     level: module.level,
@@ -41,17 +49,33 @@ const Sidebar: React.FC<SidebarProps> = ({ currentLevel, completedLevels, userLa
   }, [completedLevels.length, levels]);
 
   return (
-    <div className={`${collapsed ? "w-16" : "w-72"} bg-gradient-to-b from-gray-900 to-gray-950 text-white p-3 transition-all duration-300 space-y-2 border-r border-gray-800`}>
+    <div
+      className={`${
+        collapsed ? "md:w-16" : "md:w-72"
+      } w-72 bg-gradient-to-b from-gray-900 to-gray-950 text-white p-3 transition-all duration-300 space-y-2 border-r border-gray-800 fixed md:static inset-y-0 left-0 z-40 ${
+        mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+      }`}
+    >
       <div className="flex items-center justify-between mb-2">
         {!collapsed && <h2 className="text-xl font-bold">Cours DJ</h2>}
-        <button
-          type="button"
-          onClick={() => setCollapsed((prev) => !prev)}
-          className="h-8 w-8 flex items-center justify-center rounded-md bg-gray-800 hover:bg-gray-700"
-          aria-label={collapsed ? "Ouvrir la barre des niveaux" : "Fermer la barre des niveaux"}
-        >
-          {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setCollapsed((prev) => !prev)}
+            className="h-8 w-8 hidden md:flex items-center justify-center rounded-md bg-gray-800 hover:bg-gray-700"
+            aria-label={collapsed ? "Ouvrir la barre des niveaux" : "Fermer la barre des niveaux"}
+          >
+            {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+          </button>
+          <button
+            type="button"
+            onClick={onCloseMobile}
+            className="h-8 w-8 flex md:hidden items-center justify-center rounded-md bg-gray-800 hover:bg-gray-700 text-xs"
+            aria-label="Fermer la navigation mobile"
+          >
+            ✕
+          </button>
+        </div>
       </div>
       <nav className="space-y-1.5">
         {levels.map(({ level, title }) => {

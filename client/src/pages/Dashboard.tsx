@@ -158,21 +158,21 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50/40">
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="max-w-6xl mx-auto px-4 py-5 md:py-8">
           <div className="flex flex-wrap items-center gap-4 mb-6">
-            <img src={logo} alt="Mixy Logo" className="h-16 w-auto cursor-pointer hover:opacity-80 transition" onClick={() => navigate("/dashboard")} />
+            <img src={logo} alt="Mixy Logo" className="h-12 md:h-16 w-auto cursor-pointer hover:opacity-80 transition" onClick={() => navigate("/dashboard")} />
             <div className="ml-auto flex flex-wrap gap-2">
-              <Button variant="outline" onClick={() => setShowContactDialog(true)}>
+              <Button variant="outline" size="sm" onClick={() => setShowContactDialog(true)}>
                 Contact
               </Button>
-              <Button variant="outline" onClick={() => setShowLevelDialog(true)}>
+              <Button variant="outline" size="sm" onClick={() => setShowLevelDialog(true)}>
                 Modifier mon niveau
               </Button>
-              <Button onClick={() => navigate("/onboarding")}>Revenir à l'onboarding</Button>
+              <Button size="sm" onClick={() => navigate("/onboarding")}>Revenir à l'onboarding</Button>
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Ton Parcours Mixy</h1>
-          <p className="text-gray-600">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Ton Parcours Mixy</h1>
+          <p className="text-sm md:text-base text-gray-600">
             Les niveaux sont maintenant dans la barre à gauche. Tu peux lancer directement ton exercice ici.
           </p>
 
@@ -195,10 +195,10 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <Card className="p-7 border border-blue-100 shadow-md bg-white/90 backdrop-blur">
+      <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
+        <Card className="p-5 md:p-7 border border-blue-100 shadow-md bg-white/90 backdrop-blur">
           <p className="text-sm font-semibold text-blue-700 mb-2">Niveau actif</p>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
             Niveau {activeLevel} - {activeModule?.title}
           </h2>
           <p className="text-sm text-gray-600 mb-6">{activeModule?.description}</p>

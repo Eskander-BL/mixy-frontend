@@ -182,8 +182,8 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md p-8 border-0 shadow-xl rounded-2xl">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-3 md:p-4">
+      <Card className="w-full max-w-md p-5 md:p-8 border-0 shadow-xl rounded-2xl">
         {/* Progress Bar */}
         {step !== "summary" && (
           <div className="mb-8">
@@ -246,7 +246,7 @@ export default function Onboarding() {
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center">
               <img src={logo} alt="Mixy Logo" className="h-20 w-auto mx-auto mb-5" />
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">Bienvenue 🎧</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Bienvenue 🎧</h1>
               <p className="text-gray-600">
                 Commençons par connaître ton nom.
               </p>
@@ -259,13 +259,13 @@ export default function Onboarding() {
                 setFormData({ ...formData, name: e.target.value })
               }
               onKeyPress={(e) => e.key === "Enter" && handleNameSubmit()}
-              className="text-lg py-6"
+              className="text-base md:text-lg py-5 md:py-6"
               autoFocus
             />
             <Button
               onClick={handleNameSubmit}
               disabled={!formData.name.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 md:py-6 text-base md:text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               Continuer
               <ChevronRight size={18} />

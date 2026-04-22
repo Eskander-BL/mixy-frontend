@@ -57,25 +57,25 @@ export default function FloatingAICoach() {
       <DialogTrigger asChild>
         <Button
           size="icon"
-          className="fixed bottom-5 left-5 z-50 h-14 w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"
+          className="fixed bottom-4 left-4 md:bottom-5 md:left-5 z-50 h-12 w-12 md:h-14 md:w-14 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg"
           aria-label="Ouvrir le coach IA"
         >
-          <MessageCircle size={22} />
+          <MessageCircle size={20} />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl p-0 overflow-hidden">
+      <DialogContent className="w-[95vw] md:max-w-2xl p-0 overflow-hidden">
         <DialogHeader className="px-6 pt-5 pb-2 border-b">
           <DialogTitle className="flex items-center gap-2">
             <Bot size={18} />
             Coach IA Mixy
           </DialogTitle>
         </DialogHeader>
-        <div className="p-4">
+        <div className="p-3 md:p-4">
           <AIChatBox
             messages={messages}
             onSendMessage={handleSendMessage}
             isLoading={chatMutation.isPending}
-            height={500}
+            height={"min(70vh,500px)"}
             placeholder="Écris ta question DJ..."
           />
         </div>
