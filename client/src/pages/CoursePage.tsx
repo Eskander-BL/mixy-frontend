@@ -64,13 +64,13 @@ export default function CoursePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50/30">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
+      <div className="bg-white/95 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between gap-3 mb-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{module.title}</h1>
+              <h1 className="text-xl md:text-2xl font-bold text-gray-900">{module.title}</h1>
               <p className="text-sm text-gray-600">
                 Slide {currentSlide} sur {module.totalSlides}
               </p>
@@ -95,24 +95,25 @@ export default function CoursePage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
+      <div className="max-w-6xl mx-auto px-4 py-6 md:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 md:gap-6 items-start">
           <aside className="lg:col-span-1">
-            <Card className="p-4 bg-blue-50 border border-blue-200 lg:sticky lg:top-24">
-              <p className="text-sm text-blue-900">
+            <Card className="p-4 md:p-5 bg-white border border-blue-100 shadow-sm lg:sticky lg:top-24 rounded-xl">
+              <p className="text-xs uppercase tracking-wide text-blue-700 font-semibold mb-3">Infos du module</p>
+              <p className="text-sm text-gray-800 leading-relaxed">
                 <strong>Module:</strong> {module.title}
               </p>
-              <p className="text-sm text-blue-900 mt-2">
+              <p className="text-sm text-gray-800 mt-3">
                 <strong>Durée totale:</strong> {module.estimatedDuration}
               </p>
-              <p className="text-sm text-blue-900 mt-2">
+              <p className="text-sm text-gray-800 mt-3">
                 <strong>Progression:</strong> {currentSlide} / {module.totalSlides} slides
               </p>
             </Card>
           </aside>
           <div className="lg:col-span-3 space-y-8">
             {/* Video */}
-            <Card className="border-0 shadow-sm overflow-hidden">
+            <Card className="border-0 shadow-sm overflow-hidden rounded-xl">
               <div className="aspect-video bg-black flex items-center justify-center">
                 <iframe
                   width="100%"
@@ -138,7 +139,7 @@ export default function CoursePage() {
             </div>
 
             {/* Content */}
-            <Card className="p-8 border-0 shadow-sm">
+            <Card className="p-5 md:p-8 border-0 shadow-sm rounded-xl">
               <div className="prose prose-sm max-w-none text-gray-700">
                 {slide.content.split("\n").map((line: string, idx: number) => {
                   if (line.trim() === "") return null;
@@ -172,7 +173,7 @@ export default function CoursePage() {
             </Card>
 
             {/* Tips */}
-            <Card className="p-6 border-0 shadow-sm bg-yellow-50">
+            <Card className="p-5 md:p-6 border border-yellow-100 shadow-sm bg-yellow-50 rounded-xl">
               <h3 className="font-semibold text-gray-900 mb-4">💡 Tips Professionnels</h3>
               <ul className="space-y-2">
                 {slide.tips.map((tip: string, idx: number) => (
@@ -187,34 +188,37 @@ export default function CoursePage() {
         </div>
 
         {/* Navigation */}
-        <div className="mt-8 lg:mt-12 flex justify-between items-center lg:pl-[calc(25%+1.5rem)]">
-          <Button
-            onClick={handlePreviousSlide}
-            disabled={isFirstSlide}
-            variant="outline"
-            className="flex items-center gap-2"
-          >
-            <ChevronLeft size={18} />
-            Slide Précédente
-          </Button>
+        <div className="mt-8 lg:mt-10 grid grid-cols-1 lg:grid-cols-4 gap-5 md:gap-6">
+          <div className="hidden lg:block" />
+          <div className="lg:col-span-3 flex justify-between items-center">
+            <Button
+              onClick={handlePreviousSlide}
+              disabled={isFirstSlide}
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              <ChevronLeft size={18} />
+              Slide Précédente
+            </Button>
 
-          {isLastSlide ? (
-            <Button
-              onClick={handleStartQuiz}
-              className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2"
-            >
-              <Play size={18} />
-              Commencer le Quiz
-            </Button>
-          ) : (
-            <Button
-              onClick={handleNextSlide}
-              className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2"
-            >
-              Slide Suivante
-              <ChevronRight size={18} />
-            </Button>
-          )}
+            {isLastSlide ? (
+              <Button
+                onClick={handleStartQuiz}
+                className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2"
+              >
+                <Play size={18} />
+                Commencer le Quiz
+              </Button>
+            ) : (
+              <Button
+                onClick={handleNextSlide}
+                className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2"
+              >
+                Slide Suivante
+                <ChevronRight size={18} />
+              </Button>
+            )}
+          </div>
         </div>
 
       </div>
