@@ -4,6 +4,23 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Lock, Play, CheckCircle } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface UserProgress {
   currentLevel: number;
@@ -82,6 +99,20 @@ export default function Dashboard() {
     scores: {},
   });
   const [loading, setLoading] = useState(true);
+  const [showLevelDialog, setShowLevelDialog] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [manualLevel, setManualLevel] = useState<number>(1);
+  const [showContactDialog, setShowContactDialog] = useState(false);
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactSubject, setContactSubject] = useState<"Paiement" | "Bug technique" | "Question DJ" | "Autre">("Bug technique");
+  const [contactMessage, setContactMessage] = useState("");
+
+  const resetProgressMutation = trpc.dj.resetProgress.useMutation();
+  const userProfileQuery = trpc.dj.getUserProfile.useQuery(
+    { userId: parseInt(localStorage.getItem("userId") || "0") },
+    { enabled: !!localStorage.getItem("userId") }
+  );
+  const contactMutation = trpc.dj.contact.useMutation();
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -96,6 +127,12 @@ export default function Dashboard() {
     }
     setLoading(false);
   }, [navigate]);
+
+  useEffect(() => {
+    if (userProfileQuery.data?.email) {
+      setContactEmail(userProfileQuery.data.email);
+    }
+  }, [userProfileQuery.data]);
 
   const handleStartLevel = (level: number) => {
     if (level === 1 || userProgress.completedLevels.includes(level - 1)) {
@@ -125,6 +162,66 @@ export default function Dashboard() {
 
   const progressPercentage = (userProgress.completedLevels.length / 10) * 100;
 
+  const resetLocalProgress = (level: number) => {
+    const completedLevels =
+      level > 1 ? Array.from({ length: level - 1 }, (_, i) => i + 1) : [];
+    const nextProgress = {
+      currentLevel: level,
+      completedLevels,
+      scores: {},
+    };
+    localStorage.setItem("userProgress", JSON.stringify(nextProgress));
+    setUserProgress(nextProgress);
+  };
+
+  const handleRedoOnboarding = () => {
+    if (!confirm("Refaire l'onboarding va réinitialiser ta progression actuelle. Continuer ?")) {
+      return;
+    }
+    const userId = parseInt(localStorage.getItem("userId") || "0");
+    if (userId) {
+      resetProgressMutation.mutate({ userId, level: 1 });
+    }
+    resetLocalProgress(1);
+    setShowLevelDialog(false);
+    navigate("/onboarding");
+  };
+
+  const handleManualLevel = () => {
+    setShowResetConfirm(true);
+  };
+
+  const confirmManualLevel = () => {
+    const userId = parseInt(localStorage.getItem("userId") || "0");
+    if (userId) {
+      resetProgressMutation.mutate({ userId, level: manualLevel });
+    }
+    resetLocalProgress(manualLevel);
+    setShowResetConfirm(false);
+    setShowLevelDialog(false);
+  };
+
+  const submitContact = () => {
+    contactMutation.mutate(
+      {
+        email: contactEmail,
+        subject: contactSubject,
+        message: contactMessage,
+      },
+      {
+        onSuccess: (res) => {
+          if (res.success) {
+            alert("Message envoyé, on te répond rapidement");
+            setShowContactDialog(false);
+            setContactMessage("");
+          } else {
+            alert("Le message n'a pas pu être envoyé. Vérifie la configuration backend.");
+          }
+        },
+      }
+    );
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -139,6 +236,15 @@ export default function Dashboard() {
         <div className="max-w-6xl mx-auto px-4 py-8">
           <div className="flex items-center gap-4 mb-6">
             <img src={logo} alt="Mixy Logo" className="h-16 w-auto cursor-pointer hover:opacity-80 transition" onClick={() => navigate("/dashboard")} />
+            <div className="ml-auto flex gap-2">
+              <Button variant="outline" onClick={() => setShowContactDialog(true)}>
+                Contact
+              </Button>
+              <Button variant="outline" onClick={() => setShowLevelDialog(true)}>
+                Modifier mon niveau
+              </Button>
+              <Button onClick={() => navigate("/onboarding")}>Revenir à l'onboarding</Button>
+            </div>
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Ton Parcours d'Apprentissage
@@ -278,6 +384,107 @@ export default function Dashboard() {
           </ul>
         </Card>
       </div>
+
+      <Dialog open={showLevelDialog} onOpenChange={setShowLevelDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Modifier mon niveau</DialogTitle>
+            <DialogDescription>
+              Choisis comment recalibrer ton niveau sans perdre ta progression sans confirmation.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <Button className="w-full" onClick={handleRedoOnboarding}>
+              Refaire onboarding
+            </Button>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-600">Choisir niveau manuellement</p>
+              <Select value={String(manualLevel)} onValueChange={(value) => setManualLevel(parseInt(value))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Sélectionner un niveau" />
+                </SelectTrigger>
+                <SelectContent>
+                  {LEVELS.map((lvl) => (
+                    <SelectItem key={lvl.level} value={String(lvl.level)}>
+                      Niveau {lvl.level} - {lvl.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button variant="outline" className="w-full" onClick={handleManualLevel}>
+                Appliquer ce niveau
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showResetConfirm} onOpenChange={setShowResetConfirm}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirmer la réinitialisation</DialogTitle>
+            <DialogDescription>
+              Cette action remplace ta progression actuelle. Tu confirmes ?
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex gap-2">
+            <Button variant="outline" className="w-full" onClick={() => setShowResetConfirm(false)}>
+              Annuler
+            </Button>
+            <Button className="w-full" onClick={confirmManualLevel}>
+              Confirmer
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showContactDialog} onOpenChange={setShowContactDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Contact</DialogTitle>
+            <DialogDescription>
+              Un souci de paiement, un bug, ou une question DJ ? Écris-nous ici.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <Input
+              type="email"
+              value={contactEmail}
+              placeholder="Email"
+              onChange={(e) => setContactEmail(e.target.value)}
+            />
+            <Select
+              value={contactSubject}
+              onValueChange={(value: "Paiement" | "Bug technique" | "Question DJ" | "Autre") =>
+                setContactSubject(value)
+              }
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Paiement">Paiement</SelectItem>
+                <SelectItem value="Bug technique">Bug technique</SelectItem>
+                <SelectItem value="Question DJ">Question DJ</SelectItem>
+                <SelectItem value="Autre">Autre</SelectItem>
+              </SelectContent>
+            </Select>
+            <Textarea
+              value={contactMessage}
+              placeholder="Ton message"
+              onChange={(e) => setContactMessage(e.target.value)}
+              rows={5}
+            />
+            <Button
+              onClick={submitContact}
+              disabled={contactMutation.isPending || !contactEmail || !contactMessage}
+              className="w-full"
+            >
+              {contactMutation.isPending ? "Envoi..." : "Envoyer"}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

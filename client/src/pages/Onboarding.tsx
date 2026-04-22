@@ -40,6 +40,7 @@ export default function Onboarding() {
     level: "beginner" as "beginner" | "intermediate" | "advanced",
     goal: "fun" as "fun" | "party" | "club" | "pro",
     equipment: "none" as "none" | "controller" | "turntables" | "other",
+    equipmentModel: "",
     problem: "transitions" as "transitions" | "bpm" | "structuration" | "unknown",
   });
 
@@ -84,29 +85,26 @@ export default function Onboarding() {
   };
 
   const handleLevelQuizSubmit = () => {
-    levelDetectionMutation.mutate(
-      { answers: quizAnswers },
-      {
-        onSuccess: (result: any) => {
-          const score = quizAnswers.reduce((sum, answer) => sum + answer, 0);
-          const percentage = (score / quizAnswers.length) * 100;
-          setQuizScore(percentage);
+    levelDetectionMutation.mutate({ answers: quizAnswers }, {
+      onSuccess: () => {
+        const score = quizAnswers.reduce((sum, answer) => sum + answer, 0);
+        const percentage = (score / quizAnswers.length) * 100;
+        setQuizScore(percentage);
 
-          let detectedLevel: "beginner" | "intermediate" | "advanced";
-          if (percentage < 50) {
-            detectedLevel = "beginner";
-          } else if (percentage >= 50 && percentage < 70) {
-            detectedLevel = "intermediate";
-          } else {
-            detectedLevel = "advanced";
-          }
-          setQuizResultLevel(detectedLevel);
-          setFormData({ ...formData, level: detectedLevel });
-          setShowLevelQuiz(false);
-          setStep("quizResult"); // New step to display quiz result
-        },
-      }
-    );
+        let detectedLevel: "beginner" | "intermediate" | "advanced";
+        if (score <= 2) {
+          detectedLevel = "beginner";
+        } else if (score <= 4) {
+          detectedLevel = "intermediate";
+        } else {
+          detectedLevel = "advanced";
+        }
+        setQuizResultLevel(detectedLevel);
+        setFormData({ ...formData, level: detectedLevel });
+        setShowLevelQuiz(false);
+        setStep("quizResult");
+      },
+    });
   };
 
   const handleSaveOnboarding = () => {
@@ -118,6 +116,7 @@ export default function Onboarding() {
         level: formData.level,
         goal: formData.goal,
         equipment: formData.equipment,
+        equipmentModel: formData.equipmentModel || undefined,
         problem: formData.problem,
         quizScore: quizScore,
         quizResult: quizResultLevel,
@@ -445,7 +444,7 @@ export default function Onboarding() {
             </div>
 
             <div className="space-y-3">
-              {(["none", "beginner", "advanced", "platines"] as const).map(
+              {(["none", "controller", "turntables", "other"] as const).map(
                 (equipment) => (
                   <button
                     key={equipment}
@@ -460,6 +459,17 @@ export default function Onboarding() {
                 )
               )}
             </div>
+
+            {formData.equipment === "other" && (
+              <Input
+                type="text"
+                placeholder="Quel modèle ? (optionnel)"
+                value={formData.equipmentModel}
+                onChange={(e) =>
+                  setFormData({ ...formData, equipmentModel: e.target.value })
+                }
+              />
+            )}
 
             {formData.equipment === "none" && (
               <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
