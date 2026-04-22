@@ -454,7 +454,7 @@ export default function Onboarding() {
                     }}
                     className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition text-left font-medium text-gray-900"
                   >
-                    {equipmentNames[equipment]}
+                    {equipmentNames[equipment] || equipment}
                   </button>
                 )
               )}
@@ -550,21 +550,9 @@ export default function Onboarding() {
             <p className="text-gray-700">
               Score du quiz : {Math.round(quizScore)}%
             </p>
-            {quizScore < 50 && (
-              <p className="text-red-500 font-semibold">
-                Ton score est inférieur à 50%. Tu ne pourras pas débloquer le niveau suivant pour l'instant.
-              </p>
-            )}
-            {quizScore >= 50 && quizScore < 70 && (
-              <p className="text-yellow-600 font-semibold">
-                Ton score est entre 50% et 69%. Tu peux débloquer le niveau suivant, mais nous te conseillons de revoir les bases.
-              </p>
-            )}
-            {quizScore >= 70 && (
-              <p className="text-green-600 font-semibold">
-                Félicitations ! Ton score est de 70% ou plus. Tu peux progresser normalement.
-              </p>
-            )}
+            <p className="text-blue-700 font-semibold">
+              Parfait, on adapte maintenant ton parcours à ce niveau.
+            </p>
             <Button
               onClick={() => setStep("goal")}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg flex items-center justify-center gap-2"
