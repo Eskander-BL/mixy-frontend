@@ -115,8 +115,11 @@ export default function Dashboard() {
   const contactMutation = trpc.dj.contact.useMutation();
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (!userId) {
+    const rawUserId = localStorage.getItem("userId");
+    const userId = rawUserId ? Number.parseInt(rawUserId, 10) : NaN;
+    if (!Number.isFinite(userId) || userId <= 0) {
+      localStorage.removeItem("userId");
+      localStorage.removeItem("guestId");
       navigate("/");
       return;
     }

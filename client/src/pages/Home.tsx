@@ -6,9 +6,13 @@ export default function Home() {
   const [, navigate] = useLocation();
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
-    if (userId) {
+    const rawUserId = localStorage.getItem("userId");
+    const userId = rawUserId ? Number.parseInt(rawUserId, 10) : NaN;
+    if (Number.isFinite(userId) && userId > 0) {
       navigate("/dashboard");
+    } else if (rawUserId) {
+      localStorage.removeItem("userId");
+      localStorage.removeItem("guestId");
     }
   }, [navigate]);
 

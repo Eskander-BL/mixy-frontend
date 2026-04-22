@@ -54,21 +54,32 @@ export default function Onboarding() {
   const levelDetectionMutation = trpc.dj.detectLevel.useMutation();
   const saveOnboardingMutation = trpc.dj.saveOnboarding.useMutation();
 
+  const parseValidUserId = (raw: string | null): number | null => {
+    if (!raw) return null;
+    const parsed = Number.parseInt(raw, 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+  };
+
   useEffect(() => {
     const storedGuestId = localStorage.getItem("guestId");
     const storedUserId = localStorage.getItem("userId");
+    const parsedUserId = parseValidUserId(storedUserId);
 
-    if (storedGuestId && storedUserId) {
+    if (storedGuestId && parsedUserId) {
       setGuestId(storedGuestId);
-      setUserId(parseInt(storedUserId));
+      setUserId(parsedUserId);
     } else {
+      localStorage.removeItem("userId");
+      localStorage.removeItem("guestId");
       initGuestMutation.mutate(undefined, {
         onSuccess: (result) => {
           if (result?.guestId && result?.userId) {
             setGuestId(result.guestId);
-            setUserId(parseInt(result.userId || "0"));
+            const validUserId = parseValidUserId(String(result.userId));
+            if (!validUserId) return;
+            setUserId(validUserId);
             localStorage.setItem("guestId", result.guestId);
-            localStorage.setItem("userId", result.userId.toString());
+            localStorage.setItem("userId", String(validUserId));
             if (result.language) {
               setFormData(prev => ({ ...prev, language: result.language }));
             }
