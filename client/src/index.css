@@ -52,7 +52,7 @@
   --chart-3: #e96f00;
   --chart-4: #cc5f00;
   --chart-5: #a34d00;
-  --radius: 0.65rem;
+  --radius: 5px;
   --background: oklch(1 0 0);
   --foreground: oklch(0.235 0.015 65);
   --card: oklch(1 0 0);

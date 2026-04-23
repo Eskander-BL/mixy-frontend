@@ -56,8 +56,8 @@ export default function FloatingAICoach() {
     <>
       {open && (
         <div
-          className="fixed z-50 w-[340px] max-w-[calc(100vw-1rem)] rounded-2xl border bg-white shadow-2xl overflow-hidden"
-          style={{ right: "28px", bottom: "7.5rem", left: "auto" }}
+          className="fixed z-50 w-[340px] max-w-[calc(100vw-1rem)] rounded-[5px] border border-gray-200 bg-white shadow-xl overflow-hidden"
+          style={{ right: "28px", bottom: "9rem", left: "auto" }}
         >
           <div className="px-4 py-3 border-b bg-white flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -93,11 +93,17 @@ export default function FloatingAICoach() {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="fixed z-50 h-[4.5rem] w-[4.5rem] p-1 rounded-full bg-transparent border-0 shadow-lg hover:shadow-xl hover:bg-black/5 transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 cursor-pointer"
-        style={{ right: "28px", bottom: "28px", left: "auto" }}
+        className="fixed z-50 p-0 m-0 bg-transparent border-0 shadow-none ring-0 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 rounded-none cursor-pointer"
+        style={{ right: "32px", bottom: "36px", left: "auto" }}
         aria-label="Ouvrir le coach IA"
       >
-        <img src={brand.chatBot} alt="" className="h-full w-full object-contain drop-shadow-md" aria-hidden />
+        <img
+          src={brand.chatBot}
+          alt=""
+          className="block h-[6.5rem] w-[6.5rem] object-contain pointer-events-none select-none"
+          draggable={false}
+          aria-hidden
+        />
       </button>
     </>
   );

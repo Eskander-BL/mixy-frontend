@@ -69,7 +69,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           <button
             type="button"
             onClick={() => setCollapsed((prev) => !prev)}
-            className="h-8 w-8 hidden md:flex items-center justify-center rounded-md bg-gray-800 hover:bg-gray-700"
+            className="h-8 w-8 hidden md:flex items-center justify-center rounded-[5px] bg-gray-800 hover:bg-gray-700"
             aria-label={collapsed ? "Ouvrir la barre des niveaux" : "Fermer la barre des niveaux"}
           >
             {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
@@ -77,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           <button
             type="button"
             onClick={onCloseMobile}
-            className="h-8 w-8 flex md:hidden items-center justify-center rounded-md bg-gray-800 hover:bg-gray-700 text-xs"
+            className="h-8 w-8 flex md:hidden items-center justify-center rounded-[5px] bg-gray-800 hover:bg-gray-700 text-xs"
             aria-label="Fermer la navigation mobile"
           >
             ✕
@@ -94,12 +94,12 @@ const Sidebar: React.FC<SidebarProps> = ({
             <Link
               key={level}
               href={`/course/${level}`}
-              className={`grid grid-cols-[28px_1fr_16px] items-center gap-2 p-2.5 rounded-lg text-sm transition-colors ${
+              className={`grid grid-cols-[28px_1fr_16px] items-center gap-2 p-2.5 rounded-[5px] text-sm transition-colors ${
                 isCurrent ? "bg-primary shadow-sm shadow-orange-900/25 border border-orange-300/40" : "border border-transparent"
               } ${status === "locked" ? "opacity-60 cursor-not-allowed" : "hover:bg-gray-700/90"}`}
               onClick={(e) => status === "locked" && e.preventDefault()}
             >
-              <span className="h-6 w-6 rounded-full bg-white/10 text-[11px] font-semibold flex items-center justify-center">
+              <span className="h-6 w-6 rounded-[5px] bg-white/10 text-[11px] font-semibold flex items-center justify-center">
                 {level}
               </span>
               {!collapsed && (

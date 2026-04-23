@@ -3,7 +3,7 @@ import logo from "@/assets/logo.png";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Mail, Play, SlidersHorizontal, Undo2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { allModules } from "@/lib/courses-progressive";
 import {
@@ -155,37 +155,51 @@ export default function Dashboard() {
     );
   }
 
+  const headerActionClass =
+    "inline-flex items-center justify-center gap-2 min-h-9 px-3 text-sm font-medium text-gray-800 bg-white border border-gray-200 hover:bg-gray-50/80 transition-colors rounded-[5px] shadow-none";
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-amber-50/40">
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-5 md:py-8">
           <div className="flex flex-wrap items-center gap-4 mb-6">
             <img src={logo} alt="Mixy Logo" className="h-12 md:h-16 w-auto cursor-pointer hover:opacity-80 transition" onClick={() => navigate("/dashboard")} />
-            <div className="ml-auto flex flex-wrap gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="rounded-full border-amber-300 text-amber-700 bg-amber-50 hover:bg-amber-100 px-4"
-                onClick={() => setShowContactDialog(true)}
-              >
-                Contact
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="rounded-full border-purple-300 text-purple-700 bg-purple-50 hover:bg-purple-100 px-4"
-                onClick={() => setShowLevelDialog(true)}
-              >
-                Modifier mon niveau
-              </Button>
-              <Button
-                size="sm"
-                className="rounded-full px-4 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm"
+            <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+              <button
+                type="button"
+                className={headerActionClass + " pl-2.5 pr-3"}
                 onClick={() => navigate("/onboarding")}
               >
-                Revenir à l'onboarding
-              </Button>
+                <Undo2 className="size-4 shrink-0 text-primary" aria-hidden />
+                Retourner à l'onboarding
+              </button>
+              <button
+                type="button"
+                className="inline-flex size-9 shrink-0 items-center justify-center rounded-[5px] border border-gray-200 bg-white text-gray-800 hover:bg-gray-50/80 transition-colors"
+                onClick={() => setShowContactDialog(true)}
+                aria-label="Contact"
+              >
+                <Mail className="size-4 text-primary" />
+              </button>
+              <button
+                type="button"
+                className={headerActionClass + " pl-2.5 pr-3 hidden sm:inline-flex"}
+                onClick={() => setShowLevelDialog(true)}
+              >
+                <SlidersHorizontal className="size-4 shrink-0 text-primary" aria-hidden />
+                Modifier mon niveau
+              </button>
             </div>
+          </div>
+          <div className="sm:hidden flex justify-end mb-2">
+            <button
+              type="button"
+              className={headerActionClass + " w-full pl-2.5 pr-3"}
+              onClick={() => setShowLevelDialog(true)}
+            >
+              <SlidersHorizontal className="size-4 shrink-0 text-primary" aria-hidden />
+              Modifier mon niveau
+            </button>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Ton Parcours Mixy</h1>
           <p className="text-sm md:text-base text-gray-600">
@@ -201,9 +215,9 @@ export default function Dashboard() {
                 {userProgress.completedLevels.length} / {totalLevels} niveaux complétés
               </p>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="w-full bg-gray-200 rounded-[5px] h-2.5 overflow-hidden">
               <div
-                className="bg-primary h-3 rounded-full transition-all"
+                className="bg-primary h-2.5 rounded-[5px] transition-all"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
@@ -212,7 +226,7 @@ export default function Dashboard() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
-        <Card className="p-5 md:p-7 border border-primary/15 shadow-md bg-white/90 backdrop-blur">
+        <Card className="p-5 md:p-7 border border-primary/15 shadow-sm bg-white/90 backdrop-blur rounded-[5px]">
           <p className="text-sm font-semibold text-primary mb-2">Niveau actif</p>
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
             Niveau {activeLevel} - {activeModule?.title}
