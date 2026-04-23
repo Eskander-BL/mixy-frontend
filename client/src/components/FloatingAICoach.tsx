@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { X } from "lucide-react";
 import { useLocation } from "wouter";
-import { Button } from "@/components/ui/button";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
 import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
@@ -58,12 +57,12 @@ export default function FloatingAICoach() {
       {open && (
         <div
           className="fixed z-50 w-[340px] max-w-[calc(100vw-1rem)] rounded-2xl border bg-white shadow-2xl overflow-hidden"
-          style={{ right: "16px", bottom: "80px", left: "auto" }}
+          style={{ right: "28px", bottom: "7.5rem", left: "auto" }}
         >
           <div className="px-4 py-3 border-b bg-white flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden p-0.5">
-                <img src={brand.chatBot} alt="" className="h-full w-full object-contain" aria-hidden />
+              <div className="h-9 w-9 flex items-center justify-center p-0 bg-transparent shrink-0">
+                <img src={brand.chatBot} alt="" className="max-h-full max-w-full h-full w-full object-contain" aria-hidden />
               </div>
               <div>
                 <p className="text-sm font-semibold leading-none">Mixy Coach</p>
@@ -91,15 +90,15 @@ export default function FloatingAICoach() {
           </div>
         </div>
       )}
-      <Button
+      <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="fixed z-50 h-14 w-14 rounded-full shadow-lg border-2 border-white bg-primary hover:bg-primary/90 overflow-hidden p-1.5"
-        style={{ right: "16px", bottom: "16px", left: "auto" }}
+        className="fixed z-50 h-[4.5rem] w-[4.5rem] p-1 rounded-full bg-transparent border-0 shadow-lg hover:shadow-xl hover:bg-black/5 transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 cursor-pointer"
+        style={{ right: "28px", bottom: "28px", left: "auto" }}
         aria-label="Ouvrir le coach IA"
       >
-        <img src={brand.chatBot} alt="" className="h-full w-full object-contain" aria-hidden />
-      </Button>
+        <img src={brand.chatBot} alt="" className="h-full w-full object-contain drop-shadow-md" aria-hidden />
+      </button>
     </>
   );
 }

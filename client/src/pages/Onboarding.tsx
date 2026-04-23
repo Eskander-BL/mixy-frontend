@@ -255,7 +255,7 @@ export default function Onboarding() {
               <img
                 src={brand.dj}
                 alt="Mixy"
-                className="h-20 w-auto max-w-[200px] mx-auto mb-5 object-contain"
+                className="h-28 md:h-32 w-auto max-w-[min(100%,280px)] mx-auto mb-5 object-contain"
               />
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Bienvenue 🎧</h1>
               <p className="text-gray-600">
@@ -589,11 +589,11 @@ export default function Onboarding() {
         {step === "summary" && (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center">
-              <div className="h-20 w-20 mx-auto mb-4 flex items-center justify-center">
+              <div className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-4 flex items-center justify-center">
                 <img
                   src={brand.reading}
                   alt=""
-                  className="max-h-20 w-auto object-contain"
+                  className="max-h-full max-w-full w-auto h-auto object-contain"
                   aria-hidden
                 />
               </div>
