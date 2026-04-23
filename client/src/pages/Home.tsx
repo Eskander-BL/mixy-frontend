@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import { brand } from "@/assets/brand-assets";
 
 export default function Home() {
   const [, navigate] = useLocation();
@@ -18,7 +19,7 @@ export default function Home() {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30 flex items-center justify-center p-4">
       <div className="max-w-2xl text-center">
         <img src={logo} alt="Mixy Logo" className="h-20 w-auto mx-auto mb-4" />
         <p className="text-xl text-gray-600 mb-8">
@@ -27,7 +28,14 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="text-3xl mb-2">📚</div>
+            <div className="h-8 w-8 mx-auto mb-2 flex items-center justify-center">
+              <img
+                src={brand.reading}
+                alt=""
+                className="max-h-8 w-auto object-contain"
+                aria-hidden
+              />
+            </div>
             <h3 className="font-semibold text-gray-900 mb-2">10 Niveaux</h3>
             <p className="text-sm text-gray-600">
               Du débutant à la maîtrise complète
@@ -35,7 +43,14 @@ export default function Home() {
           </div>
 
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="text-3xl mb-2">🎯</div>
+            <div className="h-8 w-8 mx-auto mb-2 flex items-center justify-center">
+              <img
+                src={brand.pasBien}
+                alt=""
+                className="max-h-8 w-auto object-contain"
+                aria-hidden
+              />
+            </div>
             <h3 className="font-semibold text-gray-900 mb-2">Quiz Interactifs</h3>
             <p className="text-sm text-gray-600">
               Valide tes connaissances à chaque niveau
@@ -43,7 +58,14 @@ export default function Home() {
           </div>
 
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="text-3xl mb-2">🤖</div>
+            <div className="h-8 w-8 mx-auto mb-2 flex items-center justify-center">
+              <img
+                src={brand.chatBot}
+                alt=""
+                className="max-h-8 w-auto object-contain"
+                aria-hidden
+              />
+            </div>
             <h3 className="font-semibold text-gray-900 mb-2">Coach IA</h3>
             <p className="text-sm text-gray-600">
               Réponds à tes questions 24/7
@@ -53,7 +75,7 @@ export default function Home() {
 
         <Button
           onClick={() => navigate("/onboarding")}
-          className="bg-blue-600 hover:bg-blue-700 text-white py-6 px-8 text-lg font-medium"
+          className="bg-primary text-primary-foreground hover:bg-primary/90 py-6 px-8 text-lg font-medium"
         >
           Commencer maintenant
         </Button>

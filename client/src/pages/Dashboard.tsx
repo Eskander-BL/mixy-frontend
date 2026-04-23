@@ -156,7 +156,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50/40">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-amber-50/40">
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 py-5 md:py-8">
           <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -180,7 +180,7 @@ export default function Dashboard() {
               </Button>
               <Button
                 size="sm"
-                className="rounded-full px-4 bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
+                className="rounded-full px-4 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm"
                 onClick={() => navigate("/onboarding")}
               >
                 Revenir à l'onboarding
@@ -197,13 +197,13 @@ export default function Dashboard() {
               <p className="text-sm font-semibold text-gray-700">
                 Progression générale
               </p>
-              <p className="text-sm font-semibold text-blue-600">
+              <p className="text-sm font-semibold text-primary">
                 {userProgress.completedLevels.length} / {totalLevels} niveaux complétés
               </p>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-3">
               <div
-                className="bg-blue-600 h-3 rounded-full transition-all"
+                className="bg-primary h-3 rounded-full transition-all"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
@@ -212,14 +212,14 @@ export default function Dashboard() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
-        <Card className="p-5 md:p-7 border border-blue-100 shadow-md bg-white/90 backdrop-blur">
-          <p className="text-sm font-semibold text-blue-700 mb-2">Niveau actif</p>
+        <Card className="p-5 md:p-7 border border-primary/15 shadow-md bg-white/90 backdrop-blur">
+          <p className="text-sm font-semibold text-primary mb-2">Niveau actif</p>
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
             Niveau {activeLevel} - {activeModule?.title}
           </h2>
           <p className="text-sm text-gray-600 mb-6">{activeModule?.description}</p>
           <div className="flex flex-wrap items-center gap-3">
-            <Button onClick={handleStartCurrentExercise} className="bg-blue-600 hover:bg-blue-700 text-white">
+            <Button onClick={handleStartCurrentExercise} className="bg-primary text-primary-foreground hover:bg-primary/90">
               <Play size={16} className="mr-2" />
               Commencer l'exercice
             </Button>

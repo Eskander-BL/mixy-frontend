@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { useLocation } from "wouter";
 import { ChevronRight } from "lucide-react";
-import logo from "@/assets/logo.png";
+import { brand } from "@/assets/brand-assets";
 
 type OnboardingStep =
   | "language"
@@ -189,7 +189,7 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-3 md:p-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50/70 via-white to-orange-50/50 flex items-center justify-center p-3 md:p-4">
       <Card className="w-full max-w-md p-5 md:p-8 border-0 shadow-xl rounded-2xl">
         {/* Progress Bar */}
         {step !== "summary" && (
@@ -198,13 +198,13 @@ export default function Onboarding() {
               <p className="text-xs font-semibold text-gray-600">
                 Étape {currentStepIndex + 1} / {STEPS.length}
               </p>
-              <p className="text-xs font-semibold text-blue-600">
+              <p className="text-xs font-semibold text-primary">
                 {Math.round(progressPercentage)}%
               </p>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                className="bg-primary h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progressPercentage}%` }}
               ></div>
             </div>
@@ -230,7 +230,7 @@ export default function Onboarding() {
                   localStorage.setItem("language", "en");
                   setStep("name");
                 }}
-                className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition text-left font-medium text-gray-900"
+                className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
               >
                 English
               </Button>
@@ -241,7 +241,7 @@ export default function Onboarding() {
                   localStorage.setItem("language", "fr");
                   setStep("name");
                 }}
-                className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition text-left font-medium text-gray-900"
+                className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
               >
                 Français
               </Button>
@@ -252,7 +252,11 @@ export default function Onboarding() {
         {step === "name" && (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center">
-              <img src={logo} alt="Mixy Logo" className="h-20 w-auto mx-auto mb-5" />
+              <img
+                src={brand.dj}
+                alt="Mixy"
+                className="h-20 w-auto max-w-[200px] mx-auto mb-5 object-contain"
+              />
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Bienvenue 🎧</h1>
               <p className="text-gray-600">
                 Commençons par connaître ton nom.
@@ -266,13 +270,13 @@ export default function Onboarding() {
                 setFormData({ ...formData, name: e.target.value })
               }
               onKeyPress={(e) => e.key === "Enter" && handleNameSubmit()}
-              className="text-base md:text-lg py-5 md:py-6"
+              className="text-base md:text-lg py-5 md:py-6 focus-visible:ring-primary/30 focus-visible:border-primary/50"
               autoFocus
             />
             <Button
               onClick={handleNameSubmit}
               disabled={!formData.name.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 md:py-6 text-base md:text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-5 md:py-6 text-base md:text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               Continuer
               <ChevronRight size={18} />
@@ -303,7 +307,7 @@ export default function Onboarding() {
                           setFormData({ ...formData, level });
                           setStep("goal");
                         }}
-                        className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition text-left font-medium text-gray-900"
+                        className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
                       >
                         {levelNames[level]}
                       </button>
@@ -354,7 +358,7 @@ export default function Onboarding() {
                         }}
                         className={`flex-1 p-2 rounded border-2 transition font-medium ${
                           quizAnswers[idx] === 1
-                            ? "border-blue-600 bg-blue-50 text-blue-900"
+                            ? "border-primary bg-primary/5 text-foreground"
                             : "border-gray-200 hover:border-gray-300 text-gray-700"
                         }`}
                       >
@@ -368,7 +372,7 @@ export default function Onboarding() {
                         }}
                         className={`flex-1 p-2 rounded border-2 transition font-medium ${
                           quizAnswers[idx] === 0
-                            ? "border-blue-600 bg-blue-50 text-blue-900"
+                            ? "border-primary bg-primary/5 text-foreground"
                             : "border-gray-200 hover:border-gray-300 text-gray-700"
                         }`}
                       >
@@ -383,7 +387,7 @@ export default function Onboarding() {
                   disabled={
                     quizAnswers.length < 5 || levelDetectionMutation.isPending
                   }
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {levelDetectionMutation.isPending
                     ? "Analyse en cours..."
@@ -432,7 +436,7 @@ export default function Onboarding() {
                     setFormData({ ...formData, goal });
                     setStep("equipment");
                   }}
-                  className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition text-left font-medium text-gray-900"
+                  className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
                 >
                   {goalNames[goal]}
                 </button>
@@ -470,7 +474,7 @@ export default function Onboarding() {
                       setFormData({ ...formData, equipment });
                       setStep("problem");
                     }}
-                    className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition text-left font-medium text-gray-900"
+                    className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
                   >
                     {equipmentNames[equipment] || equipment}
                   </button>
@@ -536,7 +540,7 @@ export default function Onboarding() {
                     setFormData({ ...formData, problem });
                     setStep("summary");
                   }}
-                  className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition text-left font-medium text-gray-900"
+                  className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
                 >
                   {problemNames[problem]}
                 </button>
@@ -562,18 +566,18 @@ export default function Onboarding() {
             <p className="text-gray-600 text-lg">
               Basé sur tes réponses, ton niveau est :
             </p>
-            <div className="text-5xl font-extrabold text-blue-600 mb-4">
+            <div className="text-5xl font-extrabold text-primary mb-4">
               {levelNames[quizResultLevel]}
             </div>
             <p className="text-gray-700">
               Score du quiz : {Math.round(quizScore)}%
             </p>
-            <p className="text-blue-700 font-semibold">
+            <p className="text-primary font-semibold">
               Parfait, on adapte maintenant ton parcours à ce niveau.
             </p>
             <Button
               onClick={() => setStep("goal")}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg flex items-center justify-center gap-2"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg flex items-center justify-center gap-2"
             >
               Continuer
               <ChevronRight size={18} />
@@ -585,13 +589,20 @@ export default function Onboarding() {
         {step === "summary" && (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center">
-              <div className="text-6xl mb-4">🚀</div>
+              <div className="h-20 w-20 mx-auto mb-4 flex items-center justify-center">
+                <img
+                  src={brand.reading}
+                  alt=""
+                  className="max-h-20 w-auto object-contain"
+                  aria-hidden
+                />
+              </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
                 Ton parcours est prêt !
               </h1>
             </div>
 
-            <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 space-y-4">
+            <div className="bg-primary/5 p-6 rounded-lg border border-primary/20 space-y-4">
               <p className="text-gray-900 text-center leading-relaxed">
                 <strong>Salut {formData.name} !</strong>
               </p>
@@ -600,23 +611,23 @@ export default function Onboarding() {
                 <strong>{goalNames[formData.goal].toLowerCase()}</strong>.
               </p>
               <p className="text-gray-700 text-center leading-relaxed">
-                On va te montrer comment maîtriser{" "}
+                On va te montrer comment{" "}
                 <strong>{problemNames[formData.problem].toLowerCase()}</strong> pour
                 devenir un vrai DJ.
               </p>
             </div>
 
-            <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-              <p className="text-sm text-green-900 text-center">
+            <div className="bg-emerald-50/90 p-4 rounded-lg border border-emerald-200/80">
+              <p className="text-sm text-emerald-900 text-center">
                 <strong>✓ Niveau 1 est gratuit</strong> - Commence maintenant et
-                débloquer les autres niveaux en passant les quiz !
+                débloque les autres niveaux en passant les quiz !
               </p>
             </div>
 
             <Button
               onClick={handleSaveOnboarding}
               disabled={saveOnboardingMutation.isPending}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {saveOnboardingMutation.isPending ? (
                 <>

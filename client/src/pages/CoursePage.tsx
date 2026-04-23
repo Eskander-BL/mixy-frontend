@@ -32,7 +32,7 @@ export default function CoursePage() {
           <p className="text-gray-600">Cours non trouvé</p>
           <Button
             onClick={() => navigate("/dashboard")}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white"
+            className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
           >
             Retour au dashboard
           </Button>
@@ -64,7 +64,7 @@ export default function CoursePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50/30">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-amber-50/35">
       {/* Header */}
       <div className="bg-white/95 backdrop-blur border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">
@@ -87,7 +87,7 @@ export default function CoursePage() {
           {/* Progress Bar */}
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all"
+              className="bg-primary h-2 rounded-full transition-all"
               style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
@@ -98,8 +98,8 @@ export default function CoursePage() {
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 md:gap-6 items-start">
           <aside className="lg:col-span-1">
-            <Card className="p-4 md:p-5 bg-white border border-blue-100 shadow-sm lg:sticky lg:top-24 rounded-xl">
-              <p className="text-xs uppercase tracking-wide text-blue-700 font-semibold mb-3">Infos du module</p>
+            <Card className="p-4 md:p-5 bg-white border border-primary/10 shadow-sm lg:sticky lg:top-24 rounded-xl">
+              <p className="text-xs uppercase tracking-wide text-primary font-semibold mb-3">Infos du module</p>
               <p className="text-sm text-gray-800 leading-relaxed">
                 <strong>Module:</strong> {module.title}
               </p>
@@ -166,9 +166,9 @@ export default function CoursePage() {
               </div>
 
               {/* Key Takeaway */}
-              <div className="mt-8 p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
-                <p className="text-sm font-semibold text-blue-900">💡 À Retenir:</p>
-                <p className="text-sm text-blue-800 mt-1">{slide.keyTakeaway}</p>
+              <div className="mt-8 p-4 bg-primary/5 border-l-4 border-primary rounded">
+                <p className="text-sm font-semibold text-foreground">💡 À Retenir :</p>
+                <p className="text-sm text-muted-foreground mt-1">{slide.keyTakeaway}</p>
               </div>
             </Card>
 
@@ -212,7 +212,7 @@ export default function CoursePage() {
             ) : (
               <Button
                 onClick={handleNextSlide}
-                className="bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-2"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-2"
               >
                 Slide Suivante
                 <ChevronRight size={18} />

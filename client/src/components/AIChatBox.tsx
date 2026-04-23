@@ -57,6 +57,11 @@ export type AIChatBoxProps = {
    * Click to send directly
    */
   suggestedPrompts?: string[];
+
+  /**
+   * Optional image for assistant avatar (replaces default sparkles icon).
+   */
+  assistantAvatarSrc?: string;
 };
 
 /**
@@ -119,6 +124,7 @@ export function AIChatBox({
   height = "600px",
   emptyStateMessage = "Start a conversation with AI",
   suggestedPrompts,
+  assistantAvatarSrc,
 }: AIChatBoxProps) {
   const [input, setInput] = useState("");
   const scrollAreaRef = useRef<HTMLDivElement>(null);
@@ -247,8 +253,17 @@ export function AIChatBox({
                     }
                   >
                     {message.role === "assistant" && (
-                      <div className="size-8 shrink-0 mt-1 rounded-full bg-primary/10 flex items-center justify-center">
-                        <Sparkles className="size-4 text-primary" />
+                      <div className="size-8 shrink-0 mt-1 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                        {assistantAvatarSrc ? (
+                          <img
+                            src={assistantAvatarSrc}
+                            alt=""
+                            className="size-full object-contain p-0.5"
+                            aria-hidden
+                          />
+                        ) : (
+                          <Sparkles className="size-4 text-primary" />
+                        )}
                       </div>
                     )}
 
@@ -289,8 +304,17 @@ export function AIChatBox({
                       : undefined
                   }
                 >
-                  <div className="size-8 shrink-0 mt-1 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Sparkles className="size-4 text-primary" />
+                  <div className="size-8 shrink-0 mt-1 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                    {assistantAvatarSrc ? (
+                      <img
+                        src={assistantAvatarSrc}
+                        alt=""
+                        className="size-full object-contain p-0.5"
+                        aria-hidden
+                      />
+                    ) : (
+                      <Sparkles className="size-4 text-primary" />
+                    )}
                   </div>
                   <div className="rounded-lg bg-muted px-4 py-2.5">
                     <Loader2 className="size-4 animate-spin text-muted-foreground" />

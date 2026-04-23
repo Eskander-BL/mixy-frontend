@@ -57,7 +57,7 @@ export default function PaywallPageStripe() {
   // Show loading state while fetching subscription status
   if (isLoadingSubscription) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-amber-50/80 to-orange-50/50 flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8 border-0 shadow-lg text-center">
           <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
           <p className="text-gray-600">{t("messages.loading")}</p>
@@ -69,7 +69,7 @@ export default function PaywallPageStripe() {
   // If already subscribed, show success message
   if (subscriptionStatus?.isActive) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50/80 to-amber-50/40 flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8 border-0 shadow-lg text-center">
           <div className="text-6xl mb-4">🎉</div>
           <h1 className="text-3xl font-bold text-green-600 mb-2">
@@ -90,7 +90,7 @@ export default function PaywallPageStripe() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50/80 to-orange-50/50 flex items-center justify-center p-4">
       <Card className="max-w-md w-full p-8 border-0 shadow-lg">
         <div className="text-center mb-8">
           <div className="text-5xl mb-4">🔓</div>
@@ -102,7 +102,7 @@ export default function PaywallPageStripe() {
           </p>
         </div>
 
-        <div className="bg-blue-50 p-4 rounded-lg mb-6">
+        <div className="bg-primary/5 p-4 rounded-lg mb-6 border border-primary/10">
           <p className="text-sm text-gray-700 mb-3">
             <strong>✨ {t("paywall.unlockNext")}</strong>
           </p>
@@ -131,7 +131,7 @@ export default function PaywallPageStripe() {
         <Button
           onClick={handlePayment}
           disabled={loading || !userId}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-3 py-3 text-base font-semibold disabled:opacity-70"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-3 text-base font-semibold disabled:opacity-70"
         >
           {loading ? (
             <span className="flex items-center gap-2">

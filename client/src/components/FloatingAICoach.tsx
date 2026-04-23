@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
-import { Bot, MessageCircle, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
 import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
+import { brand } from "@/assets/brand-assets";
 
 export default function FloatingAICoach() {
   const [location] = useLocation();
@@ -61,8 +62,8 @@ export default function FloatingAICoach() {
         >
           <div className="px-4 py-3 border-b bg-white flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center">
-                <Bot size={16} />
+              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden p-0.5">
+                <img src={brand.chatBot} alt="" className="h-full w-full object-contain" aria-hidden />
               </div>
               <div>
                 <p className="text-sm font-semibold leading-none">Mixy Coach</p>
@@ -85,6 +86,7 @@ export default function FloatingAICoach() {
               isLoading={chatMutation.isPending}
               height={"440px"}
               placeholder="Pose ta question..."
+              assistantAvatarSrc={brand.chatBot}
             />
           </div>
         </div>
@@ -92,11 +94,11 @@ export default function FloatingAICoach() {
       <Button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="fixed z-50 h-14 w-14 rounded-full p-0 shadow-lg border-2 border-white bg-gradient-to-br from-orange-400 to-blue-600 hover:from-orange-500 hover:to-blue-700"
+        className="fixed z-50 h-14 w-14 rounded-full shadow-lg border-2 border-white bg-primary hover:bg-primary/90 overflow-hidden p-1.5"
         style={{ right: "16px", bottom: "16px", left: "auto" }}
         aria-label="Ouvrir le coach IA"
       >
-        <span className="text-2xl leading-none">🦊</span>
+        <img src={brand.chatBot} alt="" className="h-full w-full object-contain" aria-hidden />
       </Button>
     </>
   );

@@ -3,6 +3,7 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
+import { brand } from "@/assets/brand-assets";
 
 interface QuizQuestion {
   id: number;
@@ -332,7 +333,7 @@ export default function QuizPage() {
           <p className="text-gray-600">Quiz non trouvé</p>
           <Button
             onClick={() => navigate("/dashboard")}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white"
+            className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
           >
             Retour au dashboard
           </Button>
@@ -372,6 +373,9 @@ export default function QuizPage() {
   };
 
   const handleFinish = () => {
+    if (score < 50) {
+      return;
+    }
     const userId = localStorage.getItem("userId");
     if (userId) {
       const progress = JSON.parse(
@@ -388,79 +392,66 @@ export default function QuizPage() {
     }
   };
 
-  if (showResults) {
-    // Calculer le nombre de bonnes réponses
-    let correctCount = 0;
-    questions.forEach((q, idx) => {
-      if (selectedAnswers[idx] === q.correctAnswer) {
-        correctCount++;
-      }
-    });
-    const totalQuestions = questions.length;
-    const incorrectCount = totalQuestions - correctCount;
+  const handleBackToCourse = () => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      const progress = JSON.parse(
+        localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}'
+      );
+      progress.scores[level] = score;
+      localStorage.setItem("userProgress", JSON.stringify(progress));
+    }
+    navigate(`/course/${level}`);
+  };
 
-    const getMixyMessage = () => {
-      // Message basé sur la progression, pas sur des seuils fixes
-      if (correctCount === totalQuestions) {
-        // Parfait!
+  if (showResults) {
+    const getResultContent = () => {
+      if (score < 50) {
         return {
-          emoji: "🔥",
-          title: "Incroyable! Tu as tout bon!",
-          subtitle: "Tu maîtrises vraiment ce niveau",
-          bgColor: "bg-green-50",
-          borderColor: "border-green-200",
-          textColor: "text-green-600",
-          encouragement:
-            "Tu progresses à une vitesse impressionnante. Continue comme ça, tu vas devenir un vrai DJ!",
-        };
-      } else if (incorrectCount <= 1) {
-        // Très bon
-        return {
-          emoji: "⭐",
-          title: "Excellent travail!",
-          subtitle: "Tu as compris l'essentiel",
-          bgColor: "bg-green-50",
-          borderColor: "border-green-200",
-          textColor: "text-green-600",
-          encouragement:
-            "Tu progresses vraiment bien. Encore un petit effort et tu maîtriseras parfaitement ce niveau!",
-        };
-      } else if (incorrectCount <= 2) {
-        // Bon
-        return {
-          emoji: "💪",
-          title: "Bonne progression!",
-          subtitle: "Tu comprends les concepts clés",
-          bgColor: "bg-blue-50",
-          borderColor: "border-blue-200",
-          textColor: "text-blue-600",
-          encouragement:
-            "Tu progresses bien. Revois les parties où tu as hésité, et tu seras prêt pour le niveau suivant!",
-        };
-      } else {
-        // Continue
-        return {
-          emoji: "🎯",
-          title: "Continue, tu es sur la bonne voie!",
-          subtitle: "Chaque essai te rapproche du succès",
-          bgColor: "bg-blue-50",
-          borderColor: "border-blue-200",
-          textColor: "text-blue-600",
-          encouragement:
-            "Tu as identifié les points à améliorer. Revois le cours, pratique, et tu progresseras rapidement. Le DJing s'apprend en faisant!",
+          image: brand.pasBien,
+          title: "Pas encore suffisant",
+          subtitle: "Le niveau suivant reste verrouillé",
+          bgColor: "bg-rose-50",
+          borderColor: "border-rose-200",
+          textColor: "text-rose-700",
+          body: "Il faut obtenir au moins 50 % pour valider le niveau et continuer. Reprends le cours, consolide tes bases, puis refais le quiz quand tu te sens prêt.",
         };
       }
+      if (score < 70) {
+        return {
+          image: brand.bien,
+          title: "Niveau validé",
+          subtitle: "Tu as réussi, mais on peut encore progresser",
+          bgColor: "bg-amber-50",
+          borderColor: "border-amber-200",
+          textColor: "text-amber-800",
+          body: "Bonne réussite : tu peux avancer, mais pense à revoir ce module prochainement pour ancrer ce que tu as appris.",
+        };
+      }
+      return {
+        image: brand.excellent,
+        title: "Excellent",
+        subtitle: "Tu as parfaitement validé ce niveau",
+        bgColor: "bg-emerald-50",
+        borderColor: "border-emerald-200",
+        textColor: "text-emerald-700",
+        body: "Bravo : tu as tout ce qu’il faut pour enchaîner. Continue ton apprentissage sur le prochain chapitre !",
+      };
     };
 
-    const message = getMixyMessage();
+    const message = getResultContent();
 
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white flex items-center justify-center p-4">
         <Card className="max-w-2xl w-full p-8 border-0 shadow-sm">
           <div className="text-center">
-            {/* Mixy Mascot */}
-            <div className="mb-6 animate-bounce">
-              <div className="text-7xl">{message.emoji}</div>
+            <div className="mb-4 flex justify-center quiz-mascot-animate">
+              <img
+                src={message.image}
+                alt=""
+                className="h-28 w-auto max-w-[min(100%,200px)] object-contain"
+                aria-hidden
+              />
             </div>
 
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -468,7 +459,6 @@ export default function QuizPage() {
             </h1>
             <p className="text-gray-600 mb-6">{message.subtitle}</p>
 
-            {/* Score Display */}
             <div
               className={`${message.bgColor} p-6 rounded-lg mb-6 border ${message.borderColor}`}
             >
@@ -480,34 +470,54 @@ export default function QuizPage() {
               </p>
             </div>
 
-            {/* Encouragement Message */}
-            <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200">
-              <p className="text-sm text-gray-700">{message.encouragement}</p>
+            <div className="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200 text-left">
+              <p className="text-sm text-gray-700">{message.body}</p>
             </div>
 
-            {/* Next Step */}
-            <div className="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-200">
-              <p className="text-sm text-blue-900">
-                <strong>Prochaine étape:</strong> Débloquer le niveau suivant
-                avec un abonnement
-              </p>
-            </div>
+            {score >= 50 && (
+              <div className="bg-primary/5 p-4 rounded-lg mb-6 border border-primary/20">
+                <p className="text-sm text-foreground">
+                  <strong>Prochaine étape :</strong> débloquer l&apos;accès au niveau
+                  suivant (abonnement le cas échéant).
+                </p>
+              </div>
+            )}
 
-            <Button
-              onClick={handleFinish}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white mb-3 py-6 text-lg flex items-center justify-center gap-2"
-            >
-              Continuer vers le déblocage
-              <ChevronRight size={18} />
-            </Button>
-
-            <Button
-              onClick={() => navigate("/dashboard")}
-              variant="outline"
-              className="w-full"
-            >
-              Retour au dashboard
-            </Button>
+            {score < 50 ? (
+              <>
+                <Button
+                  onClick={handleBackToCourse}
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-6 text-lg flex items-center justify-center gap-2"
+                >
+                  Revoir le cours
+                  <ChevronRight size={18} />
+                </Button>
+                <Button
+                  onClick={() => navigate("/dashboard")}
+                  variant="outline"
+                  className="w-full"
+                >
+                  Retour au dashboard
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={handleFinish}
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-6 text-lg flex items-center justify-center gap-2"
+                >
+                  Continuer vers le déblocage
+                  <ChevronRight size={18} />
+                </Button>
+                <Button
+                  onClick={() => navigate("/dashboard")}
+                  variant="outline"
+                  className="w-full"
+                >
+                  Retour au dashboard
+                </Button>
+              </>
+            )}
           </div>
         </Card>
       </div>
@@ -518,7 +528,7 @@ export default function QuizPage() {
   const isAnswered = selectedAnswers[currentQuestion] !== undefined;
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white flex items-center justify-center p-4">
       <Card className="max-w-2xl w-full p-8 border-0 shadow-sm">
         {/* Progress Bar */}
         <div className="mb-8">
@@ -526,13 +536,13 @@ export default function QuizPage() {
             <p className="text-sm font-semibold text-gray-600">
               Question {currentQuestion + 1} / {questions.length}
             </p>
-            <p className="text-sm font-semibold text-blue-600">
+            <p className="text-sm font-semibold text-primary">
               {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
             </p>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              className="bg-primary h-2 rounded-full transition-all duration-300"
               style={{
                 width: `${((currentQuestion + 1) / questions.length) * 100}%`,
               }}
@@ -554,7 +564,7 @@ export default function QuizPage() {
                 onClick={() => handleSelectAnswer(idx)}
                 className={`w-full p-4 text-left border-2 rounded-lg transition ${
                   selectedAnswers[currentQuestion] === idx
-                    ? "border-blue-600 bg-blue-50"
+                    ? "border-primary bg-primary/5"
                     : "border-gray-200 hover:border-gray-300"
                 }`}
               >
@@ -562,7 +572,7 @@ export default function QuizPage() {
                   <div
                     className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
                       selectedAnswers[currentQuestion] === idx
-                        ? "border-blue-600 bg-blue-600"
+                        ? "border-primary bg-primary"
                         : "border-gray-300"
                     }`}
                   >
@@ -592,7 +602,7 @@ export default function QuizPage() {
           <Button
             onClick={handleNext}
             disabled={!isAnswered}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isLastQuestion ? "Terminer" : "Suivant"}
             <ChevronRight size={18} />

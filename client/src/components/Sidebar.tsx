@@ -95,7 +95,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               key={level}
               href={`/course/${level}`}
               className={`grid grid-cols-[28px_1fr_16px] items-center gap-2 p-2.5 rounded-lg text-sm transition-colors ${
-                isCurrent ? "bg-blue-600 shadow-sm shadow-blue-900/30 border border-blue-400/30" : "border border-transparent"
+                isCurrent ? "bg-primary shadow-sm shadow-orange-900/25 border border-orange-300/40" : "border border-transparent"
               } ${status === "locked" ? "opacity-60 cursor-not-allowed" : "hover:bg-gray-700/90"}`}
               onClick={(e) => status === "locked" && e.preventDefault()}
             >
