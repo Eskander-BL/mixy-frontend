@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, Mail, Play, Undo2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
-import { cn } from "@/lib/utils";
 import { allModules } from "@/lib/courses-progressive";
 import {
   Dialog,
@@ -25,21 +24,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  type CarouselApi,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 export default function Dashboard() {
   const [, navigate] = useLocation();
   const { currentLevel: activeLevel, completedLevels } = useProgress();
   const [loading, setLoading] = useState(true);
-  const [embla, setEmbla] = useState<CarouselApi | null>(null);
-  const [focusSlide, setFocusSlide] = useState(0);
   const [showContactDialog, setShowContactDialog] = useState(false);
   const [contactEmail, setContactEmail] = useState("");
   const [contactSubject, setContactSubject] = useState<"Paiement" | "Bug technique" | "Question DJ" | "Autre">("Bug technique");
@@ -82,24 +71,6 @@ export default function Dashboard() {
       .filter((l) => l >= 1 && l <= totalLevels)
       .sort((a, b) => a - b);
   }, [completedLevels, activeLevel, totalLevels]);
-
-  useEffect(() => {
-    if (!embla) return;
-    const sync = () => setFocusSlide(embla.selectedScrollSnap());
-    sync();
-    embla.on("reInit", sync);
-    embla.on("select", sync);
-    return () => {
-      embla.off("reInit", sync);
-      embla.off("select", sync);
-    };
-  }, [embla]);
-
-  useEffect(() => {
-    if (!embla || !levelStrip.length) return;
-    const i = levelStrip.findIndex((l) => l === activeLevel);
-    if (i >= 0) embla.scrollTo(i, true);
-  }, [embla, activeLevel, levelStrip]);
 
   const submitContact = () => {
     contactMutation.mutate(
@@ -183,156 +154,123 @@ export default function Dashboard() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
-        <div className="mb-4 md:mb-6">
+        <div className="mb-3 md:mb-4">
           <h2 className="text-lg md:text-xl font-bold text-gray-900">Tes niveaux</h2>
           <p className="text-sm text-gray-600 mt-1">
-            Un niveau par slide : fais défiler avec les flèches ou le doigt. Les{" "}
-            <strong>validés</strong> et le <strong>niveau actif</strong> sont dans le carrousel.
+            Les <strong>validés</strong> et le <strong>niveau actif</strong> s&apos;affichent les uns
+            sous les autres. S&apos;il y en a beaucoup, fais défiler <strong>verticalement</strong> dans
+            la zone.
           </p>
         </div>
 
-        <div className="relative">
-          <Carousel
-            className="w-full"
-            setApi={setEmbla}
-            opts={{ align: "start", loop: false, duration: 22, skipSnaps: false }}
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {levelStrip.map((lvl, idx) => {
-                const mod = allModules.find((m) => m.level === lvl) ?? allModules[0];
-                const isValidated = completedLevels.includes(lvl);
-                const isActiveCard = !isValidated && lvl === activeLevel;
-                const doneGradients = [
-                  "from-emerald-200/45 via-cyan-50/50 to-amber-50/40",
-                  "from-teal-200/40 via-emerald-50/30 to-orange-50/35",
-                  "from-lime-200/35 via-white to-sky-50/30",
-                ];
-                const doneGrad = doneGradients[idx % doneGradients.length] ?? doneGradients[0];
+        <div
+          className="max-h-[min(60vh,520px)] overflow-y-auto space-y-3 scroll-smooth pr-1 -mr-1 [scrollbar-width:thin]"
+        >
+          {levelStrip.map((lvl) => {
+            const mod = allModules.find((m) => m.level === lvl) ?? allModules[0];
+            const isValidated = completedLevels.includes(lvl);
+            const isActiveCard = !isValidated && lvl === activeLevel;
 
-                if (isActiveCard) {
-                  return (
-                    <CarouselItem key={lvl} className="pl-2 md:pl-4 basis-full min-w-0">
-                      <div
-                        className="rounded-2xl border border-primary/35 shadow-lg overflow-hidden min-h-[300px] md:min-h-[320px] bg-gradient-to-br from-amber-200/70 via-orange-100/50 to-rose-100/30 p-6 md:p-8 flex flex-col sm:flex-row sm:items-stretch gap-6"
-                        role="group"
-                        aria-label={`Niveau actif ${lvl}`}
-                      >
-                        <div className="flex-1 min-w-0 flex flex-col justify-center order-2 sm:order-1">
-                          <p className="text-sm font-bold text-primary mb-1 tracking-wide">Niveau actif</p>
-                          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 text-balance">
-                            Niveau {lvl} - {mod.title}
-                          </h3>
-                          <p className="text-sm text-gray-700/90 mb-5 leading-relaxed">{mod.description}</p>
-                          <div className="flex flex-wrap items-center gap-2">
-                            <Button
-                              onClick={() => navigate(`/course/${lvl}`)}
-                              className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-md"
-                            >
-                              <Play size={16} className="mr-2" />
-                              Commencer l&apos;exercice
-                            </Button>
-                            <Button
-                              variant="secondary"
-                              className="bg-white/80"
-                              onClick={() => navigate(`/quiz/${lvl}`)}
-                            >
-                              Aller au quiz
-                              <ArrowRight size={16} className="ml-2" />
-                            </Button>
-                          </div>
-                        </div>
-                        <div className="shrink-0 flex justify-center sm:justify-end sm:w-[220px] order-1 sm:order-2 self-center sm:self-end">
-                          <img
-                            src={brand.excellent}
-                            alt=""
-                            className="h-32 md:h-40 w-auto max-w-[220px] object-contain drop-shadow-md quiz-mascot-animate"
-                            aria-hidden
-                          />
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  );
-                }
-
-                if (isValidated) {
-                  return (
-                    <CarouselItem key={lvl} className="pl-2 md:pl-4 basis-full min-w-0">
-                      <div
-                        className={cn(
-                          "rounded-2xl border border-emerald-300/50 shadow-md overflow-hidden min-h-[280px] md:min-h-[300px] bg-gradient-to-br p-6 md:p-7 flex flex-col justify-between",
-                          doneGrad
-                        )}
-                        role="group"
-                        aria-label={`Niveau validé ${lvl}`}
-                      >
-                        <div>
-                          <div className="flex items-start gap-2 mb-3">
-                            <CheckCircle2
-                              className="h-6 w-6 text-emerald-600 shrink-0 mt-0.5 drop-shadow-sm"
-                              aria-hidden
-                            />
-                            <div>
-                              <p className="text-xs font-bold uppercase tracking-wider text-emerald-900/80">
-                                Niveau validé
-                              </p>
-                              <h3 className="text-lg md:text-xl font-bold text-gray-900 leading-tight text-balance">
-                                Niveau {lvl} - {mod.title}
-                              </h3>
-                            </div>
-                          </div>
-                          <p className="text-sm text-gray-800/90 leading-relaxed line-clamp-3">
-                            {mod.description}
-                          </p>
-                        </div>
-                        <div className="flex flex-wrap items-center gap-2 mt-5 pt-2 border-t border-white/50">
-                          <Button
-                            variant="secondary"
-                            className="bg-white/80 shadow-sm"
-                            onClick={() => navigate(`/course/${lvl}`)}
-                          >
-                            Revoir le cours
-                          </Button>
-                          <Button
-                            variant="outline"
-                            className="bg-white/40 border-emerald-200/60"
-                            onClick={() => navigate(`/quiz/${lvl}`)}
-                          >
-                            Aller au quiz
-                            <ArrowRight size={14} className="ml-1" />
-                          </Button>
-                        </div>
-                      </div>
-                    </CarouselItem>
-                  );
-                }
-
-                return (
-                  <CarouselItem key={lvl} className="pl-2 md:pl-4 basis-full min-w-0">
-                    <div
-                      className="rounded-2xl border border-dashed border-gray-400/50 min-h-[220px] bg-gradient-to-br from-slate-200/60 via-gray-100/50 to-white p-6 flex items-center"
-                      role="group"
-                    >
-                      <p className="text-sm text-gray-600 text-center w-full">
-                        <span className="font-medium text-gray-800 block mb-1">Niveau {lvl}</span>
-                        Termine d&apos;abord les niveaux précédents pour débloquer celui-ci.
+            if (isActiveCard) {
+              return (
+                <Card
+                  key={lvl}
+                  className="p-4 md:p-5 border border-primary/20 shadow-sm bg-white/95 rounded-[5px] w-full"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-3">
+                    <div className="flex-1 min-w-0 order-2 sm:order-1">
+                      <p className="text-sm font-semibold text-primary mb-0.5">Niveau actif</p>
+                      <h3 className="text-base md:text-lg font-bold text-gray-900 leading-snug">
+                        Niveau {lvl} - {mod.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 mt-1 mb-3 line-clamp-2 sm:line-clamp-none">
+                        {mod.description}
                       </p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Button
+                          onClick={() => navigate(`/course/${lvl}`)}
+                          className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 text-sm"
+                        >
+                          <Play size={14} className="mr-1.5" />
+                          Commencer l&apos;exercice
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => navigate(`/quiz/${lvl}`)}
+                          className="h-9"
+                        >
+                          Aller au quiz
+                          <ArrowRight size={14} className="ml-1.5" />
+                        </Button>
+                      </div>
                     </div>
-                  </CarouselItem>
-                );
-              })}
-            </CarouselContent>
-            <CarouselPrevious
-              className="left-1 sm:left-2 top-[calc(50%-12px)] -translate-y-1/2 z-10 h-9 w-9 sm:h-10 sm:w-10 border border-gray-200 bg-white/95 shadow-md hover:bg-white disabled:opacity-30"
-            />
-            <CarouselNext
-              className="right-1 sm:right-2 top-[calc(50%-12px)] -translate-y-1/2 z-10 h-9 w-9 sm:h-10 sm:w-10 border border-gray-200 bg-white/95 shadow-md hover:bg-white disabled:opacity-30"
-            />
-          </Carousel>
-          {levelStrip.length > 0 && (
-            <p className="text-center text-xs text-gray-500 mt-4">
-              Slide {focusSlide + 1} / {levelStrip.length}
-            </p>
-          )}
+                    <div className="shrink-0 flex justify-center sm:justify-end order-1 sm:order-2">
+                      <img
+                        src={brand.excellent}
+                        alt=""
+                        className="h-24 md:h-28 w-auto max-w-[160px] sm:max-w-[180px] object-contain quiz-mascot-animate"
+                        aria-hidden
+                      />
+                    </div>
+                  </div>
+                </Card>
+              );
+            }
+
+            if (isValidated) {
+              return (
+                <Card
+                  key={lvl}
+                  className="p-4 md:p-5 border border-emerald-200/80 bg-gradient-to-b from-emerald-50/50 to-white shadow-sm rounded-[5px] w-full"
+                >
+                  <div className="flex items-start gap-2 mb-1.5">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden />
+                    <div className="min-w-0">
+                      <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-800">
+                        Niveau validé
+                      </p>
+                      <h3 className="text-sm md:text-base font-bold text-gray-900 leading-tight">
+                        Niveau {lvl} - {mod.title}
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="text-xs md:text-sm text-gray-600 mb-3 line-clamp-2">{mod.description}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 text-xs"
+                      onClick={() => navigate(`/course/${lvl}`)}
+                    >
+                      Revoir le cours
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 text-xs"
+                      onClick={() => navigate(`/quiz/${lvl}`)}
+                    >
+                      Aller au quiz
+                      <ArrowRight size={12} className="ml-1" />
+                    </Button>
+                  </div>
+                </Card>
+              );
+            }
+
+            return (
+              <Card
+                key={lvl}
+                className="p-4 border border-dashed border-gray-300 bg-gray-50/80 rounded-[5px] w-full"
+              >
+                <p className="text-xs font-medium text-gray-500 mb-0.5">Niveau {lvl}</p>
+                <p className="text-xs text-gray-600">
+                  Termine d&apos;abord les niveaux précédents pour débloquer celui-ci.
+                </p>
+              </Card>
+            );
+          })}
         </div>
       </div>
 
