@@ -176,7 +176,7 @@
   }
 
   .quiz-mascot-animate {
-    animation: quiz-mascot-float 2.4s ease-in-out infinite;
+    animation: quiz-mascot-float 1.8s ease-in-out infinite;
   }
 
   @keyframes quiz-mascot-float {
@@ -185,7 +185,12 @@
       transform: translateY(0) scale(1);
     }
     50% {
-      transform: translateY(-6px) scale(1.03);
+      transform: translateY(-8px) scale(1.05);
     }
+  }
+
+  /* Atténue un fond noir sur les PNG (sur fond clair derrière) */
+  .brand-png-knockout {
+    mix-blend-mode: screen;
   }
 }

@@ -32,7 +32,7 @@ export default function Home() {
               <img
                 src={brand.reading}
                 alt=""
-                className="max-h-full max-w-full w-auto h-auto object-contain"
+                className="max-h-full max-w-full w-auto h-auto object-contain brand-png-knockout"
                 aria-hidden
               />
             </div>
@@ -47,7 +47,7 @@ export default function Home() {
               <img
                 src={brand.pasBien}
                 alt=""
-                className="max-h-full max-w-full w-auto h-auto object-contain"
+                className="max-h-full max-w-full w-auto h-auto object-contain brand-png-knockout"
                 aria-hidden
               />
             </div>

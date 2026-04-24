@@ -3,7 +3,7 @@ import logo from "@/assets/logo.png";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Mail, Play, SlidersHorizontal, Undo2 } from "lucide-react";
+import { ArrowRight, Mail, Play, Undo2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { allModules } from "@/lib/courses-progressive";
 import {
@@ -37,15 +37,11 @@ export default function Dashboard() {
     scores: {},
   });
   const [loading, setLoading] = useState(true);
-  const [showLevelDialog, setShowLevelDialog] = useState(false);
-  const [showResetConfirm, setShowResetConfirm] = useState(false);
-  const [manualLevel, setManualLevel] = useState<number>(1);
   const [showContactDialog, setShowContactDialog] = useState(false);
   const [contactEmail, setContactEmail] = useState("");
   const [contactSubject, setContactSubject] = useState<"Paiement" | "Bug technique" | "Question DJ" | "Autre">("Bug technique");
   const [contactMessage, setContactMessage] = useState("");
 
-  const resetProgressMutation = trpc.dj.resetProgress.useMutation();
   const userProfileQuery = trpc.dj.getUserProfile.useQuery(
     { userId: parseInt(localStorage.getItem("userId") || "0") },
     { enabled: !!localStorage.getItem("userId") }
@@ -82,45 +78,6 @@ export default function Dashboard() {
     return Math.max(1, Math.min(unlockedTop, totalLevels));
   }, [totalLevels, userProgress.completedLevels.length]);
   const activeModule = allModules.find((module) => module.level === activeLevel) ?? allModules[0];
-
-  const resetLocalProgress = (level: number) => {
-    const completedLevels =
-      level > 1 ? Array.from({ length: level - 1 }, (_, i) => i + 1) : [];
-    const nextProgress = {
-      currentLevel: level,
-      completedLevels,
-      scores: {},
-    };
-    localStorage.setItem("userProgress", JSON.stringify(nextProgress));
-    setUserProgress(nextProgress);
-  };
-
-  const handleRedoOnboarding = () => {
-    if (!confirm("Refaire l'onboarding va réinitialiser ta progression actuelle. Continuer ?")) {
-      return;
-    }
-    const userId = parseInt(localStorage.getItem("userId") || "0");
-    if (userId) {
-      resetProgressMutation.mutate({ userId, level: 1 });
-    }
-    resetLocalProgress(1);
-    setShowLevelDialog(false);
-    navigate("/onboarding");
-  };
-
-  const handleManualLevel = () => {
-    setShowResetConfirm(true);
-  };
-
-  const confirmManualLevel = () => {
-    const userId = parseInt(localStorage.getItem("userId") || "0");
-    if (userId) {
-      resetProgressMutation.mutate({ userId, level: manualLevel });
-    }
-    resetLocalProgress(manualLevel);
-    setShowResetConfirm(false);
-    setShowLevelDialog(false);
-  };
 
   const handleStartCurrentExercise = () => {
     navigate(`/course/${activeLevel}`);
@@ -181,25 +138,7 @@ export default function Dashboard() {
               >
                 <Mail className="size-4 text-primary" />
               </button>
-              <button
-                type="button"
-                className={headerActionClass + " pl-2.5 pr-3 hidden sm:inline-flex"}
-                onClick={() => setShowLevelDialog(true)}
-              >
-                <SlidersHorizontal className="size-4 shrink-0 text-primary" aria-hidden />
-                Modifier mon niveau
-              </button>
             </div>
-          </div>
-          <div className="sm:hidden flex justify-end mb-2">
-            <button
-              type="button"
-              className={headerActionClass + " w-full pl-2.5 pr-3"}
-              onClick={() => setShowLevelDialog(true)}
-            >
-              <SlidersHorizontal className="size-4 shrink-0 text-primary" aria-hidden />
-              Modifier mon niveau
-            </button>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Ton Parcours Mixy</h1>
           <p className="text-sm md:text-base text-gray-600">
@@ -244,59 +183,6 @@ export default function Dashboard() {
           </div>
         </Card>
       </div>
-
-      <Dialog open={showLevelDialog} onOpenChange={setShowLevelDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Modifier mon niveau</DialogTitle>
-            <DialogDescription>
-              Choisis comment recalibrer ton niveau sans perdre ta progression sans confirmation.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-3">
-            <Button className="w-full" onClick={handleRedoOnboarding}>
-              Refaire onboarding
-            </Button>
-            <div className="space-y-2">
-              <p className="text-sm text-gray-600">Choisir niveau manuellement</p>
-              <Select value={String(manualLevel)} onValueChange={(value) => setManualLevel(parseInt(value))}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Sélectionner un niveau" />
-                </SelectTrigger>
-                <SelectContent>
-                  {allModules.map((lvl) => (
-                    <SelectItem key={lvl.level} value={String(lvl.level)}>
-                      Niveau {lvl.level} - {lvl.title}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Button variant="outline" className="w-full" onClick={handleManualLevel}>
-                Appliquer ce niveau
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={showResetConfirm} onOpenChange={setShowResetConfirm}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Confirmer la réinitialisation</DialogTitle>
-            <DialogDescription>
-              Cette action remplace ta progression actuelle. Tu confirmes ?
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex gap-2">
-            <Button variant="outline" className="w-full" onClick={() => setShowResetConfirm(false)}>
-              Annuler
-            </Button>
-            <Button className="w-full" onClick={confirmManualLevel}>
-              Confirmer
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
 
       <Dialog open={showContactDialog} onOpenChange={setShowContactDialog}>
         <DialogContent>
