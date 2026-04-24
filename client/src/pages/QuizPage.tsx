@@ -320,7 +320,7 @@ const QUIZ_DATA: QuizData = {
 export default function QuizPage() {
   const [, params] = useRoute("/quiz/:level");
   const [, navigate] = useLocation();
-  const { refreshProgress, completedLevels } = useProgress();
+  const { refreshProgress, completedLevels, hasActiveSubscription } = useProgress();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -330,10 +330,10 @@ export default function QuizPage() {
   const questions = QUIZ_DATA[level] || [];
 
   useEffect(() => {
-    if (!isLevelUnlockedForCourse(level, completedLevels)) {
+    if (!isLevelUnlockedForCourse(level, completedLevels, hasActiveSubscription)) {
       navigate("/dashboard", { replace: true });
     }
-  }, [level, completedLevels, navigate]);
+  }, [level, completedLevels, hasActiveSubscription, navigate]);
 
   useLayoutEffect(() => {
     if (!questions.length) return;

@@ -33,16 +33,26 @@ export function getActiveLevelFromCompleted(completed: number[], totalLevels: nu
   return totalLevels;
 }
 
-/** Accès au cours N uniquement si le niveau N-1 est validé (sauf niveau 1). */
-export function isLevelUnlockedForCourse(level: number, completedLevels: number[]): boolean {
+/**
+ * Accès au contenu (cours / quiz) : niveau 1 toujours ; à partir du 2, prérequis pédago + abonnement actif (serveur).
+ * Le score valide l’avancement ; l’abonnement débloque le contenu.
+ */
+export function isLevelUnlockedForCourse(
+  level: number,
+  completedLevels: number[],
+  hasActiveSubscription: boolean
+): boolean {
   if (level <= 1) return true;
-  return completedLevels.includes(level - 1);
+  if (!completedLevels.includes(level - 1)) return false;
+  return hasActiveSubscription;
 }
 
 interface ProgressContextType {
   /** Premier niveau à terminer (affichage « Niveau actif », surbrillance sidebar) */
   currentLevel: number;
   completedLevels: number[];
+  /** Abonnement actif côté backend (Stripe webhook uniquement) — requis pour le contenu &gt; niveau 1 */
+  hasActiveSubscription: boolean;
   userLanguage: "en" | "fr";
   refreshProgress: () => void;
 }
@@ -66,6 +76,12 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     { enabled: !!localStorage.getItem("userId") }
   );
 
+  const subscriptionQuery = trpc.stripe.getSubscriptionStatus.useQuery(
+    { userId: parseInt(localStorage.getItem("userId") || "0", 10) },
+    { enabled: !!localStorage.getItem("userId") }
+  );
+  const hasActiveSubscription = subscriptionQuery.data?.isActive === true;
+
   const applyMergedProgress = useCallback(
     (apiData?: { completedLevels?: unknown } | null) => {
       const api = apiData ?? getProgressQuery.data;
@@ -83,10 +99,11 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   }, [applyMergedProgress]);
 
   const refreshProgress = useCallback(() => {
+    void subscriptionQuery.refetch();
     void getProgressQuery
       .refetch()
       .then((res) => applyMergedProgress(res.data ?? getProgressQuery.data));
-  }, [getProgressQuery, applyMergedProgress]);
+  }, [getProgressQuery, subscriptionQuery, applyMergedProgress]);
 
   // TODO: Fetch user language from backend
   useEffect(() => {
@@ -99,7 +116,9 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   }, []);
 
   return (
-    <ProgressContext.Provider value={{ currentLevel, completedLevels, userLanguage, refreshProgress }}>
+    <ProgressContext.Provider
+      value={{ currentLevel, completedLevels, hasActiveSubscription, userLanguage, refreshProgress }}
+    >
       {children}
     </ProgressContext.Provider>
   );

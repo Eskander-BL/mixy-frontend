@@ -5,7 +5,7 @@ import { useProgress } from "@/contexts/ProgressContext";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, Mail, Play, Undo2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Lock, Mail, Play, Undo2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { allModules } from "@/lib/courses-progressive";
 import {
@@ -27,7 +27,7 @@ import {
 
 export default function Dashboard() {
   const [location, navigate] = useLocation();
-  const { currentLevel: activeLevel, completedLevels } = useProgress();
+  const { currentLevel: activeLevel, completedLevels, hasActiveSubscription } = useProgress();
   const [loading, setLoading] = useState(true);
   const [showContactDialog, setShowContactDialog] = useState(false);
   const [contactEmail, setContactEmail] = useState("");
@@ -79,18 +79,27 @@ export default function Dashboard() {
   );
   const levelsScrollRef = useRef<HTMLDivElement>(null);
 
-  /** Dernière « slide » = niveau en cours (en bas de la liste) : on colle le scroll en bas. */
+  /**
+   * Colle le **bas** de la carte « Niveau actif » au **bas** de la zone (comme capture 2).
+   * `scrollTop = max` seul échoue si le layout n’est pas fini (images) → mauvais `scrollHeight`.
+   */
   const scrollTesNiveauToActive = useCallback(() => {
     const list = levelsScrollRef.current;
     if (!list) return;
-    const maxScroll = Math.max(0, list.scrollHeight - list.clientHeight);
-    list.scrollTop = maxScroll;
+    const active = list.querySelector<HTMLElement>("#dashboard-niveau-actif-card");
+    const target = active ?? (list.lastElementChild as HTMLElement | null);
+    if (!target) return;
+
+    const listH = list.clientHeight;
+    const listRect = list.getBoundingClientRect();
+    const r = target.getBoundingClientRect();
+    const bottomInContent = r.bottom - listRect.top + list.scrollTop;
+    const maxS = Math.max(0, list.scrollHeight - listH);
+    const padding = 10;
+    const next = bottomInContent - listH + padding;
+    list.scrollTop = Math.max(0, Math.min(next, maxS));
   }, []);
 
-  /**
-   * Après F5, après « Chargement… », retour /course → /dashboard, ou refetch trpc, la zone doit
-   * s’ancrer sur le Niveau actif (dépendances : loading, location, progression).
-   */
   useLayoutEffect(() => {
     if (loading) return;
     scrollTesNiveauToActive();
@@ -104,12 +113,29 @@ export default function Dashboard() {
     const t0 = setTimeout(scrollTesNiveauToActive, 0);
     const t1 = setTimeout(scrollTesNiveauToActive, 50);
     const t2 = setTimeout(scrollTesNiveauToActive, 200);
+    const t3 = setTimeout(scrollTesNiveauToActive, 400);
+    const t4 = setTimeout(scrollTesNiveauToActive, 700);
     return () => {
       clearTimeout(t0);
       clearTimeout(t1);
       clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
     };
   }, [loading, location, activeLevel, levelStripKey, completedKey, scrollTesNiveauToActive]);
+
+  /** Recalcul quand la hauteur du bloc change (images, polices, etc.) */
+  useEffect(() => {
+    const list = levelsScrollRef.current;
+    if (!list || loading) return;
+    const ro = new ResizeObserver(() => {
+      scrollTesNiveauToActive();
+    });
+    ro.observe(list);
+    return () => {
+      ro.disconnect();
+    };
+  }, [loading, levelStripKey, scrollTesNiveauToActive]);
 
   const submitContact = () => {
     contactMutation.mutate(
@@ -227,22 +253,44 @@ export default function Dashboard() {
                         {mod.description}
                       </p>
                       <div className="flex flex-wrap items-center gap-2">
-                        <Button
-                          onClick={() => navigate(`/course/${lvl}`)}
-                          className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 text-sm"
-                        >
-                          <Play size={14} className="mr-1.5" />
-                          Commencer l&apos;exercice
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => navigate(`/quiz/${lvl}`)}
-                          className="h-9"
-                        >
-                          Aller au quiz
-                          <ArrowRight size={14} className="ml-1.5" />
-                        </Button>
+                        {lvl > 1 && !hasActiveSubscription ? (
+                          <Button
+                            onClick={() => navigate(`/paywall/${lvl - 1}`)}
+                            className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 text-sm"
+                          >
+                            <Lock size={14} className="mr-1.5" />
+                            Abonnement requis
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={() => navigate(`/course/${lvl}`)}
+                            className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 text-sm"
+                          >
+                            <Play size={14} className="mr-1.5" />
+                            Commencer l&apos;exercice
+                          </Button>
+                        )}
+                        {lvl > 1 && !hasActiveSubscription ? (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => navigate(`/paywall/${lvl - 1}`)}
+                            className="h-9"
+                          >
+                            Débloquer le contenu
+                            <ArrowRight size={14} className="ml-1.5" />
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => navigate(`/quiz/${lvl}`)}
+                            className="h-9"
+                          >
+                            Aller au quiz
+                            <ArrowRight size={14} className="ml-1.5" />
+                          </Button>
+                        )}
                       </div>
                     </div>
                     <div className="shrink-0 flex justify-center sm:justify-end order-1 sm:order-2">
@@ -251,6 +299,7 @@ export default function Dashboard() {
                         alt=""
                         className="h-24 md:h-28 w-auto max-w-[160px] sm:max-w-[180px] object-contain quiz-mascot-animate"
                         aria-hidden
+                        onLoad={scrollTesNiveauToActive}
                       />
                     </div>
                   </div>

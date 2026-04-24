@@ -6,6 +6,7 @@ import { allModules } from "@/lib/courses-progressive";
 interface SidebarProps {
   currentLevel: number;
   completedLevels: number[];
+  hasActiveSubscription: boolean;
   userLanguage: "en" | "fr";
   mobileOpen?: boolean;
   onCloseMobile?: () => void;
@@ -14,6 +15,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({
   currentLevel,
   completedLevels,
+  hasActiveSubscription,
   userLanguage,
   mobileOpen = false,
   onCloseMobile,
@@ -27,8 +29,9 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const getLevelStatus = (level: number) => {
     if (level === 1) return "accessible";
-    if (completedLevels.includes(level - 1)) return "unlocked";
-    return "locked";
+    if (!completedLevels.includes(level - 1)) return "locked";
+    if (level > 1 && !hasActiveSubscription) return "locked";
+    return "unlocked";
   };
 
   const renderLevelTitle = (level: number, title: string) => {

@@ -19,7 +19,7 @@ import { Menu } from "lucide-react";
 import { Button } from "./components/ui/button";
 
 function AppContent() {
-  const { currentLevel, completedLevels, userLanguage } = useProgress();
+  const { currentLevel, completedLevels, hasActiveSubscription, userLanguage } = useProgress();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const renderAppContent = () => (
@@ -35,6 +35,7 @@ function AppContent() {
       <Sidebar
         currentLevel={currentLevel}
         completedLevels={completedLevels}
+        hasActiveSubscription={hasActiveSubscription}
         userLanguage={userLanguage}
         mobileOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}

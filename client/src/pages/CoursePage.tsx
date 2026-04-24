@@ -11,7 +11,7 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 export default function CoursePage() {
   const [, params] = useRoute("/course/:level");
   const [, navigate] = useLocation();
-  const { completedLevels } = useProgress();
+  const { completedLevels, hasActiveSubscription } = useProgress();
   const [userId, setUserId] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
 
@@ -29,10 +29,10 @@ export default function CoursePage() {
   }, [navigate]);
 
   useEffect(() => {
-    if (!isLevelUnlockedForCourse(level, completedLevels)) {
+    if (!isLevelUnlockedForCourse(level, completedLevels, hasActiveSubscription)) {
       navigate("/dashboard", { replace: true });
     }
-  }, [level, completedLevels, navigate]);
+  }, [level, completedLevels, hasActiveSubscription, navigate]);
 
   useEffect(() => {
     setCurrentSlide(1);
