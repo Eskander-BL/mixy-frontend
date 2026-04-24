@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
+import { scrollAppMainToTop } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 export default function CoursePage() {
@@ -37,6 +38,10 @@ export default function CoursePage() {
     setCurrentSlide(1);
   }, [level]);
 
+  useLayoutEffect(() => {
+    scrollAppMainToTop();
+  }, [currentSlide, level]);
+
   if (!module || !slide) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -60,14 +65,12 @@ export default function CoursePage() {
   const handleNextSlide = () => {
     if (!isLastSlide) {
       setCurrentSlide(currentSlide + 1);
-      window.scrollTo(0, 0);
     }
   };
 
   const handlePreviousSlide = () => {
     if (!isFirstSlide) {
       setCurrentSlide(currentSlide - 1);
-      window.scrollTo(0, 0);
     }
   };
 

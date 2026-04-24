@@ -28,7 +28,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="h-16 w-16 md:h-[4.75rem] md:w-[4.75rem] mx-auto mb-3 flex items-center justify-center">
+            <div className="h-[120px] w-[120px] md:h-[128px] md:w-[128px] mx-auto mb-3 flex items-center justify-center">
               <img
                 src={brand.reading}
                 alt=""
@@ -43,7 +43,7 @@ export default function Home() {
           </div>
 
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="h-16 w-16 md:h-[4.75rem] md:w-[4.75rem] mx-auto mb-3 flex items-center justify-center">
+            <div className="h-[120px] w-[120px] md:h-[128px] md:w-[128px] mx-auto mb-3 flex items-center justify-center">
               <img
                 src={brand.excellent}
                 alt=""
@@ -58,7 +58,7 @@ export default function Home() {
           </div>
 
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="h-16 w-16 md:h-[4.75rem] md:w-[4.75rem] mx-auto mb-3 flex items-center justify-center">
+            <div className="h-[120px] w-[120px] md:h-[128px] md:w-[128px] mx-auto mb-3 flex items-center justify-center">
               <img
                 src={brand.chatBot}
                 alt=""

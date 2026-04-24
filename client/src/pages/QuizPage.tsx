@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
+import { scrollAppMainToTop } from "@/lib/utils";
 
 interface QuizQuestion {
   id: number;
@@ -334,6 +335,11 @@ export default function QuizPage() {
     }
   }, [level, completedLevels, navigate]);
 
+  useLayoutEffect(() => {
+    if (!questions.length) return;
+    scrollAppMainToTop();
+  }, [level, currentQuestion, showResults, questions.length]);
+
   if (!questions.length) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -458,7 +464,7 @@ export default function QuizPage() {
               <img
                 src={message.image}
                 alt=""
-                className="h-28 w-auto max-w-[min(100%,200px)] object-contain"
+                className="h-40 md:h-48 w-auto max-w-[min(100%,300px)] object-contain"
                 aria-hidden
               />
             </div>

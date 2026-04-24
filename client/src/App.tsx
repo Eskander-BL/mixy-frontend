@@ -39,7 +39,7 @@ function AppContent() {
         mobileOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}
       />
-      <main className="flex-1 overflow-auto w-full">
+      <main id="app-main-scroll" className="flex-1 overflow-auto w-full">
         <div className="md:hidden sticky top-0 z-20 bg-white border-b px-3 py-2">
           <Button variant="outline" size="sm" onClick={() => setMobileSidebarOpen(true)}>
             <Menu size={16} className="mr-2" />
