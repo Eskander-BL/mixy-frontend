@@ -79,36 +79,12 @@ export default function Dashboard() {
   );
   const levelsScrollRef = useRef<HTMLDivElement>(null);
 
+  /** Dernière « slide » = niveau en cours (en bas de la liste) : on colle le scroll en bas. */
   const scrollTesNiveauToActive = useCallback(() => {
     const list = levelsScrollRef.current;
     if (!list) return;
-
-    /** Centre la carte dans la zone visible (comme capture 2), avec garde-fous. */
-    const centerBlockInList = (el: HTMLElement) => {
-      const listRect = list.getBoundingClientRect();
-      const r = el.getBoundingClientRect();
-      const topInContent = r.top - listRect.top + list.scrollTop;
-      const elH = el.offsetHeight;
-      const listH = list.clientHeight;
-      const maxScroll = Math.max(0, list.scrollHeight - listH);
-
-      let next: number;
-      if (elH >= listH - 2) {
-        next = topInContent - 10;
-      } else {
-        next = topInContent - (listH - elH) / 2;
-      }
-      list.scrollTop = Math.max(0, Math.min(next, maxScroll));
-    };
-
-    const active = list.querySelector<HTMLElement>("#dashboard-niveau-actif-card");
-    if (active) {
-      centerBlockInList(active);
-      return;
-    }
-    if (list.lastElementChild) {
-      centerBlockInList(list.lastElementChild as HTMLElement);
-    }
+    const maxScroll = Math.max(0, list.scrollHeight - list.clientHeight);
+    list.scrollTop = maxScroll;
   }, []);
 
   /**
