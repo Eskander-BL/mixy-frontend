@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import logo from "@/assets/logo.png";
 import { brand } from "@/assets/brand-assets";
 import { useProgress } from "@/contexts/ProgressContext";
@@ -71,6 +71,29 @@ export default function Dashboard() {
       .filter((l) => l >= 1 && l <= totalLevels)
       .sort((a, b) => a - b);
   }, [completedLevels, activeLevel, totalLevels]);
+
+  const levelStripKey = levelStrip.join(",");
+  const levelsScrollRef = useRef<HTMLDivElement>(null);
+  const activeLevelCardRef = useRef<HTMLDivElement>(null);
+
+  /** Remonter la liste pour que le « Niveau actif » soit visible (retour cours / dashboard). */
+  useLayoutEffect(() => {
+    const list = levelsScrollRef.current;
+    if (!list) return;
+    const run = () => {
+      const active = activeLevelCardRef.current;
+      if (active) {
+        list.scrollTop = Math.max(0, active.offsetTop - 12);
+        return;
+      }
+      if (list.lastElementChild) {
+        const el = list.lastElementChild as HTMLElement;
+        list.scrollTop = Math.max(0, el.offsetTop - 12);
+      }
+    };
+    run();
+    requestAnimationFrame(run);
+  }, [activeLevel, levelStripKey]);
 
   const submitContact = () => {
     contactMutation.mutate(
@@ -164,6 +187,7 @@ export default function Dashboard() {
         </div>
 
         <div
+          ref={levelsScrollRef}
           className="max-h-[min(60vh,520px)] overflow-y-auto space-y-3 scroll-smooth pr-1 -mr-1 [scrollbar-width:thin]"
         >
           {levelStrip.map((lvl) => {
@@ -173,8 +197,8 @@ export default function Dashboard() {
 
             if (isActiveCard) {
               return (
+                <div key={lvl} ref={activeLevelCardRef}>
                 <Card
-                  key={lvl}
                   className="p-4 md:p-5 border border-primary/20 shadow-sm bg-white/95 rounded-[5px] w-full"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start gap-3">
@@ -215,13 +239,14 @@ export default function Dashboard() {
                     </div>
                   </div>
                 </Card>
+                </div>
               );
             }
 
             if (isValidated) {
               return (
+                <div key={lvl}>
                 <Card
-                  key={lvl}
                   className="p-4 md:p-5 border border-emerald-200/80 bg-gradient-to-b from-emerald-50/50 to-white shadow-sm rounded-[5px] w-full"
                 >
                   <div className="flex items-start gap-2 mb-1.5">
@@ -256,12 +281,13 @@ export default function Dashboard() {
                     </Button>
                   </div>
                 </Card>
+                </div>
               );
             }
 
             return (
+              <div key={lvl}>
               <Card
-                key={lvl}
                 className="p-4 border border-dashed border-gray-300 bg-gray-50/80 rounded-[5px] w-full"
               >
                 <p className="text-xs font-medium text-gray-500 mb-0.5">Niveau {lvl}</p>
@@ -269,6 +295,7 @@ export default function Dashboard() {
                   Termine d&apos;abord les niveaux précédents pour débloquer celui-ci.
                 </p>
               </Card>
+              </div>
             );
           })}
         </div>
