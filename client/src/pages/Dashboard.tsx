@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import logo from "@/assets/logo.png";
 import { brand } from "@/assets/brand-assets";
 import { useProgress } from "@/contexts/ProgressContext";
