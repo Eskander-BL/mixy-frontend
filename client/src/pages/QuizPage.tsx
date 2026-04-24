@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
+import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
 
 interface QuizQuestion {
   id: number;
@@ -318,6 +319,7 @@ const QUIZ_DATA: QuizData = {
 export default function QuizPage() {
   const [, params] = useRoute("/quiz/:level");
   const [, navigate] = useLocation();
+  const { refreshProgress, completedLevels } = useProgress();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -325,6 +327,12 @@ export default function QuizPage() {
 
   const level = params?.level ? parseInt(params.level) : 1;
   const questions = QUIZ_DATA[level] || [];
+
+  useEffect(() => {
+    if (!isLevelUnlockedForCourse(level, completedLevels)) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [level, completedLevels, navigate]);
 
   if (!questions.length) {
     return (
@@ -387,6 +395,7 @@ export default function QuizPage() {
       }
       progress.scores[level] = score;
       localStorage.setItem("userProgress", JSON.stringify(progress));
+      refreshProgress();
 
       navigate(`/paywall/${level}`);
     }

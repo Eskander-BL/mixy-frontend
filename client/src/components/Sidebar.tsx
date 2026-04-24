@@ -27,9 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   const getLevelStatus = (level: number) => {
     if (level === 1) return "accessible";
-    if (completedLevels.includes(level - 1) || currentLevel >= level) {
-      return "unlocked";
-    }
+    if (completedLevels.includes(level - 1)) return "unlocked";
     return "locked";
   };
 

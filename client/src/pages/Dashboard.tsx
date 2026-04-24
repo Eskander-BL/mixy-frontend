@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import logo from "@/assets/logo.png";
 import { brand } from "@/assets/brand-assets";
+import { useProgress } from "@/contexts/ProgressContext";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -24,19 +25,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface UserProgress {
-  currentLevel: number;
-  completedLevels: number[];
-  scores: Record<number, number>;
-}
-
 export default function Dashboard() {
   const [, navigate] = useLocation();
-  const [userProgress, setUserProgress] = useState<UserProgress>({
-    currentLevel: 1,
-    completedLevels: [],
-    scores: {},
-  });
+  const { currentLevel: activeLevel, completedLevels } = useProgress();
   const [loading, setLoading] = useState(true);
   const [showContactDialog, setShowContactDialog] = useState(false);
   const [contactEmail, setContactEmail] = useState("");
@@ -59,10 +50,6 @@ export default function Dashboard() {
       return;
     }
 
-    const savedProgress = localStorage.getItem("userProgress");
-    if (savedProgress) {
-      setUserProgress(JSON.parse(savedProgress));
-    }
     setLoading(false);
   }, [navigate]);
 
@@ -73,12 +60,11 @@ export default function Dashboard() {
   }, [userProfileQuery.data]);
 
   const totalLevels = allModules.length;
-  const progressPercentage = (userProgress.completedLevels.length / totalLevels) * 100;
-  const activeLevel = useMemo(() => {
-    const unlockedTop = userProgress.completedLevels.length + 1;
-    return Math.max(1, Math.min(unlockedTop, totalLevels));
-  }, [totalLevels, userProgress.completedLevels.length]);
-  const activeModule = allModules.find((module) => module.level === activeLevel) ?? allModules[0];
+  const progressPercentage = (completedLevels.length / totalLevels) * 100;
+  const activeModule = useMemo(
+    () => allModules.find((module) => module.level === activeLevel) ?? allModules[0],
+    [activeLevel]
+  );
 
   const handleStartCurrentExercise = () => {
     navigate(`/course/${activeLevel}`);
@@ -152,7 +138,7 @@ export default function Dashboard() {
                 Progression générale
               </p>
               <p className="text-sm font-semibold text-primary">
-                {userProgress.completedLevels.length} / {totalLevels} niveaux complétés
+                {completedLevels.length} / {totalLevels} niveaux complétés
               </p>
             </div>
             <div className="w-full bg-gray-200 rounded-[5px] h-2.5 overflow-hidden">

@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
 import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
+import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 export default function CoursePage() {
   const [, params] = useRoute("/course/:level");
   const [, navigate] = useLocation();
+  const { completedLevels } = useProgress();
   const [userId, setUserId] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
 
@@ -24,6 +26,16 @@ export default function CoursePage() {
       navigate("/");
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (!isLevelUnlockedForCourse(level, completedLevels)) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [level, completedLevels, navigate]);
+
+  useEffect(() => {
+    setCurrentSlide(1);
+  }, [level]);
 
   if (!module || !slide) {
     return (
