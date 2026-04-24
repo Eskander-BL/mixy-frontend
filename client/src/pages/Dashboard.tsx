@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import logo from "@/assets/logo.png";
+import { brand } from "@/assets/brand-assets";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -166,12 +167,24 @@ export default function Dashboard() {
 
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
         <Card className="p-5 md:p-7 border border-primary/15 shadow-sm bg-white/90 backdrop-blur rounded-[5px]">
-          <p className="text-sm font-semibold text-primary mb-2">Niveau actif</p>
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
-            Niveau {activeLevel} - {activeModule?.title}
-          </h2>
-          <p className="text-sm text-gray-600 mb-6">{activeModule?.description}</p>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-col md:flex-row md:items-start gap-6">
+            <div className="flex-1 min-w-0 order-2 md:order-1">
+              <p className="text-sm font-semibold text-primary mb-2">Niveau actif</p>
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                Niveau {activeLevel} - {activeModule?.title}
+              </h2>
+              <p className="text-sm text-gray-600 mb-6 md:mb-0">{activeModule?.description}</p>
+            </div>
+            <div className="shrink-0 flex justify-center md:justify-end order-1 md:order-2">
+              <img
+                src={brand.excellent}
+                alt=""
+                className="h-32 md:h-36 w-auto max-w-[220px] object-contain quiz-mascot-animate"
+                aria-hidden
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 mt-6">
             <Button onClick={handleStartCurrentExercise} className="bg-primary text-primary-foreground hover:bg-primary/90">
               <Play size={16} className="mr-2" />
               Commencer l'exercice

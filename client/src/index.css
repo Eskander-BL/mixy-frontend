@@ -188,9 +188,4 @@
       transform: translateY(-8px) scale(1.05);
     }
   }
-
-  /* Atténue un fond noir sur les PNG (sur fond clair derrière) */
-  .brand-png-knockout {
-    mix-blend-mode: screen;
-  }
 }

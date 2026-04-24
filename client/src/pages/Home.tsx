@@ -32,7 +32,7 @@ export default function Home() {
               <img
                 src={brand.reading}
                 alt=""
-                className="max-h-full max-w-full w-auto h-auto object-contain brand-png-knockout"
+                className="max-h-full max-w-full w-auto h-auto object-contain"
                 aria-hidden
               />
             </div>
@@ -45,9 +45,9 @@ export default function Home() {
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
             <div className="h-16 w-16 md:h-[4.75rem] md:w-[4.75rem] mx-auto mb-3 flex items-center justify-center">
               <img
-                src={brand.pasBien}
+                src={brand.excellent}
                 alt=""
-                className="max-h-full max-w-full w-auto h-auto object-contain brand-png-knockout"
+                className="max-h-full max-w-full w-auto h-auto object-contain"
                 aria-hidden
               />
             </div>

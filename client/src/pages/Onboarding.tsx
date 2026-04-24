@@ -589,11 +589,11 @@ export default function Onboarding() {
         {step === "summary" && (
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center">
-              <div className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-4 flex items-center justify-center">
+              <div className="h-32 w-32 md:h-36 md:w-36 mx-auto mb-4 flex items-center justify-center">
                 <img
                   src={brand.reading}
                   alt=""
-                  className="max-h-full max-w-full w-auto h-auto object-contain brand-png-knockout"
+                  className="max-h-full max-w-full w-auto h-auto object-contain"
                   aria-hidden
                 />
               </div>

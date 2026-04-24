@@ -449,7 +449,7 @@ export default function QuizPage() {
               <img
                 src={message.image}
                 alt=""
-                className="h-28 w-auto max-w-[min(100%,200px)] object-contain brand-png-knockout"
+                className="h-28 w-auto max-w-[min(100%,200px)] object-contain"
                 aria-hidden
               />
             </div>

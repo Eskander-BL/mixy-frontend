@@ -58,7 +58,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div
       className={`${
-        collapsed ? "md:w-16" : "md:w-72"
+        /* ~144px replié : cadenas + numéro visibles (avant 64px c’était trop étroit) */
+        collapsed ? "md:w-36" : "md:w-72"
       } w-72 bg-gradient-to-b from-gray-900 to-gray-950 text-white p-3 transition-all duration-300 space-y-2 border-r border-gray-800 fixed md:static inset-y-0 left-0 z-40 ${
         mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
       }`}
@@ -94,24 +95,24 @@ const Sidebar: React.FC<SidebarProps> = ({
             <Link
               key={level}
               href={`/course/${level}`}
-              className={`grid grid-cols-[28px_1fr_16px] items-center gap-2 p-2.5 rounded-[5px] text-sm transition-colors ${
+              className={`flex items-center gap-2 p-2.5 rounded-[5px] text-sm transition-colors ${
                 isCurrent ? "bg-primary shadow-sm shadow-orange-900/25 border border-orange-300/40" : "border border-transparent"
               } ${status === "locked" ? "opacity-60 cursor-not-allowed" : "hover:bg-gray-700/90"}`}
               onClick={(e) => status === "locked" && e.preventDefault()}
             >
-              <span className="h-6 w-6 rounded-[5px] bg-white/10 text-[11px] font-semibold flex items-center justify-center">
+              <span className="h-6 w-6 rounded-[5px] bg-white/10 text-[11px] font-semibold flex items-center justify-center shrink-0">
                 {level}
               </span>
               {!collapsed && (
-                <span className="text-[12px] leading-4 pr-1">
+                <span className="text-[12px] leading-4 pr-1 flex-1 min-w-0">
                   {renderLevelTitle(level, title)}
                 </span>
               )}
               {isCompleted && (
-                <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0 justify-self-end" />
+                <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0 ml-auto" />
               )}
               {status === "locked" && (
-                <Lock className="h-4 w-4 text-gray-300 shrink-0 justify-self-end" />
+                <Lock className="h-4 w-4 text-gray-300 shrink-0 ml-auto" />
               )}
             </Link>
           );
