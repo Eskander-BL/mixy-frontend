@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/select";
 
 export default function Dashboard() {
-  const [, navigate] = useLocation();
+  const [location, navigate] = useLocation();
   const { currentLevel: activeLevel, completedLevels } = useProgress();
   const [loading, setLoading] = useState(true);
   const [showContactDialog, setShowContactDialog] = useState(false);
@@ -73,27 +73,54 @@ export default function Dashboard() {
   }, [completedLevels, activeLevel, totalLevels]);
 
   const levelStripKey = levelStrip.join(",");
+  const completedKey = useMemo(
+    () => completedLevels.join(","),
+    [completedLevels]
+  );
   const levelsScrollRef = useRef<HTMLDivElement>(null);
-  const activeLevelCardRef = useRef<HTMLDivElement>(null);
 
-  /** Remonter la liste pour que le « Niveau actif » soit visible (retour cours / dashboard). */
-  useLayoutEffect(() => {
+  const scrollTesNiveauToActive = useCallback(() => {
     const list = levelsScrollRef.current;
     if (!list) return;
-    const run = () => {
-      const active = activeLevelCardRef.current;
-      if (active) {
-        list.scrollTop = Math.max(0, active.offsetTop - 12);
-        return;
-      }
-      if (list.lastElementChild) {
-        const el = list.lastElementChild as HTMLElement;
-        list.scrollTop = Math.max(0, el.offsetTop - 12);
-      }
+    const align = (el: HTMLElement) => {
+      const listRect = list.getBoundingClientRect();
+      const r = el.getBoundingClientRect();
+      const next = r.top - listRect.top + list.scrollTop;
+      list.scrollTop = Math.max(0, next - 12);
     };
-    run();
-    requestAnimationFrame(run);
-  }, [activeLevel, levelStripKey]);
+    const active = list.querySelector<HTMLElement>("#dashboard-niveau-actif-card");
+    if (active) {
+      align(active);
+      return;
+    }
+    if (list.lastElementChild) {
+      align(list.lastElementChild as HTMLElement);
+    }
+  }, []);
+
+  /**
+   * Après F5, après « Chargement… », retour /course → /dashboard, ou refetch trpc, la zone doit
+   * s’ancrer sur le Niveau actif (dépendances : loading, location, progression).
+   */
+  useLayoutEffect(() => {
+    if (loading) return;
+    scrollTesNiveauToActive();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(scrollTesNiveauToActive);
+    });
+  }, [loading, location, activeLevel, levelStripKey, completedKey, scrollTesNiveauToActive]);
+
+  useEffect(() => {
+    if (loading) return;
+    const t0 = setTimeout(scrollTesNiveauToActive, 0);
+    const t1 = setTimeout(scrollTesNiveauToActive, 50);
+    const t2 = setTimeout(scrollTesNiveauToActive, 200);
+    return () => {
+      clearTimeout(t0);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [loading, location, activeLevel, levelStripKey, completedKey, scrollTesNiveauToActive]);
 
   const submitContact = () => {
     contactMutation.mutate(
@@ -197,7 +224,7 @@ export default function Dashboard() {
 
             if (isActiveCard) {
               return (
-                <div key={lvl} ref={activeLevelCardRef}>
+                <div key={lvl} id="dashboard-niveau-actif-card" data-niveau={lvl}>
                 <Card
                   className="p-4 md:p-5 border border-primary/20 shadow-sm bg-white/95 rounded-[5px] w-full"
                 >
