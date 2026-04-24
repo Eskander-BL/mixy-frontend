@@ -82,19 +82,32 @@ export default function Dashboard() {
   const scrollTesNiveauToActive = useCallback(() => {
     const list = levelsScrollRef.current;
     if (!list) return;
-    const align = (el: HTMLElement) => {
+
+    /** Centre la carte dans la zone visible (comme capture 2), avec garde-fous. */
+    const centerBlockInList = (el: HTMLElement) => {
       const listRect = list.getBoundingClientRect();
       const r = el.getBoundingClientRect();
-      const next = r.top - listRect.top + list.scrollTop;
-      list.scrollTop = Math.max(0, next - 12);
+      const topInContent = r.top - listRect.top + list.scrollTop;
+      const elH = el.offsetHeight;
+      const listH = list.clientHeight;
+      const maxScroll = Math.max(0, list.scrollHeight - listH);
+
+      let next: number;
+      if (elH >= listH - 2) {
+        next = topInContent - 10;
+      } else {
+        next = topInContent - (listH - elH) / 2;
+      }
+      list.scrollTop = Math.max(0, Math.min(next, maxScroll));
     };
+
     const active = list.querySelector<HTMLElement>("#dashboard-niveau-actif-card");
     if (active) {
-      align(active);
+      centerBlockInList(active);
       return;
     }
     if (list.lastElementChild) {
-      align(list.lastElementChild as HTMLElement);
+      centerBlockInList(list.lastElementChild as HTMLElement);
     }
   }, []);
 
