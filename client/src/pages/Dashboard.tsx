@@ -5,7 +5,7 @@ import { useProgress } from "@/contexts/ProgressContext";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, Lock, Mail, Play, Undo2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Lock, Mail, MessageCircle, Play, Undo2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { allModules } from "@/lib/courses-progressive";
 import {
@@ -335,14 +335,30 @@ export default function Dashboard() {
                         )}
                       </div>
                     </div>
-                    <div className="shrink-0 flex justify-center sm:justify-end order-1 sm:order-2">
-                      <img
-                        src={brand.excellent}
-                        alt=""
-                        className="h-24 md:h-28 w-auto max-w-[160px] sm:max-w-[180px] object-contain quiz-mascot-animate"
+                    <div className="shrink-0 flex flex-col items-center sm:items-end order-1 sm:order-2 gap-1.5">
+                      <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-primary/90 text-center sm:text-right">
+                        Coach
+                      </p>
+                      <div
+                        className="relative flex h-[7.25rem] w-[7.25rem] sm:h-32 sm:w-32 shrink-0 items-end justify-center rounded-full bg-gradient-to-br from-amber-100/90 via-white to-orange-50 p-2 shadow-md ring-2 ring-primary/20"
                         aria-hidden
-                        onLoad={scrollTesNiveauToActive}
-                      />
+                      >
+                        <img
+                          src={brand.excellent}
+                          alt=""
+                          className="mb-0.5 max-h-[5rem] sm:max-h-[5.5rem] w-auto max-w-[min(100%,5.5rem)] object-contain object-bottom quiz-mascot-animate"
+                          onLoad={scrollTesNiveauToActive}
+                        />
+                        <span
+                          className="absolute -bottom-0.5 -right-0.5 z-[1] flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground shadow border border-white"
+                          aria-hidden
+                        >
+                          <MessageCircle className="h-3 w-3" strokeWidth={2.5} />
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-muted-foreground text-center sm:text-right max-w-[8rem] leading-tight">
+                        Utilise l&apos;icône en bas à droite pour le chat
+                      </p>
                     </div>
                   </div>
                 </Card>
