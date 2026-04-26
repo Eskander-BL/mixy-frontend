@@ -24,8 +24,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { CompleteAccountCard } from "@/components/CompleteAccountCard";
 
 export default function Dashboard() {
+  useDocumentTitle("Tableau de bord");
   const [location, navigate] = useLocation();
   const { currentLevel: activeLevel, completedLevels, hasActiveSubscription } = useProgress();
   const [loading, setLoading] = useState(true);
@@ -33,6 +36,7 @@ export default function Dashboard() {
   const [contactEmail, setContactEmail] = useState("");
   const [contactSubject, setContactSubject] = useState<"Paiement" | "Bug technique" | "Question DJ" | "Autre">("Bug technique");
   const [contactMessage, setContactMessage] = useState("");
+  const [returnFromPayment, setReturnFromPayment] = useState(false);
 
   const userProfileQuery = trpc.dj.getUserProfile.useQuery(
     { userId: parseInt(localStorage.getItem("userId") || "0") },
@@ -58,6 +62,31 @@ export default function Dashboard() {
       setContactEmail(userProfileQuery.data.email);
     }
   }, [userProfileQuery.data]);
+
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    if (q.get("payment") === "success") {
+      setReturnFromPayment(true);
+    }
+  }, []);
+
+  const needCompleteAccount =
+    !userProfileQuery.isLoading &&
+    Boolean(
+      !userProfileQuery.data?.email &&
+        typeof window !== "undefined" &&
+        localStorage.getItem("guestId")
+    ) &&
+    (hasActiveSubscription || returnFromPayment);
+
+  useEffect(() => {
+    if (!needCompleteAccount) return;
+    if (window.location.hash !== "#inscription-mixy") return;
+    const t = window.setTimeout(() => {
+      document.getElementById("inscription-mixy")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => clearTimeout(t);
+  }, [needCompleteAccount]);
 
   const totalLevels = allModules.length;
   const progressPercentage = (completedLevels.length / totalLevels) * 100;
@@ -215,6 +244,19 @@ export default function Dashboard() {
               ></div>
             </div>
           </div>
+
+          {needCompleteAccount ? (
+            <div id="inscription-mixy" className="mt-6 scroll-mt-4">
+              <CompleteAccountCard
+                onSuccess={() => {
+                  setReturnFromPayment(false);
+                  if (window.location.search) {
+                    window.history.replaceState({}, "", window.location.pathname);
+                  }
+                }}
+              />
+            </div>
+          ) : null}
         </div>
       </div>
 

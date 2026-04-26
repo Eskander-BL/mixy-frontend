@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 type OnboardingStep =
   | "language"
@@ -29,6 +30,7 @@ const STEPS: OnboardingStep[] = [
 ];
 
 export default function Onboarding() {
+  useDocumentTitle("Onboarding");
   const [, navigate] = useLocation();
   const [step, setStep] = useState<OnboardingStep>("name");
   const [guestId, setGuestId] = useState<string>("");
@@ -281,6 +283,12 @@ export default function Onboarding() {
               Continuer
               <ChevronRight size={18} />
             </Button>
+            <p className="text-center text-sm text-gray-600">
+              Tu as déjà un compte ?{" "}
+              <Link href="/login" className="text-primary font-medium underline underline-offset-2">
+                Se connecter
+              </Link>
+            </p>
           </div>
         )}
 

@@ -6,6 +6,8 @@ import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
 import { scrollAppMainToTop } from "@/lib/utils";
+import { getModuleByLevel } from "@/lib/courses-progressive";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 interface QuizQuestion {
   id: number;
@@ -328,6 +330,10 @@ export default function QuizPage() {
 
   const level = params?.level ? parseInt(params.level) : 1;
   const questions = QUIZ_DATA[level] || [];
+  const quizModule = getModuleByLevel(level);
+  useDocumentTitle(
+    quizModule?.title ? `Quiz : ${quizModule.title}` : `Quiz — niveau ${level}`,
+  );
 
   useEffect(() => {
     if (!isLevelUnlockedForCourse(level, completedLevels, hasActiveSubscription)) {

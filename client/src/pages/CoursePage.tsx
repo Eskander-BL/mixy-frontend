@@ -7,6 +7,7 @@ import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive"
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
 import { scrollAppMainToTop } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function CoursePage() {
   const [, params] = useRoute("/course/:level");
@@ -18,6 +19,7 @@ export default function CoursePage() {
   const level = params?.level ? parseInt(params.level) : 1;
   const module = getModuleByLevel(level);
   const slide = getSlideFromModule(level, currentSlide);
+  useDocumentTitle(module?.title ? `Cours : ${module.title}` : `Cours — niveau ${level}`);
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");

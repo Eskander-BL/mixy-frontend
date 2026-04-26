@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import logo from "@/assets/logo.png";
 import { brand } from "@/assets/brand-assets";
 
 export default function Home() {
   const [, navigate] = useLocation();
+  useDocumentTitle();
 
   useEffect(() => {
     const rawUserId = localStorage.getItem("userId");
@@ -22,6 +24,9 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30 flex items-center justify-center p-4">
       <div className="max-w-2xl text-center">
         <img src={logo} alt="Mixy Logo" className="h-20 w-auto mx-auto mb-4" />
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-3">
+          Apprends le mix &amp; le DJ avec Mixy
+        </h1>
         <p className="text-xl text-gray-600 mb-8">
           Apprends à mixer comme un pro. Pas de théorie ennuyeuse, juste de la pratique.
         </p>

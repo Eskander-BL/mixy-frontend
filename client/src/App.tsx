@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import CoursePage from "./pages/CoursePage";
 import QuizPage from "./pages/QuizPage";
 import PaywallPage from "./pages/PaywallPage";
+import LoginPage from "./pages/LoginPage";
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "./components/ui/button";
@@ -63,6 +64,7 @@ function AppContent() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/onboarding"} component={Onboarding} />
+      <Route path={"/login"} component={LoginPage} />
       <Route path={".*"}>{renderAppContent()}</Route>
     </Switch>
   );

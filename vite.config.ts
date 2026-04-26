@@ -150,7 +150,57 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+function getSeoOrigin(): string {
+  return (process.env.VITE_SEO_ORIGIN || "https://mixy-frontend.vercel.app").replace(/\/$/, "");
+}
+
+/** Remplace `__SEO_ORIGIN__` dans `index.html` et écrit `sitemap.xml` + `robots.txt` en prod build. */
+function seoBuildPlugin(): Plugin {
+  let outDir = "";
+  return {
+    name: "seo-build",
+    configResolved(config) {
+      outDir = config.build.outDir;
+    },
+    transformIndexHtml(html) {
+      return html.replaceAll("__SEO_ORIGIN__", getSeoOrigin());
+    },
+    closeBundle() {
+      if (!outDir) return;
+      const origin = getSeoOrigin();
+      const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${origin}/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${origin}/onboarding</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
+`;
+      const robots = `User-agent: *
+Allow: /
+
+Sitemap: ${origin}/sitemap.xml
+`;
+      fs.writeFileSync(path.join(outDir, "sitemap.xml"), sitemap, "utf-8");
+      fs.writeFileSync(path.join(outDir, "robots.txt"), robots, "utf-8");
+    },
+  };
+}
+
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  vitePluginManusRuntime(),
+  vitePluginManusDebugCollector(),
+  seoBuildPlugin(),
+];
 
 export default defineConfig({
   plugins,

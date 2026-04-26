@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { scrollAppMainToTop } from "@/lib/utils";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function PaywallPage() {
   const [, params] = useRoute("/paywall/:level");
@@ -16,6 +17,7 @@ export default function PaywallPage() {
   const createCheckoutSessionMutation = trpc.stripe.createCheckoutSession.useMutation();
 
   const level = params?.level ? parseInt(params.level) : 1;
+  useDocumentTitle(`S'abonner — niveau ${level}`);
 
   useLayoutEffect(() => {
     scrollAppMainToTop();

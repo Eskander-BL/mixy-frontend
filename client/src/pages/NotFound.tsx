@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Home } from "lucide-react";
 import { useLocation } from "wouter";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function NotFound() {
+  useDocumentTitle("Page introuvable");
   const [, setLocation] = useLocation();
 
   const handleGoHome = () => {
@@ -24,13 +26,13 @@ export default function NotFound() {
           <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
 
           <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page Not Found
+            Page introuvable
           </h2>
 
           <p className="text-slate-600 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
+            Cette adresse n’existe pas ou a été déplacée.
             <br />
-            It may have been moved or deleted.
+            Tu peux repartir de l’accueil.
           </p>
 
           <div
@@ -42,7 +44,7 @@ export default function NotFound() {
               className="bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
             >
               <Home className="w-4 h-4 mr-2" />
-              Go Home
+              Accueil
             </Button>
           </div>
         </CardContent>
