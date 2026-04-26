@@ -93,17 +93,17 @@ export default function FloatingAICoach() {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="fixed z-50 p-0 m-0 bg-transparent border-0 shadow-none ring-0 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 rounded-full cursor-pointer group"
+        className="fixed z-50 p-0 m-0 bg-transparent border-0 shadow-none ring-0 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 rounded-full cursor-pointer"
         style={{ right: "24px", bottom: "28px", left: "auto" }}
         aria-label="Ouvrir le coach IA"
       >
         <span className="inline-flex flex-col items-center" aria-hidden>
-          {/* Fond blanc rond : mascotte + flottement inchangé */}
+          {/* Fond blanc rond + ancre : pas d’animation rebond sur la mascotte */}
           <span className="flex h-[5.25rem] w-[5.25rem] items-center justify-center rounded-full bg-white p-1.5 shadow-[0_6px_24px_rgba(0,0,0,0.12)] ring-1 ring-gray-200/90">
             <img
               src={brand.chatBot}
               alt=""
-              className="h-full w-full max-h-[4.5rem] max-w-[4.5rem] object-contain object-bottom pointer-events-none select-none quiz-mascot-animate"
+              className="h-full w-full max-h-[4.5rem] max-w-[4.5rem] object-contain object-bottom pointer-events-none select-none"
               draggable={false}
             />
           </span>
