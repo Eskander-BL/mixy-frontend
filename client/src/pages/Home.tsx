@@ -32,12 +32,12 @@ export default function Home() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="h-[120px] w-[120px] md:h-[128px] md:w-[128px] mx-auto mb-3 flex items-center justify-center">
+          <div className="flex flex-col p-6 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="mx-auto mb-3 flex size-32 shrink-0 items-center justify-center md:size-36">
               <img
                 src={brand.mixyReadCrop}
                 alt=""
-                className="max-h-full max-w-full w-auto h-auto object-contain object-bottom"
+                className="h-full w-full object-contain object-center select-none pointer-events-none"
                 aria-hidden
               />
             </div>
@@ -47,12 +47,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="h-[120px] w-[120px] md:h-[128px] md:w-[128px] mx-auto mb-3 flex items-center justify-center">
+          <div className="flex flex-col p-6 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="mx-auto mb-3 flex size-32 shrink-0 items-center justify-center md:size-36">
               <img
                 src={brand.quizzMixy}
                 alt=""
-                className="max-h-full max-w-full w-auto h-auto object-contain object-bottom"
+                className="h-full w-full object-contain object-center select-none pointer-events-none"
                 aria-hidden
               />
             </div>
@@ -62,12 +62,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="h-[120px] w-[120px] md:h-[128px] md:w-[128px] mx-auto mb-3 flex items-center justify-center">
+          <div className="flex flex-col p-6 bg-white rounded-lg shadow-sm border border-gray-200">
+            <div className="mx-auto mb-3 flex size-32 shrink-0 items-center justify-center md:size-36">
               <img
                 src={brand.chatBot}
                 alt=""
-                className="max-h-full max-w-full w-auto h-auto object-contain"
+                className="h-full w-full object-contain object-center select-none pointer-events-none"
                 aria-hidden
               />
             </div>
