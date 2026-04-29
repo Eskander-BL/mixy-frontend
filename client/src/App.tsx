@@ -41,7 +41,11 @@ function AppContent() {
         mobileOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}
       />
-      <main id="app-main-scroll" className="flex-1 overflow-auto w-full">
+      {/* Espace pour le FAB Mixy Coach (FloatingAICoach) — évite le chevauchement des CTA en bas */}
+      <main
+        id="app-main-scroll"
+        className="flex-1 overflow-auto w-full pb-36 pr-[7.75rem]"
+      >
         <div className="md:hidden sticky top-0 z-20 bg-white border-b px-3 py-2">
           <Button variant="outline" size="sm" onClick={() => setMobileSidebarOpen(true)}>
             <Menu size={16} className="mr-2" />

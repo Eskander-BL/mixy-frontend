@@ -4,6 +4,7 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { brand } from "@/assets/brand-assets";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { scrollAppMainToTop } from "@/lib/utils";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -77,7 +78,14 @@ export default function PaywallPage() {
     <div className="min-h-screen bg-gradient-to-br from-amber-50/80 to-orange-50/50 flex items-center justify-center p-4">
       <Card className="max-w-md w-full p-8 border-0 shadow-lg">
         <div className="text-center mb-8">
-          <div className="text-5xl mb-4">🔓</div>
+          <div className="mx-auto mb-4 max-w-[220px] rounded-2xl bg-neutral-950 p-3 shadow-inner">
+            <img
+              src={brand.mixyUnlock}
+              alt=""
+              className="w-full h-auto max-h-48 object-contain object-center"
+              aria-hidden
+            />
+          </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">
             {t("paywall.title")}
           </h1>

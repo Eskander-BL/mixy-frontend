@@ -255,9 +255,9 @@ export default function Onboarding() {
           <div className="space-y-6 animate-fadeIn">
             <div className="text-center">
               <img
-                src={brand.dj}
+                src={brand.mixyReadCrop}
                 alt="Mixy"
-                className="h-40 md:h-44 w-auto max-w-[min(100%,320px)] mx-auto mb-5 object-contain"
+                className="h-40 md:h-44 w-auto max-w-[min(100%,320px)] mx-auto mb-5 object-contain object-bottom"
               />
               <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Bienvenue 🎧</h1>
               <p className="text-gray-600">
@@ -342,6 +342,14 @@ export default function Onboarding() {
               </>
             ) : (
               <div className="space-y-4">
+                <div className="text-center">
+                  <img
+                    src={brand.quizzMixy}
+                    alt=""
+                    className="h-36 md:h-40 w-auto max-w-[min(100%,280px)] mx-auto mb-2 object-contain object-bottom"
+                    aria-hidden
+                  />
+                </div>
                 <p className="text-sm text-gray-600 font-semibold">
                   Réponds à ces 5 questions rapides:
                 </p>
@@ -599,9 +607,9 @@ export default function Onboarding() {
             <div className="text-center">
               <div className="h-40 w-40 md:h-44 md:w-44 mx-auto mb-4 flex items-center justify-center">
                 <img
-                  src={brand.reading}
+                  src={brand.mixyReadCrop}
                   alt=""
-                  className="max-h-full max-w-full w-auto h-auto object-contain"
+                  className="max-h-full max-w-full w-auto h-auto object-contain object-bottom"
                   aria-hidden
                 />
               </div>
