@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
 import { allModules } from "@/lib/courses-progressive";
+import { readMixyLearningProfile, type MixyLearningProfile } from "@/lib/learning-profile";
 
 const TOTAL_LEVELS = allModules.length;
 
@@ -54,6 +55,8 @@ interface ProgressContextType {
   /** Abonnement actif côté backend (Stripe webhook uniquement) — requis pour le contenu &gt; niveau 1 */
   hasActiveSubscription: boolean;
   userLanguage: "en" | "fr";
+  /** Profil matériel / table cible (après onboarding) */
+  learningProfile: MixyLearningProfile | null;
   refreshProgress: () => void;
 }
 
@@ -69,6 +72,9 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     getActiveLevelFromCompleted(initialLocalCompleted, TOTAL_LEVELS)
   );
   const [completedLevels, setCompletedLevels] = useState<number[]>(() => initialLocalCompleted);
+  const [learningProfile, setLearningProfile] = useState(() =>
+    typeof window !== "undefined" ? readMixyLearningProfile() : null
+  );
   const [userLanguage, setUserLanguage] = useState<"en" | "fr">("en");
 
   const getProgressQuery = trpc.dj.getProgress.useQuery(
@@ -105,6 +111,13 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
       .then((res) => applyMergedProgress(res.data ?? getProgressQuery.data));
   }, [getProgressQuery, subscriptionQuery, applyMergedProgress]);
 
+  useEffect(() => {
+    const syncProfile = () => setLearningProfile(readMixyLearningProfile());
+    syncProfile();
+    window.addEventListener("mixy-learning-profile-updated", syncProfile);
+    return () => window.removeEventListener("mixy-learning-profile-updated", syncProfile);
+  }, []);
+
   // TODO: Fetch user language from backend
   useEffect(() => {
     const storedLanguage = localStorage.getItem("language");
@@ -117,7 +130,14 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   return (
     <ProgressContext.Provider
-      value={{ currentLevel, completedLevels, hasActiveSubscription, userLanguage, refreshProgress }}
+      value={{
+        currentLevel,
+        completedLevels,
+        hasActiveSubscription,
+        userLanguage,
+        learningProfile,
+        refreshProgress,
+      }}
     >
       {children}
     </ProgressContext.Provider>

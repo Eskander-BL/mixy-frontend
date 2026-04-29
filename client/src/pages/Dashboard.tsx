@@ -25,12 +25,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { CompleteAccountCard } from "@/components/CompleteAccountCard";
+import { targetDeckLabelFr } from "@/lib/learning-profile";
 
 export default function Dashboard() {
   useDocumentTitle("Tableau de bord");
   const [location, navigate] = useLocation();
-  const { currentLevel: activeLevel, completedLevels, hasActiveSubscription } = useProgress();
+  const { currentLevel: activeLevel, completedLevels, hasActiveSubscription, learningProfile } = useProgress();
   const [loading, setLoading] = useState(true);
   const [showContactDialog, setShowContactDialog] = useState(false);
   const [contactEmail, setContactEmail] = useState("");
@@ -227,6 +227,42 @@ export default function Dashboard() {
           <p className="text-sm md:text-base text-gray-600">
             Les niveaux sont maintenant dans la barre à gauche. Tu peux lancer directement ton exercice ici.
           </p>
+
+          {learningProfile && (
+            <div className="mt-5 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-amber-50/60 px-4 py-3 text-sm text-gray-800">
+              <p className="font-semibold text-gray-900 mb-1">Ton parcours personnalisé</p>
+              <p className="text-gray-700">
+                {learningProfile.equipment === "none" && (
+                  <>
+                    Tu progresses <strong>sans table</strong> pour l’instant
+                    {learningProfile.targetDeck != null ? (
+                      <>
+                        {" "}
+                        — on te parle surtout de{" "}
+                        <strong>{targetDeckLabelFr(learningProfile.targetDeck)}</strong> + Rekordbox dans les cours.
+                      </>
+                    ) : null}
+                  </>
+                )}
+                {learningProfile.equipment === "controller" && (
+                  <>
+                    Tu as un <strong>contrôleur</strong>
+                    {learningProfile.targetDeck != null ? (
+                      <>
+                        {" "}
+                        ({targetDeckLabelFr(learningProfile.targetDeck)}) — les encarts te rappellent les bons réglages.
+                      </>
+                    ) : null}
+                  </>
+                )}
+                {learningProfile.equipment === "turntables" && "Parcours vinyle : les bases BPM / EQ restent les mêmes."}
+                {learningProfile.equipment === "other" && "Setup « autre » : les fondamentaux s’appliquent à tout DJ logiciel."}
+              </p>
+              <p className="text-xs text-gray-600 mt-1">
+                Repasse par l’onboarding si tu changes de table — on mettra à jour tes encarts.
+              </p>
+            </div>
+          )}
 
           <div className="mt-6">
             <div className="flex justify-between items-center mb-2">

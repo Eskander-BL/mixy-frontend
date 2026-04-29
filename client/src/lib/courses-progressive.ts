@@ -7,6 +7,12 @@ import { level4Module, level5Module } from "./courses-progressive-extended";
 
 export type UserLevel = "beginner" | "intermediate" | "advanced";
 
+export interface SlideIllustration {
+  url: string;
+  alt: string;
+  caption?: string;
+}
+
 export interface Slide {
   slideNumber: number;
   title: string;
@@ -14,6 +20,8 @@ export interface Slide {
   videoUrl: string;
   videoDescription: string;
   content: string;
+  /** Schémas / photos (boutons table, captures Rekordbox…) */
+  illustrations?: SlideIllustration[];
   keyTakeaway: string;
   exercise: {
     title: string;
@@ -53,6 +61,14 @@ export const level1Module: CourseModule = {
       videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
       videoDescription:
         "Parcours Performance (et repères visuels) dans Rekordbox — idéal avant de brancher la table. Active les sous-titres YouTube si besoin.",
+      illustrations: [
+        {
+          url: "https://www.pioneerdj.com/-/media/pioneerdj/images/products/controller/ddj-flx4/black/ddj-flx4-angle-ttl-1200.jpg",
+          alt: "Contrôleur DJ DDJ-FLX4 — vue en plongée",
+          caption:
+            "Repère les jogs, les faders de volume, la section mixer et les pads : même logique sur FLX3 avec parfois plus de touches d’effet.",
+        },
+      ],
       content: `Ce parcours Mixy vise surtout les DJs sur **Pioneer DJ avec Rekordbox**, en particulier **DDJ-FLX4** et **DDJ-FLX3** (même logique : 2 decks, section mixer au centre, pads sous les jogs).
 
 **Deux grands modes dans Rekordbox**

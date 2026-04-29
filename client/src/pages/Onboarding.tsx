@@ -7,6 +7,8 @@ import { Link, useLocation } from "wouter";
 import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import type { TargetDeck } from "@/lib/learning-profile";
+import { persistMixyLearningProfile, targetDeckLabelFr } from "@/lib/learning-profile";
 
 type OnboardingStep =
   | "language"
@@ -44,6 +46,7 @@ export default function Onboarding() {
     goal: "fun" as "fun" | "party" | "club" | "pro",
     equipment: "none" as "none" | "controller" | "turntables" | "other",
     equipmentModel: "",
+    targetDeck: null as TargetDeck | null,
     problem: "transitions" as "transitions" | "bpm" | "structuration" | "unknown",
   });
 
@@ -143,11 +146,27 @@ export default function Onboarding() {
       },
       {
         onSuccess: () => {
+          const targetDeck =
+            formData.equipment === "none" || formData.equipment === "controller"
+              ? formData.targetDeck ?? "undecided"
+              : null;
+          persistMixyLearningProfile({
+            equipment: formData.equipment,
+            targetDeck,
+          });
           localStorage.setItem("userProgress", JSON.stringify(progressPayload));
           navigate("/dashboard");
         },
         onError: () => {
           // Fallback UX: l'utilisateur ne reste pas bloqué sur le dernier écran.
+          const targetDeck =
+            formData.equipment === "none" || formData.equipment === "controller"
+              ? formData.targetDeck ?? "undecided"
+              : null;
+          persistMixyLearningProfile({
+            equipment: formData.equipment,
+            targetDeck,
+          });
           localStorage.setItem("userProgress", JSON.stringify(progressPayload));
           navigate("/dashboard");
         },
@@ -180,6 +199,31 @@ export default function Onboarding() {
     bpm: "Comprendre le BPM",
     structuration: "Structurer un set",
     unknown: "Je ne sais pas par où commencer",
+  };
+
+  const targetDeckLabels: Record<TargetDeck, string> = {
+    flx4: "DDJ-FLX4 — idéal pour bien débuter avec Rekordbox",
+    flx3: "DDJ-FLX3 — plus de fonctions, plus « pro »",
+    other: "Autre contrôleur / autre marque",
+    undecided: "Je ne sais pas encore",
+  };
+
+  const canContinueFromEquipment = () => {
+    if (formData.equipment === "none") return formData.targetDeck != null;
+    return true;
+  };
+
+  const proceedFromEquipment = () => {
+    if (!canContinueFromEquipment()) return;
+    let td: TargetDeck | null = formData.targetDeck;
+    if (formData.equipment === "controller") {
+      if (!td) td = "undecided";
+    }
+    if (formData.equipment === "turntables" || formData.equipment === "other") {
+      td = null;
+    }
+    setFormData((prev) => ({ ...prev, targetDeck: td }));
+    setStep("problem");
   };
 
   const currentStepIndex = STEPS.indexOf(step);
@@ -477,7 +521,7 @@ export default function Onboarding() {
                 Quel matériel as-tu ?
               </h1>
               <p className="text-gray-600">
-                Cela nous aide à adapter les exercices pratiques.
+                On adapte les encarts et conseils (FLX4, FLX3, sans table…).
               </p>
             </div>
 
@@ -486,11 +530,19 @@ export default function Onboarding() {
                 (equipment) => (
                   <button
                     key={equipment}
+                    type="button"
                     onClick={() => {
-                      setFormData({ ...formData, equipment });
-                      setStep("problem");
+                      setFormData((prev) => ({
+                        ...prev,
+                        equipment,
+                        targetDeck: equipment === "none" || equipment === "controller" ? prev.targetDeck : null,
+                      }));
                     }}
-                    className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
+                    className={`w-full p-4 border-2 rounded-lg transition text-left font-medium ${
+                      formData.equipment === equipment
+                        ? "border-primary bg-primary/5 text-gray-900"
+                        : "border-gray-200 hover:border-primary hover:bg-primary/5 text-gray-900"
+                    }`}
                   >
                     {equipmentNames[equipment] || equipment}
                   </button>
@@ -510,14 +562,67 @@ export default function Onboarding() {
             )}
 
             {formData.equipment === "none" && (
-              <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                <p className="text-sm text-yellow-900">
-                  <strong>💡 Conseil:</strong> Pas de problème! Tu vas d'abord
-                  apprendre la théorie. Ensuite, tu pourras pratiquer avec du
-                  matériel.
-                </p>
+              <div className="space-y-3">
+                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                  <p className="text-sm text-amber-950 font-medium mb-2">
+                    Quelle table vises-tu ? (obligatoire pour personnaliser ton parcours)
+                  </p>
+                  <p className="text-xs text-amber-900/90 mb-3">
+                    Beaucoup commencent avec une{" "}
+                    <strong>DDJ-FLX4</strong> ; la <strong>FLX3</strong> va un cran plus loin. Tu pourras changer d&apos;avis plus tard.
+                  </p>
+                  <div className="space-y-2">
+                    {(["flx4", "flx3", "other", "undecided"] as const).map((deck) => (
+                      <button
+                        key={deck}
+                        type="button"
+                        onClick={() => setFormData((prev) => ({ ...prev, targetDeck: deck }))}
+                        className={`w-full p-3 rounded-lg border text-left text-sm font-medium transition ${
+                          formData.targetDeck === deck
+                            ? "border-primary bg-white shadow-sm"
+                            : "border-amber-200 bg-white/70 hover:border-amber-400"
+                        }`}
+                      >
+                        {targetDeckLabels[deck]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             )}
+
+            {formData.equipment === "controller" && (
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-gray-600">
+                  Ta table (optionnel — recommandé si c&apos;est une FLX)
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {(["flx4", "flx3", "other", "undecided"] as const).map((deck) => (
+                    <button
+                      key={deck}
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, targetDeck: deck }))}
+                      className={`w-full p-3 rounded-lg border text-left text-sm transition ${
+                        formData.targetDeck === deck
+                          ? "border-primary bg-primary/5"
+                          : "border-gray-200 hover:border-gray-300"
+                      }`}
+                    >
+                      {targetDeckLabels[deck]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <Button
+              onClick={proceedFromEquipment}
+              disabled={!canContinueFromEquipment()}
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Continuer
+              <ChevronRight size={18} className="ml-1 inline" />
+            </Button>
 
             <Button
               onClick={handleGoBack}
@@ -631,6 +736,15 @@ export default function Onboarding() {
                 <strong>{problemNames[formData.problem].toLowerCase()}</strong> pour
                 devenir un vrai DJ.
               </p>
+              {(formData.equipment === "none" || formData.equipment === "controller") &&
+                formData.targetDeck != null && (
+                  <p className="text-sm text-primary font-medium text-center leading-relaxed">
+                    Parcours personnalisé :{" "}
+                    {formData.equipment === "none" ? "sans table pour l'instant" : "avec contrôleur"} — table visée :{" "}
+                    <strong>{targetDeckLabelFr(formData.targetDeck)}</strong>.
+                  </p>
+                )}
+
             </div>
 
             <div className="bg-emerald-50/90 p-4 rounded-lg border border-emerald-200/80">

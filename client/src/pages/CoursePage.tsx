@@ -6,13 +6,15 @@ import { trpc } from "@/lib/trpc";
 import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
 import { scrollAppMainToTop } from "@/lib/utils";
+import { getLearningCallout } from "@/lib/learning-path-callouts";
+import { LearningPathCallout } from "@/components/LearningPathCallout";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 export default function CoursePage() {
   const [, params] = useRoute("/course/:level");
   const [, navigate] = useLocation();
-  const { completedLevels, hasActiveSubscription } = useProgress();
+  const { completedLevels, hasActiveSubscription, learningProfile } = useProgress();
   const [userId, setUserId] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
 
@@ -63,6 +65,7 @@ export default function CoursePage() {
   const isFirstSlide = currentSlide === 1;
   const isLastSlide = currentSlide === module.totalSlides;
   const progressPercentage = (currentSlide / module.totalSlides) * 100;
+  const pathCallout = getLearningCallout(learningProfile, level, currentSlide);
 
   const handleNextSlide = () => {
     if (!isLastSlide) {
@@ -155,6 +158,12 @@ export default function CoursePage() {
               <p className="text-lg text-gray-600">{slide.subtitle}</p>
             </div>
 
+            {pathCallout ? (
+              <div className="max-w-3xl">
+                <LearningPathCallout callout={pathCallout} />
+              </div>
+            ) : null}
+
             {/* Content */}
             <Card className="p-5 md:p-8 border-0 shadow-sm rounded-xl">
               <div className="prose prose-sm max-w-none text-gray-700">
@@ -181,6 +190,27 @@ export default function CoursePage() {
                   );
                 })}
               </div>
+
+              {slide.illustrations && slide.illustrations.length > 0 && (
+                <div className="mt-8 space-y-4">
+                  {slide.illustrations.map((fig, i) => (
+                    <figure key={i} className="overflow-hidden rounded-lg border bg-muted/30">
+                      <img
+                        src={fig.url}
+                        alt={fig.alt}
+                        className="w-full max-h-80 object-contain bg-white"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      />
+                      {fig.caption ? (
+                        <figcaption className="px-3 py-2 text-xs text-muted-foreground border-t bg-muted/20">
+                          {fig.caption}
+                        </figcaption>
+                      ) : null}
+                    </figure>
+                  ))}
+                </div>
+              )}
 
               {/* Key Takeaway */}
               <div className="mt-8 p-4 bg-primary/5 border-l-4 border-primary rounded">
