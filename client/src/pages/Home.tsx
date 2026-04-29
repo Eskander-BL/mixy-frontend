@@ -37,7 +37,7 @@ export default function Home() {
               <img
                 src={brand.mixyReadCrop}
                 alt=""
-                className="h-full w-full object-contain object-center select-none pointer-events-none"
+                className="h-full w-full max-h-[82%] max-w-[82%] object-contain object-center select-none pointer-events-none"
                 aria-hidden
               />
             </div>
