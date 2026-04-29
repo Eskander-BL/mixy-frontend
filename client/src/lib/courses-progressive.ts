@@ -39,19 +39,120 @@ export interface CourseModule {
  */
 export const level1Module: CourseModule = {
   level: 1,
-  title: "Les Bases du DJing: Synchronisation",
-  description: "Comprends comment deux musiques peuvent jouer ensemble sans chaos",
+  title: "Les Bases du DJing : Setup, Rekordbox & synchronisation",
+  description:
+    "Configurer ta DDJ-FLX3 / FLX4 avec Rekordbox, puis maîtriser BPM, tempo et premières transitions",
   userLevels: ["beginner", "intermediate", "advanced"],
-  totalSlides: 3,
-  estimatedDuration: "15 minutes",
+  totalSlides: 5,
+  estimatedDuration: "40 minutes",
   slides: [
     {
       slideNumber: 1,
+      title: "Rekordbox + DDJ-FLX3 / FLX4 : la bonne base",
+      subtitle: "Modes du logiciel, analyse des morceaux, lecture d'une waveform",
+      videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+      videoDescription:
+        "Parcours Performance (et repères visuels) dans Rekordbox — idéal avant de brancher la table. Active les sous-titres YouTube si besoin.",
+      content: `Ce parcours Mixy vise surtout les DJs sur **Pioneer DJ avec Rekordbox**, en particulier **DDJ-FLX4** et **DDJ-FLX3** (même logique : 2 decks, section mixer au centre, pads sous les jogs).
+
+**Deux grands modes dans Rekordbox**
+- **Export** : tu prépares la musique (playlists, grilles de BPM, mémoire de points cue), tu peux exporter vers une clé USB pour des lecteurs CDJ/XDJ en boîte.
+- **Performance** : c'est le **mode DJ** avec la table branchée — deux pistes visibles, waveforms, platines A/B.
+
+**Avant de mixer**
+- Importe tes morceaux dans la **Collection**, crée une **playlist d'entraînement** avec des titres au BPM proche (ex. 124–128).
+- Lance **l'analyse** (BPM / grille) pour que Rekordbox affiche le tempo et les repères sur la waveform.
+- Vérifie que la **grid** (lignes sur les temps forts) suit bien le kick ; corrige si une piste a été mal analysée.
+
+**Côté matériel (vue d'ensemble)**
+- **Decks gauche / droite** : chargent chacun une piste, **jog** pour nudge ou scratch léger selon tes réglages.
+- **Section mixer** : volumes par canal (**channel faders**), **crossfader**, **EQ 3 bandes**, filtres selon modèle, **section effets** (Smart CFX sur FLX3 / Merge FX sur FLX4 selon firmware — garde les idées simples au début : une couleur de son à la fois).
+- **Pads** : **Hot Cues** pour marquer intros, drops, ponts ; tu gagneras un temps énorme sur les transitions.
+
+**Ressources utiles (manuel officiel & visuels)**
+- DDJ-FLX4 (son, branchements, panneau arrière) : https://www.pioneerdj.com/fr-fr/product/controller/archive/ddj-flx4/black/overview/
+- DDJ-FLX3 : https://www.pioneerdj.com/fr-fr/product/controller/archive/ddj-flx3/black/overview/
+- Télécharge le **mode d'emploi PDF** depuis la fiche « Support » du modèle : repère la page « Connections » et « Part names » pour mémoriser boutons + voyants.
+
+**Théorie + pratique**
+- Théorie courte ici + **vidéo ci-dessus** pour l'écran ; en pratique répète : importer → analyser → charger deck A/B → lire la grille au casque.`,
+      keyTakeaway:
+        "Export pour préparer, Performance pour jouer. Analyse toujours tes morceaux et vérifie la grille avant de te fier au tempo à l'écran.",
+      exercise: {
+        title: "Préparer 5 morceaux propres dans Rekordbox",
+        description: "Même sans table branchée, c'est l'exercice n°1 des DJs Rekordbox",
+        steps: [
+          "Installe Rekordbox (dernière version stable) et ouvre le mode Performance en essai.",
+          "Crée une playlist « Entraînement Mixy » avec 5 titres du même style.",
+          "Sélectionne-les → clic droit → analyse (tempo / grille si proposé).",
+          "Ouvre un morceau, zoome la waveform et vérifie que chaque kick tombe sur une ligne de grille.",
+          "Pose 4 Hot Cues : intro, avant refrain, drop, outro (raccourcis affichés dans Rekordbox selon ton clavier).",
+          "Charge le même titre sur les decks A et B : écoute A au casque, B en silence — entends-tu le beat identique des deux côtés ?",
+        ],
+        estimatedTime: "15 minutes",
+      },
+      tips: [
+        "FLX4 peut ouvrir deux ports USB-C : lis la petite icône près de chaque port sur TON manuel (données vs charge).",
+        "Si tu mixes du streaming, vérifie les conditions d'utilisation et la stabilité réseau.",
+        "Garde un backup USB exporté si tu joues hors de chez toi.",
+      ],
+    },
+    {
+      slideNumber: 2,
+      title: "Brancher la table : USB, Master, casque",
+      subtitle: "FLX3 / FLX4 — enceintes actives, gain propre, écoute DJ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoDescription:
+        "Tour complet débutant sur la DDJ-FLX4 : vue matérielle, faders, branchements — en anglais mais très visuel ; active les sous-titres auto.",
+      content: `**Chaîne audio simple (répète ce schéma mentalement)**
+Ordinateur → **USB** → contrôleur → **MASTER OUT (RCA ou XLR selon modèle)** → enceintes **actives** ou table de son / ampli → enceintes passives.
+
+**Étape par étape (sécurité + propre)**
+- Mets tous les faders et le **master** à zéro avant d'allumer les enceintes.
+- Branche **USB** entre PC/Mac et contrôleur (certains modèles ont deux ports : repère sur le manuel lequel est **données / alimentation**).
+- **Sortie Master** : câble fourni souvent en **RCA** → entrée **LINE** des enceintes monitoring (pas « Phono »). Vis **rouge/blanc** cohérentes.
+- **Casque** sur la prise **PHONES** 6,35 mm : tu pré-écoutes le deck que tu prépares avec le **cue** (écoute DJ) sans l'envoyer tout de suite dans la salle.
+
+**Réglages de base avant le son fort**
+- **Trim / Gain** par voie : monte jusqu'à voir le signal dans la zone **verte / orange** sans saturer en permanence dans le rouge.
+- **EQ au centre** (12h) pour commencer — tu les bougeras pour les transitions (niveau 2).
+- **Crossfader** : pour tes premiers exercices Mixy, laisse-le **au centre** et joue surtout des **channel faders** : c'est plus pédagogique.
+
+**Si tu n'as pas de grosse sono**
+- Des **enceintes monitoring** actives proches de toi suffisent pour t'entraîner ; baisse les basses si tu es en appart (voisins).
+
+**Ressource visuelle complémentaire**
+- Vidéo « allumer / USB » (très court) : https://www.youtube.com/watch?v=EIUd_xdBYGs
+
+**Lien utile**
+- Support Pioneer : https://support.pioneerdj.com (pilotes, firmware, manuels).`,
+      keyTakeaway:
+        "USB + Master vers une entrée ligne propre, casque sur PHONES pour préparer. Zéro saturation, trims calmes, puis tu montes le master.",
+      exercise: {
+        title: "Check-list branchement « sans grésillement »",
+        description: "À refaire avant chaque session longue",
+        steps: [
+          "Table et PC éteints ou faders à zéro — branche les câbles Master.",
+          "Branche le casque, allume la table puis le PC, ouvre Rekordbox Performance.",
+          "Sur un seul deck, lance un morceau : vérifie le **VU-meter** et baisse le trim si tu touches le rouge en continu.",
+          "Active le **cue** casque sur ce deck : tu dois l'entendre clairement sans que le master ne hurle.",
+          "Notes sur un papier : « câble Master droit », « volume enceintes à -6 dB » pour te souvenir demain.",
+        ],
+        estimatedTime: "10 minutes",
+      },
+      tips: [
+        "Note la position de ta prise Casque sur le manuel (bouton split cue / mix selon modèle).",
+        "Un câble RCA trop long ou mal blindé peut ramasser du bruit : change de câble avant d'accuser Rekordbox.",
+        "Firmware : une mise à jour peut corriger des bugs audio — fais-la tranquillement avant un live.",
+      ],
+    },
+    {
+      slideNumber: 3,
       title: "Le BPM: Le Coeur du Rythme",
       subtitle: "Pourquoi deux chansons ne sonnent pas toujours bien ensemble",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
       videoDescription:
-        "Regarde comment un DJ identifie le BPM d'une chanson et l'utilise pour synchroniser.",
+        "Tu vois le tempo affiché dans Rekordbox et la grille sur la waveform — utile pour relier oreille et écran.",
       content: `Imagine deux metronomes:
 - Metronome 1: 120 clics par minute
 - Metronome 2: 140 clics par minute
@@ -69,6 +170,10 @@ Exemples Reels:
 Le Secret du DJing:
 Mettre deux chansons au MEME BPM = elles sonnent bien ensemble
 Deux BPM differents = chaos
+
+**Sur ta DDJ + Rekordbox**
+- Le tempo affiché par deck (ex. 124,0) doit correspondre à ce que tu entends après analyse correcte.
+- Les boutons **Sync** existent pour t'aider au début : apprends quand même à **sentir** le décalage au casque — c'est ce qui te sauve quand la grille est fausse ou en live sans écran.
 
 C'est Tout Pour Maintenant:
 Tu n'as pas besoin de comprendre la theorie musicale. Tu as juste besoin de comprendre que le BPM c'est le rythme, et que deux rythmes differents ne fonctionnent pas ensemble.`,
@@ -94,12 +199,12 @@ Tu n'as pas besoin de comprendre la theorie musicale. Tu as juste besoin de comp
       ],
     },
     {
-      slideNumber: 2,
+      slideNumber: 4,
       title: "Le Pitch: Ajuster la Vitesse",
       subtitle: "Comment changer le BPM d'une chanson sans la deformer",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
       videoDescription:
-        "Vois comment un DJ utilise le Pitch pour ajuster la vitesse d'une chanson.",
+        "Exemple sur DDJ-FLX4 : tempo / beatmatch — relie ce que tu fais au doigt avec le BPM affiché.",
       content: `Le Probleme:
 Tu as deux chansons que tu aimes, mais elles n'ont pas le meme BPM.
 - Chanson A: 120 BPM
@@ -131,7 +236,11 @@ Important:
 Limitation:
 Tu ne peux pas changer le BPM de plus de +/- 10% sans que ca sonne bizarre.
 - Si une chanson est a 100 BPM, tu peux la mettre jusqu'a 110 BPM max
-- Au-dela, ca sonne deforme`,
+- Au-dela, ca sonne deforme
+
+**Hardware FLX3 / FLX4**
+- Le **fader de tempo** (pitch) est en général au-dessus ou à côté du jog : vérifie sur ton manuel la plage **±%** et l'interrupteur « tempo range » si présent.
+- **Key Lock / Master Tempo** (si activé dans Rekordbox) : change le tempo sans trop bouger la hauteur — pratique pour rester proche du BPM cible sans casser la voix.`,
       keyTakeaway:
         "Le Pitch te permet d'ajuster la vitesse d'une chanson pour qu'elle corresponde a une autre.",
       exercise: {
@@ -153,12 +262,12 @@ Tu ne peux pas changer le BPM de plus de +/- 10% sans que ca sonne bizarre.
       ],
     },
     {
-      slideNumber: 3,
+      slideNumber: 5,
       title: "La Synchronisation en Action",
       subtitle: "Mets deux chansons ensemble pour la premiere fois",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
       videoDescription:
-        "Regarde un vrai DJ synchroniser deux chansons en direct. C'est plus simple que tu penses.",
+        "Transition type « drop mix » sur FLX4 : inspiration pour enchaîner proprement une fois le tempo aligné.",
       content: `Mise en Situation Reelle:
 Tu es en train de mixer. Voici ce qui se passe:
 
@@ -235,10 +344,14 @@ export const level2Module: CourseModule = {
       slideNumber: 1,
       title: "Les 3 Bandes de Frequences",
       subtitle: "Comprends ce que tu entends vraiment",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Decouvre les trois parties d'une chanson que tu peux controler avec l'EQ.",
-      content: `Imagine une chanson comme un sandwich a 3 etages:
+      content: `**EQ sur ta FLX / Rekordbox**
+- Chaque voie du mélangeur a 3 potentiomètres **High / Mid / Low** (parfois **Trim** au sommet de la voie pour le gain d'entrée).
+- Dans Rekordbox Performance, les mêmes bandes existent à l'écran : bouger un **knob physique** ou le curseur logiciel, c'est le même principe.
+
+Imagine une chanson comme un sandwich a 3 etages:
 
 Etage 1: Les Basses (Low) - Le Fondement
 - Frequences: 20-250 Hz
@@ -288,7 +401,7 @@ Pourquoi C'est Important:
       slideNumber: 2,
       title: "Comment Utiliser l'EQ pour Mixer",
       subtitle: "La technique de base pour des transitions fluides",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Vois comment un DJ utilise l'EQ pour melanger deux chansons sans saturation.",
       content: `Le Probleme:
@@ -353,7 +466,7 @@ Important:
       slideNumber: 3,
       title: "L'EQ en Action: Cas Reels",
       subtitle: "Comment les DJs professionnels utilisent l'EQ",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Regarde comment les meilleurs DJs utilisent l'EQ pour creer des transitions parfaites.",
       content: `Cas Reel 1: Deux Chansons House Lourdes
@@ -441,7 +554,7 @@ export const level3Module: CourseModule = {
       slideNumber: 1,
       title: "Les 3 Phases d'une Transition",
       subtitle: "Comprends la structure d'une bonne transition",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Decouvre les 3 phases que tu dois maitriser pour une transition parfaite.",
       content: `Une Bonne Transition c'est Invisible
@@ -506,7 +619,7 @@ Pourquoi C'est Important:
       slideNumber: 2,
       title: "Les Variations de Transitions",
       subtitle: "Il existe plusieurs facons de faire une transition",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Decouvre les variations de transitions que les DJs utilisent.",
       content: `Il N'y A Pas Une Seule Facon de Faire une Transition
@@ -578,7 +691,7 @@ Quand Utiliser Quelle Variation:
       slideNumber: 3,
       title: "Transitions en Situation Reelle",
       subtitle: "Mets tout ensemble et fais ta premiere transition",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Regarde comment un DJ professionnel fait une transition parfaite en direct.",
       content: `Mise en Situation Complete:
@@ -679,7 +792,7 @@ export const allModules: CourseModule[] = [
         slideNumber: 1,
         title: "Loops, FX et timing",
         subtitle: "Créer une transition expressive sans perdre le groove",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
         videoDescription: "Introduction rapide aux techniques avancées de performance.",
         content:
           "Dans ce niveau, tu apprends à manipuler des loops et des effets pour prolonger les transitions et créer des moments marquants.",
@@ -711,7 +824,7 @@ export const allModules: CourseModule[] = [
         slideNumber: 1,
         title: "Signaux de la piste",
         subtitle: "Observer pour mieux décider",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
         videoDescription: "Comment choisir le prochain morceau en observant la salle.",
         content:
           "Tu vas apprendre à reconnaître les signes d'engagement et à ajuster ton énergie musicale selon la réaction du public.",
@@ -742,7 +855,7 @@ export const allModules: CourseModule[] = [
         slideNumber: 1,
         title: "Architecture d'un set",
         subtitle: "Intro, montée, pic, respiration",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
         videoDescription: "Les blocs clés pour structurer une session efficace.",
         content:
           "Ce niveau te guide pour structurer ton set avec une logique claire et conserver l'attention du public sur toute la durée.",
@@ -774,7 +887,7 @@ export const allModules: CourseModule[] = [
         slideNumber: 1,
         title: "Routine live",
         subtitle: "Rester solide sous pression",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
         videoDescription: "Préparer et exécuter une performance club maîtrisée.",
         content:
           "Tu vas cadrer ta routine live: préparation, check rapide, gestion du stress et maintien de la qualité sonore.",
@@ -805,7 +918,7 @@ export const allModules: CourseModule[] = [
         slideNumber: 1,
         title: "Ton style DJ",
         subtitle: "Construire une identité claire",
-        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
         videoDescription: "Transformer ta technique en identité de performance.",
         content:
           "Dernier niveau: tu alignes technique, sélection musicale et storytelling pour créer une identité cohérente.",

@@ -20,7 +20,7 @@ export const level4Module: CourseModule = {
       slideNumber: 1,
       title: "Comprendre les Clés Musicales",
       subtitle: "Pourquoi certaines chansons sonnent bien ensemble",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Découvre comment les clés musicales affectent la compatibilité entre deux chansons.",
       content: `Les Clés Musicales: C'est Quoi?
@@ -78,7 +78,7 @@ Il existe un outil appelé "Camelot Wheel" qui montre quelles clés sont compati
       slideNumber: 2,
       title: "Le Camelot Wheel: Ton Meilleur Ami",
       subtitle: "Un outil simple pour trouver les clés compatibles",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Vois comment utiliser le Camelot Wheel pour trouver les clés compatibles instantanément.",
       content: `Le Camelot Wheel Expliqué:
@@ -139,7 +139,7 @@ Les meilleurs DJs en club utilisent le Camelot Wheel. C'est un secret profession
       slideNumber: 3,
       title: "Transition Harmonique en Action",
       subtitle: "Vois comment les pros font une transition harmonique",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Regarde un DJ professionnel faire une transition harmonique parfaite en direct.",
       content: `Mise en Situation Complète:
@@ -203,7 +203,7 @@ C'est la différence entre un DJ amateur et un DJ professionnel. Le mixage harmo
       slideNumber: 4,
       title: "Cas Avancés: Quand Mélanger les Clés",
       subtitle: "Quand ignorer le Camelot Wheel (et pourquoi)",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Découvre quand et comment les DJs avancés mélangent des clés incompatibles.",
       content: `Quand Ignorer le Camelot Wheel?
@@ -280,7 +280,7 @@ export const level5Module: CourseModule = {
       slideNumber: 1,
       title: "Les 4 Phases d'un Set Parfait",
       subtitle: "La structure que tous les grands DJs utilisent",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Découvre la structure universelle d'un set professionnel.",
       content: `La Structure d'un Set:
@@ -344,7 +344,7 @@ Un set bien structuré c'est comme une symphonie: chaque partie a un sens et cr�
       slideNumber: 2,
       title: "Créer une Progression Musicale Cohérente",
       subtitle: "Comment choisir les chansons dans le bon ordre",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Vois comment les pros choisissent l'ordre des chansons pour une progression fluide.",
       content: `Comment Choisir l'Ordre des Chansons?
@@ -413,7 +413,7 @@ Chaque chanson augmente légèrement le BPM et l'énergie. La foule ne réalise 
       slideNumber: 3,
       title: "Lire la Foule et Adapter en Temps Réel",
       subtitle: "L'art invisible du DJing professionnel",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Découvre comment les pros lisent la foule et adaptent leur set en direct.",
       content: `Lire la Foule: Le Secret des Grands DJs
