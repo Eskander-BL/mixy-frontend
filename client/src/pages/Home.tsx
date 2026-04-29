@@ -50,9 +50,9 @@ export default function Home() {
           <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-200">
             <div className="h-[120px] w-[120px] md:h-[128px] md:w-[128px] mx-auto mb-3 flex items-center justify-center">
               <img
-                src={brand.quizzMixy}
+                src={brand.excellent}
                 alt=""
-                className="max-h-full max-w-full w-auto h-auto object-contain object-bottom"
+                className="max-h-full max-w-full w-auto h-auto object-contain"
                 aria-hidden
               />
             </div>
