@@ -1,7 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
 import { allModules } from "@/lib/courses-progressive";
-import { readMixyLearningProfile, type MixyLearningProfile } from "@/lib/learning-profile";
+import {
+  readMixyLearningProfile,
+  getCourseTrackFromProfile,
+  type MixyLearningProfile,
+  type CourseTrackId,
+} from "@/lib/learning-profile";
 
 const TOTAL_LEVELS = allModules.length;
 
@@ -57,6 +62,8 @@ interface ProgressContextType {
   userLanguage: "en" | "fr";
   /** Profil matériel / table cible (après onboarding) */
   learningProfile: MixyLearningProfile | null;
+  /** Niveau 1 : contenu FLX4 vs FLX3/XDJ-RX ; niveaux suivants identiques. */
+  courseTrack: CourseTrackId;
   refreshProgress: () => void;
 }
 
@@ -118,6 +125,8 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     return () => window.removeEventListener("mixy-learning-profile-updated", syncProfile);
   }, []);
 
+  const courseTrack = getCourseTrackFromProfile(learningProfile);
+
   // TODO: Fetch user language from backend
   useEffect(() => {
     const storedLanguage = localStorage.getItem("language");
@@ -136,6 +145,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
         hasActiveSubscription,
         userLanguage,
         learningProfile,
+        courseTrack,
         refreshProgress,
       }}
     >

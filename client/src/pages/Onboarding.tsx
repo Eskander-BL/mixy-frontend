@@ -8,7 +8,7 @@ import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import type { TargetDeck } from "@/lib/learning-profile";
-import { persistMixyLearningProfile, targetDeckLabelFr } from "@/lib/learning-profile";
+import { GEAR_PRICE_RANGE_FR, persistMixyLearningProfile, targetDeckLabelFr } from "@/lib/learning-profile";
 
 type OnboardingStep =
   | "language"
@@ -30,6 +30,8 @@ const STEPS: OnboardingStep[] = [
   "quizResult",
   "summary",
 ];
+
+const TARGET_DECK_CHOICES = ["flx4", "flx3", "xdj_rx", "other", "undecided"] as const satisfies readonly TargetDeck[];
 
 export default function Onboarding() {
   useDocumentTitle("Onboarding");
@@ -86,8 +88,9 @@ export default function Onboarding() {
             setUserId(validUserId);
             localStorage.setItem("guestId", result.guestId);
             localStorage.setItem("userId", String(validUserId));
-            if (result.language) {
-              setFormData(prev => ({ ...prev, language: result.language }));
+            const lang = result.language;
+            if (lang === "en" || lang === "fr") {
+              setFormData((prev) => ({ ...prev, language: lang }));
             }
           }
         },
@@ -204,6 +207,7 @@ export default function Onboarding() {
   const targetDeckLabels: Record<TargetDeck, string> = {
     flx4: "DDJ-FLX4 — idéal pour bien débuter avec Rekordbox",
     flx3: "DDJ-FLX3 — plus de fonctions, plus « pro »",
+    xdj_rx: "XDJ-RX (RX2 / RX3) — tout-en-un, USB + écrans intégrés",
     other: "Autre contrôleur / autre marque",
     undecided: "Je ne sais pas encore",
   };
@@ -521,7 +525,7 @@ export default function Onboarding() {
                 Quel matériel as-tu ?
               </h1>
               <p className="text-gray-600">
-                On adapte les encarts et conseils (FLX4, FLX3, sans table…).
+                Le <strong>niveau 1</strong> change selon ta table (parcours FLX4 ou parcours FLX3 / XDJ-RX). Du <strong>niveau 2</strong> à la fin, tout le monde suit les mêmes chapitres ; les encarts restent adaptés à ton setup.
               </p>
             </div>
 
@@ -563,16 +567,29 @@ export default function Onboarding() {
 
             {formData.equipment === "none" && (
               <div className="space-y-3">
-                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                  <p className="text-sm text-amber-950 font-medium mb-2">
-                    Quelle table vises-tu ? (obligatoire pour personnaliser ton parcours)
+                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg space-y-3">
+                  <p className="text-sm text-amber-950 font-medium">
+                    Quelle table vises-tu ? (obligatoire — le <strong>niveau 1</strong> du cours suivra ce choix : FLX4 d’un côté, FLX3 + XDJ-RX de l’autre)
                   </p>
-                  <p className="text-xs text-amber-900/90 mb-3">
-                    Beaucoup commencent avec une{" "}
-                    <strong>DDJ-FLX4</strong> ; la <strong>FLX3</strong> va un cran plus loin. Tu pourras changer d&apos;avis plus tard.
+                  <p className="text-xs text-amber-900/90">
+                    <strong>Deux introductions niveau 1</strong> : la FLX4 a une surface plus simple (beaucoup via Shift) ; la FLX3 et l’XDJ-RX partagent un niveau 1 plus « club » (plus de boutons visibles ou écrans type CDJ). Ensuite, même progression pour tous.
                   </p>
+                  <div className="rounded-lg border border-amber-200/80 bg-white/85 p-3 text-xs text-amber-950 space-y-2">
+                    <p className="font-semibold">Repères prix indicatifs (France / Europe — à vérifier neuf / promo / occasion)</p>
+                    <ul className="space-y-2 list-none pl-0 leading-relaxed">
+                      <li>
+                        <strong>DDJ-FLX4</strong> — compacte, 2 voies, parfaite pour apprendre Rekordbox : {GEAR_PRICE_RANGE_FR.flx4}.
+                      </li>
+                      <li>
+                        <strong>DDJ-FLX3</strong> — plus de contrôle type club (Smart CFX, usage plus pro) : {GEAR_PRICE_RANGE_FR.flx3}.
+                      </li>
+                      <li>
+                        <strong>XDJ-RX</strong> — tout-en-un avec écrans, USB Rekordbox sans PC en cabine : {GEAR_PRICE_RANGE_FR.xdj_rx}.
+                      </li>
+                    </ul>
+                  </div>
                   <div className="space-y-2">
-                    {(["flx4", "flx3", "other", "undecided"] as const).map((deck) => (
+                    {TARGET_DECK_CHOICES.map((deck) => (
                       <button
                         key={deck}
                         type="button"
@@ -594,10 +611,10 @@ export default function Onboarding() {
             {formData.equipment === "controller" && (
               <div className="space-y-2">
                 <p className="text-xs font-medium text-gray-600">
-                  Ta table (optionnel — recommandé si c&apos;est une FLX)
+                  Ta table (optionnel — utile si c&apos;est une FLX ou un XDJ-RX)
                 </p>
                 <div className="grid grid-cols-1 gap-2">
-                  {(["flx4", "flx3", "other", "undecided"] as const).map((deck) => (
+                  {TARGET_DECK_CHOICES.map((deck) => (
                     <button
                       key={deck}
                       type="button"
@@ -744,6 +761,9 @@ export default function Onboarding() {
                     <strong>{targetDeckLabelFr(formData.targetDeck)}</strong>.
                   </p>
                 )}
+              <p className="text-xs text-gray-600 text-center leading-relaxed">
+                Le <strong>niveau 1</strong> est celui de <strong>ta table</strong> (FLX4 ou parcours FLX3 / XDJ-RX) ; du niveau 2 à la fin, tu suis les <strong>mêmes chapitres</strong> que toute la communauté, avec des encarts selon ton matériel.
+              </p>
 
             </div>
 

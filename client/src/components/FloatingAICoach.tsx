@@ -5,9 +5,11 @@ import { AIChatBox, type Message } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
 import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
 import { brand } from "@/assets/brand-assets";
+import { useProgress } from "@/contexts/ProgressContext";
 
 export default function FloatingAICoach() {
   const [location] = useLocation();
+  const { courseTrack } = useProgress();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "system", content: "You are Mixy Coach." },
@@ -23,8 +25,8 @@ export default function FloatingAICoach() {
     return Number.parseInt(match[1], 10) || 1;
   }, [location]);
 
-  const module = getModuleByLevel(level);
-  const slide = getSlideFromModule(level, 1);
+  const module = getModuleByLevel(level, courseTrack);
+  const slide = getSlideFromModule(level, 1, courseTrack);
 
   const chatMutation = trpc.ai.chat.useMutation({
     onSuccess: (result) => {

@@ -1,7 +1,4 @@
 /**
- * Unified type exports
- * Import shared types from this single entry point.
+ * Unified type exports (frontend bundle). Schéma Drizzle = dépôt backend uniquement.
  */
-
-export type * from "../drizzle/schema";
 export * from "./_core/errors";

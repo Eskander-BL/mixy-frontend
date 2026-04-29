@@ -15,12 +15,13 @@ import CoursePage from "./pages/CoursePage";
 import QuizPage from "./pages/QuizPage";
 import PaywallPage from "./pages/PaywallPage";
 import LoginPage from "./pages/LoginPage";
+import LegalNoticePage from "./pages/LegalNoticePage";
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "./components/ui/button";
 
 function AppContent() {
-  const { currentLevel, completedLevels, hasActiveSubscription, userLanguage } = useProgress();
+  const { currentLevel, completedLevels, hasActiveSubscription, userLanguage, courseTrack } = useProgress();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const renderAppContent = () => (
@@ -38,6 +39,7 @@ function AppContent() {
         completedLevels={completedLevels}
         hasActiveSubscription={hasActiveSubscription}
         userLanguage={userLanguage}
+        courseTrack={courseTrack}
         mobileOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}
       />
@@ -68,6 +70,7 @@ function AppContent() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/onboarding"} component={Onboarding} />
+      <Route path={"/legal"} component={LegalNoticePage} />
       <Route path={"/login"} component={LoginPage} />
       <Route path={".*"}>{renderAppContent()}</Route>
     </Switch>

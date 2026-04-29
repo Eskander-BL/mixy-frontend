@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, Lock, Mail, Play, Undo2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
-import { allModules } from "@/lib/courses-progressive";
+import { getAllModules } from "@/lib/courses-progressive";
 import {
   Dialog,
   DialogContent,
@@ -25,12 +25,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { targetDeckLabelFr } from "@/lib/learning-profile";
+import { courseTrackLabelFr, targetDeckLabelFr } from "@/lib/learning-profile";
+import { CompleteAccountCard } from "@/components/CompleteAccountCard";
+import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
 
 export default function Dashboard() {
   useDocumentTitle("Tableau de bord");
   const [location, navigate] = useLocation();
-  const { currentLevel: activeLevel, completedLevels, hasActiveSubscription, learningProfile } = useProgress();
+  const { currentLevel: activeLevel, completedLevels, hasActiveSubscription, learningProfile, courseTrack, refreshProgress } = useProgress();
   const [loading, setLoading] = useState(true);
   const [showContactDialog, setShowContactDialog] = useState(false);
   const [contactEmail, setContactEmail] = useState("");
@@ -88,7 +90,12 @@ export default function Dashboard() {
     return () => clearTimeout(t);
   }, [needCompleteAccount]);
 
-  const totalLevels = allModules.length;
+  const modulesForUser = useMemo(() => getAllModules(courseTrack), [courseTrack]);
+  const userIdNum = useMemo(
+    () => Number.parseInt(typeof window !== "undefined" ? localStorage.getItem("userId") || "0" : "0", 10),
+    []
+  );
+  const totalLevels = modulesForUser.length;
   const progressPercentage = (completedLevels.length / totalLevels) * 100;
 
   /**
@@ -258,6 +265,9 @@ export default function Dashboard() {
                 {learningProfile.equipment === "turntables" && "Parcours vinyle : les bases BPM / EQ restent les mêmes."}
                 {learningProfile.equipment === "other" && "Setup « autre » : les fondamentaux s’appliquent à tout DJ logiciel."}
               </p>
+              <p className="text-xs text-gray-600 mt-1 border-t border-primary/10 pt-2">
+                <strong>{courseTrackLabelFr(courseTrack)}</strong> — à partir du niveau 2, les chapitres sont les mêmes pour toute la communauté.
+              </p>
               <p className="text-xs text-gray-600 mt-1">
                 Repasse par l’onboarding si tu changes de table — on mettra à jour tes encarts.
               </p>
@@ -280,6 +290,10 @@ export default function Dashboard() {
               ></div>
             </div>
           </div>
+
+          {hasActiveSubscription && userIdNum > 0 ? (
+            <SubscriptionManageCard userId={userIdNum} onChanged={refreshProgress} />
+          ) : null}
 
           {needCompleteAccount ? (
             <div id="inscription-mixy" className="mt-6 scroll-mt-4">
@@ -311,7 +325,7 @@ export default function Dashboard() {
           className="max-h-[min(60vh,520px)] overflow-y-auto space-y-3 scroll-smooth pr-1 -mr-1 [scrollbar-width:thin]"
         >
           {levelStrip.map((lvl) => {
-            const mod = allModules.find((m) => m.level === lvl) ?? allModules[0];
+            const mod = modulesForUser.find((m) => m.level === lvl) ?? modulesForUser[0];
             const isValidated = completedLevels.includes(lvl);
             const isActiveCard = !isValidated && lvl === activeLevel;
 

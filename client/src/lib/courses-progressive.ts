@@ -4,6 +4,7 @@
  */
 
 import { level4Module, level5Module } from "./courses-progressive-extended";
+import type { CourseTrackId } from "./learning-profile";
 
 export type UserLevel = "beginner" | "intermediate" | "advanced";
 
@@ -43,21 +44,21 @@ export interface CourseModule {
 }
 
 /**
- * NIVEAU 1: LES BASES DU DJING (Débutant)
+ * NIVEAU 1 — parcours FLX4 (débutant, surface compacte, touches Shift / Merge FX)
  */
-export const level1Module: CourseModule = {
+export const level1ModuleFlx4: CourseModule = {
   level: 1,
-  title: "Les Bases du DJing : Setup, Rekordbox & synchronisation",
+  title: "Les Bases du DJing — parcours DDJ-FLX4",
   description:
-    "Configurer ta DDJ-FLX3 / FLX4 avec Rekordbox, puis maîtriser BPM, tempo et premières transitions",
+    "Ta FLX4 a moins de boutons visibles qu’une FLX3 : beaucoup se fait avec Shift et calques. Rekordbox + branchements + BPM avec des exemples calibrés FLX4.",
   userLevels: ["beginner", "intermediate", "advanced"],
   totalSlides: 5,
   estimatedDuration: "40 minutes",
   slides: [
     {
       slideNumber: 1,
-      title: "Rekordbox + DDJ-FLX3 / FLX4 : la bonne base",
-      subtitle: "Modes du logiciel, analyse des morceaux, lecture d'une waveform",
+      title: "Rekordbox + DDJ-FLX4 : la bonne base",
+      subtitle: "Modes du logiciel, analyse des morceaux — et l’idée des « boutons cachés » (Shift)",
       videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
       videoDescription:
         "Parcours Performance (et repères visuels) dans Rekordbox — idéal avant de brancher la table. Active les sous-titres YouTube si besoin.",
@@ -66,10 +67,12 @@ export const level1Module: CourseModule = {
           url: "https://www.pioneerdj.com/-/media/pioneerdj/images/products/controller/ddj-flx4/black/ddj-flx4-angle-ttl-1200.jpg",
           alt: "Contrôleur DJ DDJ-FLX4 — vue en plongée",
           caption:
-            "Repère les jogs, les faders de volume, la section mixer et les pads : même logique sur FLX3 avec parfois plus de touches d’effet.",
+            "FLX4 : jogs, faders, mixer au centre, pads en dessous. Garde en tête que **Shift** + pad ou bouton ouvre souvent la « 2e couche » (voir le manuel Layer).",
         },
       ],
-      content: `Ce parcours Mixy vise surtout les DJs sur **Pioneer DJ avec Rekordbox**, en particulier **DDJ-FLX4** et **DDJ-FLX3** (même logique : 2 decks, section mixer au centre, pads sous les jogs).
+      content: `**Ce niveau 1 est le parcours FLX4** — c’est la table que la majorité des abonnés Mixy utilisent : surface **plus simple en apparence**, mais **tout autant puissante** une fois qu’on connaît les **calques (Shift)** et les raccordements Rekordbox.
+
+Même logique générale que sur d’autres contrôleurs Pioneer : **2 decks**, **mixer au centre**, **pads** sous les jogs. La différence avec une FLX3 ou un XDJ-RX, c’est surtout **où** se trouvent les réglages (souvent derrière **Shift** ou dans un sous-menu sur FLX4).
 
 **Deux grands modes dans Rekordbox**
 - **Export** : tu prépares la musique (playlists, grilles de BPM, mémoire de points cue), tu peux exporter vers une clé USB pour des lecteurs CDJ/XDJ en boîte.
@@ -82,7 +85,7 @@ export const level1Module: CourseModule = {
 
 **Côté matériel (vue d'ensemble)**
 - **Decks gauche / droite** : chargent chacun une piste, **jog** pour nudge ou scratch léger selon tes réglages.
-- **Section mixer** : volumes par canal (**channel faders**), **crossfader**, **EQ 3 bandes**, filtres selon modèle, **section effets** (Smart CFX sur FLX3 / Merge FX sur FLX4 selon firmware — garde les idées simples au début : une couleur de son à la fois).
+- **Section mixer** : volumes par canal (**channel faders**), **crossfader**, **EQ 3 bandes**, **Merge FX** (ou effets selon firmware) — au début, utilise **un** effet ou filtre à la fois pour entendre clairement.
 - **Pads** : **Hot Cues** pour marquer intros, drops, ponts ; tu gagneras un temps énorme sur les transitions.
 
 **Ressources utiles (manuel officiel & visuels)**
@@ -115,8 +118,8 @@ export const level1Module: CourseModule = {
     },
     {
       slideNumber: 2,
-      title: "Brancher la table : USB, Master, casque",
-      subtitle: "FLX3 / FLX4 — enceintes actives, gain propre, écoute DJ",
+      title: "Brancher la FLX4 : USB, Master, casque",
+      subtitle: "Enceintes actives, gain propre, écoute DJ — ports USB parfois doubles",
       videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Tour complet débutant sur la DDJ-FLX4 : vue matérielle, faders, branchements — en anglais mais très visuel ; active les sous-titres auto.",
@@ -254,7 +257,7 @@ Tu ne peux pas changer le BPM de plus de +/- 10% sans que ca sonne bizarre.
 - Si une chanson est a 100 BPM, tu peux la mettre jusqu'a 110 BPM max
 - Au-dela, ca sonne deforme
 
-**Hardware FLX3 / FLX4**
+**Hardware DDJ-FLX4**
 - Le **fader de tempo** (pitch) est en général au-dessus ou à côté du jog : vérifie sur ton manuel la plage **±%** et l'interrupteur « tempo range » si présent.
 - **Key Lock / Master Tempo** (si activé dans Rekordbox) : change le tempo sans trop bouger la hauteur — pratique pour rester proche du BPM cible sans casser la voix.`,
       keyTakeaway:
@@ -342,6 +345,170 @@ La Realite:
         "Maitrise d'abord la synchronisation, puis explore le reste",
       ],
     },
+  ],
+};
+
+/**
+ * NIVEAU 1 — parcours DDJ-FLX3 & XDJ-RX (plus de contrôles visibles, logique type CDJ / club)
+ */
+export const level1ModuleFlx3Xdj: CourseModule = {
+  level: 1,
+  title: "Les Bases du DJing — DDJ-FLX3 & XDJ-RX",
+  description:
+    "Niveau 1 distinct du parcours FLX4 : la FLX3 déploie plus de boutons (Smart CFX, sections pad) ; l’XDJ-RX se pilote comme un tout-en-un USB (Export Rekordbox). Les niveaux 2 à fin sont communs avec l’autre parcours.",
+  userLevels: ["beginner", "intermediate", "advanced"],
+  totalSlides: 5,
+  estimatedDuration: "40 minutes",
+  slides: [
+    {
+      slideNumber: 1,
+      title: "Rekordbox + FLX3 / XDJ-RX : la bonne base « club »",
+      subtitle: "Plus de boutons sous les doigts, ou tout-en-un sans PC au plateau",
+      videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+      videoDescription:
+        "Modes Export & Performance dans Rekordbox — indispensable avant de brancher une FLX3, et pour préparer les clés USB d’un XDJ-RX.",
+      illustrations: [
+        {
+          url: "https://www.pioneerdj.com/-/media/pioneerdj/images/products/controller/ddj-flx3/black/ddj-flx3-angle-ttl-1200.jpg",
+          alt: "Contrôleur DJ DDJ-FLX3 — voie mixer et sections effets",
+          caption:
+            "Sur FLX3, beaucoup de fonctions ont un bouton dédié (ex. Smart CFX). Sur XDJ-RX, l’équivalent se règle souvent à l’écran + molettes, comme sur des CDJ.",
+        },
+      ],
+      content: `**Ce parcours niveau 1 est calibré FLX3 et XDJ-RX** — pas pour la FLX4. L’idée : tu apprends avec **la même disposition « pro »** que sur beaucoup de setups club (plus de contrôles **visibles** qu’une FLX4, moins besoin de tout passer par des couches Shift).
+
+**DDJ-FLX3 (contrôleur + ordinateur)**
+- Beaucoup de **boutons et pads** sont accessibles directement : **Smart CFX**, **Beat FX**, **Hot Cues** — on ira **doucement** sur les effets au début pour entendre chaque mouvement.
+- **Performance** avec Rekordbox : table branchée en USB, deux decks à l’écran comme d’habitude.
+
+**XDJ-RX (tout-en-un)**
+- Tu peux mixer **sans ouvrir le PC sur le plateau** : playlists préparées en **Export** sur une clé USB, chargées sur les lecteurs.
+- L’écran par deck remplace une bonne partie de l’UI « laptop » : BPM, vagues, points cue — pense **CDJ + mixer intégré**.
+
+**Deux grands modes dans Rekordbox (les deux matériels)**
+- **Export** : organisation des morceaux, **grid**, **Hot Cues**, playlists pour clé USB (surtout vitale pour l’XDJ-RX).
+- **Performance** : mode DJ avec **FLX3** branchée — ou préparation mentale des morceaux si tu bosses pour du stand-alone XDJ.
+
+**Avant de mixer**
+- Importe tes morceaux, crée une playlist d'entraînement BPM proches (ex. 124–128).
+- Lance l'**analyse** BPM / grille ; vérifie que le kick suit les lignes de grille.
+
+**Ressources utiles**
+- DDJ-FLX3 : https://www.pioneerdj.com/fr-fr/product/controller/archive/ddj-flx3/black/overview/
+- Gamme XDJ-RX : https://www.pioneerdj.com/fr-fr/product/all-in-one-system/
+- PDF Support : télécharge le manuel et repère « Connections » + « Part names ».
+
+**Théorie + pratique**
+- Même discipline que sur FLX4 : importer → analyser → charger deck A/B → écouter la grille au casque. Seule la **surface** change.`,
+      keyTakeaway:
+        "FLX3 = beaucoup de contrôles visibles avec le laptop. XDJ-RX = prépare en Export, joue depuis la machine. Rekordbox reste le hub.",
+      exercise: {
+        title: "Préparer 5 morceaux + 1 scénario Export",
+        description: "Base commune aux deux machines",
+        steps: [
+          "Crée une playlist « Mixy FLX3/XDJ » avec 5 morceaux du même style.",
+          "Analyse-les (BPM / grille) et corrige une grille si besoin.",
+          "Pose 4 Hot Cues par morceau (intro, pont, drop, outro).",
+          "Si tu vises un **XDJ-RX** : exporte la playlist sur une clé USB (Export mode) et vérifie qu’elle s’affiche dans Rekordbox « Device » / lecteur test.",
+          "Si tu vises une **FLX3** : charge un titre sur A et B en Performance et vérifie le beat au casque.",
+        ],
+        estimatedTime: "18 minutes",
+      },
+      tips: [
+        "Sur FLX3, note les noms des pads (Serato / Rekordbox) dans le mode d’emploi : ils changent selon la couche.",
+        "Sur XDJ-RX, garde une clé de backup : les USB sont ton « disque dur scène ».",
+        "Ne monte pas le master tant que les trims ne sont pas calibrés.",
+      ],
+    },
+    {
+      slideNumber: 2,
+      title: "Brancher la FLX3 ou l’XDJ-RX",
+      subtitle: "FLX3 : USB + casque + master — XDJ : clés USB + enceintes + casque",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoDescription:
+        "Vidéo exemple contrôleur FLX (visuel ports) — pour XDJ-RX, ajoute l’étape « playlists sur clé USB » avant d’allumer.",
+      content: `**DDJ-FLX3 (avec ordinateur)**
+Ordinateur → **USB** → contrôleur → **MASTER OUT** → enceintes actives (entrée ligne). **Casque** sur **PHONES**. Même logique qu’une FLX4, mais vérifie sur **ton** manuel la présence d’entrées **MIC** ou **AUX** si tu ajoutes un micro.
+
+**XDJ-RX (sans PC requis en mix)**
+- Branche les **enceintes** sur la sortie **Master** (RCA/XLR selon modèle).
+- **Casque** sur la prise DJ / booth.
+- Insère une ou deux **clés USB** avec tes playlists **Export** ; sélectionne les morceaux depuis les **écrans**.
+
+**Points communs**
+- Faders et master à **zéro** avant d’allumer la sono.
+- Régle les **trims** : signal dans le vert/orange, pas de rouge continu.
+- Pour l’appart : petites enceintes actives ; fais attention aux basses vers les voisins.
+
+**Support**
+- Manuels & firmware : https://www.pioneerdj.com/fr-fr/support/`,
+      keyTakeaway:
+        "FLX3 = chaîne laptop‑contrôleur‑sono. XDJ-RX = clé USB + enceintes + casque, PC seulement pour préparer chez toi.",
+      exercise: {
+        title: "Check-list selon ta machine",
+        description: "Une fois avant chaque session",
+        steps: [
+          "Note sur papier : « FLX3 + PC » ou « XDJ seul ».",
+          "FLX3 : câble USB données OK ? XDJ : clé reconnue sur le lecteur ?",
+          "Enceintes sur entrée ligne, pas phono ; master monté progressivement.",
+          "Casque : pré-écoute d’un deck sans saturer le master.",
+        ],
+        estimatedTime: "10 minutes",
+      },
+      tips: [
+        "XDJ : formate tes clés FAT32 si le manuel le recommande.",
+        "FLX3 : mets à jour Rekordbox et le firmware de la table le même week-end pour éviter les bugs.",
+        "Garde une multiprise propre + un câble de secours.",
+      ],
+    },
+    level1ModuleFlx4.slides[2],
+    {
+      ...level1ModuleFlx4.slides[3],
+      videoDescription:
+        "Tempo & pitch : applique la même logique sur le fader de la FLX3 ou la molette tempo d’un XDJ-RX.",
+      content: `Le Probleme:
+Tu as deux chansons que tu aimes, mais elles n'ont pas le meme BPM.
+- Chanson A: 120 BPM
+- Chanson B: 130 BPM
+- Resultat: Elles ne sonnent pas bien ensemble
+
+La Solution: Le Pitch
+Le Pitch c'est un curseur qui change la vitesse de la chanson.
+- Augmente le Pitch -> la chanson devient plus rapide
+- Baisse le Pitch -> la chanson devient plus lente
+
+Comment Ca Marche:
+Imagine un disque vinyle:
+- Si tu le fais tourner plus vite -> la musique est plus rapide
+- Si tu le fais tourner plus lentement -> la musique est plus lente
+
+Le Pitch digital fonctionne exactement comme ca.
+
+Exemple Pratique:
+- Chanson A: 120 BPM (tu la laisses a 120)
+- Chanson B: 130 BPM (tu la ralentis a 120 avec le Pitch)
+- Resultat: Les deux jouent a 120 BPM = parfait!
+
+Important:
+- Le Pitch change aussi la tonalite (la chanson sonne plus aigue ou plus grave)
+- C'est normal et ca fait partie du DJing
+- Les DJs professionnels acceptent ce changement
+
+Limitation:
+Tu ne peux pas changer le BPM de plus de +/- 10% sans que ca sonne bizarre.
+
+**Hardware DDJ-FLX3**
+- Le **pitch** est en façade par deck ; **Tempo Range** élargit ou réduit la plage utile (lis la valeur affichée avant de tirer le fader). **Smart CFX** colore le son — un réglage à la fois au début.
+
+**Hardware XDJ-RX**
+- Le tempo se pilote sur **l’écran** / la **molette** du deck : le BPM affiché doit coller à ce que tu entends après analyse. **Key Lock / Master Tempo** dans le menu si tu veux limiter la déformation de la voix.
+
+**Rekordbox (les deux)**
+- Active **Key Lock / Master Tempo** si tu veux optimiser le tempo sans trop bouger la hauteur — à tester au casque avant d’envoyer en salle.`,
+      keyTakeaway:
+        "Même logique de pitch partout : FLX3 = faders visibles ; XDJ-RX = contrôle à l’écran + Rekordbox pour la prépa.",
+    },
+    level1ModuleFlx4.slides[4],
   ],
 };
 
@@ -790,8 +957,7 @@ Conseils Pratiques:
   ],
 };
 
-export const allModules: CourseModule[] = [
-  level1Module,
+const courseModulesFromLevel2: CourseModule[] = [
   level2Module,
   level3Module,
   level4Module,
@@ -955,15 +1121,24 @@ export const allModules: CourseModule[] = [
   },
 ];
 
-export function getModuleByLevel(level: number): CourseModule | null {
-  return allModules.find((m) => m.level === level) || null;
+export function getAllModules(track: CourseTrackId): CourseModule[] {
+  const level1 = track === "flx4" ? level1ModuleFlx4 : level1ModuleFlx3Xdj;
+  return [level1, ...courseModulesFromLevel2];
+}
+
+/** Défaut = parcours majoritaire FLX4 (communauté Instagram). */
+export const allModules = getAllModules("flx4");
+
+export function getModuleByLevel(level: number, track: CourseTrackId = "flx4"): CourseModule | null {
+  return getAllModules(track).find((m) => m.level === level) ?? null;
 }
 
 export function getSlideFromModule(
   level: number,
-  slideNumber: number
+  slideNumber: number,
+  track: CourseTrackId = "flx4",
 ): Slide | null {
-  const module = getModuleByLevel(level);
+  const module = getModuleByLevel(level, track);
   if (!module) return null;
-  return module.slides.find((s) => s.slideNumber === slideNumber) || null;
+  return module.slides.find((s) => s.slideNumber === slideNumber) ?? null;
 }

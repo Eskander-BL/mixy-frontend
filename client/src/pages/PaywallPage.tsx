@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react";
-import { useLocation, useRoute } from "wouter";
+import { useLocation, useRoute, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -115,15 +115,23 @@ export default function PaywallPage() {
               {t("paywall.price")}
             </p>
             <p className="text-xs text-gray-500 mt-2">
-              Cancel anytime
+              {t("paywall.cancelAnytime")}
             </p>
           </div>
         </div>
 
+        <p className="text-xs text-center text-gray-600 mb-3">
+          {t("paywall.legalBeforeSubscribe")}
+          <Link href="/legal" className="text-primary font-medium underline underline-offset-2">
+            {t("paywall.legalLinkLabel")}
+          </Link>
+          .
+        </p>
+
         <Button
           onClick={handlePayment}
           disabled={loading}
-          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-3 text-base font-semibold disabled:opacity-70"
+          className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-2 py-3 text-base font-semibold disabled:opacity-70"
         >
           {loading ? (
             <span className="flex items-center gap-2">

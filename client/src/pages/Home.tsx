@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import logo from "@/assets/logo.png";
@@ -85,8 +85,10 @@ export default function Home() {
           Commencer maintenant
         </Button>
 
-        <p className="text-sm text-gray-600 mt-8">
-          Gratuit pour les 2 premiers niveaux. Puis 4,99€/mois pour accès complet.
+        <p className="text-sm text-gray-600 mt-10">
+          <Link href="/legal" className="text-primary underline underline-offset-2">
+            CGU, mentions légales & confidentialité
+          </Link>
         </p>
       </div>
     </div>

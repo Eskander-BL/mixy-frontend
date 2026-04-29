@@ -322,7 +322,7 @@ const QUIZ_DATA: QuizData = {
 export default function QuizPage() {
   const [, params] = useRoute("/quiz/:level");
   const [, navigate] = useLocation();
-  const { refreshProgress, completedLevels, hasActiveSubscription } = useProgress();
+  const { refreshProgress, completedLevels, hasActiveSubscription, courseTrack } = useProgress();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -330,7 +330,7 @@ export default function QuizPage() {
 
   const level = params?.level ? parseInt(params.level) : 1;
   const questions = QUIZ_DATA[level] || [];
-  const quizModule = getModuleByLevel(level);
+  const quizModule = getModuleByLevel(level, courseTrack);
   useDocumentTitle(
     quizModule?.title ? `Quiz : ${quizModule.title}` : `Quiz — niveau ${level}`,
   );

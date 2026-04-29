@@ -130,8 +130,31 @@ export const translations = {
       ],
       subscribe: "Subscribe Now",
       paymentMethod: "Secure payment with Stripe",
+      cancelAnytime:
+        "Cancel anytime: we stop renewals only — you keep full access until the end of your paid month. No extra cancellation fee.",
+      legalBeforeSubscribe: "By paying, you accept the ",
+      legalLinkLabel: "terms and legal notice",
       alreadySubscribed: "You're already subscribed!",
       nextLevel: "Go to Next Level",
+    },
+
+    subscription: {
+      title: "Your subscription",
+      activeUntil: "Access until {{date}}",
+      managePayment: "Card & invoices",
+      managePaymentHint: "Open Stripe’s secure billing portal to update your card or download receipts.",
+      cancelRenewal: "Turn off auto-renewal",
+      cancelRenewalHint:
+        "Your next charge is cancelled. You keep full access until the end of the period you already paid for.",
+      cancelScheduled: "Auto-renewal is already off — access until {{date}}.",
+      cancelConfirmTitle: "Turn off auto-renewal?",
+      cancelConfirmDescription:
+        "No cancellation fee. You keep premium access until the end of your current billing period. After that, no more charges and paid content locks.",
+      confirmCancel: "Confirm",
+      cancelDialogBack: "Back",
+      cancelSuccess: "Done — no charge after {{date}}. You still have access until then.",
+      portalError: "Could not open Stripe portal. Enable Customer portal in your Stripe Dashboard.",
+      cancelError: "Could not update subscription. Retry or use the billing portal.",
     },
 
     // Buttons
@@ -287,8 +310,33 @@ export const translations = {
       ],
       subscribe: "S'abonner Maintenant",
       paymentMethod: "Paiement sécurisé avec Stripe",
+      cancelAnytime:
+        "Annulation à tout moment : on arrête seulement les renouvellements — tu gardes l’accès jusqu’à la fin du mois déjà payé, sans frais d’annulation.",
+      legalBeforeSubscribe: "En payant, tu acceptes les ",
+      legalLinkLabel: "CGU et mentions légales",
       alreadySubscribed: "Vous êtes déjà abonné!",
       nextLevel: "Aller au Niveau Suivant",
+    },
+
+    subscription: {
+      title: "Abonnement Mixy",
+      activeUntil: "Accès jusqu’au {{date}}",
+      managePayment: "Carte et factures",
+      managePaymentHint:
+        "Ouvre le portail sécurisé Stripe pour modifier ta carte ou télécharger une facture.",
+      cancelRenewal: "Annuler le renouvellement",
+      cancelRenewalHint:
+        "Le prochain prélèvement est désactivé. Tu conserves l’accès jusqu’à la fin de la période déjà payée.",
+      cancelScheduled: "Renouvellement déjà désactivé — accès jusqu’au {{date}}.",
+      cancelConfirmTitle: "Désactiver le renouvellement ?",
+      cancelConfirmDescription:
+        "Aucun frais d’annulation. Tu gardes l’accès premium jusqu’à la fin de ta période actuelle ; après cette date, plus de prélèvement et le contenu payant se verrouille.",
+      confirmCancel: "Confirmer",
+      cancelDialogBack: "Retour",
+      cancelSuccess: "C’est fait : plus de prélèvement après le {{date}}. Accès jusqu’à cette date.",
+      portalError:
+        "Impossible d’ouvrir le portail Stripe. Active le portail client dans le Dashboard Stripe.",
+      cancelError: "Impossible de mettre à jour l’abonnement. Réessaie ou passe par le portail.",
     },
 
     // Buttons

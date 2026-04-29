@@ -14,13 +14,13 @@ import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 export default function CoursePage() {
   const [, params] = useRoute("/course/:level");
   const [, navigate] = useLocation();
-  const { completedLevels, hasActiveSubscription, learningProfile } = useProgress();
+  const { completedLevels, hasActiveSubscription, learningProfile, courseTrack } = useProgress();
   const [userId, setUserId] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
 
   const level = params?.level ? parseInt(params.level) : 1;
-  const module = getModuleByLevel(level);
-  const slide = getSlideFromModule(level, currentSlide);
+  const module = getModuleByLevel(level, courseTrack);
+  const slide = getSlideFromModule(level, currentSlide, courseTrack);
   useDocumentTitle(module?.title ? `Cours : ${module.title}` : `Cours — niveau ${level}`);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function CoursePage() {
 
   useEffect(() => {
     setCurrentSlide(1);
-  }, [level]);
+  }, [level, courseTrack]);
 
   useLayoutEffect(() => {
     scrollAppMainToTop();
