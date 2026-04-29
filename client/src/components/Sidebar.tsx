@@ -21,11 +21,15 @@ const Sidebar: React.FC<SidebarProps> = ({
   onCloseMobile,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const levels = allModules.map((module) => ({
-    level: module.level,
-    title: module.title,
-    duration: module.estimatedDuration,
-  }));
+  const levels = useMemo(
+    () =>
+      allModules.map((module) => ({
+        level: module.level,
+        title: module.title,
+        duration: module.estimatedDuration,
+      })),
+    [],
+  );
 
   const getLevelStatus = (level: number) => {
     if (level === 1) return "accessible";
@@ -39,15 +43,30 @@ const Sidebar: React.FC<SidebarProps> = ({
     return `${prefix} - ${title}`;
   };
 
-  const remainingMinutes = useMemo(() => {
+  const { totalCourseMinutes, remainingMinutes, timeProgress } = useMemo(() => {
+    const parseModuleMinutes = (duration: string) => {
+      const parsed = Number.parseInt(duration, 10);
+      return Number.isFinite(parsed) ? parsed : 15;
+    };
+
+    const totalAll = levels.reduce((sum, level) => sum + parseModuleMinutes(level.duration), 0);
+
     const unlockedLevels = completedLevels.length + 1;
-    const remaining = levels.slice(unlockedLevels - 1);
-    const total = remaining.reduce((sum, level) => {
-      const parsed = Number.parseInt(level.duration, 10);
-      return sum + (Number.isFinite(parsed) ? parsed : 15);
-    }, 0);
-    return Math.max(total, 0);
+    const remainingSlice = levels.slice(unlockedLevels - 1);
+    const remaining = remainingSlice.reduce((sum, level) => sum + parseModuleMinutes(level.duration), 0);
+
+    const remainingClamped = Math.max(remaining, 0);
+    const progress =
+      totalAll > 0 ? Math.min(1, Math.max(0, (totalAll - remainingClamped) / totalAll)) : 0;
+
+    return {
+      totalCourseMinutes: totalAll,
+      remainingMinutes: remainingClamped,
+      timeProgress: progress,
+    };
   }, [completedLevels.length, levels]);
+
+  const progressPercent = Math.round(timeProgress * 100);
 
   const formatDuration = (minutes: number) => {
     if (minutes < 60) return `${minutes} min`;
@@ -61,7 +80,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       className={`${
         /* ~144px replié : cadenas + numéro visibles (avant 64px c’était trop étroit) */
         collapsed ? "md:w-36" : "md:w-72"
-      } w-72 bg-gradient-to-b from-gray-900 to-gray-950 text-white p-3 transition-all duration-300 space-y-2 border-r border-gray-800 fixed md:static inset-y-0 left-0 z-40 ${
+      } w-72 bg-gradient-to-b from-gray-900 to-gray-950 text-white p-3 transition-all duration-300 flex flex-col md:h-full min-h-0 gap-2 border-r border-gray-800 fixed md:static inset-y-0 left-0 z-40 ${
         mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
       }`}
     >
@@ -86,7 +105,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
       </div>
-      <nav className="space-y-1.5">
+      <nav className="space-y-1.5 flex-1 min-h-0 overflow-y-auto">
         {levels.map(({ level, title }) => {
           const status = getLevelStatus(level);
           const isCompleted = completedLevels.includes(level);
@@ -120,9 +139,67 @@ const Sidebar: React.FC<SidebarProps> = ({
         })}
       </nav>
       {!collapsed && (
-        <div className="text-xs text-gray-300 pt-3 border-t border-gray-800">
-          <p className="font-medium">Temps estimé restant</p>
-          <p className="mt-1 text-gray-200 text-sm">{formatDuration(remainingMinutes)}</p>
+        <div className="pt-3 mt-auto border-t border-gray-800 shrink-0">
+          <div
+            className="flex items-center gap-3"
+            role="group"
+            aria-label={
+              userLanguage === "fr"
+                ? `Progression du parcours : ${progressPercent} pour cent. Temps restant estimé : ${formatDuration(remainingMinutes)}.`
+                : `Path progress: ${progressPercent} percent. Estimated time left: ${formatDuration(remainingMinutes)}.`
+            }
+          >
+            <div
+              className="relative h-11 w-11 shrink-0"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={progressPercent}
+              aria-valuetext={`${progressPercent}%`}
+            >
+              <svg className="h-11 w-11 -rotate-90" viewBox="0 0 44 44" aria-hidden>
+                <circle
+                  cx="22"
+                  cy="22"
+                  r="18"
+                  fill="none"
+                  strokeWidth="3"
+                  className="text-white/10"
+                  stroke="currentColor"
+                />
+                <circle
+                  cx="22"
+                  cy="22"
+                  r="18"
+                  fill="none"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  className="text-primary transition-[stroke-dashoffset] duration-500 ease-out"
+                  stroke="currentColor"
+                  strokeDasharray={2 * Math.PI * 18}
+                  strokeDashoffset={(1 - timeProgress) * 2 * Math.PI * 18}
+                />
+              </svg>
+              <span className="pointer-events-none absolute inset-0 flex items-center justify-center text-[9px] font-bold tabular-nums text-white/90">
+                {progressPercent}%
+              </span>
+            </div>
+            <div className="min-w-0 flex-1 text-xs text-gray-300">
+              <p className="font-medium text-gray-200">
+                {userLanguage === "fr" ? "Temps estimé restant" : "Estimated time left"}
+              </p>
+              <p className="mt-0.5 text-sm font-semibold text-white tabular-nums">
+                {formatDuration(remainingMinutes)}
+              </p>
+              {totalCourseMinutes > 0 && (
+                <p className="mt-1 text-[10px] leading-tight text-gray-400">
+                  {userLanguage === "fr"
+                    ? "Anneau : part du parcours couverte (durées indicatives)"
+                    : "Ring: share of path covered (indicative durations)"}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
       )}
     </div>
