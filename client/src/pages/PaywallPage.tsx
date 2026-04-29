@@ -78,11 +78,11 @@ export default function PaywallPage() {
     <div className="min-h-screen bg-gradient-to-br from-amber-50/80 to-orange-50/50 flex items-center justify-center p-4">
       <Card className="max-w-md w-full p-8 border-0 shadow-lg">
         <div className="text-center mb-8">
-          <div className="mx-auto mb-4 max-w-[220px] rounded-2xl bg-neutral-950 p-3 shadow-inner">
+          <div className="mx-auto mb-4 flex max-w-[240px] justify-center">
             <img
               src={brand.mixyUnlock}
               alt=""
-              className="w-full h-auto max-h-48 object-contain object-center"
+              className="h-44 w-auto max-w-full object-contain object-center drop-shadow-sm"
               aria-hidden
             />
           </div>
