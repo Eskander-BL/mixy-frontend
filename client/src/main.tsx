@@ -50,10 +50,22 @@ queryClient.getMutationCache().subscribe(event => {
   }
 });
 
+/** Base API sans slash final. En prod sans VITE_API_URL, évite POST relatif /api/trpc → Vercel (405 + corps non-JSON). */
+function apiBaseUrl(): string {
+  const fromEnv = import.meta.env.VITE_API_URL?.trim();
+  if (fromEnv) {
+    return fromEnv.replace(/\/$/, "");
+  }
+  if (import.meta.env.PROD) {
+    return "https://api.mixyia.com";
+  }
+  return "";
+}
+
 const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
-      url: `${import.meta.env.VITE_API_URL || ""}/api/trpc`,
+      url: `${apiBaseUrl()}/api/trpc`,
       transformer: superjson,
       fetch(input, init) {
         return globalThis.fetch(input, {
