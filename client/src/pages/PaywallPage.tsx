@@ -3,7 +3,7 @@ import { useLocation, useRoute, Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { scrollAppMainToTop } from "@/lib/utils";
@@ -13,9 +13,15 @@ export default function PaywallPage() {
   const [, params] = useRoute("/paywall/:level");
   const [, navigate] = useLocation();
   const [loading, setLoading] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
   const { t } = useLanguageContext();
   const createCheckoutSessionMutation = trpc.stripe.createCheckoutSession.useMutation();
+  const userIdNum = parseInt(localStorage.getItem("userId") || "0", 10);
+
+  const { data: subscriptionStatus, isLoading: isLoadingSubscription } =
+    trpc.stripe.getSubscriptionStatus.useQuery(
+      { userId: userIdNum },
+      { enabled: userIdNum > 0 },
+    );
 
   const level = params?.level ? parseInt(params.level) : 1;
   useDocumentTitle(`S'abonner — niveau ${level}`);
@@ -54,21 +60,40 @@ export default function PaywallPage() {
     }
   };
 
-  if (showSuccess) {
+  if (userIdNum <= 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-amber-50/80 to-orange-50/50 flex items-center justify-center p-4">
+        <Card className="max-w-md w-full p-8 border-0 shadow-lg text-center">
+          <p className="text-gray-600 mb-4">{t("messages.loading")}</p>
+          <Button onClick={() => navigate("/")} variant="outline" className="w-full">
+            {t("buttons.back")}
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
+  if (isLoadingSubscription) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-amber-50/80 to-orange-50/50 flex items-center justify-center p-4">
+        <Card className="max-w-md w-full p-8 border-0 shadow-lg text-center">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">{t("messages.loading")}</p>
+        </Card>
+      </div>
+    );
+  }
+
+  if (subscriptionStatus?.isActive) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-emerald-50/80 to-amber-50/40 flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8 border-0 shadow-lg text-center">
           <div className="text-6xl mb-4">🎉</div>
-          <h1 className="text-3xl font-bold text-green-600 mb-2">
-            {t("paywall.alreadySubscribed")}
-          </h1>
-          <p className="text-gray-600 mb-6">
-            {t("paywall.nextLevel")}
-          </p>
-          <div className="animate-spin">
-            <div className="w-8 h-8 border-4 border-orange-200 border-t-primary rounded-full mx-auto"></div>
-          </div>
-          <p className="text-sm text-gray-500 mt-4">{t("messages.loading")}</p>
+          <h1 className="text-3xl font-bold text-green-600 mb-2">{t("paywall.alreadySubscribed")}</h1>
+          <p className="text-gray-600 mb-6">{t("paywall.nextLevel")}</p>
+          <Button onClick={() => navigate("/dashboard")} className="w-full bg-green-600 hover:bg-green-700">
+            {t("buttons.back")}
+          </Button>
         </Card>
       </div>
     );

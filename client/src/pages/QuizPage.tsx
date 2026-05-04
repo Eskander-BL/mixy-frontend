@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
 import { scrollAppMainToTop } from "@/lib/utils";
-import { getModuleByLevel } from "@/lib/courses-progressive";
+import { getAllModules, getModuleByLevel } from "@/lib/courses-progressive";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 interface QuizQuestion {
@@ -409,7 +409,13 @@ export default function QuizPage() {
       localStorage.setItem("userProgress", JSON.stringify(progress));
       refreshProgress();
 
-      navigate(`/paywall/${level}`);
+      if (hasActiveSubscription) {
+        const totalLevels = getAllModules(courseTrack).length;
+        const nextLevel = level + 1;
+        navigate(nextLevel <= totalLevels ? `/course/${nextLevel}` : "/dashboard");
+      } else {
+        navigate(`/paywall/${level}`);
+      }
     }
   };
 
@@ -498,8 +504,10 @@ export default function QuizPage() {
             {score >= 50 && (
               <div className="bg-primary/5 p-4 rounded-lg mb-6 border border-primary/20">
                 <p className="text-sm text-foreground">
-                  <strong>Prochaine étape :</strong> débloquer l&apos;accès au niveau
-                  suivant (abonnement le cas échéant).
+                  <strong>Prochaine étape :</strong>{" "}
+                  {hasActiveSubscription
+                    ? "enchaîner avec le cours du niveau suivant."
+                    : "débloquer l&apos;accès au niveau suivant (abonnement)."}
                 </p>
               </div>
             )}
@@ -527,7 +535,7 @@ export default function QuizPage() {
                   onClick={handleFinish}
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-6 text-lg flex items-center justify-center gap-2"
                 >
-                  Continuer vers le déblocage
+                  {hasActiveSubscription ? "Continuer le parcours" : "Continuer vers le déblocage"}
                   <ChevronRight size={18} />
                 </Button>
                 <Button
