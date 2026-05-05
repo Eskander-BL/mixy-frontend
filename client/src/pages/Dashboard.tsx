@@ -28,6 +28,7 @@ import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { courseTrackLabelFr, targetDeckLabelFr } from "@/lib/learning-profile";
 import { CompleteAccountCard } from "@/components/CompleteAccountCard";
 import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
+import { toast } from "sonner";
 
 export default function Dashboard() {
   useDocumentTitle("Tableau de bord");
@@ -174,23 +175,36 @@ export default function Dashboard() {
   }, [loading, levelStripKey, scrollTesNiveauToActive]);
 
   const submitContact = () => {
+    const email = contactEmail.trim();
+    const message = contactMessage.trim();
+    if (!email || !message) {
+      toast.error("Renseigne ton e-mail et ton message.");
+      return;
+    }
     contactMutation.mutate(
       {
-        email: contactEmail,
+        email,
         subject: contactSubject,
-        message: contactMessage,
+        message,
       },
       {
         onSuccess: (res) => {
           if (res.success) {
-            alert("Message envoyé, on te répond rapidement");
+            toast.success("Message envoyé, on te répond rapidement.");
             setShowContactDialog(false);
             setContactMessage("");
           } else {
-            alert("Le message n'a pas pu être envoyé. Vérifie la configuration backend.");
+            toast.error(
+              "Le message n’a pas pu être envoyé (serveur ou Resend). Vérifie les logs Railway et CONTACT_NOTIFY_EMAIL.",
+            );
           }
         },
-      }
+        onError: (err) => {
+          const msg =
+            err instanceof Error ? err.message : "Erreur réseau ou serveur. Réessaie dans un instant.";
+          toast.error(msg);
+        },
+      },
     );
   };
 
@@ -496,8 +510,11 @@ export default function Dashboard() {
               rows={5}
             />
             <Button
+              type="button"
               onClick={submitContact}
-              disabled={contactMutation.isPending || !contactEmail || !contactMessage}
+              disabled={
+                contactMutation.isPending || !contactEmail.trim() || !contactMessage.trim()
+              }
               className="w-full"
             >
               {contactMutation.isPending ? "Envoi..." : "Envoyer"}

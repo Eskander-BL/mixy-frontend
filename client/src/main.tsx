@@ -57,7 +57,8 @@ function apiBaseUrl(): string {
     return fromEnv.replace(/\/$/, "");
   }
   if (import.meta.env.PROD) {
-    return "https://api.mixy.com";
+    /* Déploiement mixyia.com — même valeur que sur Vercel via VITE_API_URL si tu la définis. */
+    return "https://api.mixyia.com";
   }
   return "";
 }
