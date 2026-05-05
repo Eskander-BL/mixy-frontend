@@ -46,15 +46,52 @@ export function readMixyLearningProfile(): MixyLearningProfile | null {
   }
 }
 
-export function persistMixyLearningProfile(profile: Omit<MixyLearningProfile, "updatedAt">) {
+export function persistMixyLearningProfile(
+  profile: Omit<MixyLearningProfile, "updatedAt"> & { updatedAt?: number },
+) {
   const payload: MixyLearningProfile = {
-    ...profile,
-    updatedAt: Date.now(),
+    equipment: profile.equipment,
+    targetDeck: profile.targetDeck ?? null,
+    updatedAt: profile.updatedAt ?? Date.now(),
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event("mixy-learning-profile-updated"));
   }
+}
+
+/** Fusionne les données renvoyées par `dj.getProgress` (profil stocké en base). */
+export function coerceMixyLearningProfileFromRemote(data: unknown): MixyLearningProfile | null {
+  if (!data || typeof data !== "object") return null;
+  const o = data as Record<string, unknown>;
+  const equipment = o.equipment;
+  if (
+    equipment !== "none" &&
+    equipment !== "controller" &&
+    equipment !== "turntables" &&
+    equipment !== "other"
+  ) {
+    return null;
+  }
+  const td = o.targetDeck;
+  let targetDeck: TargetDeck | null = null;
+  if (td === null || td === undefined) targetDeck = null;
+  else if (
+    td === "flx4" ||
+    td === "flx3" ||
+    td === "xdj_rx" ||
+    td === "other" ||
+    td === "undecided"
+  ) {
+    targetDeck = td;
+  } else {
+    return null;
+  }
+  return {
+    equipment,
+    targetDeck,
+    updatedAt: typeof o.updatedAt === "number" ? o.updatedAt : Date.now(),
+  };
 }
 
 export function targetDeckLabelFr(deck: TargetDeck | null): string {

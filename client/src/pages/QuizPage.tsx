@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
+import { trpc } from "@/lib/trpc";
 import { scrollAppMainToTop } from "@/lib/utils";
 import { getAllModules, getModuleByLevel } from "@/lib/courses-progressive";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
@@ -323,10 +324,12 @@ export default function QuizPage() {
   const [, params] = useRoute("/quiz/:level");
   const [, navigate] = useLocation();
   const { refreshProgress, completedLevels, hasActiveSubscription, courseTrack } = useProgress();
+  const submitQuizMutation = trpc.dj.submitQuiz.useMutation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
+  const [savingProgress, setSavingProgress] = useState(false);
 
   const level = params?.level ? parseInt(params.level) : 1;
   const questions = QUIZ_DATA[level] || [];
@@ -392,30 +395,55 @@ export default function QuizPage() {
     setShowResults(true);
   };
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     if (score < 50) {
       return;
     }
-    const userId = localStorage.getItem("userId");
-    if (userId) {
-      const progress = JSON.parse(
-        localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}'
+    const userIdRaw = localStorage.getItem("userId");
+    if (!userIdRaw) {
+      return;
+    }
+    const userIdNum = parseInt(userIdRaw, 10);
+    if (!Number.isFinite(userIdNum) || userIdNum <= 0) {
+      return;
+    }
+
+    const answers = questions.map((_, idx) => selectedAnswers[idx] ?? -1);
+
+    setSavingProgress(true);
+    try {
+      await submitQuizMutation.mutateAsync({
+        userId: userIdNum,
+        level,
+        answers,
+      });
+    } catch (e) {
+      console.error("[Quiz] submitQuiz failed:", e);
+      setSavingProgress(false);
+      window.alert(
+        "Impossible d'enregistrer ta progression sur le serveur. Vérifie ta connexion et réessaie.",
       );
+      return;
+    }
+    setSavingProgress(false);
 
-      if (!progress.completedLevels.includes(level)) {
-        progress.completedLevels.push(level);
-      }
-      progress.scores[level] = score;
-      localStorage.setItem("userProgress", JSON.stringify(progress));
-      refreshProgress();
+    const progress = JSON.parse(
+      localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}',
+    );
 
-      if (hasActiveSubscription) {
-        const totalLevels = getAllModules(courseTrack).length;
-        const nextLevel = level + 1;
-        navigate(nextLevel <= totalLevels ? `/course/${nextLevel}` : "/dashboard");
-      } else {
-        navigate(`/paywall/${level}`);
-      }
+    if (!progress.completedLevels.includes(level)) {
+      progress.completedLevels.push(level);
+    }
+    progress.scores[level] = score;
+    localStorage.setItem("userProgress", JSON.stringify(progress));
+    refreshProgress();
+
+    if (hasActiveSubscription) {
+      const totalLevels = getAllModules(courseTrack).length;
+      const nextLevel = level + 1;
+      navigate(nextLevel <= totalLevels ? `/course/${nextLevel}` : "/dashboard");
+    } else {
+      navigate(`/paywall/${level}`);
     }
   };
 
@@ -532,10 +560,15 @@ export default function QuizPage() {
             ) : (
               <>
                 <Button
-                  onClick={handleFinish}
+                  onClick={() => void handleFinish()}
+                  disabled={savingProgress}
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-6 text-lg flex items-center justify-center gap-2"
                 >
-                  {hasActiveSubscription ? "Continuer le parcours" : "Continuer vers le déblocage"}
+                  {savingProgress
+                    ? "Enregistrement…"
+                    : hasActiveSubscription
+                      ? "Continuer le parcours"
+                      : "Continuer vers le déblocage"}
                   <ChevronRight size={18} />
                 </Button>
                 <Button

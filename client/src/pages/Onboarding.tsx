@@ -61,6 +61,7 @@ export default function Onboarding() {
   const updateLanguageMutation = trpc.dj.updateLanguage.useMutation();
   const levelDetectionMutation = trpc.dj.detectLevel.useMutation();
   const saveOnboardingMutation = trpc.dj.saveOnboarding.useMutation();
+  const saveLearningProfileMutation = trpc.dj.saveLearningProfile.useMutation();
 
   const parseValidUserId = (raw: string | null): number | null => {
     if (!raw) return null;
@@ -127,6 +128,21 @@ export default function Onboarding() {
     });
   };
 
+  const pushLearningProfileToServer = (
+    uid: number,
+    equipment: typeof formData.equipment,
+    targetDeck: TargetDeck | null,
+  ) => {
+    saveLearningProfileMutation.mutate({
+      userId: uid,
+      profile: {
+        equipment,
+        targetDeck: targetDeck ?? undefined,
+        updatedAt: Date.now(),
+      },
+    });
+  };
+
   const handleSaveOnboarding = () => {
     if (!userId) return;
 
@@ -157,6 +173,9 @@ export default function Onboarding() {
             equipment: formData.equipment,
             targetDeck,
           });
+          if (userId) {
+            pushLearningProfileToServer(userId, formData.equipment, targetDeck);
+          }
           localStorage.setItem("userProgress", JSON.stringify(progressPayload));
           navigate("/dashboard");
         },
@@ -170,6 +189,9 @@ export default function Onboarding() {
             equipment: formData.equipment,
             targetDeck,
           });
+          if (userId) {
+            pushLearningProfileToServer(userId, formData.equipment, targetDeck);
+          }
           localStorage.setItem("userProgress", JSON.stringify(progressPayload));
           navigate("/dashboard");
         },

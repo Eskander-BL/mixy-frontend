@@ -4,6 +4,8 @@ import { allModules } from "@/lib/courses-progressive";
 import {
   readMixyLearningProfile,
   getCourseTrackFromProfile,
+  coerceMixyLearningProfileFromRemote,
+  persistMixyLearningProfile,
   type MixyLearningProfile,
   type CourseTrackId,
 } from "@/lib/learning-profile";
@@ -124,6 +126,20 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     window.addEventListener("mixy-learning-profile-updated", syncProfile);
     return () => window.removeEventListener("mixy-learning-profile-updated", syncProfile);
   }, []);
+
+  useEffect(() => {
+    const remoteRaw = getProgressQuery.data?.learningProfile;
+    const parsed = coerceMixyLearningProfileFromRemote(remoteRaw);
+    if (!parsed) return;
+    const local = readMixyLearningProfile();
+    if (local && (local.updatedAt ?? 0) > parsed.updatedAt) return;
+    persistMixyLearningProfile({
+      equipment: parsed.equipment,
+      targetDeck: parsed.targetDeck,
+      updatedAt: parsed.updatedAt,
+    });
+    setLearningProfile(parsed);
+  }, [getProgressQuery.data?.learningProfile]);
 
   const courseTrack = getCourseTrackFromProfile(learningProfile);
 

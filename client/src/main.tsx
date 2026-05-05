@@ -57,7 +57,7 @@ function apiBaseUrl(): string {
     return fromEnv.replace(/\/$/, "");
   }
   if (import.meta.env.PROD) {
-    return "https://api.mixyia.com";
+    return "https://api.mixy.com";
   }
   return "";
 }

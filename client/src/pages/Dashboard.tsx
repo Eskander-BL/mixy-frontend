@@ -338,7 +338,7 @@ export default function Dashboard() {
                   <div className="flex flex-col sm:flex-row sm:items-start gap-3">
                     <div className="flex-1 min-w-0 order-2 sm:order-1">
                       <p className="text-sm font-semibold text-primary mb-0.5">Niveau actif</p>
-                      <h3 className="text-base md:text-lg font-bold text-gray-900 leading-snug">
+                      <h3 className="text-base md:text-lg font-bold text-gray-900 leading-snug break-words">
                         Niveau {lvl} - {mod.title}
                       </h3>
                       <p className="text-sm text-gray-600 mt-1 mb-3 line-clamp-2 sm:line-clamp-none">
@@ -412,7 +412,7 @@ export default function Dashboard() {
                       <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-800">
                         Niveau validé
                       </p>
-                      <h3 className="text-sm md:text-base font-bold text-gray-900 leading-tight">
+                      <h3 className="text-sm md:text-base font-bold text-gray-900 leading-tight break-words">
                         Niveau {lvl} - {mod.title}
                       </h3>
                     </div>
