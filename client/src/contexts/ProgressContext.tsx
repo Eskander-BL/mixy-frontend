@@ -33,6 +33,11 @@ function normalizeApiCompleted(raw: unknown): number[] {
     .filter((n): n is number => typeof n === "number" && Number.isFinite(n) && n >= 1);
 }
 
+function normalizeApiCurrentLevel(raw: unknown): number | null {
+  if (typeof raw !== "number" || !Number.isFinite(raw) || raw < 1) return null;
+  return Math.floor(raw);
+}
+
 /** Premier niveau pas encore validé (quiz ≥ 50 %, etc.) : c’est le seul « niveau actif ». */
 export function getActiveLevelFromCompleted(completed: number[], totalLevels: number): number {
   for (let l = 1; l <= totalLevels; l++) {
@@ -98,11 +103,24 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   const hasActiveSubscription = subscriptionQuery.data?.isActive === true;
 
   const applyMergedProgress = useCallback(
-    (apiData?: { completedLevels?: unknown } | null) => {
+    (apiData?: { completedLevels?: unknown; currentLevel?: unknown; lastCompletedLevel?: unknown } | null) => {
       const api = apiData ?? getProgressQuery.data;
       const apiCompleted = normalizeApiCompleted(api?.completedLevels);
+      const apiCurrentLevel = normalizeApiCurrentLevel(api?.currentLevel);
+      const apiLastCompleted =
+        typeof api?.lastCompletedLevel === "number" && Number.isFinite(api.lastCompletedLevel)
+          ? Math.max(0, Math.floor(api.lastCompletedLevel))
+          : null;
+      const apiCompletedFromProgress =
+        apiLastCompleted && apiLastCompleted > 0
+          ? Array.from({ length: apiLastCompleted }, (_, i) => i + 1)
+          : apiCurrentLevel && apiCurrentLevel > 1
+            ? Array.from({ length: apiCurrentLevel - 1 }, (_, i) => i + 1)
+            : [];
       const localCompleted = readLocalCompletedLevels();
-      const merged = [...new Set([...apiCompleted, ...localCompleted])].sort((a, b) => a - b);
+      const merged = [...new Set([...apiCompleted, ...apiCompletedFromProgress, ...localCompleted])].sort(
+        (a, b) => a - b
+      );
       setCompletedLevels(merged);
       setCurrentLevel(getActiveLevelFromCompleted(merged, TOTAL_LEVELS));
     },
