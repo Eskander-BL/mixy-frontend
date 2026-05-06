@@ -547,7 +547,7 @@ export default function Onboarding() {
                 Quel matériel as-tu ?
               </h1>
               <p className="text-gray-600">
-                Le <strong>niveau 1</strong> change selon ta table (parcours FLX4 ou parcours FLX3 / XDJ-RX). Du <strong>niveau 2</strong> à la fin, tout le monde suit les mêmes chapitres ; les encarts restent adaptés à ton setup.
+                Le <strong>niveau 1</strong> change selon ta table (parcours FLX4 ou parcours FLX3 / XDJ-RX). Du <strong>niveau 2</strong> à la fin, la méthode reste commune mais les objectifs montent en difficulté, avec des conseils adaptés à ton setup.
               </p>
             </div>
 
@@ -784,7 +784,7 @@ export default function Onboarding() {
                   </p>
                 )}
               <p className="text-xs text-gray-600 text-center leading-relaxed">
-                Le <strong>niveau 1</strong> est celui de <strong>ta table</strong> (FLX4 ou parcours FLX3 / XDJ-RX) ; du niveau 2 à la fin, tu suis les <strong>mêmes chapitres</strong> que toute la communauté, avec des encarts selon ton matériel.
+                Le <strong>niveau 1</strong> est celui de <strong>ta table</strong> (FLX4 ou parcours FLX3 / XDJ-RX) ; ensuite, tu suis une progression commune par compétences avec des recommandations adaptées à ton matériel.
               </p>
 
             </div>

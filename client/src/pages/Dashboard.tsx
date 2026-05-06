@@ -271,7 +271,8 @@ export default function Dashboard() {
                     {learningProfile.targetDeck != null ? (
                       <>
                         {" "}
-                        ({targetDeckLabelFr(learningProfile.targetDeck)}) — les encarts te rappellent les bons réglages.
+                        ({targetDeckLabelFr(learningProfile.targetDeck)}) — on adapte les conseils pratiques
+                        (boutons, réglages, workflow Rekordbox) à ton matériel.
                       </>
                     ) : null}
                   </>
@@ -280,10 +281,12 @@ export default function Dashboard() {
                 {learningProfile.equipment === "other" && "Setup « autre » : les fondamentaux s’appliquent à tout DJ logiciel."}
               </p>
               <p className="text-xs text-gray-600 mt-1 border-t border-primary/10 pt-2">
-                <strong>{courseTrackLabelFr(courseTrack)}</strong> — à partir du niveau 2, les chapitres sont les mêmes pour toute la communauté.
+                <strong>{courseTrackLabelFr(courseTrack)}</strong> — à partir du niveau 2, la méthode est commune
+                (fondamentaux DJ), mais la difficulté et les objectifs montent à chaque niveau.
               </p>
               <p className="text-xs text-gray-600 mt-1">
-                Repasse par l’onboarding si tu changes de table — on mettra à jour tes encarts.
+                Tu changes de setup ? Relance l’onboarding : on mettra à jour les recommandations de cours
+                et d’exercices.
               </p>
             </div>
           )}
@@ -373,7 +376,7 @@ export default function Dashboard() {
                             className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 text-sm"
                           >
                             <Play size={14} className="mr-1.5" />
-                            Commencer l&apos;exercice
+                            Commencer l'exercice
                           </Button>
                         )}
                         {lvl > 1 && !hasActiveSubscription ? (

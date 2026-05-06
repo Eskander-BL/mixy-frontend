@@ -25,7 +25,7 @@ export default function Home() {
       <div className="max-w-2xl text-center">
         <img src={logo} alt="Mixy Logo" className="h-20 w-auto mx-auto mb-4" />
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-3">
-          Apprends le mix &amp; le DJ avec Mixy
+          Apprends le mix & le DJ avec Mixy
         </h1>
         <p className="text-xl text-gray-600 mb-8">
           Apprends à mixer comme un pro. Pas de théorie ennuyeuse, juste de la pratique.

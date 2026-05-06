@@ -535,7 +535,7 @@ export default function QuizPage() {
                   <strong>Prochaine étape :</strong>{" "}
                   {hasActiveSubscription
                     ? "enchaîner avec le cours du niveau suivant."
-                    : "débloquer l&apos;accès au niveau suivant (abonnement)."}
+                    : "débloquer l'accès au niveau suivant (abonnement)."}
                 </p>
               </div>
             )}

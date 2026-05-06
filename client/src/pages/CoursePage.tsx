@@ -3,7 +3,12 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
-import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
+import {
+  getModuleByLevel,
+  getPreviousLevelRecap,
+  getRecommendedVideosForLevel,
+  getSlideFromModule,
+} from "@/lib/courses-progressive";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
 import { scrollAppMainToTop } from "@/lib/utils";
 import { getLearningCallout } from "@/lib/learning-path-callouts";
@@ -66,6 +71,8 @@ export default function CoursePage() {
   const isLastSlide = currentSlide === module.totalSlides;
   const progressPercentage = (currentSlide / module.totalSlides) * 100;
   const pathCallout = getLearningCallout(learningProfile, level, currentSlide);
+  const previousRecap = currentSlide === 1 ? getPreviousLevelRecap(level, courseTrack) : null;
+  const recommendedVideos = getRecommendedVideosForLevel(level, courseTrack);
 
   const handleNextSlide = () => {
     if (!isLastSlide) {
@@ -118,18 +125,62 @@ export default function CoursePage() {
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 md:gap-6 items-start">
           <aside className="lg:col-span-1">
-            <Card className="p-4 md:p-5 bg-white border border-primary/10 shadow-sm lg:sticky lg:top-24 rounded-xl">
-              <p className="text-xs uppercase tracking-wide text-primary font-semibold mb-3">Infos du module</p>
-              <p className="text-sm text-gray-800 leading-relaxed">
-                <strong>Module:</strong> {module.title}
-              </p>
-              <p className="text-sm text-gray-800 mt-3">
-                <strong>Durée totale:</strong> {module.estimatedDuration}
-              </p>
-              <p className="text-sm text-gray-800 mt-3">
-                <strong>Progression:</strong> {currentSlide} / {module.totalSlides} slides
-              </p>
-            </Card>
+            <div className="space-y-4 lg:sticky lg:top-24">
+              <Card className="p-4 md:p-5 bg-white border border-primary/10 shadow-sm rounded-xl">
+                <p className="text-xs uppercase tracking-wide text-primary font-semibold mb-3">Infos du module</p>
+                <p className="text-sm text-gray-800 leading-relaxed">
+                  <strong>Module:</strong> {module.title}
+                </p>
+                <p className="text-sm text-gray-800 mt-3">
+                  <strong>Durée totale:</strong> {module.estimatedDuration}
+                </p>
+                <p className="text-sm text-gray-800 mt-3">
+                  <strong>Progression:</strong> {currentSlide} / {module.totalSlides} slides
+                </p>
+              </Card>
+
+              {previousRecap ? (
+                <Card className="p-4 md:p-5 bg-blue-50 border border-blue-100 shadow-sm rounded-xl">
+                  <p className="text-xs uppercase tracking-wide text-blue-700 font-semibold mb-2">
+                    Récap niveau précédent
+                  </p>
+                  <p className="text-sm text-blue-900 font-semibold">
+                    Niveau {previousRecap.level}: {previousRecap.title}
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {previousRecap.points.map((point, idx) => (
+                      <li key={idx} className="text-sm text-blue-900/90 flex gap-2">
+                        <span className="font-bold text-blue-700">•</span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              ) : null}
+
+              {recommendedVideos.length > 0 ? (
+                <Card className="p-4 md:p-5 bg-amber-50 border border-amber-100 shadow-sm rounded-xl">
+                  <p className="text-xs uppercase tracking-wide text-amber-700 font-semibold mb-2">
+                    Vidéos recommandées
+                  </p>
+                  <ul className="space-y-3">
+                    {recommendedVideos.map((video) => (
+                      <li key={video.url} className="text-sm">
+                        <a
+                          href={video.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-semibold text-amber-900 hover:underline"
+                        >
+                          {video.title}
+                        </a>
+                        <p className="text-amber-900/80 mt-1">{video.reason}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              ) : null}
+            </div>
           </aside>
           <div className="lg:col-span-3 space-y-8">
             {/* Video */}

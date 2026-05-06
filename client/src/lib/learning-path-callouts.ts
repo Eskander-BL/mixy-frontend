@@ -53,7 +53,7 @@ export function getLearningCallout(
         title: deckFocusTitle(equipment, "DDJ-FLX3"),
         lines: [
           "La DDJ-FLX3 monte d'un cran : Smart CFX, usage plus « club », plus de marge dans Rekordbox (jusqu'à 4 decks en écran selon tes réglages).",
-          "Même fondamentaux qu'avec la FLX4 : BPM, EQ, phrasing — les noms et dispositions changent un peu ; les encarts te guident.",
+          "Même fondamentaux qu'avec la FLX4 : BPM, EQ, phrasing — les noms et dispositions changent un peu ; les rappels te guident étape par étape.",
           "Sans table, prépare Hot Cues et playlists dans Rekordbox : tu seras déjà avancé le jour où tu branches la bête.",
         ],
         links: [
@@ -79,11 +79,11 @@ export function getLearningCallout(
       };
     }
     return {
-      title: equipment === "none" ? "Pas encore de table ?" : "Choisis une cible pour des encarts plus précis",
+      title: equipment === "none" ? "Pas encore de table ?" : "Choisis une cible pour des conseils plus précis",
       lines: [
         "Beaucoup débutent en FLX4 (budget plus léger, très pédagogique) ; la FLX3 vise plus haut si tu veux garder ta table longtemps.",
         "Un XDJ-RX, c'est un investissement intermédiaire / pro : tout-en-un, pratique si tu n'aimes pas le laptop sur le plateau.",
-        "Repasse par l'onboarding et choisis FLX4, FLX3 ou XDJ-RX — les encarts suivront ; tu peux changer plus tard.",
+        "Repasse par l'onboarding et choisis FLX4, FLX3 ou XDJ-RX — les recommandations suivront ; tu peux changer plus tard.",
       ],
       links: [{ label: "Site Pioneer DJ (comparer les gammes)", href: "https://www.pioneerdj.com/fr-fr/" }],
     };

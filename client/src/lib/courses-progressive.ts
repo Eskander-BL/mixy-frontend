@@ -120,7 +120,7 @@ Même logique générale que sur d’autres contrôleurs Pioneer : **2 decks**, 
       slideNumber: 2,
       title: "Brancher la FLX4 : USB, Master, casque",
       subtitle: "Enceintes actives, gain propre, écoute DJ — ports USB parfois doubles",
-      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
       videoDescription:
         "Tour complet débutant sur la DDJ-FLX4 : vue matérielle, faders, branchements — en anglais mais très visuel ; active les sous-titres auto.",
       content: `**Chaîne audio simple (répète ce schéma mentalement)**
@@ -355,7 +355,7 @@ export const level1ModuleFlx3Xdj: CourseModule = {
   level: 1,
   title: "Les Bases du DJing — DDJ-FLX3 & XDJ-RX",
   description:
-    "Niveau 1 distinct du parcours FLX4 : la FLX3 déploie plus de boutons (Smart CFX, sections pad) ; l’XDJ-RX se pilote comme un tout-en-un USB (Export Rekordbox). Les niveaux 2 à fin sont communs avec l’autre parcours.",
+    "Niveau 1 distinct du parcours FLX4 : la FLX3 déploie plus de boutons (Smart CFX, sections pad) ; l’XDJ-RX se pilote comme un tout-en-un USB (Export Rekordbox). Ensuite, la méthode pédagogique est partagée, avec une progression de difficulté et des exercices adaptés au setup.",
   userLevels: ["beginner", "intermediate", "advanced"],
   totalSlides: 5,
   estimatedDuration: "40 minutes",
@@ -424,7 +424,7 @@ export const level1ModuleFlx3Xdj: CourseModule = {
       slideNumber: 2,
       title: "Brancher la FLX3 ou l’XDJ-RX",
       subtitle: "FLX3 : USB + casque + master — XDJ : clés USB + enceintes + casque",
-      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
       videoDescription:
         "Vidéo exemple contrôleur FLX (visuel ports) — pour XDJ-RX, ajoute l’étape « playlists sur clé USB » avant d’allumer.",
       content: `**DDJ-FLX3 (avec ordinateur)**
@@ -527,7 +527,7 @@ export const level2Module: CourseModule = {
       slideNumber: 1,
       title: "Les 3 Bandes de Frequences",
       subtitle: "Comprends ce que tu entends vraiment",
-      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
       videoDescription:
         "Decouvre les trois parties d'une chanson que tu peux controler avec l'EQ.",
       content: `**EQ sur ta FLX / Rekordbox**
@@ -584,7 +584,7 @@ Pourquoi C'est Important:
       slideNumber: 2,
       title: "Comment Utiliser l'EQ pour Mixer",
       subtitle: "La technique de base pour des transitions fluides",
-      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
       videoDescription:
         "Vois comment un DJ utilise l'EQ pour melanger deux chansons sans saturation.",
       content: `Le Probleme:
@@ -649,7 +649,7 @@ Important:
       slideNumber: 3,
       title: "L'EQ en Action: Cas Reels",
       subtitle: "Comment les DJs professionnels utilisent l'EQ",
-      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
       videoDescription:
         "Regarde comment les meilleurs DJs utilisent l'EQ pour creer des transitions parfaites.",
       content: `Cas Reel 1: Deux Chansons House Lourdes
@@ -737,7 +737,7 @@ export const level3Module: CourseModule = {
       slideNumber: 1,
       title: "Les 3 Phases d'une Transition",
       subtitle: "Comprends la structure d'une bonne transition",
-      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
       videoDescription:
         "Decouvre les 3 phases que tu dois maitriser pour une transition parfaite.",
       content: `Une Bonne Transition c'est Invisible
@@ -974,7 +974,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Loops, FX et timing",
         subtitle: "Créer une transition expressive sans perdre le groove",
-        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+        videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
         videoDescription: "Introduction rapide aux techniques avancées de performance.",
         content:
           "Dans ce niveau, tu apprends à manipuler des loops et des effets pour prolonger les transitions et créer des moments marquants.",
@@ -1006,7 +1006,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Signaux de la piste",
         subtitle: "Observer pour mieux décider",
-        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+        videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
         videoDescription: "Comment choisir le prochain morceau en observant la salle.",
         content:
           "Tu vas apprendre à reconnaître les signes d'engagement et à ajuster ton énergie musicale selon la réaction du public.",
@@ -1037,7 +1037,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Architecture d'un set",
         subtitle: "Intro, montée, pic, respiration",
-        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+        videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
         videoDescription: "Les blocs clés pour structurer une session efficace.",
         content:
           "Ce niveau te guide pour structurer ton set avec une logique claire et conserver l'attention du public sur toute la durée.",
@@ -1069,7 +1069,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Routine live",
         subtitle: "Rester solide sous pression",
-        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+        videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
         videoDescription: "Préparer et exécuter une performance club maîtrisée.",
         content:
           "Tu vas cadrer ta routine live: préparation, check rapide, gestion du stress et maintien de la qualité sonore.",
@@ -1100,7 +1100,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Ton style DJ",
         subtitle: "Construire une identité claire",
-        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+        videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
         videoDescription: "Transformer ta technique en identité de performance.",
         content:
           "Dernier niveau: tu alignes technique, sélection musicale et storytelling pour créer une identité cohérente.",
@@ -1141,4 +1141,113 @@ export function getSlideFromModule(
   const module = getModuleByLevel(level, track);
   if (!module) return null;
   return module.slides.find((s) => s.slideNumber === slideNumber) ?? null;
+}
+
+export type RecommendedLearningVideo = {
+  title: string;
+  url: string;
+  reason: string;
+};
+
+const LEVEL_VIDEO_PICKS_COMMON: Record<number, RecommendedLearningVideo[]> = {
+  2: [
+    {
+      title: "EQ Mixing Basics (house transitions)",
+      url: "https://www.youtube.com/watch?v=IVMFK0iNqQE",
+      reason: "Travail concret des EQ et du passage d'un morceau à l'autre.",
+    },
+    {
+      title: "Beatmatching and phrasing workflow",
+      url: "https://www.youtube.com/watch?v=25JAaIdJwnM",
+      reason: "Relie timing, pitch et structure de phrase musicale.",
+    },
+  ],
+  3: [
+    {
+      title: "Transition structure in real sets",
+      url: "https://www.youtube.com/watch?v=IVMFK0iNqQE",
+      reason: "Montre préparation, mix et sortie propre en situation.",
+    },
+    {
+      title: "Manual tempo correction drills",
+      url: "https://www.youtube.com/watch?v=25JAaIdJwnM",
+      reason: "Aide à corriger un léger décalage sans casser le groove.",
+    },
+  ],
+  4: [
+    {
+      title: "Harmonic mixing fundamentals",
+      url: "https://www.youtube.com/watch?v=H31hjTx3bXY",
+      reason: "Introduction simple des clés musicales et compatibilités.",
+    },
+  ],
+  5: [
+    {
+      title: "How to plan energy in a DJ set",
+      url: "https://www.youtube.com/watch?v=IVMFK0iNqQE",
+      reason: "Aide à construire une vraie progression de set.",
+    },
+  ],
+};
+
+const LEVEL_VIDEO_PICKS_BY_TRACK: Partial<Record<CourseTrackId, Record<number, RecommendedLearningVideo[]>>> = {
+  flx4: {
+    1: [
+      {
+        title: "DDJ-FLX4 full beginner walkthrough",
+        url: "https://www.youtube.com/watch?v=fa3sLTn0Wek",
+        reason: "Repère les zones de la FLX4 et les premiers gestes.",
+      },
+      {
+        title: "Rekordbox performance mode essentials",
+        url: "https://www.youtube.com/watch?v=H31hjTx3bXY",
+        reason: "Le plus important sur FLX4: maîtriser Rekordbox.",
+      },
+    ],
+    2: [
+      {
+        title: "Rekordbox cueing and phrase prep",
+        url: "https://www.youtube.com/watch?v=EIUd_xdBYGs",
+        reason: "Préparer les points de repère avant d'utiliser l'EQ.",
+      },
+    ],
+  },
+  flx3_xdj: {
+    1: [
+      {
+        title: "Controller/XDJ startup workflow",
+        url: "https://www.youtube.com/watch?v=fa3sLTn0Wek",
+        reason: "Base utile pour contrôleur et logique club.",
+      },
+      {
+        title: "Rekordbox export preparation",
+        url: "https://www.youtube.com/watch?v=H31hjTx3bXY",
+        reason: "Préparer des playlists et cues pour une pratique régulière.",
+      },
+    ],
+  },
+};
+
+export function getRecommendedVideosForLevel(
+  level: number,
+  track: CourseTrackId,
+): RecommendedLearningVideo[] {
+  const trackSpecific = LEVEL_VIDEO_PICKS_BY_TRACK[track]?.[level] ?? [];
+  const common = LEVEL_VIDEO_PICKS_COMMON[level] ?? [];
+  return [...trackSpecific, ...common].slice(0, 3);
+}
+
+export function getPreviousLevelRecap(
+  level: number,
+  track: CourseTrackId,
+): { level: number; title: string; points: string[] } | null {
+  if (level <= 1) return null;
+  const previous = getModuleByLevel(level - 1, track);
+  if (!previous) return null;
+  const points = previous.slides.slice(0, 3).map((s) => s.keyTakeaway);
+  return {
+    level: previous.level,
+    title: previous.title,
+    points,
+  };
 }
