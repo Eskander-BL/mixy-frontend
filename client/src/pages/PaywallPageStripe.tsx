@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useRoute } from "wouter";
+import { useLocation, useRoute, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check, Loader2 } from "lucide-react";
@@ -10,6 +10,8 @@ export default function PaywallPageStripe() {
   const [, params] = useRoute("/paywall/:level");
   const [, navigate] = useLocation();
   const [loading, setLoading] = useState(false);
+  const [consentImmediate, setConsentImmediate] = useState(false);
+  const [consentError, setConsentError] = useState<string | null>(null);
   const { t } = useLanguageContext();
 
   const level = params?.level ? parseInt(params.level) : 1;
@@ -27,6 +29,12 @@ export default function PaywallPageStripe() {
       console.error("User ID not found");
       return;
     }
+
+    if (!consentImmediate) {
+      setConsentError(t("paywall.consentImmediateRequired") as string);
+      return;
+    }
+    setConsentError(null);
 
     setLoading(true);
 
@@ -128,6 +136,30 @@ export default function PaywallPageStripe() {
           </div>
         </div>
 
+        <label className="flex items-start gap-2 mb-3 text-xs text-gray-700 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={consentImmediate}
+            onChange={(e) => {
+              setConsentImmediate(e.target.checked);
+              if (e.target.checked) setConsentError(null);
+            }}
+            className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-primary"
+            aria-describedby={consentError ? "consent-immediate-error" : undefined}
+            aria-invalid={consentError ? "true" : undefined}
+          />
+          <span>{t("paywall.consentImmediateLabel")}</span>
+        </label>
+        {consentError && (
+          <p
+            id="consent-immediate-error"
+            role="alert"
+            className="text-xs text-rose-600 mb-3"
+          >
+            {consentError}
+          </p>
+        )}
+
         <Button
           onClick={handlePayment}
           disabled={loading || !userId}
@@ -154,6 +186,13 @@ export default function PaywallPageStripe() {
 
         <p className="text-xs text-gray-500 text-center mt-4">
           {t("paywall.paymentMethod")}
+        </p>
+        <p className="text-[11px] text-gray-500 text-center mt-1">
+          {t("paywall.legalBeforeSubscribe")}
+          <Link href="/legal" className="text-primary underline underline-offset-2">
+            {t("paywall.legalLinkLabel")}
+          </Link>
+          .
         </p>
       </Card>
     </div>

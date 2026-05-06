@@ -9,7 +9,7 @@ export default function LegalNoticePage() {
   useDocumentTitle("Mentions légales & CGU");
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 to-white">
+    <main className="min-h-screen bg-gradient-to-b from-amber-50/50 to-white">
       <div className="max-w-3xl mx-auto px-4 py-10 md:py-14">
         <div className="mb-8">
           <Button variant="outline" size="sm" asChild>
@@ -68,6 +68,30 @@ export default function LegalNoticePage() {
         </section>
 
         <section className="space-y-4 text-sm text-gray-800 leading-relaxed mb-10">
+          <h2 className="text-lg font-semibold text-gray-900">
+            3 bis. Droit de rétractation et exécution immédiate du contrat
+          </h2>
+          <p>
+            Mixy fournit un contenu numérique non livré sur support matériel (cours, quiz et outils
+            pédagogiques en ligne). Conformément à <strong>l’article L221-28, 13° du Code de la
+            consommation</strong>, le droit de rétractation de 14 jours ne s’applique pas dès lors que
+            l’exécution du contrat a commencé après ton accord exprès et ta renonciation expresse à
+            ce droit.
+          </p>
+          <p>
+            Au moment de la souscription, tu coches une case dédiée par laquelle tu reconnais que
+            l’accès au contenu démarre immédiatement après le paiement et tu renonces expressément
+            à ton droit de rétractation. Sans cet accord exprès, l’abonnement ne peut pas être
+            activé.
+          </p>
+          <p>
+            Tu peux à tout moment <strong>désactiver le renouvellement automatique</strong> depuis
+            ton tableau de bord (rubrique « Abonnement ») : aucun nouveau prélèvement ne sera
+            effectué et tu conserves l’accès jusqu’au terme de la période déjà payée.
+          </p>
+        </section>
+
+        <section className="space-y-4 text-sm text-gray-800 leading-relaxed mb-10">
           <h2 className="text-lg font-semibold text-gray-900">4. Propriété intellectuelle</h2>
           <p>
             Les contenus Mixy (textes, visuels, structure, marque) sont protégés. Toute reproduction ou diffusion non
@@ -110,10 +134,10 @@ export default function LegalNoticePage() {
         </section>
 
         <p className="text-xs text-gray-500">
-          Dernière mise à jour : 29 avril 2026 — document cadre ; faire valider par un conseil avant mise en pub
+          Dernière mise à jour : 6 mai 2026 — document cadre ; faire valider par un conseil avant mise en pub
           payante importante.
         </p>
       </div>
-    </div>
+    </main>
   );
 }

@@ -135,6 +135,9 @@ export const translations = {
         "Cancel anytime: we stop renewals only — you keep full access until the end of your paid month. No extra cancellation fee.",
       legalBeforeSubscribe: "By paying, you accept the ",
       legalLinkLabel: "terms and legal notice",
+      consentImmediateLabel:
+        "I expressly accept that access to the content starts immediately upon payment and I expressly waive my 14-day right of withdrawal for digital content (Art. L221-28 13° of the French Consumer Code).",
+      consentImmediateRequired: "Please tick the consent box to proceed to payment.",
       alreadySubscribed: "You're already subscribed!",
       nextLevel: "Go to Next Level",
     },
@@ -316,6 +319,10 @@ export const translations = {
         "Annulation à tout moment : on arrête seulement les renouvellements — tu gardes l’accès jusqu’à la fin du mois déjà payé, sans frais d’annulation.",
       legalBeforeSubscribe: "En payant, tu acceptes les ",
       legalLinkLabel: "CGU et mentions légales",
+      consentImmediateLabel:
+        "J'accepte expressément que l'accès au contenu démarre immédiatement après le paiement et je renonce expressément à mon droit de rétractation de 14 jours pour ce contenu numérique (art. L221-28 13° du Code de la consommation).",
+      consentImmediateRequired:
+        "Coche la case de consentement pour pouvoir passer au paiement.",
       alreadySubscribed: "Vous êtes déjà abonné!",
       nextLevel: "Aller au Niveau Suivant",
     },
