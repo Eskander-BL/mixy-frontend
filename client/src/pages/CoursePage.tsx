@@ -3,6 +3,7 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
+import { brand } from "@/assets/brand-assets";
 import {
   getModuleByLevel,
   getPreviousLevelRecap,
@@ -252,6 +253,12 @@ export default function CoursePage() {
                         className="w-full max-h-80 object-contain bg-white"
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
+                        onError={(e) => {
+                          const img = e.currentTarget;
+                          if (img.dataset.fallbackApplied === "true") return;
+                          img.dataset.fallbackApplied = "true";
+                          img.src = brand.mixyReadCrop;
+                        }}
                       />
                       {fig.caption ? (
                         <figcaption className="px-3 py-2 text-xs text-muted-foreground border-t bg-muted/20">
