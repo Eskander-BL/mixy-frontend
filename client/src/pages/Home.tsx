@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 import { brand } from "@/assets/brand-assets";
 
 export default function Home() {
@@ -21,9 +21,17 @@ export default function Home() {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30 flex items-center justify-center p-4">
+    <main className="min-h-screen bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30 flex items-center justify-center p-4">
       <div className="max-w-2xl text-center">
-        <img src={logo} alt="Mixy Logo" className="h-20 w-auto mx-auto mb-4" />
+        <img
+          src={logo}
+          alt="Mixy"
+          width={404}
+          height={140}
+          className="h-20 w-auto mx-auto mb-4"
+          fetchPriority="high"
+          decoding="async"
+        />
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-3">
           Apprends le mix & le DJ avec Mixy
         </h1>
@@ -37,11 +45,15 @@ export default function Home() {
               <img
                 src={brand.mixyReadCrop}
                 alt=""
+                width={184}
+                height={184}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full max-h-[82%] max-w-[82%] object-contain object-center select-none pointer-events-none"
                 aria-hidden
               />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">10 Niveaux</h3>
+            <h2 className="font-semibold text-gray-900 mb-2">10 Niveaux</h2>
             <p className="text-sm text-gray-600">
               Du débutant à la maîtrise complète
             </p>
@@ -52,11 +64,15 @@ export default function Home() {
               <img
                 src={brand.quizzMixy}
                 alt=""
+                width={184}
+                height={184}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-contain object-center select-none pointer-events-none"
                 aria-hidden
               />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Quiz Interactifs</h3>
+            <h2 className="font-semibold text-gray-900 mb-2">Quiz Interactifs</h2>
             <p className="text-sm text-gray-600">
               Valide tes connaissances à chaque niveau
             </p>
@@ -67,11 +83,15 @@ export default function Home() {
               <img
                 src={brand.chatBot}
                 alt=""
+                width={184}
+                height={184}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-contain object-center select-none pointer-events-none"
                 aria-hidden
               />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Coach IA</h3>
+            <h2 className="font-semibold text-gray-900 mb-2">Coach IA</h2>
             <p className="text-sm text-gray-600">
               Réponds à tes questions 24/7
             </p>
@@ -91,6 +111,6 @@ export default function Home() {
           </Link>
         </p>
       </div>
-    </div>
+    </main>
   );
 }

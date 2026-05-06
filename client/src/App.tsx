@@ -1,24 +1,36 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { ProgressProvider, useProgress } from "./contexts/ProgressContext";
 import Sidebar from "./components/Sidebar";
-import FloatingAICoach from "./components/FloatingAICoach";
 import Home from "./pages/Home";
-import Onboarding from "./pages/Onboarding";
-import Dashboard from "./pages/Dashboard";
-import CoursePage from "./pages/CoursePage";
-import QuizPage from "./pages/QuizPage";
-import PaywallPage from "./pages/PaywallPage";
-import LoginPage from "./pages/LoginPage";
-import LegalNoticePage from "./pages/LegalNoticePage";
-import { useState } from "react";
-import { Menu } from "lucide-react";
+import { lazy, Suspense, useState } from "react";
+import { Loader2, Menu } from "lucide-react";
 import { Button } from "./components/ui/button";
+
+// Lazy-load les pages secondaires : la home et l'onboarding doivent rester ultra rapides
+// au premier rendu (LCP / pub d'acquisition), le reste se charge à la navigation.
+const Onboarding = lazy(() => import("./pages/Onboarding"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const CoursePage = lazy(() => import("./pages/CoursePage"));
+const QuizPage = lazy(() => import("./pages/QuizPage"));
+const PaywallPage = lazy(() => import("./pages/PaywallPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const LegalNoticePage = lazy(() => import("./pages/LegalNoticePage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const FloatingAICoach = lazy(() => import("./components/FloatingAICoach"));
+
+function PageFallback() {
+  return (
+    <div className="flex items-center justify-center min-h-[40vh] text-gray-500">
+      <Loader2 className="w-6 h-6 animate-spin" aria-hidden />
+      <span className="sr-only">Chargement…</span>
+    </div>
+  );
+}
 
 function AppContent() {
   const { currentLevel, completedLevels, hasActiveSubscription, userLanguage, courseTrack } = useProgress();
@@ -54,24 +66,40 @@ function AppContent() {
             Niveaux
           </Button>
         </div>
-        <Switch>
-          <Route path={"/dashboard"} component={Dashboard} />
-          <Route path={"/course/:level"} component={CoursePage} />
-          <Route path={"/quiz/:level"} component={QuizPage} />
-          <Route path={"/paywall/:level"} component={PaywallPage} />
-          <Route path={".*"} component={NotFound} /> {/* Fallback for other routes with sidebar */}
-        </Switch>
+        <Suspense fallback={<PageFallback />}>
+          <Switch>
+            <Route path={"/dashboard"} component={Dashboard} />
+            <Route path={"/course/:level"} component={CoursePage} />
+            <Route path={"/quiz/:level"} component={QuizPage} />
+            <Route path={"/paywall/:level"} component={PaywallPage} />
+            <Route path={".*"} component={NotFound} /> {/* Fallback for other routes with sidebar */}
+          </Switch>
+        </Suspense>
       </main>
-      <FloatingAICoach />
+      <Suspense fallback={null}>
+        <FloatingAICoach />
+      </Suspense>
     </div>
   );
 
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/onboarding"} component={Onboarding} />
-      <Route path={"/legal"} component={LegalNoticePage} />
-      <Route path={"/login"} component={LoginPage} />
+      <Route path={"/onboarding"}>
+        <Suspense fallback={<PageFallback />}>
+          <Onboarding />
+        </Suspense>
+      </Route>
+      <Route path={"/legal"}>
+        <Suspense fallback={<PageFallback />}>
+          <LegalNoticePage />
+        </Suspense>
+      </Route>
+      <Route path={"/login"}>
+        <Suspense fallback={<PageFallback />}>
+          <LoginPage />
+        </Suspense>
+      </Route>
       <Route path={".*"}>{renderAppContent()}</Route>
     </Switch>
   );

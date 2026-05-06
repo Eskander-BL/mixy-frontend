@@ -261,7 +261,7 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50/70 via-white to-orange-50/50 flex items-center justify-center p-3 md:p-4">
+    <main className="min-h-screen bg-gradient-to-br from-amber-50/70 via-white to-orange-50/50 flex items-center justify-center p-3 md:p-4">
       <Card className="w-full max-w-md p-5 md:p-8 border-0 shadow-xl rounded-2xl">
         {/* Progress Bar */}
         {step !== "summary" && (
@@ -816,6 +816,6 @@ export default function Onboarding() {
           </div>
         )}
       </Card>
-    </div>
+    </main>
   );
 }

@@ -193,12 +193,15 @@ Sitemap: ${origin}/sitemap.xml
   };
 }
 
+const isProd = process.env.NODE_ENV === "production";
+
+// Les plugins Manus (runtime + debug collector) injectent un gros script inline (~370 KB)
+// utile en dev mais inutile et ralentissant en prod (LCP, taille HTML).
+// jsxLocPlugin est aussi un outil de dev (overlay « ouvrir dans Cursor »).
 const plugins = [
   react(),
   tailwindcss(),
-  jsxLocPlugin(),
-  vitePluginManusRuntime(),
-  vitePluginManusDebugCollector(),
+  ...(isProd ? [] : [jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()]),
   seoBuildPlugin(),
 ];
 
@@ -217,6 +220,43 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    chunkSizeWarningLimit: 1000,
+    // N'auto-precharge que les chunks atteignables depuis l'entrée. Le chunk markdown (912 KB,
+    // KaTeX + remark + streamdown) est lazy-loaded par le coach IA / les cours premium ;
+    // on évite ainsi qu'il bloque le LCP de la home.
+    modulePreload: {
+      polyfill: false,
+      resolveDependencies: (_filename, deps) =>
+        deps.filter((dep) => !dep.includes("markdown-")),
+    },
+    rollupOptions: {
+      output: {
+        // Stratégie minimale : isole React (gros, partagé) et le bloc markdown/katex (énorme,
+        // utilisé uniquement par le Coach IA). Le reste suit le code-splitting auto par route.
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return undefined;
+          if (
+            id.includes("node_modules/react/") ||
+            id.includes("node_modules/react-dom/") ||
+            id.includes("node_modules/scheduler/")
+          ) {
+            return "react";
+          }
+          if (
+            id.includes("node_modules/streamdown") ||
+            id.includes("node_modules/katex") ||
+            id.includes("node_modules/remark-") ||
+            id.includes("node_modules/rehype-") ||
+            id.includes("node_modules/micromark") ||
+            id.includes("node_modules/mdast-") ||
+            id.includes("node_modules/hast-")
+          ) {
+            return "markdown";
+          }
+          return undefined;
+        },
+      },
+    },
   },
   server: {
     host: true,

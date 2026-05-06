@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.webp";
 import { brand } from "@/assets/brand-assets";
 import { useProgress } from "@/contexts/ProgressContext";
 import { useLocation } from "wouter";
