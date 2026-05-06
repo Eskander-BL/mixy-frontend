@@ -5,7 +5,7 @@ import { useProgress } from "@/contexts/ProgressContext";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, Lock, Mail, Play, Undo2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, CreditCard, Lock, Mail, Play, Undo2 } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { getAllModules } from "@/lib/courses-progressive";
 import {
@@ -36,6 +36,7 @@ export default function Dashboard() {
   const { currentLevel: activeLevel, completedLevels, hasActiveSubscription, learningProfile, courseTrack, refreshProgress } = useProgress();
   const [loading, setLoading] = useState(true);
   const [showContactDialog, setShowContactDialog] = useState(false);
+  const [showBillingDialog, setShowBillingDialog] = useState(false);
   const [contactEmail, setContactEmail] = useState("");
   const [contactSubject, setContactSubject] = useState<"Paiement" | "Bug technique" | "Question DJ" | "Autre">("Bug technique");
   const [contactMessage, setContactMessage] = useState("");
@@ -242,6 +243,16 @@ export default function Dashboard() {
               >
                 <Mail className="size-4 text-primary" />
               </button>
+              {hasActiveSubscription && userIdNum > 0 ? (
+                <button
+                  type="button"
+                  className="inline-flex size-9 shrink-0 items-center justify-center rounded-[5px] border border-gray-200 bg-white text-gray-800 hover:bg-gray-50/80 transition-colors"
+                  onClick={() => setShowBillingDialog(true)}
+                  aria-label="Paiement"
+                >
+                  <CreditCard className="size-4 text-primary" />
+                </button>
+              ) : null}
             </div>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Ton Parcours Mixy</h1>
@@ -307,10 +318,6 @@ export default function Dashboard() {
               ></div>
             </div>
           </div>
-
-          {hasActiveSubscription && userIdNum > 0 ? (
-            <SubscriptionManageCard userId={userIdNum} onChanged={refreshProgress} />
-          ) : null}
 
           {needCompleteAccount ? (
             <div id="inscription-mixy" className="mt-6 scroll-mt-4">
@@ -474,6 +481,22 @@ export default function Dashboard() {
           })}
         </div>
       </div>
+
+      <Dialog open={showBillingDialog} onOpenChange={setShowBillingDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Paiement et abonnement</DialogTitle>
+            <DialogDescription>
+              Gère ta carte, tes factures et le renouvellement automatique depuis cet espace.
+            </DialogDescription>
+          </DialogHeader>
+          {hasActiveSubscription && userIdNum > 0 ? (
+            <SubscriptionManageCard userId={userIdNum} onChanged={refreshProgress} cardClassName="mt-0" />
+          ) : (
+            <p className="text-sm text-gray-600">Aucun abonnement actif pour le moment.</p>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={showContactDialog} onOpenChange={setShowContactDialog}>
         <DialogContent>

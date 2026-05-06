@@ -28,9 +28,10 @@ function fillDate(template: string, iso: string, language: string) {
 type Props = {
   userId: number;
   onChanged: () => void;
+  cardClassName?: string;
 };
 
-export function SubscriptionManageCard({ userId, onChanged }: Props) {
+export function SubscriptionManageCard({ userId, onChanged, cardClassName }: Props) {
   const { language, t } = useLanguageContext();
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -73,7 +74,11 @@ export function SubscriptionManageCard({ userId, onChanged }: Props) {
 
   return (
     <>
-      <Card className="mt-5 p-4 md:p-5 border border-emerald-200/80 bg-gradient-to-r from-emerald-50/60 to-white rounded-xl shadow-sm">
+      <Card
+        className={`p-4 md:p-5 border border-emerald-200/80 bg-gradient-to-r from-emerald-50/60 to-white rounded-xl shadow-sm ${
+          cardClassName ?? ""
+        }`}
+      >
         <p className="text-sm font-semibold text-emerald-900 mb-1">{t("subscription.title")}</p>
         <p className="text-sm text-gray-700 mb-3">
           {expiresAt
@@ -106,7 +111,7 @@ export function SubscriptionManageCard({ userId, onChanged }: Props) {
               type="button"
               variant="outline"
               size="sm"
-              className="h-9 text-rose-700 border-rose-200 hover:bg-rose-50"
+              className="h-9 text-gray-700 border-gray-200 hover:bg-gray-50"
               disabled={cancelMutation.isPending || isLoading}
               onClick={() => setConfirmOpen(true)}
             >
