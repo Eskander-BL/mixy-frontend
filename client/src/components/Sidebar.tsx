@@ -46,24 +46,21 @@ const Sidebar: React.FC<SidebarProps> = ({
     return `${prefix} - ${title}`;
   };
 
-  const { totalCourseMinutes, remainingMinutes, timeProgress } = useMemo(() => {
+  const { remainingMinutes, timeProgress } = useMemo(() => {
     const parseModuleMinutes = (duration: string) => {
       const parsed = Number.parseInt(duration, 10);
       return Number.isFinite(parsed) ? parsed : 15;
     };
 
     const totalAll = levels.reduce((sum, level) => sum + parseModuleMinutes(level.duration), 0);
-
     const unlockedLevels = completedLevels.length + 1;
     const remainingSlice = levels.slice(unlockedLevels - 1);
     const remaining = remainingSlice.reduce((sum, level) => sum + parseModuleMinutes(level.duration), 0);
-
     const remainingClamped = Math.max(remaining, 0);
     const progress =
       totalAll > 0 ? Math.min(1, Math.max(0, (totalAll - remainingClamped) / totalAll)) : 0;
 
     return {
-      totalCourseMinutes: totalAll,
       remainingMinutes: remainingClamped,
       timeProgress: progress,
     };
@@ -194,13 +191,6 @@ const Sidebar: React.FC<SidebarProps> = ({
               <p className="mt-0.5 text-sm font-semibold text-white tabular-nums">
                 {formatDuration(remainingMinutes)}
               </p>
-              {totalCourseMinutes > 0 && (
-                <p className="mt-1 text-[10px] leading-tight text-gray-400">
-                  {userLanguage === "fr"
-                    ? "Anneau : part du parcours couverte (durées indicatives)"
-                    : "Ring: share of path covered (indicative durations)"}
-                </p>
-              )}
             </div>
           </div>
         </div>
