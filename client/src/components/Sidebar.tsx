@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { Lock, CheckCircle2, ChevronLeft, ChevronRight } from "lucide-react";
-import { getAllModules } from "@/lib/courses-progressive";
+import { getAllModules, type UserLevel } from "@/lib/courses-progressive";
 import type { CourseTrackId } from "@/lib/learning-profile";
 
 interface SidebarProps {
@@ -10,6 +10,7 @@ interface SidebarProps {
   hasActiveSubscription: boolean;
   userLanguage: "en" | "fr";
   courseTrack: CourseTrackId;
+  skillLevel: UserLevel;
   mobileOpen?: boolean;
   onCloseMobile?: () => void;
 }
@@ -20,18 +21,19 @@ const Sidebar: React.FC<SidebarProps> = ({
   hasActiveSubscription,
   userLanguage,
   courseTrack,
+  skillLevel,
   mobileOpen = false,
   onCloseMobile,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
   const levels = useMemo(
     () =>
-      getAllModules(courseTrack).map((module) => ({
+      getAllModules(courseTrack, skillLevel, userLanguage).map((module) => ({
         level: module.level,
         title: module.title,
         duration: module.estimatedDuration,
       })),
-    [courseTrack],
+    [courseTrack, skillLevel, userLanguage],
   );
 
   const getLevelStatus = (level: number) => {

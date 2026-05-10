@@ -6,16 +6,21 @@ import { trpc } from "@/lib/trpc";
 import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
 import { brand } from "@/assets/brand-assets";
 import { useProgress } from "@/contexts/ProgressContext";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function FloatingAICoach() {
   const [location] = useLocation();
-  const { courseTrack } = useProgress();
+  const { courseTrack, skillLevel, completedLevels } = useProgress();
+  const { language } = useLanguageContext();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "system", content: "You are Mixy Coach." },
     {
       role: "assistant",
-      content: "Salut, je suis ton coach Mixy. Pose-moi une question sur le DJing ou ton cours.",
+      content:
+        language === "fr"
+          ? "Salut, je suis ton coach Mixy. Pose-moi une question sur le DJing ou ton cours."
+          : "Hey, I'm your Mixy coach. Ask me anything about DJing or your current course.",
     },
   ]);
 
@@ -25,8 +30,13 @@ export default function FloatingAICoach() {
     return Number.parseInt(match[1], 10) || 1;
   }, [location]);
 
-  const module = getModuleByLevel(level, courseTrack);
-  const slide = getSlideFromModule(level, 1, courseTrack);
+  const module = getModuleByLevel(level, courseTrack, skillLevel, language);
+  const slide = getSlideFromModule(level, 1, courseTrack, skillLevel, language);
+  const userId = Number.parseInt(localStorage.getItem("userId") || "0", 10);
+  const quizInsightsQuery = trpc.dj.getQuizInsights.useQuery(
+    { userId },
+    { enabled: Number.isFinite(userId) && userId > 0 }
+  );
 
   const chatMutation = trpc.ai.chat.useMutation({
     onSuccess: (result) => {
@@ -51,6 +61,9 @@ export default function FloatingAICoach() {
       currentLevel: level,
       courseTitle: module?.title ?? "Parcours DJ",
       currentSlideContent: slide?.content ?? "Pas de slide active, coaching général.",
+      language,
+      skillLevel,
+      weakLevels: quizInsightsQuery.data?.weakLevels ?? [],
     });
   };
 
@@ -68,7 +81,11 @@ export default function FloatingAICoach() {
               </div>
               <div>
                 <p className="text-sm font-semibold leading-none">Mixy Coach</p>
-                <p className="text-xs text-gray-500 mt-1">Pose-moi tes questions DJ</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  {language === "fr"
+                    ? "Pose-moi tes questions DJ"
+                    : "Ask me your DJ questions"}
+                </p>
               </div>
             </div>
             <button
@@ -86,7 +103,7 @@ export default function FloatingAICoach() {
               onSendMessage={handleSendMessage}
               isLoading={chatMutation.isPending}
               height={"440px"}
-              placeholder="Pose ta question..."
+              placeholder={language === "fr" ? "Pose ta question..." : "Ask your question..."}
               assistantAvatarSrc={brand.chatBot}
             />
           </div>

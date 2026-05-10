@@ -12,7 +12,7 @@ export const level4Module: CourseModule = {
   level: 4,
   title: "Mixage Harmonique: Les Clés Musicales",
   description: "Mélanger des chansons en clés différentes sans dissonance",
-  userLevels: ["intermediate", "advanced"],
+  userLevels: ["beginner", "intermediate", "advanced"],
   totalSlides: 4,
   estimatedDuration: "20 minutes",
   slides: [
@@ -272,7 +272,7 @@ export const level5Module: CourseModule = {
   level: 5,
   title: "Structurer un Set: L'Art de la Progression",
   description: "Créer une progression musicale cohérente et engageante",
-  userLevels: ["intermediate", "advanced"],
+  userLevels: ["beginner", "intermediate", "advanced"],
   totalSlides: 3,
   estimatedDuration: "20 minutes",
   slides: [

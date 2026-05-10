@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
-import { allModules } from "@/lib/courses-progressive";
+import { allModules, getAllModules, type UserLevel } from "@/lib/courses-progressive";
 import {
   readMixyLearningProfile,
   getCourseTrackFromProfile,
@@ -69,6 +69,8 @@ interface ProgressContextType {
   userLanguage: "en" | "fr";
   /** Profil matériel / table cible (après onboarding) */
   learningProfile: MixyLearningProfile | null;
+  /** Niveau DJ déclaré à l’onboarding (beginner = parcours fondations 1–3, autre = parcours accéléré 1–3). */
+  skillLevel: UserLevel;
   /** Niveau 1 : contenu FLX4 vs FLX3/XDJ-RX ; niveaux suivants identiques. */
   courseTrack: CourseTrackId;
   refreshProgress: () => void;
@@ -81,11 +83,17 @@ const initialLocalCompleted = (() => {
   return [...new Set(local)].sort((a, b) => a - b);
 })();
 
+function normalizeSkillLevel(raw: unknown): UserLevel {
+  if (raw === "intermediate" || raw === "advanced") return raw;
+  return "beginner";
+}
+
 export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [currentLevel, setCurrentLevel] = useState<number>(() =>
     getActiveLevelFromCompleted(initialLocalCompleted, TOTAL_LEVELS)
   );
   const [completedLevels, setCompletedLevels] = useState<number[]>(() => initialLocalCompleted);
+  const [skillLevel, setSkillLevel] = useState<UserLevel>("beginner");
   const [learningProfile, setLearningProfile] = useState(() =>
     typeof window !== "undefined" ? readMixyLearningProfile() : null
   );
@@ -102,9 +110,22 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   );
   const hasActiveSubscription = subscriptionQuery.data?.isActive === true;
 
+  const courseTrack = getCourseTrackFromProfile(learningProfile);
+
   const applyMergedProgress = useCallback(
-    (apiData?: { completedLevels?: unknown; currentLevel?: unknown; lastCompletedLevel?: unknown } | null) => {
+    (apiData?: {
+      completedLevels?: unknown;
+      currentLevel?: unknown;
+      lastCompletedLevel?: unknown;
+      skillLevel?: unknown;
+    } | null) => {
       const api = apiData ?? getProgressQuery.data;
+      const nextSkill = normalizeSkillLevel(api?.skillLevel);
+      setSkillLevel(nextSkill);
+
+      const pathTrack = getCourseTrackFromProfile(learningProfile);
+      const lengthForPath = getAllModules(pathTrack, nextSkill).length;
+
       const apiCompleted = normalizeApiCompleted(api?.completedLevels);
       const apiCurrentLevel = normalizeApiCurrentLevel(api?.currentLevel);
       const apiLastCompleted =
@@ -122,9 +143,9 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
         (a, b) => a - b
       );
       setCompletedLevels(merged);
-      setCurrentLevel(getActiveLevelFromCompleted(merged, TOTAL_LEVELS));
+      setCurrentLevel(getActiveLevelFromCompleted(merged, lengthForPath));
     },
-    [getProgressQuery.data]
+    [getProgressQuery.data, learningProfile],
   );
 
   useEffect(() => {
@@ -159,8 +180,6 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     setLearningProfile(parsed);
   }, [getProgressQuery.data?.learningProfile]);
 
-  const courseTrack = getCourseTrackFromProfile(learningProfile);
-
   // TODO: Fetch user language from backend
   useEffect(() => {
     const storedLanguage = localStorage.getItem("language");
@@ -179,6 +198,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
         hasActiveSubscription,
         userLanguage,
         learningProfile,
+        skillLevel,
         courseTrack,
         refreshProgress,
       }}

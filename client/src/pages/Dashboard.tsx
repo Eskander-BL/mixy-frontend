@@ -33,7 +33,15 @@ import { toast } from "sonner";
 export default function Dashboard() {
   useDocumentTitle("Tableau de bord");
   const [location, navigate] = useLocation();
-  const { currentLevel: activeLevel, completedLevels, hasActiveSubscription, learningProfile, courseTrack, refreshProgress } = useProgress();
+  const {
+    currentLevel: activeLevel,
+    completedLevels,
+    hasActiveSubscription,
+    learningProfile,
+    courseTrack,
+    skillLevel,
+    refreshProgress,
+  } = useProgress();
   const [loading, setLoading] = useState(true);
   const [showContactDialog, setShowContactDialog] = useState(false);
   const [showBillingDialog, setShowBillingDialog] = useState(false);
@@ -92,7 +100,11 @@ export default function Dashboard() {
     return () => clearTimeout(t);
   }, [needCompleteAccount]);
 
-  const modulesForUser = useMemo(() => getAllModules(courseTrack), [courseTrack]);
+  const languagePref = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") === "en" ? "en" : "fr";
+  const modulesForUser = useMemo(
+    () => getAllModules(courseTrack, skillLevel, languagePref),
+    [courseTrack, skillLevel, languagePref]
+  );
   const userIdNum = useMemo(
     () => Number.parseInt(typeof window !== "undefined" ? localStorage.getItem("userId") || "0" : "0", 10),
     []
@@ -292,8 +304,27 @@ export default function Dashboard() {
                 {learningProfile.equipment === "other" && "Setup « autre » : les fondamentaux s’appliquent à tout DJ logiciel."}
               </p>
               <p className="text-xs text-gray-600 mt-1 border-t border-primary/10 pt-2">
-                <strong>{courseTrackLabelFr(courseTrack)}</strong> — à partir du niveau 2, la méthode est commune
-                (fondamentaux DJ), mais la difficulté et les objectifs montent à chaque niveau.
+                <strong>{courseTrackLabelFr(courseTrack)}</strong>
+                {" — "}
+                {skillLevel === "beginner" && (
+                  <>
+                    niveaux <strong>1 à 3</strong> : parcours <strong>débutant</strong> (bases matériel + EQ +
+                    transitions).
+                  </>
+                )}
+                {skillLevel === "intermediate" && (
+                  <>
+                    niveaux <strong>1 à 3</strong> : parcours <strong>accéléré intermédiaire</strong> (contenu
+                    différent des fondations débutant).
+                  </>
+                )}
+                {skillLevel === "advanced" && (
+                  <>
+                    niveaux <strong>1 à 3</strong> : parcours <strong>accéléré confirmé</strong> (même trame que
+                    l&apos;intermédiaire, ton orienté niveau DJ avancé).
+                  </>
+                )}{" "}
+                À partir du <strong>niveau 4</strong>, tout le monde suit les mêmes chapitres (mix harmonique, set…).
               </p>
               <p className="text-xs text-gray-600 mt-1">
                 Tu changes de setup ? Relance l’onboarding : on mettra à jour les recommandations de cours

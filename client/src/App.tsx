@@ -33,7 +33,8 @@ function PageFallback() {
 }
 
 function AppContent() {
-  const { currentLevel, completedLevels, hasActiveSubscription, userLanguage, courseTrack } = useProgress();
+  const { currentLevel, completedLevels, hasActiveSubscription, userLanguage, courseTrack, skillLevel } =
+    useProgress();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const renderAppContent = () => (
@@ -52,6 +53,7 @@ function AppContent() {
         hasActiveSubscription={hasActiveSubscription}
         userLanguage={userLanguage}
         courseTrack={courseTrack}
+        skillLevel={skillLevel}
         mobileOpen={mobileSidebarOpen}
         onCloseMobile={() => setMobileSidebarOpen(false)}
       />

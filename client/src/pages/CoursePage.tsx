@@ -6,8 +6,10 @@ import { trpc } from "@/lib/trpc";
 import { brand } from "@/assets/brand-assets";
 import {
   getModuleByLevel,
+  getPrimaryVideoForLevel,
   getPreviousLevelRecap,
   getRecommendedVideosForLevel,
+  resolveSlideVideoUrlForLanguage,
   getSlideFromModule,
 } from "@/lib/courses-progressive";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
@@ -16,17 +18,19 @@ import { getLearningCallout } from "@/lib/learning-path-callouts";
 import { LearningPathCallout } from "@/components/LearningPathCallout";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function CoursePage() {
   const [, params] = useRoute("/course/:level");
   const [, navigate] = useLocation();
-  const { completedLevels, hasActiveSubscription, learningProfile, courseTrack } = useProgress();
+  const { completedLevels, hasActiveSubscription, learningProfile, courseTrack, skillLevel } = useProgress();
+  const { language } = useLanguageContext();
   const [userId, setUserId] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
 
   const level = params?.level ? parseInt(params.level) : 1;
-  const module = getModuleByLevel(level, courseTrack);
-  const slide = getSlideFromModule(level, currentSlide, courseTrack);
+  const module = getModuleByLevel(level, courseTrack, skillLevel, language);
+  const slide = getSlideFromModule(level, currentSlide, courseTrack, skillLevel, language);
   useDocumentTitle(module?.title ? `Cours : ${module.title}` : `Cours — niveau ${level}`);
 
   useEffect(() => {
@@ -46,7 +50,7 @@ export default function CoursePage() {
 
   useEffect(() => {
     setCurrentSlide(1);
-  }, [level, courseTrack]);
+  }, [level, courseTrack, skillLevel]);
 
   useLayoutEffect(() => {
     scrollAppMainToTop();
@@ -72,8 +76,12 @@ export default function CoursePage() {
   const isLastSlide = currentSlide === module.totalSlides;
   const progressPercentage = (currentSlide / module.totalSlides) * 100;
   const pathCallout = getLearningCallout(learningProfile, level, currentSlide);
-  const previousRecap = currentSlide === 1 ? getPreviousLevelRecap(level, courseTrack) : null;
-  const recommendedVideos = getRecommendedVideosForLevel(level, courseTrack);
+  const previousRecap =
+    currentSlide === 1 ? getPreviousLevelRecap(level, courseTrack, skillLevel, language) : null;
+  const recommendedVideos = getRecommendedVideosForLevel(level, courseTrack, language);
+  const localizedSlideVideoUrl = resolveSlideVideoUrlForLanguage(slide.videoUrl, language);
+  const primaryVideo = getPrimaryVideoForLevel(level, language);
+  const finalVideoUrl = localizedSlideVideoUrl ?? primaryVideo?.url ?? null;
 
   const handleNextSlide = () => {
     if (!isLastSlide) {
@@ -162,7 +170,7 @@ export default function CoursePage() {
               {recommendedVideos.length > 0 ? (
                 <Card className="p-4 md:p-5 bg-amber-50 border border-amber-100 shadow-sm rounded-xl">
                   <p className="text-xs uppercase tracking-wide text-amber-700 font-semibold mb-2">
-                    Vidéos recommandées
+                    {language === "fr" ? "Vidéos recommandées" : "Recommended videos"}
                   </p>
                   <ul className="space-y-3">
                     {recommendedVideos.map((video) => (
@@ -187,15 +195,30 @@ export default function CoursePage() {
             {/* Video */}
             <Card className="border-0 shadow-sm overflow-hidden rounded-xl">
               <div className="aspect-video bg-black flex items-center justify-center">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={slide.videoUrl}
-                  title={slide.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+                {finalVideoUrl ? (
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={finalVideoUrl.replace("/watch?v=", "/embed/")}
+                    title={slide.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                ) : (
+                  <div className="px-6 text-center">
+                    <p className="text-white font-semibold mb-2">
+                      {language === "fr"
+                        ? "Vidéo dans ta langue en cours de curation"
+                        : "Video in your language is being curated"}
+                    </p>
+                    <p className="text-white/80 text-sm">
+                      {language === "fr"
+                        ? "On n'affiche que les vidéos validées FR. Utilise les recommandations à droite en attendant."
+                        : "We only display language-validated videos. Use recommended videos on the right for now."}
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="p-6 bg-white">
                 <p className="text-sm text-gray-600">{slide.videoDescription}</p>
