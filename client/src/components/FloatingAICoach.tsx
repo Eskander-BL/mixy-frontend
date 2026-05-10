@@ -12,6 +12,7 @@ export default function FloatingAICoach() {
   const [location] = useLocation();
   const { courseTrack, skillLevel, completedLevels } = useProgress();
   const { language } = useLanguageContext();
+  const isFr = language === "fr";
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "system", content: "You are Mixy Coach." },
@@ -40,7 +41,11 @@ export default function FloatingAICoach() {
 
   const chatMutation = trpc.ai.chat.useMutation({
     onSuccess: (result) => {
-      const response = result?.response ?? "Je n'ai pas pu générer de réponse, réessaie dans un instant.";
+      const response =
+        result?.response ??
+        (isFr
+          ? "Je n'ai pas pu générer de réponse, réessaie dans un instant."
+          : "I could not generate a response, please try again in a moment.");
       setMessages((prev) => [...prev, { role: "assistant", content: response }]);
     },
     onError: () => {
@@ -48,7 +53,9 @@ export default function FloatingAICoach() {
         ...prev,
         {
           role: "assistant",
-          content: "Le coach IA est indisponible pour le moment. Vérifie la configuration backend et réessaie.",
+          content: isFr
+            ? "Le coach IA est indisponible pour le moment. Vérifie la configuration backend et réessaie."
+            : "The AI coach is currently unavailable. Check backend configuration and try again.",
         },
       ]);
     },
@@ -59,8 +66,8 @@ export default function FloatingAICoach() {
     chatMutation.mutate({
       userMessage: content,
       currentLevel: level,
-      courseTitle: module?.title ?? "Parcours DJ",
-      currentSlideContent: slide?.content ?? "Pas de slide active, coaching général.",
+      courseTitle: module?.title ?? (isFr ? "Parcours DJ" : "DJ learning path"),
+      currentSlideContent: slide?.content ?? (isFr ? "Pas de slide active, coaching général." : "No active slide, general coaching."),
       language,
       skillLevel,
       weakLevels: quizInsightsQuery.data?.weakLevels ?? [],
@@ -92,7 +99,7 @@ export default function FloatingAICoach() {
               type="button"
               onClick={() => setOpen(false)}
               className="h-7 w-7 rounded-md hover:bg-gray-100 flex items-center justify-center text-gray-500"
-              aria-label="Fermer le chat"
+              aria-label={isFr ? "Fermer le chat" : "Close chat"}
             >
               <X size={15} />
             </button>
@@ -114,7 +121,7 @@ export default function FloatingAICoach() {
         onClick={() => setOpen((prev) => !prev)}
         className="fixed z-50 p-0 m-0 bg-transparent border-0 shadow-none ring-0 outline-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 rounded-full cursor-pointer"
         style={{ right: "24px", bottom: "28px", left: "auto" }}
-        aria-label="Ouvrir le coach IA"
+        aria-label={isFr ? "Ouvrir le coach IA" : "Open AI coach"}
       >
         <span className="inline-flex flex-col items-center" aria-hidden>
           {/* Fond blanc rond + ancre : pas d’animation rebond sur la mascotte */}

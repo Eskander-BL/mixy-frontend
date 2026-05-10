@@ -25,13 +25,18 @@ export default function CoursePage() {
   const [, navigate] = useLocation();
   const { completedLevels, hasActiveSubscription, learningProfile, courseTrack, skillLevel } = useProgress();
   const { language } = useLanguageContext();
+  const isFr = language === "fr";
   const [userId, setUserId] = useState<number | null>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
 
   const level = params?.level ? parseInt(params.level) : 1;
   const module = getModuleByLevel(level, courseTrack, skillLevel, language);
   const slide = getSlideFromModule(level, currentSlide, courseTrack, skillLevel, language);
-  useDocumentTitle(module?.title ? `Cours : ${module.title}` : `Cours — niveau ${level}`);
+  useDocumentTitle(
+    module?.title
+      ? `${isFr ? "Cours" : "Course"}: ${module.title}`
+      : `${isFr ? "Cours" : "Course"} — ${isFr ? "niveau" : "level"} ${level}`,
+  );
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
@@ -60,12 +65,12 @@ export default function CoursePage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="p-8 text-center">
-          <p className="text-gray-600">Cours non trouvé</p>
+          <p className="text-gray-600">{isFr ? "Cours non trouvé" : "Course not found"}</p>
           <Button
             onClick={() => navigate("/dashboard")}
             className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
           >
-            Retour au dashboard
+            {isFr ? "Retour au dashboard" : "Back to dashboard"}
           </Button>
         </Card>
       </div>
@@ -108,7 +113,7 @@ export default function CoursePage() {
             <div>
               <h1 className="text-xl md:text-2xl font-bold text-gray-900">{module.title}</h1>
               <p className="text-sm text-gray-600">
-                Slide {currentSlide} sur {module.totalSlides}
+                {isFr ? "Slide" : "Slide"} {currentSlide} {isFr ? "sur" : "of"} {module.totalSlides}
               </p>
             </div>
             <Button
@@ -116,7 +121,7 @@ export default function CoursePage() {
               onClick={() => navigate("/dashboard")}
               className="text-gray-600"
             >
-              Retour
+              {isFr ? "Retour" : "Back"}
             </Button>
           </div>
 
@@ -136,25 +141,28 @@ export default function CoursePage() {
           <aside className="lg:col-span-1">
             <div className="space-y-4 lg:sticky lg:top-24">
               <Card className="p-4 md:p-5 bg-white border border-primary/10 shadow-sm rounded-xl">
-                <p className="text-xs uppercase tracking-wide text-primary font-semibold mb-3">Infos du module</p>
+                <p className="text-xs uppercase tracking-wide text-primary font-semibold mb-3">
+                  {isFr ? "Infos du module" : "Module info"}
+                </p>
                 <p className="text-sm text-gray-800 leading-relaxed">
-                  <strong>Module:</strong> {module.title}
+                  <strong>{isFr ? "Module" : "Module"}:</strong> {module.title}
                 </p>
                 <p className="text-sm text-gray-800 mt-3">
-                  <strong>Durée totale:</strong> {module.estimatedDuration}
+                  <strong>{isFr ? "Durée totale" : "Total duration"}:</strong> {module.estimatedDuration}
                 </p>
                 <p className="text-sm text-gray-800 mt-3">
-                  <strong>Progression:</strong> {currentSlide} / {module.totalSlides} slides
+                  <strong>{isFr ? "Progression" : "Progress"}:</strong> {currentSlide} /{" "}
+                  {module.totalSlides} {isFr ? "slides" : "slides"}
                 </p>
               </Card>
 
               {previousRecap ? (
                 <Card className="p-4 md:p-5 bg-blue-50 border border-blue-100 shadow-sm rounded-xl">
                   <p className="text-xs uppercase tracking-wide text-blue-700 font-semibold mb-2">
-                    Récap niveau précédent
+                    {isFr ? "Récap niveau précédent" : "Previous level recap"}
                   </p>
                   <p className="text-sm text-blue-900 font-semibold">
-                    Niveau {previousRecap.level}: {previousRecap.title}
+                    {isFr ? "Niveau" : "Level"} {previousRecap.level}: {previousRecap.title}
                   </p>
                   <ul className="mt-3 space-y-2">
                     {previousRecap.points.map((point, idx) => (
@@ -295,14 +303,18 @@ export default function CoursePage() {
 
               {/* Key Takeaway */}
               <div className="mt-8 p-4 bg-primary/5 border-l-4 border-primary rounded">
-                <p className="text-sm font-semibold text-foreground">💡 À Retenir :</p>
+                <p className="text-sm font-semibold text-foreground">
+                  💡 {isFr ? "À Retenir" : "Key takeaway"}:
+                </p>
                 <p className="text-sm text-muted-foreground mt-1">{slide.keyTakeaway}</p>
               </div>
             </Card>
 
             {/* Tips */}
             <Card className="p-5 md:p-6 border border-yellow-100 shadow-sm bg-yellow-50 rounded-xl">
-              <h3 className="font-semibold text-gray-900 mb-4">💡 Tips Professionnels</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">
+                💡 {isFr ? "Tips Professionnels" : "Pro tips"}
+              </h3>
               <ul className="space-y-2">
                 {slide.tips.map((tip: string, idx: number) => (
                   <li key={idx} className="flex gap-3">
@@ -326,7 +338,7 @@ export default function CoursePage() {
               className="flex items-center gap-2"
             >
               <ChevronLeft size={18} />
-              Slide Précédente
+              {isFr ? "Slide Précédente" : "Previous slide"}
             </Button>
 
             {isLastSlide ? (
@@ -335,14 +347,14 @@ export default function CoursePage() {
                 className="bg-green-600 hover:bg-green-700 text-white flex items-center gap-2"
               >
                 <Play size={18} />
-                Commencer le Quiz
+                {isFr ? "Commencer le Quiz" : "Start quiz"}
               </Button>
             ) : (
               <Button
                 onClick={handleNextSlide}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-2"
               >
-                Slide Suivante
+                {isFr ? "Slide Suivante" : "Next slide"}
                 <ChevronRight size={18} />
               </Button>
             )}

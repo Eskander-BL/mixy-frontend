@@ -1663,6 +1663,7 @@ export default function QuizPage() {
   const { refreshProgress, completedLevels, hasActiveSubscription, courseTrack, skillLevel } =
     useProgress();
   const { language } = useLanguageContext();
+  const isFr = language === "fr";
   const submitQuizMutation = trpc.dj.submitQuiz.useMutation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
@@ -1674,7 +1675,9 @@ export default function QuizPage() {
   const questions = pickQuizQuestions(level, skillLevel, language);
   const quizModule = getModuleByLevel(level, courseTrack, skillLevel, language);
   useDocumentTitle(
-    quizModule?.title ? `Quiz : ${quizModule.title}` : `Quiz — niveau ${level}`,
+    quizModule?.title
+      ? `Quiz: ${quizModule.title}`
+      : `Quiz — ${isFr ? "niveau" : "level"} ${level}`,
   );
 
   useEffect(() => {
@@ -1692,12 +1695,12 @@ export default function QuizPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="p-8 text-center">
-          <p className="text-gray-600">Quiz non trouvé</p>
+          <p className="text-gray-600">{isFr ? "Quiz non trouvé" : "Quiz not found"}</p>
           <Button
             onClick={() => navigate("/dashboard")}
             className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
           >
-            Retour au dashboard
+            {isFr ? "Retour au dashboard" : "Back to dashboard"}
           </Button>
         </Card>
       </div>
@@ -1761,7 +1764,9 @@ export default function QuizPage() {
       console.error("[Quiz] submitQuiz failed:", e);
       setSavingProgress(false);
       window.alert(
-        "Impossible d'enregistrer ta progression sur le serveur. Vérifie ta connexion et réessaie.",
+        isFr
+          ? "Impossible d'enregistrer ta progression sur le serveur. Vérifie ta connexion et réessaie."
+          : "Unable to save your progress on the server. Check your connection and try again.",
       );
       return;
     }
@@ -1804,33 +1809,39 @@ export default function QuizPage() {
       if (score < 50) {
         return {
           image: brand.pasBien,
-          title: "Pas encore suffisant",
-          subtitle: "Le niveau suivant reste verrouillé",
+          title: isFr ? "Pas encore suffisant" : "Not enough yet",
+          subtitle: isFr ? "Le niveau suivant reste verrouillé" : "The next level stays locked",
           bgColor: "bg-rose-50",
           borderColor: "border-rose-200",
           textColor: "text-rose-700",
-          body: "Il faut obtenir au moins 50 % pour valider le niveau et continuer. Reprends le cours, consolide tes bases, puis refais le quiz quand tu te sens prêt.",
+          body: isFr
+            ? "Il faut obtenir au moins 50 % pour valider le niveau et continuer. Reprends le cours, consolide tes bases, puis refais le quiz quand tu te sens prêt."
+            : "You need at least 50% to validate this level and continue. Review the course, strengthen your fundamentals, then try the quiz again.",
         };
       }
       if (score < 70) {
         return {
           image: brand.bien,
-          title: "Niveau validé",
-          subtitle: "Tu as réussi, mais on peut encore progresser",
+          title: isFr ? "Niveau validé" : "Level validated",
+          subtitle: isFr ? "Tu as réussi, mais on peut encore progresser" : "You passed, but there is room to improve",
           bgColor: "bg-amber-50",
           borderColor: "border-amber-200",
           textColor: "text-amber-800",
-          body: "Bonne réussite : tu peux avancer, mais pense à revoir ce module prochainement pour ancrer ce que tu as appris.",
+          body: isFr
+            ? "Bonne réussite : tu peux avancer, mais pense à revoir ce module prochainement pour ancrer ce que tu as appris."
+            : "Good result: you can move forward, but revisit this module soon to reinforce what you learned.",
         };
       }
       return {
         image: brand.excellent,
-        title: "Excellent",
-        subtitle: "Tu as parfaitement validé ce niveau",
+        title: isFr ? "Excellent" : "Excellent",
+        subtitle: isFr ? "Tu as parfaitement validé ce niveau" : "You fully validated this level",
         bgColor: "bg-emerald-50",
         borderColor: "border-emerald-200",
         textColor: "text-emerald-700",
-        body: "Bravo : tu as tout ce qu’il faut pour enchaîner. Continue ton apprentissage sur le prochain chapitre !",
+        body: isFr
+          ? "Bravo : tu as tout ce qu’il faut pour enchaîner. Continue ton apprentissage sur le prochain chapitre !"
+          : "Great work: you have what it takes to move on. Continue learning in the next chapter!",
       };
     };
 
@@ -1861,7 +1872,9 @@ export default function QuizPage() {
                 {score}%
               </p>
               <p className="text-sm text-gray-600 mt-2">
-                Ce score reflète ta compréhension du niveau
+                {isFr
+                  ? "Ce score reflète ta compréhension du niveau"
+                  : "This score reflects your understanding of the level"}
               </p>
             </div>
 
@@ -1872,10 +1885,14 @@ export default function QuizPage() {
             {score >= 50 && (
               <div className="bg-primary/5 p-4 rounded-lg mb-6 border border-primary/20">
                 <p className="text-sm text-foreground">
-                  <strong>Prochaine étape :</strong>{" "}
+                  <strong>{isFr ? "Prochaine étape" : "Next step"}:</strong>{" "}
                   {hasActiveSubscription
-                    ? "enchaîner avec le cours du niveau suivant."
-                    : "débloquer l'accès au niveau suivant (abonnement)."}
+                    ? isFr
+                      ? "enchaîner avec le cours du niveau suivant."
+                      : "continue with the next level course."
+                    : isFr
+                      ? "débloquer l'accès au niveau suivant (abonnement)."
+                      : "unlock access to the next level (subscription)."}
                 </p>
               </div>
             )}
@@ -1886,7 +1903,7 @@ export default function QuizPage() {
                   onClick={handleBackToCourse}
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-6 text-lg flex items-center justify-center gap-2"
                 >
-                  Revoir le cours
+                  {isFr ? "Revoir le cours" : "Review course"}
                   <ChevronRight size={18} />
                 </Button>
                 <Button
@@ -1894,7 +1911,7 @@ export default function QuizPage() {
                   variant="outline"
                   className="w-full"
                 >
-                  Retour au dashboard
+                  {isFr ? "Retour au dashboard" : "Back to dashboard"}
                 </Button>
               </>
             ) : (
@@ -1905,10 +1922,16 @@ export default function QuizPage() {
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-6 text-lg flex items-center justify-center gap-2"
                 >
                   {savingProgress
-                    ? "Enregistrement…"
+                    ? isFr
+                      ? "Enregistrement…"
+                      : "Saving..."
                     : hasActiveSubscription
-                      ? "Continuer le parcours"
-                      : "Continuer vers le déblocage"}
+                      ? isFr
+                        ? "Continuer le parcours"
+                        : "Continue learning path"
+                      : isFr
+                        ? "Continuer vers le déblocage"
+                        : "Continue to unlock"}
                   <ChevronRight size={18} />
                 </Button>
                 <Button
@@ -1916,7 +1939,7 @@ export default function QuizPage() {
                   variant="outline"
                   className="w-full"
                 >
-                  Retour au dashboard
+                  {isFr ? "Retour au dashboard" : "Back to dashboard"}
                 </Button>
               </>
             )}
@@ -1936,7 +1959,7 @@ export default function QuizPage() {
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
             <p className="text-sm font-semibold text-gray-600">
-              Question {currentQuestion + 1} / {questions.length}
+              {isFr ? "Question" : "Question"} {currentQuestion + 1} / {questions.length}
             </p>
             <p className="text-sm font-semibold text-primary">
               {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
@@ -1997,7 +2020,7 @@ export default function QuizPage() {
               variant="outline"
               className="flex-1"
             >
-              Précédent
+              {isFr ? "Précédent" : "Previous"}
             </Button>
           )}
 
@@ -2006,7 +2029,7 @@ export default function QuizPage() {
             disabled={!isAnswered}
             className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {isLastQuestion ? "Terminer" : "Suivant"}
+            {isLastQuestion ? (isFr ? "Terminer" : "Finish") : isFr ? "Suivant" : "Next"}
             <ChevronRight size={18} />
           </Button>
         </div>

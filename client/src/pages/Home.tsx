@@ -7,6 +7,7 @@ import { brand } from "@/assets/brand-assets";
 
 export default function Home() {
   const [, navigate] = useLocation();
+  const isFr = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") !== "en";
   useDocumentTitle();
 
   useEffect(() => {
@@ -33,10 +34,12 @@ export default function Home() {
           decoding="async"
         />
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight mb-3">
-          Apprends le mix & le DJ avec Mixy
+          {isFr ? "Apprends le mix & le DJ avec Mixy" : "Learn mixing & DJing with Mixy"}
         </h1>
         <p className="text-xl text-gray-600 mb-8">
-          Apprends à mixer comme un pro. Pas de théorie ennuyeuse, juste de la pratique.
+          {isFr
+            ? "Apprends à mixer comme un pro. Pas de théorie ennuyeuse, juste de la pratique."
+            : "Learn to mix like a pro. No boring theory, just practical training."}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -53,9 +56,9 @@ export default function Home() {
                 aria-hidden
               />
             </div>
-            <h2 className="font-semibold text-gray-900 mb-2">10 Niveaux</h2>
+            <h2 className="font-semibold text-gray-900 mb-2">{isFr ? "10 Niveaux" : "10 Levels"}</h2>
             <p className="text-sm text-gray-600">
-              Du débutant à la maîtrise complète
+              {isFr ? "Du débutant à la maîtrise complète" : "From beginner to full mastery"}
             </p>
           </div>
 
@@ -72,9 +75,11 @@ export default function Home() {
                 aria-hidden
               />
             </div>
-            <h2 className="font-semibold text-gray-900 mb-2">Quiz Interactifs</h2>
+            <h2 className="font-semibold text-gray-900 mb-2">
+              {isFr ? "Quiz Interactifs" : "Interactive Quizzes"}
+            </h2>
             <p className="text-sm text-gray-600">
-              Valide tes connaissances à chaque niveau
+              {isFr ? "Valide tes connaissances à chaque niveau" : "Validate your knowledge at every level"}
             </p>
           </div>
 
@@ -91,9 +96,9 @@ export default function Home() {
                 aria-hidden
               />
             </div>
-            <h2 className="font-semibold text-gray-900 mb-2">Coach IA</h2>
+            <h2 className="font-semibold text-gray-900 mb-2">{isFr ? "Coach IA" : "AI Coach"}</h2>
             <p className="text-sm text-gray-600">
-              Réponds à tes questions 24/7
+              {isFr ? "Réponds à tes questions 24/7" : "Get answers to your questions 24/7"}
             </p>
           </div>
         </div>
@@ -102,12 +107,12 @@ export default function Home() {
           onClick={() => navigate("/onboarding")}
           className="bg-primary text-primary-foreground hover:bg-primary/90 py-6 px-8 text-lg font-medium"
         >
-          Commencer maintenant
+          {isFr ? "Commencer maintenant" : "Start now"}
         </Button>
 
         <p className="text-sm text-gray-600 mt-10">
           <Link href="/legal" className="text-primary underline underline-offset-2">
-            CGU, mentions légales & confidentialité
+            {isFr ? "CGU, mentions légales & confidentialité" : "Terms, legal notice & privacy"}
           </Link>
         </p>
       </div>

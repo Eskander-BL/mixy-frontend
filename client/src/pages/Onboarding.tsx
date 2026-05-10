@@ -8,7 +8,7 @@ import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import type { TargetDeck } from "@/lib/learning-profile";
-import { GEAR_PRICE_RANGE_FR, persistMixyLearningProfile, targetDeckLabelFr } from "@/lib/learning-profile";
+import { GEAR_PRICE_RANGE_FR, persistMixyLearningProfile } from "@/lib/learning-profile";
 
 type OnboardingStep =
   | "language"
@@ -56,6 +56,7 @@ export default function Onboarding() {
   const [quizAnswers, setQuizAnswers] = useState<number[]>([]);
   const [quizScore, setQuizScore] = useState<number | null>(null);
   const [quizResultLevel, setQuizResultLevel] = useState<"beginner" | "intermediate" | "advanced" | null>(null);
+  const isFr = formData.language === "fr";
 
   const initGuestMutation = trpc.dj.initGuest.useMutation();
   const updateLanguageMutation = trpc.dj.updateLanguage.useMutation();
@@ -202,40 +203,75 @@ export default function Onboarding() {
     );
   };
 
-  const levelNames: Record<string, string> = {
-    beginner: "Débutant",
-    intermediate: "Intermédiaire",
-    advanced: "Avancé",
-  };
+  const levelNames: Record<string, string> = isFr
+    ? {
+        beginner: "Débutant",
+        intermediate: "Intermédiaire",
+        advanced: "Avancé",
+      }
+    : {
+        beginner: "Beginner",
+        intermediate: "Intermediate",
+        advanced: "Advanced",
+      };
 
-  const goalNames: Record<string, string> = {
-    fun: "Mixer pour le fun",
-    party: "Soirées entre amis",
-    club: "Apprendre les bases du mix en club",
-    pro: "Devenir DJ professionnel",
-  };
+  const goalNames: Record<string, string> = isFr
+    ? {
+        fun: "Mixer pour le fun",
+        party: "Soirées entre amis",
+        club: "Apprendre les bases du mix en club",
+        pro: "Devenir DJ professionnel",
+      }
+    : {
+        fun: "Mix for fun",
+        party: "House parties with friends",
+        club: "Learn core club mixing skills",
+        pro: "Become a professional DJ",
+      };
 
-  const equipmentNames: Record<string, string> = {
-    none: "Je n’ai pas encore de matériel",
-    controller: "Un contrôleur DJ (type Pioneer, FLX…)",
-    turntables: "Platines vinyles",
-    other: "Autre setup",
-  };
+  const equipmentNames: Record<string, string> = isFr
+    ? {
+        none: "Je n’ai pas encore de matériel",
+        controller: "Un contrôleur DJ (type Pioneer, FLX…)",
+        turntables: "Platines vinyles",
+        other: "Autre setup",
+      }
+    : {
+        none: "I do not have DJ gear yet",
+        controller: "A DJ controller (Pioneer, FLX, etc.)",
+        turntables: "Turntables",
+        other: "Other setup",
+      };
 
-  const problemNames: Record<string, string> = {
-    transitions: "Maîtriser les transitions",
-    bpm: "Comprendre le BPM",
-    structuration: "Structurer un set",
-    unknown: "Je ne sais pas par où commencer",
-  };
+  const problemNames: Record<string, string> = isFr
+    ? {
+        transitions: "Maîtriser les transitions",
+        bpm: "Comprendre le BPM",
+        structuration: "Structurer un set",
+        unknown: "Je ne sais pas par où commencer",
+      }
+    : {
+        transitions: "Master transitions",
+        bpm: "Understand BPM",
+        structuration: "Structure a set",
+        unknown: "I do not know where to start",
+      };
 
-  const targetDeckLabels: Record<TargetDeck, string> = {
-    flx4: "DDJ-FLX4 — idéal pour bien débuter avec Rekordbox",
-    flx3: "DDJ-FLX3 — plus de fonctions, plus « pro »",
-    xdj_rx: "XDJ-RX (RX2 / RX3) — tout-en-un, USB + écrans intégrés",
-    other: "Autre contrôleur / autre marque",
-    undecided: "Je ne sais pas encore",
-  };
+  const targetDeckLabels: Record<TargetDeck, string> = isFr
+    ? {
+        flx4: "DDJ-FLX4 — idéal pour bien débuter avec Rekordbox",
+        flx3: "DDJ-FLX3 — plus de fonctions, plus « pro »",
+        xdj_rx: "XDJ-RX (RX2 / RX3) — tout-en-un, USB + écrans intégrés",
+        other: "Autre contrôleur / autre marque",
+        undecided: "Je ne sais pas encore",
+      }
+    : {
+        flx4: "DDJ-FLX4 — ideal to start with Rekordbox",
+        flx3: "DDJ-FLX3 — more functions, more pro-oriented",
+        xdj_rx: "XDJ-RX (RX2 / RX3) — all-in-one, USB + built-in screens",
+        other: "Other controller / other brand",
+        undecided: "I am not sure yet",
+      };
 
   const canContinueFromEquipment = () => {
     if (formData.equipment === "none") return formData.targetDeck != null;
@@ -271,7 +307,7 @@ export default function Onboarding() {
           <div className="mb-8">
             <div className="flex justify-between items-center mb-2">
               <p className="text-xs font-semibold text-gray-600">
-                Étape {currentStepIndex + 1} / {STEPS.length}
+                {isFr ? "Étape" : "Step"} {currentStepIndex + 1} / {STEPS.length}
               </p>
               <p className="text-xs font-semibold text-primary">
                 {Math.round(progressPercentage)}%
@@ -291,10 +327,12 @@ export default function Onboarding() {
           <div className="space-y-6 animate-fadeIn">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Choose your language 🌐
+                {isFr ? "Choisis ta langue 🌐" : "Choose your language 🌐"}
               </h1>
               <p className="text-gray-600">
-                Please select your preferred language to continue.
+                {isFr
+                  ? "Sélectionne ta langue préférée pour continuer."
+                  : "Please select your preferred language to continue."}
               </p>
             </div>
             <div className="space-y-3">
@@ -332,14 +370,16 @@ export default function Onboarding() {
                 alt="Mixy"
                 className="h-40 md:h-44 w-auto max-w-[min(100%,320px)] mx-auto mb-5 object-contain object-bottom"
               />
-              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Bienvenue 🎧</h1>
+              <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                {isFr ? "Bienvenue 🎧" : "Welcome 🎧"}
+              </h1>
               <p className="text-gray-600">
-                Commençons par connaître ton nom.
+                {isFr ? "Commençons par connaître ton nom." : "Let's start with your name."}
               </p>
             </div>
             <Input
               type="text"
-              placeholder="Ton nom"
+              placeholder={isFr ? "Ton nom" : "Your name"}
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -353,13 +393,13 @@ export default function Onboarding() {
               disabled={!formData.name.trim()}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-5 md:py-6 text-base md:text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Continuer
+              {isFr ? "Continuer" : "Continue"}
               <ChevronRight size={18} />
             </Button>
             <p className="text-center text-sm text-gray-600">
-              Tu as déjà un compte ?{" "}
+              {isFr ? "Tu as déjà un compte ?" : "Already have an account?"}{" "}
               <Link href="/login" className="text-primary font-medium underline underline-offset-2">
-                Se connecter
+                {isFr ? "Se connecter" : "Sign in"}
               </Link>
             </p>
           </div>
@@ -370,10 +410,12 @@ export default function Onboarding() {
           <div className="space-y-6 animate-fadeIn">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Quel est ton niveau ?
+                {isFr ? "Quel est ton niveau ?" : "What is your level?"}
               </h1>
               <p className="text-gray-600">
-                Sélectionne ton niveau ou teste-toi avec un mini-quiz.
+                {isFr
+                  ? "Sélectionne ton niveau ou teste-toi avec un mini-quiz."
+                  : "Select your level or evaluate yourself with a quick quiz."}
               </p>
             </div>
 
@@ -401,7 +443,7 @@ export default function Onboarding() {
                     <div className="w-full border-t border-gray-300"></div>
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-600">ou</span>
+                    <span className="px-2 bg-white text-gray-600">{isFr ? "ou" : "or"}</span>
                   </div>
                 </div>
 
@@ -410,7 +452,7 @@ export default function Onboarding() {
                   variant="outline"
                   className="w-full py-6 text-lg"
                 >
-                  Je ne sais pas → Tester mon niveau
+                  {isFr ? "Je ne sais pas → Tester mon niveau" : "I am not sure → Test my level"}
                 </Button>
               </>
             ) : (
@@ -424,15 +466,25 @@ export default function Onboarding() {
                   />
                 </div>
                 <p className="text-sm text-gray-600 font-semibold">
-                  Réponds à ces 5 questions rapides:
+                  {isFr ? "Réponds à ces 5 questions rapides:" : "Answer these 5 quick questions:"}
                 </p>
 
                 {[
-                  "Sais-tu synchroniser deux musiques ?",
-                  "Sais-tu ce qu'est le BPM ?",
-                  "As-tu déjà fait une transition propre ?",
-                  "Utilises-tu les EQ ?",
-                  "As-tu déjà mixé devant des gens ?",
+                  ...(isFr
+                    ? [
+                        "Sais-tu synchroniser deux musiques ?",
+                        "Sais-tu ce qu'est le BPM ?",
+                        "As-tu déjà fait une transition propre ?",
+                        "Utilises-tu les EQ ?",
+                        "As-tu déjà mixé devant des gens ?",
+                      ]
+                    : [
+                        "Can you synchronize two tracks?",
+                        "Do you know what BPM means?",
+                        "Have you already done a clean transition?",
+                        "Do you use EQ?",
+                        "Have you already mixed in front of people?",
+                      ]),
                 ].map((question, idx) => (
                   <div key={idx} className="space-y-2">
                     <p className="font-medium text-sm text-gray-900">
@@ -451,7 +503,7 @@ export default function Onboarding() {
                             : "border-gray-200 hover:border-gray-300 text-gray-700"
                         }`}
                       >
-                        Oui
+                        {isFr ? "Oui" : "Yes"}
                       </button>
                       <button
                         onClick={() => {
@@ -465,7 +517,7 @@ export default function Onboarding() {
                             : "border-gray-200 hover:border-gray-300 text-gray-700"
                         }`}
                       >
-                        Non
+                        {isFr ? "Non" : "No"}
                       </button>
                     </div>
                   </div>
@@ -479,8 +531,12 @@ export default function Onboarding() {
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {levelDetectionMutation.isPending
-                    ? "Analyse en cours..."
-                    : "Voir mon niveau"}
+                    ? isFr
+                      ? "Analyse en cours..."
+                      : "Analyzing..."
+                    : isFr
+                      ? "Voir mon niveau"
+                      : "See my level"}
                 </Button>
 
                 <Button
@@ -488,7 +544,7 @@ export default function Onboarding() {
                   variant="outline"
                   className="w-full"
                 >
-                  Retour
+                  {isFr ? "Retour" : "Back"}
                 </Button>
               </div>
             )}
@@ -499,7 +555,7 @@ export default function Onboarding() {
                 variant="ghost"
                 className="w-full text-gray-600"
               >
-                Retour
+                {isFr ? "Retour" : "Back"}
               </Button>
             )}
           </div>
@@ -510,10 +566,12 @@ export default function Onboarding() {
           <div className="space-y-6 animate-fadeIn">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Quel est ton objectif ?
+                {isFr ? "Quel est ton objectif ?" : "What is your goal?"}
               </h1>
               <p className="text-gray-600">
-                Cela nous aide à adapter le contenu pour toi.
+                {isFr
+                  ? "Cela nous aide à adapter le contenu pour toi."
+                  : "This helps us tailor the content for you."}
               </p>
             </div>
 
@@ -537,7 +595,7 @@ export default function Onboarding() {
               variant="ghost"
               className="w-full text-gray-600"
             >
-              Retour
+              {isFr ? "Retour" : "Back"}
             </Button>
           </div>
         )}
@@ -547,10 +605,22 @@ export default function Onboarding() {
           <div className="space-y-6 animate-fadeIn">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Quel matériel as-tu ?
+                {isFr ? "Quel matériel as-tu ?" : "What gear do you have?"}
               </h1>
               <p className="text-gray-600">
-                Le <strong>niveau 1</strong> change selon ta table (parcours FLX4 ou parcours FLX3 / XDJ-RX). Du <strong>niveau 2</strong> à la fin, la méthode reste commune mais les objectifs montent en difficulté, avec des conseils adaptés à ton setup.
+                {isFr ? (
+                  <>
+                    Le <strong>niveau 1</strong> change selon ta table (parcours FLX4 ou parcours FLX3 / XDJ-RX).
+                    Du <strong>niveau 2</strong> à la fin, la méthode reste commune mais les objectifs montent
+                    en difficulté, avec des conseils adaptés à ton setup.
+                  </>
+                ) : (
+                  <>
+                    <strong>Level 1</strong> changes based on your deck (FLX4 path or FLX3 / XDJ-RX path). From
+                    <strong> level 2</strong> onward, the method is shared, with progressively harder goals and
+                    setup-specific advice.
+                  </>
+                )}
               </p>
             </div>
 
@@ -582,7 +652,7 @@ export default function Onboarding() {
             {formData.equipment === "other" && (
               <Input
                 type="text"
-                placeholder="Quel modèle ? (optionnel)"
+                placeholder={isFr ? "Quel modèle ? (optionnel)" : "Which model? (optional)"}
                 value={formData.equipmentModel}
                 onChange={(e) =>
                   setFormData({ ...formData, equipmentModel: e.target.value })
@@ -594,22 +664,58 @@ export default function Onboarding() {
               <div className="space-y-3">
                 <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg space-y-3">
                   <p className="text-sm text-amber-950 font-medium">
-                    Quelle table vises-tu ? (obligatoire — le <strong>niveau 1</strong> du cours suivra ce choix : FLX4 d’un côté, FLX3 + XDJ-RX de l’autre)
+                    {isFr ? (
+                      <>
+                        Quelle table vises-tu ? (obligatoire — le <strong>niveau 1</strong> du cours suivra ce
+                        choix : FLX4 d’un côté, FLX3 + XDJ-RX de l’autre)
+                      </>
+                    ) : (
+                      <>
+                        Which deck are you targeting? (required — <strong>level 1</strong> follows this choice:
+                        FLX4 on one side, FLX3 + XDJ-RX on the other)
+                      </>
+                    )}
                   </p>
                   <p className="text-xs text-amber-900/90">
-                    <strong>Deux introductions niveau 1</strong> : la FLX4 a une surface plus simple (beaucoup via Shift) ; la FLX3 et l’XDJ-RX partagent un niveau 1 plus « club » (plus de boutons visibles ou écrans type CDJ). Ensuite, même progression pour tous.
+                    {isFr ? (
+                      <>
+                        <strong>Deux introductions niveau 1</strong> : la FLX4 a une surface plus simple (beaucoup
+                        via Shift) ; la FLX3 et l’XDJ-RX partagent un niveau 1 plus « club » (plus de boutons
+                        visibles ou écrans type CDJ). Ensuite, même progression pour tous.
+                      </>
+                    ) : (
+                      <>
+                        <strong>Two level-1 intros</strong>: FLX4 has a simpler surface (many actions via Shift),
+                        while FLX3 and XDJ-RX share a more club-oriented level 1 (more visible buttons or CDJ-like
+                        screens). After that, progression is shared.
+                      </>
+                    )}
                   </p>
                   <div className="rounded-lg border border-amber-200/80 bg-white/85 p-3 text-xs text-amber-950 space-y-2">
-                    <p className="font-semibold">Repères prix indicatifs (France / Europe — à vérifier neuf / promo / occasion)</p>
+                    <p className="font-semibold">
+                      {isFr
+                        ? "Repères prix indicatifs (France / Europe — à vérifier neuf / promo / occasion)"
+                        : "Indicative price ranges (France / Europe — verify new / promo / used)"}
+                    </p>
                     <ul className="space-y-2 list-none pl-0 leading-relaxed">
                       <li>
-                        <strong>DDJ-FLX4</strong> — compacte, 2 voies, parfaite pour apprendre Rekordbox : {GEAR_PRICE_RANGE_FR.flx4}.
+                        <strong>DDJ-FLX4</strong> —{" "}
+                        {isFr ? "compacte, 2 voies, parfaite pour apprendre Rekordbox" : "compact, 2-channel, great to learn Rekordbox"}:{" "}
+                        {GEAR_PRICE_RANGE_FR.flx4}.
                       </li>
                       <li>
-                        <strong>DDJ-FLX3</strong> — plus de contrôle type club (Smart CFX, usage plus pro) : {GEAR_PRICE_RANGE_FR.flx3}.
+                        <strong>DDJ-FLX3</strong> —{" "}
+                        {isFr
+                          ? "plus de contrôle type club (Smart CFX, usage plus pro)"
+                          : "more club-style control (Smart CFX, more pro workflow)"}:{" "}
+                        {GEAR_PRICE_RANGE_FR.flx3}.
                       </li>
                       <li>
-                        <strong>XDJ-RX</strong> — tout-en-un avec écrans, USB Rekordbox sans PC en cabine : {GEAR_PRICE_RANGE_FR.xdj_rx}.
+                        <strong>XDJ-RX</strong> —{" "}
+                        {isFr
+                          ? "tout-en-un avec écrans, USB Rekordbox sans PC en cabine"
+                          : "all-in-one with screens, Rekordbox USB without a laptop in the booth"}:{" "}
+                        {GEAR_PRICE_RANGE_FR.xdj_rx}.
                       </li>
                     </ul>
                   </div>
@@ -636,7 +742,9 @@ export default function Onboarding() {
             {formData.equipment === "controller" && (
               <div className="space-y-2">
                 <p className="text-xs font-medium text-gray-600">
-                  Ta table (optionnel — utile si c&apos;est une FLX ou un XDJ-RX)
+                  {isFr
+                    ? "Ta table (optionnel — utile si c&apos;est une FLX ou un XDJ-RX)"
+                    : "Your deck (optional — useful if it is a FLX or XDJ-RX)"}
                 </p>
                 <div className="grid grid-cols-1 gap-2">
                   {TARGET_DECK_CHOICES.map((deck) => (
@@ -662,7 +770,7 @@ export default function Onboarding() {
               disabled={!canContinueFromEquipment()}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Continuer
+              {isFr ? "Continuer" : "Continue"}
               <ChevronRight size={18} className="ml-1 inline" />
             </Button>
 
@@ -671,7 +779,7 @@ export default function Onboarding() {
               variant="ghost"
               className="w-full text-gray-600"
             >
-              Retour
+              {isFr ? "Retour" : "Back"}
             </Button>
           </div>
         )}
@@ -681,10 +789,12 @@ export default function Onboarding() {
           <div className="space-y-6 animate-fadeIn">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Quel est ton défi principal ?
+                {isFr ? "Quel est ton défi principal ?" : "What is your main challenge?"}
               </h1>
               <p className="text-gray-600">
-                Sur quoi veux-tu te concentrer en priorité ?
+                {isFr
+                  ? "Sur quoi veux-tu te concentrer en priorité ?"
+                  : "What do you want to focus on first?"}
               </p>
             </div>
 
@@ -715,7 +825,7 @@ export default function Onboarding() {
               variant="ghost"
               className="w-full text-gray-600"
             >
-              Retour
+              {isFr ? "Retour" : "Back"}
             </Button>
           </div>
         )}
@@ -724,25 +834,27 @@ export default function Onboarding() {
         {step === "quizResult" && quizResultLevel && quizScore !== null && (
           <div className="space-y-6 animate-fadeIn text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Ton niveau a été détecté !
+              {isFr ? "Ton niveau a été détecté !" : "Your level has been detected!"}
             </h1>
             <p className="text-gray-600 text-lg">
-              Basé sur tes réponses, ton niveau est :
+              {isFr ? "Basé sur tes réponses, ton niveau est :" : "Based on your answers, your level is:"}
             </p>
             <div className="text-5xl font-extrabold text-primary mb-4">
               {levelNames[quizResultLevel]}
             </div>
             <p className="text-gray-700">
-              Score du quiz : {Math.round(quizScore)}%
+              {isFr ? "Score du quiz" : "Quiz score"}: {Math.round(quizScore)}%
             </p>
             <p className="text-primary font-semibold">
-              Parfait, on adapte maintenant ton parcours à ce niveau.
+              {isFr
+                ? "Parfait, on adapte maintenant ton parcours à ce niveau."
+                : "Great, we now adapt your learning path to this level."}
             </p>
             <Button
               onClick={() => setStep("goal")}
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-6 text-lg flex items-center justify-center gap-2"
             >
-              Continuer
+              {isFr ? "Continuer" : "Continue"}
               <ChevronRight size={18} />
             </Button>
           </div>
@@ -761,41 +873,61 @@ export default function Onboarding() {
                 />
               </div>
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                Ton parcours est prêt !
+                {isFr ? "Ton parcours est prêt !" : "Your learning path is ready!"}
               </h1>
             </div>
 
             <div className="bg-primary/5 p-6 rounded-lg border border-primary/20 space-y-4">
               <p className="text-gray-900 text-center leading-relaxed">
-                <strong>Salut {formData.name} !</strong>
+                <strong>{isFr ? `Salut ${formData.name} !` : `Hey ${formData.name}!`}</strong>
               </p>
               <p className="text-gray-700 text-center leading-relaxed">
                 Tu es un <strong>{levelNames[formData.level].toLowerCase()}</strong> qui rêve de{" "}
                 <strong>{goalNames[formData.goal].toLowerCase()}</strong>.
               </p>
               <p className="text-gray-700 text-center leading-relaxed">
-                On va te montrer comment{" "}
+                {isFr ? "On va te montrer comment " : "We will show you how to "}
                 <strong>{problemNames[formData.problem].toLowerCase()}</strong> pour
-                devenir un vrai DJ.
+                {isFr ? " devenir un vrai DJ." : " and become a real DJ."}
               </p>
               {(formData.equipment === "none" || formData.equipment === "controller") &&
                 formData.targetDeck != null && (
                   <p className="text-sm text-primary font-medium text-center leading-relaxed">
-                    Parcours personnalisé :{" "}
-                    {formData.equipment === "none" ? "sans table pour l'instant" : "avec contrôleur"} — table visée :{" "}
-                    <strong>{targetDeckLabelFr(formData.targetDeck)}</strong>.
+                    {isFr ? "Parcours personnalisé" : "Personalized path"}:{" "}
+                    {formData.equipment === "none"
+                      ? isFr
+                        ? "sans table pour l'instant"
+                        : "without gear for now"
+                      : isFr
+                        ? "avec contrôleur"
+                        : "with controller"}{" "}
+                    — {isFr ? "table visée" : "target deck"}:{" "}
+                    <strong>{targetDeckLabels[formData.targetDeck]}</strong>.
                   </p>
                 )}
               <p className="text-xs text-gray-600 text-center leading-relaxed">
-                Le <strong>niveau 1</strong> est celui de <strong>ta table</strong> (FLX4 ou parcours FLX3 / XDJ-RX) ; ensuite, tu suis une progression commune par compétences avec des recommandations adaptées à ton matériel.
+                {isFr ? (
+                  <>
+                    Le <strong>niveau 1</strong> est celui de <strong>ta table</strong> (FLX4 ou parcours FLX3 /
+                    XDJ-RX) ; ensuite, tu suis une progression commune par compétences avec des recommandations
+                    adaptées à ton matériel.
+                  </>
+                ) : (
+                  <>
+                    <strong>Level 1</strong> is tied to <strong>your deck</strong> (FLX4 or FLX3 / XDJ-RX path);
+                    then you follow a shared skill progression with recommendations adapted to your setup.
+                  </>
+                )}
               </p>
 
             </div>
 
             <div className="bg-emerald-50/90 p-4 rounded-lg border border-emerald-200/80">
               <p className="text-sm text-emerald-900 text-center">
-                <strong>✓ Niveau 1 est gratuit</strong> - Commence maintenant et
-                débloque les autres niveaux en passant les quiz !
+                <strong>{isFr ? "✓ Niveau 1 est gratuit" : "✓ Level 1 is free"}</strong> —{" "}
+                {isFr
+                  ? "Commence maintenant et débloque les autres niveaux en passant les quiz !"
+                  : "Start now and unlock the next levels by passing quizzes!"}
               </p>
             </div>
 
@@ -807,11 +939,11 @@ export default function Onboarding() {
               {saveOnboardingMutation.isPending ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Chargement...
+                  {isFr ? "Chargement..." : "Loading..."}
                 </>
               ) : (
                 <>
-                  Commencer maintenant
+                  {isFr ? "Commencer maintenant" : "Start now"}
                   <ChevronRight size={18} />
                 </>
               )}

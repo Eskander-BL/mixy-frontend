@@ -15,6 +15,7 @@ type Props = {
  * Après un paiement (ou abonnement actif en guest) : enregistre email + mdp sur le **même** userId (backend).
  */
 export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props) {
+  const isFr = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") !== "en";
   const utils = trpc.useUtils();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,11 +28,15 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
         localStorage.setItem("userId", String(data.userId));
       }
       await utils.invalidate();
-      toast.success("Compte créé — tu peux te reconnecter sur un autre appareil avec ton email.");
+      toast.success(
+        isFr
+          ? "Compte créé — tu peux te reconnecter sur un autre appareil avec ton email."
+          : "Account created — you can now sign in on another device with your email.",
+      );
       onSuccess?.();
     },
     onError: (e) => {
-      toast.error(e.message || "Inscription impossible");
+      toast.error(e.message || (isFr ? "Inscription impossible" : "Registration failed"));
     },
   });
 
@@ -40,15 +45,19 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
     const uid = localStorage.getItem("userId");
     const gid = localStorage.getItem("guestId");
     if (!uid || !gid) {
-      toast.error("Session invité manquante. Reviens depuis l’appareil où tu t’es inscrit.");
+      toast.error(
+        isFr
+          ? "Session invité manquante. Reviens depuis l’appareil où tu t’es inscrit."
+          : "Missing guest session. Return from the device where you first signed up.",
+      );
       return;
     }
     if (password.length < 8) {
-      toast.error("Mot de passe : au moins 8 caractères.");
+      toast.error(isFr ? "Mot de passe : au moins 8 caractères." : "Password must be at least 8 characters.");
       return;
     }
     if (password !== password2) {
-      toast.error("Les mots de passe ne correspondent pas.");
+      toast.error(isFr ? "Les mots de passe ne correspondent pas." : "Passwords do not match.");
       return;
     }
     registerMut.mutate({
@@ -74,7 +83,7 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
           />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="reg-pw">Mot de passe</Label>
+          <Label htmlFor="reg-pw">{isFr ? "Mot de passe" : "Password"}</Label>
           <Input
             id="reg-pw"
             type="password"
@@ -86,7 +95,7 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
           />
         </div>
         <div className="space-y-1.5">
-          <Label htmlFor="reg-pw2">Confirmer le mot de passe</Label>
+          <Label htmlFor="reg-pw2">{isFr ? "Confirmer le mot de passe" : "Confirm password"}</Label>
           <Input
             id="reg-pw2"
             type="password"
@@ -98,7 +107,7 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
           />
         </div>
         <Button type="submit" className="w-full" disabled={registerMut.isPending}>
-          {registerMut.isPending ? "Enregistrement…" : "Créer mon compte"}
+          {registerMut.isPending ? (isFr ? "Enregistrement…" : "Saving...") : isFr ? "Créer mon compte" : "Create my account"}
         </Button>
       </form>
     );
@@ -107,12 +116,11 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
   return (
     <Card className="border-amber-200 bg-amber-50/50 max-w-lg">
       <CardHeader>
-        <CardTitle>En 2 minutes, sécurise ton accès</CardTitle>
+        <CardTitle>{isFr ? "En 2 minutes, sécurise ton accès" : "Secure your access in 2 minutes"}</CardTitle>
         <CardDescription>
-          Crée ton compte avec ton email : tu pourras te reconnecter sur un autre téléphone ou ordinateur avec le même
-          abonnement. Tu as fermé l’onglet ? Pas de panique : tant que ton abonnement est actif, ce message revient
-          ici sur le **même appareil / même navigateur** dès que tu ouvres le tableau de bord — tu n’es pas pénalisé
-          si tu finis l’inscription plus tard.
+          {isFr
+            ? "Crée ton compte avec ton email : tu pourras te reconnecter sur un autre téléphone ou ordinateur avec le même abonnement. Tu as fermé l’onglet ? Pas de panique : tant que ton abonnement est actif, ce message revient ici sur le même appareil / même navigateur dès que tu ouvres le tableau de bord."
+            : "Create your account with your email so you can sign in on another phone or computer with the same subscription. Closed the tab? No worries: as long as your subscription is active, this message appears again on the same device/browser when you open the dashboard."}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -129,7 +137,7 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="c-pw">Mot de passe (min. 8 caractères)</Label>
+            <Label htmlFor="c-pw">{isFr ? "Mot de passe (min. 8 caractères)" : "Password (min. 8 characters)"}</Label>
             <Input
               id="c-pw"
               type="password"
@@ -141,7 +149,7 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="c-pw2">Confirmer le mot de passe</Label>
+            <Label htmlFor="c-pw2">{isFr ? "Confirmer le mot de passe" : "Confirm password"}</Label>
             <Input
               id="c-pw2"
               type="password"
@@ -153,7 +161,7 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
             />
           </div>
           <Button type="submit" className="w-full" disabled={registerMut.isPending}>
-            {registerMut.isPending ? "Enregistrement…" : "Créer mon compte"}
+            {registerMut.isPending ? (isFr ? "Enregistrement…" : "Saving...") : isFr ? "Créer mon compte" : "Create my account"}
           </Button>
         </form>
       </CardContent>

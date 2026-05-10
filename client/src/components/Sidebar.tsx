@@ -87,13 +87,21 @@ const Sidebar: React.FC<SidebarProps> = ({
       }`}
     >
       <div className="flex items-center justify-between mb-2 pb-2 border-b border-gray-800">
-        {!collapsed && <h2 className="text-xl font-bold">Cours DJ</h2>}
+        {!collapsed && <h2 className="text-xl font-bold">{userLanguage === "fr" ? "Cours DJ" : "DJ Courses"}</h2>}
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => setCollapsed((prev) => !prev)}
             className="h-8 w-8 hidden md:flex items-center justify-center rounded-[5px] bg-gray-800 hover:bg-gray-700"
-            aria-label={collapsed ? "Ouvrir la barre des niveaux" : "Fermer la barre des niveaux"}
+            aria-label={
+              collapsed
+                ? userLanguage === "fr"
+                  ? "Ouvrir la barre des niveaux"
+                  : "Open level sidebar"
+                : userLanguage === "fr"
+                  ? "Fermer la barre des niveaux"
+                  : "Close level sidebar"
+            }
           >
             {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
           </button>
@@ -101,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             type="button"
             onClick={onCloseMobile}
             className="h-8 w-8 flex md:hidden items-center justify-center rounded-[5px] bg-gray-800 hover:bg-gray-700 text-xs"
-            aria-label="Fermer la navigation mobile"
+            aria-label={userLanguage === "fr" ? "Fermer la navigation mobile" : "Close mobile navigation"}
           >
             ✕
           </button>

@@ -11,7 +11,8 @@ import { toast } from "sonner";
  * Connexion email + mdp (compte créé après inscription post-paiement).
  */
 export default function LoginPage() {
-  useDocumentTitle("Connexion");
+  const isFr = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") !== "en";
+  useDocumentTitle(isFr ? "Connexion" : "Sign in");
   const [, navigate] = useLocation();
   const utils = trpc.useUtils();
   const [email, setEmail] = useState("");
@@ -24,11 +25,11 @@ export default function LoginPage() {
       }
       localStorage.removeItem("guestId");
       await utils.invalidate();
-      toast.success("Connexion réussie");
+      toast.success(isFr ? "Connexion réussie" : "Signed in successfully");
       navigate("/dashboard");
     },
     onError: (e) => {
-      toast.error(e.message || "Connexion impossible");
+      toast.error(e.message || (isFr ? "Connexion impossible" : "Unable to sign in"));
     },
   });
 
@@ -41,8 +42,12 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-amber-50/40 to-white">
       <Card className="w-full max-w-md shadow-md">
         <CardHeader>
-          <CardTitle>Connexion</CardTitle>
-          <CardDescription>Utilise l’e-mail et le mot de passe de ton compte Mixy.</CardDescription>
+          <CardTitle>{isFr ? "Connexion" : "Sign in"}</CardTitle>
+          <CardDescription>
+            {isFr
+              ? "Utilise l’e-mail et le mot de passe de ton compte Mixy."
+              : "Use your Mixy account email and password."}
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit} className="space-y-4">
@@ -58,7 +63,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="login-pw">Mot de passe</Label>
+              <Label htmlFor="login-pw">{isFr ? "Mot de passe" : "Password"}</Label>
               <Input
                 id="login-pw"
                 type="password"
@@ -69,12 +74,12 @@ export default function LoginPage() {
               />
             </div>
             <Button type="submit" className="w-full" disabled={loginMut.isPending}>
-              {loginMut.isPending ? "Connexion…" : "Se connecter"}
+              {loginMut.isPending ? (isFr ? "Connexion…" : "Signing in...") : isFr ? "Se connecter" : "Sign in"}
             </Button>
             <p className="text-sm text-center text-muted-foreground">
-              Pas encore de compte ?{" "}
+              {isFr ? "Pas encore de compte ?" : "No account yet?"}{" "}
               <Link href="/onboarding" className="text-primary underline underline-offset-2">
-                Démarrer
+                {isFr ? "Démarrer" : "Get started"}
               </Link>
             </p>
           </form>

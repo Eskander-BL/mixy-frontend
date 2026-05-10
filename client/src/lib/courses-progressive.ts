@@ -2239,13 +2239,63 @@ export function getAllModules(
   language: Language = "fr",
 ): CourseModule[] {
   const tailFromLevel4 = courseModulesFromLevel2.slice(2);
+  const withStageProgression = (modules: CourseModule[]): CourseModule[] => {
+    if (skillTier === "beginner") return modules;
+    const isAdvanced = skillTier === "advanced";
+    const stageTitlePrefix =
+      language === "fr"
+        ? isAdvanced
+          ? "Parcours Pro"
+          : "Parcours Intermédiaire"
+        : isAdvanced
+          ? "Pro Path"
+          : "Intermediate Path";
+    const recapTitle =
+      language === "fr"
+        ? isAdvanced
+          ? "Récap Intermédiaire"
+          : "Récap Débutant"
+        : isAdvanced
+          ? "Intermediate Recap"
+          : "Beginner Recap";
+    const recapText =
+      language === "fr"
+        ? isAdvanced
+          ? "Récap utile: si tu viens du parcours intermédiaire, garde les réflexes de transitions propres, gestion d'énergie et stabilité en situation. Ici on monte vers un niveau club-ready avec plus de précision d'exécution."
+          : "Récap utile: si tu viens du parcours débutant, garde les fondamentaux BPM, EQ, transitions et structure de set. Ici, on passe sur une exécution plus rapide, plus propre et plus stratégique."
+        : isAdvanced
+          ? "Helpful recap: if you come from the intermediate path, keep clean transitions, energy management, and stable execution habits. This path pushes toward club-ready precision."
+          : "Helpful recap: if you come from the beginner path, keep BPM, EQ, transition and set-structure fundamentals. This path moves to faster, cleaner and more strategic execution.";
+
+    return modules.map((module) => {
+      if (module.level < 4) return module;
+      const firstSlide = module.slides[0];
+      const patchedFirstSlide = firstSlide
+        ? {
+            ...firstSlide,
+            subtitle: `${recapTitle} — ${firstSlide.subtitle}`,
+            content: `${recapText}\n\n${firstSlide.content}`,
+          }
+        : firstSlide;
+      return {
+        ...module,
+        title: `${stageTitlePrefix} — ${module.title}`,
+        description:
+          language === "fr"
+            ? `${module.description} Focus ${isAdvanced ? "pro": "intermédiaire"}: exécution sous contrainte et progression vers l'étape suivante.`
+            : `${module.description} ${isAdvanced ? "Pro" : "Intermediate"} focus: execution under constraints and progression to the next stage.`,
+        slides: module.slides.map((slide, idx) => (idx === 0 && patchedFirstSlide ? patchedFirstSlide : slide)),
+      };
+    });
+  };
+
   if (skillTier === "beginner") {
     const level1 = track === "flx4" ? level1ModuleFlx4 : level1ModuleFlx3Xdj;
     return localizeModules([level1, ...courseModulesFromLevel2], language);
   }
   const accelTier = skillTier === "advanced" ? "advanced" : "intermediate";
   const accelerated = buildAcceleratedLevels123(track, accelTier);
-  return localizeModules([...accelerated, ...tailFromLevel4], language);
+  return withStageProgression(localizeModules([...accelerated, ...tailFromLevel4], language));
 }
 
 /** Défaut = parcours majoritaire FLX4 (communauté Instagram), utilisateur débutant. */
@@ -2391,37 +2441,37 @@ const LEVEL_VIDEO_PICKS_COMMON: Record<number, RecommendedLearningVideo[]> = {
 const LEVEL_VIDEO_PICKS_COMMON_FR: Record<number, RecommendedLearningVideo[]> = {
   1: [
     {
-      title: "4 Étapes Pour Devenir DJ Producteur (en Partant de ZÉRO)",
-      url: "https://www.youtube.com/watch?v=Ubm9R3VKEqg",
-      reason: "Contenu francophone motivant pour cadrer une progression DJ long terme.",
+      title: "Ce que vous devez savoir avant de vous lancer sur les réseaux",
+      url: "https://www.youtube.com/watch?v=FlDeqQMj9II",
+      reason: "Complément FR utile pour poser une posture sérieuse dès le départ.",
     },
   ],
   2: [
     {
-      title: "4 Étapes Pour Devenir DJ Producteur (en Partant de ZÉRO)",
-      url: "https://www.youtube.com/watch?v=Ubm9R3VKEqg",
-      reason: "Explication en français de la logique d'apprentissage progressive.",
+      title: "Ce que vous devez savoir avant de vous lancer sur les réseaux",
+      url: "https://www.youtube.com/watch?v=FlDeqQMj9II",
+      reason: "Ajoute une perspective FR sur discipline et régularité de pratique.",
     },
   ],
   3: [
     {
-      title: "4 Étapes Pour Devenir DJ Producteur (en Partant de ZÉRO)",
-      url: "https://www.youtube.com/watch?v=Ubm9R3VKEqg",
-      reason: "Renforce la vision d'ensemble avant les transitions avancées.",
+      title: "Ce que vous devez savoir avant de vous lancer sur les réseaux",
+      url: "https://www.youtube.com/watch?v=FlDeqQMj9II",
+      reason: "Renforce l'approche FR sur la constance avant d'accélérer techniquement.",
     },
   ],
   4: [
     {
-      title: "4 Étapes Pour Devenir DJ Producteur (en Partant de ZÉRO)",
-      url: "https://www.youtube.com/watch?v=Ubm9R3VKEqg",
-      reason: "Support francophone complémentaire à la progression harmonique.",
+      title: "Ce que vous devez savoir avant de vous lancer sur les réseaux",
+      url: "https://www.youtube.com/watch?v=FlDeqQMj9II",
+      reason: "Apporte un angle FR sur la cohérence artistique et la direction.",
     },
   ],
   5: [
     {
-      title: "4 Étapes Pour Devenir DJ Producteur (en Partant de ZÉRO)",
-      url: "https://www.youtube.com/watch?v=Ubm9R3VKEqg",
-      reason: "Aide à garder une trajectoire claire vers le niveau pro.",
+      title: "Ce que vous devez savoir avant de vous lancer sur les réseaux",
+      url: "https://www.youtube.com/watch?v=FlDeqQMj9II",
+      reason: "Soutient la progression FR autour du positionnement et de la vision.",
     },
   ],
   6: [
@@ -2611,17 +2661,18 @@ export function getRecommendedVideosForLevel(
   track: CourseTrackId,
   language: Language = "fr",
 ): RecommendedLearningVideo[] {
+  const dedupeByUrl = (videos: RecommendedLearningVideo[]) =>
+    videos.filter((item, idx, arr) => arr.findIndex((x) => x.url === item.url) === idx);
+
   if (language === "fr") {
     const primary = PRIMARY_LEVEL_VIDEO_BY_LANGUAGE.fr[level];
     const extra = LEVEL_VIDEO_PICKS_COMMON_FR[level] ?? [];
-    return [primary, ...extra].filter(Boolean).slice(0, 3);
+    return dedupeByUrl([primary, ...extra].filter(Boolean)).slice(0, 3);
   }
   const trackSpecific = LEVEL_VIDEO_PICKS_BY_TRACK[track]?.[level] ?? [];
   const common = LEVEL_VIDEO_PICKS_COMMON[level] ?? [];
   const merged = [...trackSpecific, ...common];
-  const deduped = merged.filter(
-    (item, idx, arr) => arr.findIndex((x) => x.url === item.url) === idx
-  );
+  const deduped = dedupeByUrl(merged);
   if (language !== "en") return deduped.slice(0, 3);
   return deduped.slice(0, 3).map((v) => ({
     ...v,
