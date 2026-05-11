@@ -27,7 +27,7 @@ function PageFallback() {
   return (
     <div className="flex items-center justify-center min-h-[40vh] text-gray-500">
       <Loader2 className="w-6 h-6 animate-spin" aria-hidden />
-      <span className="sr-only">Loading\u2026</span>
+      <span className="sr-only">Loading&hellip;</span>
     </div>
   );
 }
