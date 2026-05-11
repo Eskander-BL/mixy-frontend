@@ -8,7 +8,7 @@ import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import type { TargetDeck } from "@/lib/learning-profile";
-import { GEAR_PRICE_RANGE_FR, persistMixyLearningProfile } from "@/lib/learning-profile";
+import { persistMixyLearningProfile } from "@/lib/learning-profile";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 
 type OnboardingStep =
@@ -294,6 +294,9 @@ export default function Onboarding() {
     }
     if (formData.equipment === "turntables" || formData.equipment === "other") {
       td = null;
+    }
+    if (formData.equipment === "none" && (td === "undecided" || !td)) {
+      td = "flx4";
     }
     setFormData((prev) => ({ ...prev, targetDeck: td }));
     setStep("problem");
@@ -616,19 +619,9 @@ export default function Onboarding() {
                 {isFr ? "Quel matériel as-tu ?" : "What gear do you have?"}
               </h1>
               <p className="text-gray-600">
-                {isFr ? (
-                  <>
-                    Le <strong>niveau 1</strong> change selon ta table (parcours FLX4 ou parcours FLX3 / XDJ-RX).
-                    Du <strong>niveau 2</strong> à la fin, la méthode reste commune mais les objectifs montent
-                    en difficulté, avec des conseils adaptés à ton setup.
-                  </>
-                ) : (
-                  <>
-                    <strong>Level 1</strong> changes based on your deck (FLX4 path or FLX3 / XDJ-RX path). From
-                    <strong> level 2</strong> onward, the method is shared, with progressively harder goals and
-                    setup-specific advice.
-                  </>
-                )}
+                {isFr
+                  ? "Pas de matos ? C'est pas grave du tout. Tu peux commencer sans et te rep\u00e9rer tranquillement pour mieux choisir ta table plus tard. Ceux qui ont d\u00e9j\u00e0 du mat\u00e9riel auront des exercices adapt\u00e9s \u00e0 leur setup."
+                  : "No gear yet? That's totally fine. You can start without any and take your time to figure out which deck suits you best. If you already have gear, exercises will be adapted to your setup."}
               </p>
             </div>
 
@@ -699,34 +692,6 @@ export default function Onboarding() {
                       </>
                     )}
                   </p>
-                  <div className="rounded-lg border border-amber-200/80 bg-white/85 p-3 text-xs text-amber-950 space-y-2">
-                    <p className="font-semibold">
-                      {isFr
-                        ? "Repères prix indicatifs (France / Europe — à vérifier neuf / promo / occasion)"
-                        : "Indicative price ranges (France / Europe — verify new / promo / used)"}
-                    </p>
-                    <ul className="space-y-2 list-none pl-0 leading-relaxed">
-                      <li>
-                        <strong>DDJ-FLX4</strong> —{" "}
-                        {isFr ? "compacte, 2 voies, parfaite pour apprendre Rekordbox" : "compact, 2-channel, great to learn Rekordbox"}:{" "}
-                        {GEAR_PRICE_RANGE_FR.flx4}.
-                      </li>
-                      <li>
-                        <strong>DDJ-FLX3</strong> —{" "}
-                        {isFr
-                          ? "plus de contrôle type club (Smart CFX, usage plus pro)"
-                          : "more club-style control (Smart CFX, more pro workflow)"}:{" "}
-                        {GEAR_PRICE_RANGE_FR.flx3}.
-                      </li>
-                      <li>
-                        <strong>XDJ-RX</strong> —{" "}
-                        {isFr
-                          ? "tout-en-un avec écrans, USB Rekordbox sans PC en cabine"
-                          : "all-in-one with screens, Rekordbox USB without a laptop in the booth"}:{" "}
-                        {GEAR_PRICE_RANGE_FR.xdj_rx}.
-                      </li>
-                    </ul>
-                  </div>
                   <div className="space-y-2">
                     {TARGET_DECK_CHOICES.map((deck) => (
                       <button
@@ -796,7 +761,7 @@ export default function Onboarding() {
         {step === "problem" && (
           <div className="space-y-6 animate-fadeIn">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
                 {isFr ? "Quel est ton défi principal ?" : "What is your main challenge?"}
               </h1>
               <p className="text-gray-600">
@@ -818,7 +783,11 @@ export default function Onboarding() {
                 <button
                   key={problem}
                   onClick={() => {
-                    setFormData({ ...formData, problem });
+                    let chosen = problem;
+                    if (problem === "unknown" && formData.equipment === "none") {
+                      chosen = "structuration";
+                    }
+                    setFormData({ ...formData, problem: chosen });
                     setStep("summary");
                   }}
                   className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
@@ -920,6 +889,13 @@ export default function Onboarding() {
                     <strong>{targetDeckLabels[formData.targetDeck]}</strong>.
                   </p>
                 )}
+              {formData.equipment === "none" && formData.targetDeck === "flx4" && (
+                <p className="text-xs text-amber-700 bg-amber-50 rounded-md p-2 text-center leading-relaxed">
+                  {isFr
+                    ? "On t'a mis sur le parcours FLX4 par défaut — c'est la table la plus simple pour débuter. Tu pourras changer plus tard en relançant l'onboarding."
+                    : "We set you on the FLX4 path by default — it's the simplest deck to start with. You can change later by re-running the onboarding."}
+                </p>
+              )}
               <p className="text-xs text-gray-600 text-center leading-relaxed">
                 {isFr ? (
                   <>
