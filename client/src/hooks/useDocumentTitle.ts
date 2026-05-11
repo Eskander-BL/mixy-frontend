@@ -1,15 +1,19 @@
 import { useEffect } from "react";
-import { buildDocumentTitle, SEO_DEFAULT_TITLE } from "@shared/seo";
+import { buildDocumentTitle, SEO_DEFAULT_TITLE_FR, SEO_DEFAULT_TITLE_EN } from "@shared/seo";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
-/**
- * Titre d’onglet par route (SPA). N’affecte pas les cartes de partage social (définies dans index.html).
- */
 export function useDocumentTitle(section?: string) {
+  const { language } = useLanguageContext();
+
   useEffect(() => {
     const previous = document.title;
-    document.title = section ? buildDocumentTitle(section) : SEO_DEFAULT_TITLE;
+    if (section) {
+      document.title = buildDocumentTitle(section);
+    } else {
+      document.title = language === "fr" ? SEO_DEFAULT_TITLE_FR : SEO_DEFAULT_TITLE_EN;
+    }
     return () => {
       document.title = previous;
     };
-  }, [section]);
+  }, [section, language]);
 }

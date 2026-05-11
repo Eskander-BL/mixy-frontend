@@ -13,7 +13,8 @@ export default function PaywallPage() {
   const [, params] = useRoute("/paywall/:level");
   const [, navigate] = useLocation();
   const [loading, setLoading] = useState(false);
-  const { t } = useLanguageContext();
+  const { t, language } = useLanguageContext();
+  const isFr = language === "fr";
   const createCheckoutSessionMutation = trpc.stripe.createCheckoutSession.useMutation();
   const userIdNum = parseInt(localStorage.getItem("userId") || "0", 10);
 
@@ -24,7 +25,7 @@ export default function PaywallPage() {
     );
 
   const level = params?.level ? parseInt(params.level) : 1;
-  useDocumentTitle(`S'abonner — niveau ${level}`);
+  useDocumentTitle(isFr ? `S'abonner — niveau ${level}` : `Subscribe — level ${level}`);
 
   useLayoutEffect(() => {
     scrollAppMainToTop();
@@ -135,7 +136,7 @@ export default function PaywallPage() {
 
         <div className="mb-6">
           <div className="text-center">
-            <p className="text-sm text-gray-600 mb-1">Pricing</p>
+            <p className="text-sm text-gray-600 mb-1">{isFr ? "Tarif" : "Pricing"}</p>
             <p className="text-4xl font-bold text-gray-900">
               {t("paywall.price")}
             </p>

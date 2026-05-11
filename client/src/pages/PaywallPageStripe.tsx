@@ -12,7 +12,8 @@ export default function PaywallPageStripe() {
   const [loading, setLoading] = useState(false);
   const [consentImmediate, setConsentImmediate] = useState(false);
   const [consentError, setConsentError] = useState<string | null>(null);
-  const { t } = useLanguageContext();
+  const { t, language } = useLanguageContext();
+  const isFr = language === "fr";
 
   const level = params?.level ? parseInt(params.level) : 1;
   const userId = parseInt(localStorage.getItem("userId") || "0");
@@ -126,12 +127,12 @@ export default function PaywallPageStripe() {
 
         <div className="mb-6">
           <div className="text-center">
-            <p className="text-sm text-gray-600 mb-1">Pricing</p>
+            <p className="text-sm text-gray-600 mb-1">{isFr ? "Tarif" : "Pricing"}</p>
             <p className="text-4xl font-bold text-gray-900">
               {t("paywall.price")}
             </p>
             <p className="text-xs text-gray-500 mt-2">
-              Cancel anytime
+              {isFr ? "Annulation à tout moment" : "Cancel anytime"}
             </p>
           </div>
         </div>

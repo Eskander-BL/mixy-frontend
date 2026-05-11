@@ -884,13 +884,20 @@ export default function Onboarding() {
                 <strong>{isFr ? `Salut ${formData.name} !` : `Hey ${formData.name}!`}</strong>
               </p>
               <p className="text-gray-700 text-center leading-relaxed">
-                Tu es un <strong>{levelNames[formData.level].toLowerCase()}</strong> qui rêve de{" "}
-                <strong>{goalNames[formData.goal].toLowerCase()}</strong>.
+                {isFr ? (
+                  <>Tu es un <strong>{levelNames[formData.level].toLowerCase()}</strong> qui rêve de{" "}
+                  <strong>{goalNames[formData.goal].toLowerCase()}</strong>.</>
+                ) : (
+                  <>You're a <strong>{levelNames[formData.level].toLowerCase()}</strong> who dreams of{" "}
+                  <strong>{goalNames[formData.goal].toLowerCase()}</strong>.</>
+                )}
               </p>
               <p className="text-gray-700 text-center leading-relaxed">
-                {isFr ? "On va te montrer comment " : "We will show you how to "}
-                <strong>{problemNames[formData.problem].toLowerCase()}</strong> pour
-                {isFr ? " devenir un vrai DJ." : " and become a real DJ."}
+                {isFr ? (
+                  <>On va te montrer comment <strong>{problemNames[formData.problem].toLowerCase()}</strong> pour devenir un vrai DJ.</>
+                ) : (
+                  <>We will show you how to <strong>{problemNames[formData.problem].toLowerCase()}</strong> and become a real DJ.</>
+                )}
               </p>
               {(formData.equipment === "none" || formData.equipment === "controller") &&
                 formData.targetDeck != null && (

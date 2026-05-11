@@ -491,7 +491,7 @@ export default function Dashboard() {
                 <p className="text-xs font-medium text-gray-500 mb-0.5">{isFr ? "Niveau" : "Level"} {lvl}</p>
                 <p className="text-xs text-gray-600">
                   {isFr
-                    ? "Termine d&apos;abord les niveaux précédents pour débloquer celui-ci."
+                    ? "Termine d'abord les niveaux précédents pour débloquer celui-ci."
                     : "Complete previous levels first to unlock this one."}
                 </p>
               </Card>
