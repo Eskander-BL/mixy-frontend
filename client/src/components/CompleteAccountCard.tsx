@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 type Props = {
   onSuccess?: () => void;
@@ -15,7 +16,8 @@ type Props = {
  * Après un paiement (ou abonnement actif en guest) : enregistre email + mdp sur le **même** userId (backend).
  */
 export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props) {
-  const isFr = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") !== "en";
+  const { language } = useLanguageContext();
+  const isFr = language === "fr";
   const utils = trpc.useUtils();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

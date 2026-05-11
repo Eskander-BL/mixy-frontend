@@ -1,12 +1,14 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 /**
  * CGU / mentions — texte type à personnaliser (raison sociale, SIREN, contact juridique) avant pub forte.
  */
 export default function LegalNoticePage() {
-  const isFr = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") !== "en";
+  const { language } = useLanguageContext();
+  const isFr = language === "fr";
   useDocumentTitle(isFr ? "Mentions légales & CGU" : "Legal notice & Terms");
 
   return (

@@ -30,9 +30,11 @@ import { courseTrackLabelFr, targetDeckLabelFr } from "@/lib/learning-profile";
 import { CompleteAccountCard } from "@/components/CompleteAccountCard";
 import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
 import { toast } from "sonner";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function Dashboard() {
-  const isFr = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") !== "en";
+  const { language } = useLanguageContext();
+  const isFr = language === "fr";
   useDocumentTitle(isFr ? "Tableau de bord" : "Dashboard");
   const [location, navigate] = useLocation();
   const {
@@ -104,8 +106,7 @@ export default function Dashboard() {
     return () => clearTimeout(t);
   }, [needCompleteAccount]);
 
-  const languagePref =
-    (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") === "en" ? "en" : "fr";
+  const languagePref = language;
   const modulesForUser = useMemo(
     () => getAllModules(courseTrack, skillLevel, languagePref),
     [courseTrack, skillLevel, languagePref]

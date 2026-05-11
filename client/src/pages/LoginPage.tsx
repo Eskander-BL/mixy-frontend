@@ -7,11 +7,13 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { toast } from "sonner";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 /**
  * Connexion email + mdp (compte créé après inscription post-paiement).
  */
 export default function LoginPage() {
-  const isFr = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") !== "en";
+  const { language } = useLanguageContext();
+  const isFr = language === "fr";
   useDocumentTitle(isFr ? "Connexion" : "Sign in");
   const [, navigate] = useLocation();
   const utils = trpc.useUtils();
