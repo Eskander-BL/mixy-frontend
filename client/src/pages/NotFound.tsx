@@ -3,9 +3,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Home } from "lucide-react";
 import { useLocation } from "wouter";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function NotFound() {
-  useDocumentTitle("Page introuvable");
+  const { language } = useLanguageContext();
+  const isFr = language === "fr";
+  useDocumentTitle(isFr ? "Page introuvable" : "Page not found");
   const [, setLocation] = useLocation();
 
   const handleGoHome = () => {
@@ -26,13 +29,13 @@ export default function NotFound() {
           <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
 
           <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page introuvable
+            {isFr ? "Page introuvable" : "Page not found"}
           </h2>
 
           <p className="text-slate-600 mb-8 leading-relaxed">
-            Cette adresse n’existe pas ou a été déplacée.
+            {isFr ? "Cette adresse n'existe pas ou a été déplacée." : "This page doesn't exist or has been moved."}
             <br />
-            Tu peux repartir de l’accueil.
+            {isFr ? "Tu peux repartir de l'accueil." : "You can go back to the home page."}
           </p>
 
           <div
@@ -44,7 +47,7 @@ export default function NotFound() {
               className="bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
             >
               <Home className="w-4 h-4 mr-2" />
-              Accueil
+              {isFr ? "Accueil" : "Home"}
             </Button>
           </div>
         </CardContent>
