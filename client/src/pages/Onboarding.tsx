@@ -716,7 +716,7 @@ export default function Onboarding() {
               <div className="space-y-2">
                 <p className="text-xs font-medium text-gray-600">
                   {isFr
-                    ? "Ta table (optionnel — utile si c&apos;est une FLX ou un XDJ-RX)"
+                    ? "Ta table (optionnel — utile si c'est une FLX ou un XDJ-RX)"
                     : "Your deck (optional — useful if it is a FLX or XDJ-RX)"}
                 </p>
                 <div className="grid grid-cols-1 gap-2">
@@ -761,7 +761,7 @@ export default function Onboarding() {
         {step === "problem" && (
           <div className="space-y-6 animate-fadeIn">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-[1.35rem] sm:text-3xl font-bold text-gray-900 mb-2 leading-tight">
                 {isFr ? "Quel est ton défi principal ?" : "What is your main challenge?"}
               </h1>
               <p className="text-gray-600">

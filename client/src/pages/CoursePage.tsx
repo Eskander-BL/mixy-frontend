@@ -8,7 +8,7 @@ import {
   getModuleByLevel,
   getPrimaryVideoForLevel,
   getPreviousLevelRecap,
-  getRecommendedVideosForLevel,
+
   resolveSlideVideoUrlForLanguage,
   getSlideFromModule,
 } from "@/lib/courses-progressive";
@@ -83,7 +83,7 @@ export default function CoursePage() {
   const pathCallout = getLearningCallout(learningProfile, level, currentSlide);
   const previousRecap =
     currentSlide === 1 ? getPreviousLevelRecap(level, courseTrack, skillLevel, language) : null;
-  const recommendedVideos = getRecommendedVideosForLevel(level, courseTrack, language);
+
   const localizedSlideVideoUrl = resolveSlideVideoUrlForLanguage(slide.videoUrl, language);
   const primaryVideo = getPrimaryVideoForLevel(level, language);
   const finalVideoUrl = localizedSlideVideoUrl ?? primaryVideo?.url ?? null;
@@ -175,28 +175,6 @@ export default function CoursePage() {
                 </Card>
               ) : null}
 
-              {recommendedVideos.length > 0 ? (
-                <Card className="p-4 md:p-5 bg-amber-50 border border-amber-100 shadow-sm rounded-xl">
-                  <p className="text-xs uppercase tracking-wide text-amber-700 font-semibold mb-2">
-                    {language === "fr" ? "Vidéos recommandées" : "Recommended videos"}
-                  </p>
-                  <ul className="space-y-3">
-                    {recommendedVideos.map((video) => (
-                      <li key={video.url} className="text-sm">
-                        <a
-                          href={video.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="font-semibold text-amber-900 hover:underline"
-                        >
-                          {video.title}
-                        </a>
-                        <p className="text-amber-900/80 mt-1">{video.reason}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </Card>
-              ) : null}
             </div>
           </aside>
           <div className="lg:col-span-3 space-y-8">
