@@ -6,6 +6,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, CreditCard, Lock, Mail, Play, Undo2 } from "lucide-react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { trpc } from "@/lib/trpc";
 import { getAllModules } from "@/lib/courses-progressive";
 import {
@@ -275,6 +276,7 @@ export default function Dashboard() {
                   <CreditCard className="size-4 text-primary" />
                 </button>
               ) : null}
+              <LanguageSwitcher />
             </div>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">

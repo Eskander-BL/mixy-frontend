@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import logo from "@/assets/logo.webp";
 import { brand } from "@/assets/brand-assets";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function Home() {
   const [, navigate] = useLocation();
-  const isFr = (typeof window !== "undefined" ? localStorage.getItem("language") : "fr") !== "en";
+  const { language } = useLanguageContext();
+  const isFr = language === "fr";
   useDocumentTitle();
 
   useEffect(() => {
@@ -22,7 +25,10 @@ export default function Home() {
   }, [navigate]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30 flex items-center justify-center p-4">
+    <main className="min-h-screen bg-gradient-to-br from-amber-50/40 via-white to-orange-50/30 flex items-center justify-center p-4 relative">
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher />
+      </div>
       <div className="max-w-2xl text-center">
         <img
           src={logo}
