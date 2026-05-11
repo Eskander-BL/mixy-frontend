@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { courseTrackLabelFr, targetDeckLabelFr } from "@/lib/learning-profile";
+import { courseTrackLabel, targetDeckLabel } from "@/lib/learning-profile";
 import { CompleteAccountCard } from "@/components/CompleteAccountCard";
 import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
 import { toast } from "sonner";
@@ -574,8 +574,8 @@ export default function Dashboard() {
             {learningProfile?.equipment === "controller" && learningProfile?.targetDeck && (
               <p>
                 {isFr
-                  ? `Les exercices et conseils sont adapt\u00e9s \u00e0 ton ${targetDeckLabelFr(learningProfile.targetDeck)} pour que ce soit plus simple \u00e0 suivre.`
-                  : `Exercises and tips are adapted to your ${targetDeckLabelFr(learningProfile.targetDeck)} so it\u2019s easier to follow.`}
+                  ? `Les exercices et conseils sont adapt\u00e9s \u00e0 ton ${targetDeckLabel(learningProfile.targetDeck, "fr")} pour que ce soit plus simple \u00e0 suivre.`
+                  : `Exercises and tips are adapted to your ${targetDeckLabel(learningProfile.targetDeck, "en")} so it\u2019s easier to follow.`}
               </p>
             )}
             <p>

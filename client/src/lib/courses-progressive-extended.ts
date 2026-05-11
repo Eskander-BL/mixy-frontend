@@ -22,56 +22,38 @@ export const level4Module: CourseModule = {
       subtitle: "Pourquoi certaines chansons sonnent bien ensemble",
       videoUrl: "https://www.youtube.com/embed/AxkIQi81JP0",
       videoDescription:
-        "Découvre comment les clés musicales affectent la compatibilité entre deux chansons.",
-      content: `Les Clés Musicales: C'est Quoi?
+        "On t'explique comment les clés musicales changent tout dans la compatibilité entre deux morceaux.",
+      content: `Bon, maintenant on entre dans un truc vraiment cool : le mixage harmonique.
 
-Une clé musicale c'est comme la "tonalité" d'une chanson. Chaque chanson a une clé.
+Chaque morceau a une tonalité — sa clé musicale. C'est un peu comme sa couleur. Tu peux avoir du Do majeur, du La mineur, du Ré majeur, du Sol mineur… y'en a plein.
 
-Exemples de Clés:
-- Do majeur
-- La mineur
-- Ré majeur
-- Sol mineur
+Et voilà le truc : quand tu mixes deux morceaux ensemble, si leurs clés sont compatibles, la transition sonne naturelle, musicale, fluide. La foule ne sait pas pourquoi, mais elle sent que c'est beau.
 
-Pourquoi C'est Important?
+Par contre, si tu balances un morceau en Do majeur contre un en Fa dièse majeur… aïe. Ça grince. Ça sonne faux. Et la piste le ressent immédiatement.
 
-Imagine deux chansons:
-- Chanson A: Clé de Do majeur
-- Chanson B: Clé de Fa# majeur
+C'est là que le mixage harmonique entre en jeu. Au lieu de laisser le hasard décider, tu choisis des morceaux dont les clés s'entendent bien ensemble. Résultat ? Tes transitions passent d'un niveau « correct » à un niveau « waow, c'est un vrai pro ».
 
-Si tu les mixes directement, ça sonne "bizarre" et désagréable. C'est parce que les clés ne s'harmonisent pas.
+Et devine quoi : il existe un outil magique pour ça. Ça s'appelle le Camelot Wheel. C'est un cercle qui te montre en un coup d'œil quelles clés sont compatibles entre elles. On va le voir en détail juste après.
 
-Mais si tu trouves deux chansons dans des clés compatibles:
-- Chanson A: Clé de Do majeur
-- Chanson B: Clé de Sol majeur (compatible avec Do)
-
-Résultat: Une harmonie naturelle et fluide!
-
-Le Secret du Mixage Harmonique:
-
-Les meilleures transitions musicales utilisent des clés compatibles. C'est ce qui rend un DJ vraiment professionnel.
-
-Camelot Wheel:
-
-Il existe un outil appelé "Camelot Wheel" qui montre quelles clés sont compatibles entre elles. C'est la base du mixage harmonique moderne.`,
+C'est ici que ton mix commence à avoir une vraie identité musicale. Accroche-toi, c'est un game-changer.`,
       keyTakeaway:
-        "Les clés musicales compatibles créent des transitions harmoniques naturelles et fluides.",
+        "Quand les clés sont compatibles, ta transition devient musicale et naturelle — c'est ce qui sépare un bon DJ d'un très bon DJ.",
       exercise: {
-        title: "Identifie les clés de tes chansons préférées",
-        description: "Apprends à reconnaître les clés musicales",
+        title: "Repère les clés de tes morceaux",
+        description: "Commence à voir la musique en couleurs harmoniques",
         steps: [
-          "Choisis 5 chansons que tu aimes",
-          "Utilise Shazam ou une app pour voir leur clé musicale",
-          "Note les clés sur un papier",
-          "Essaie de trouver des paires de chansons avec des clés compatibles",
-          "Écoute ces paires ensemble - remarque comment elles sonnent",
+          "Prends 5 morceaux que tu kiffes et que tu joues souvent",
+          "Utilise Shazam, Rekordbox ou Mixed In Key pour identifier leur clé",
+          "Note chaque clé à côté du titre du morceau",
+          "Essaie de trouver des paires dont les clés sont proches",
+          "Écoute ces paires en même temps — tu vas sentir la différence",
         ],
         estimatedTime: "10 minutes",
       },
       tips: [
-        "Le mixage harmonique demande de la pratique",
-        "Commence par des clés très proches",
-        "Utilise le Camelot Wheel comme référence",
+        "Le mixage harmonique, ça s'apprend progressivement — pas de pression",
+        "Commence avec des clés très proches, c'est déjà un énorme upgrade",
+        "Garde le Camelot Wheel sous les yeux quand tu prépares tes sets",
       ],
     },
     {
@@ -80,59 +62,47 @@ Il existe un outil appelé "Camelot Wheel" qui montre quelles clés sont compati
       subtitle: "Un outil simple pour trouver les clés compatibles",
       videoUrl: "https://www.youtube.com/embed/gxq36qom2LI",
       videoDescription:
-        "Vois comment utiliser le Camelot Wheel pour trouver les clés compatibles instantanément.",
-      content: `Le Camelot Wheel Expliqué:
+        "Découvre comment utiliser le Camelot Wheel pour repérer instantanément les clés qui matchent.",
+      content: `OK, le Camelot Wheel — c'est ton arme secrète à partir de maintenant.
 
-Le Camelot Wheel est un cercle avec 12 positions. Chaque position représente une clé musicale.
+C'est un cercle avec 12 positions. Chaque position = une clé musicale, avec un numéro et une lettre (genre 8A, 5B, etc.). Simple.
 
-Comment Ça Marche?
+Et la règle est ultra-facile à retenir :
 
-1. Trouve la clé de ta première chanson (ex: 8A)
-2. Regarde le Camelot Wheel
-3. Les clés compatibles sont:
-   - La position directement à côté (8B)
-   - La position +1 (9A)
-   - La position -1 (7A)
+Si ta chanson est en 8A, les clés compatibles sont :
+- 8B (même numéro, l'autre lettre — toujours safe)
+- 9A (un cran au-dessus — ça monte en douceur)
+- 7A (un cran en-dessous — ça descend en douceur)
 
-Exemple Pratique:
+C'est tout. Trois options sûres à chaque fois. Pas besoin d'être musicien, pas besoin de connaître le solfège. Tu regardes le numéro, tu restes proche, et ça matche.
 
-Si ta première chanson est en 8A (La mineur):
-- Compatible: 8B, 9A, 7A
-- Pas compatible: 1A, 2A, 3A, etc.
+Concrètement, si ta première chanson est en 8A (La mineur), tu peux enchaîner avec du 8B, du 9A ou du 7A. Tout le reste, tu évites pour l'instant.
 
-Pourquoi C'est Puissant?
+Et pour trouver les clés de tes morceaux, t'as plein d'outils :
+- Rekordbox et Serato les analysent automatiquement
+- Mixed In Key est ultra-précis (payant mais top)
+- Même Shazam peut t'aider en dépannage
 
-Au lieu de chercher au hasard, tu sais exactement quelles clés fonctionnent. C'est scientifique et fiable.
-
-Outils pour Trouver les Clés:
-
-- Shazam (gratuit)
-- Mixed In Key (payant, très précis)
-- Serato DJ (inclus dans le logiciel)
-- Rekordbox (inclus dans le logiciel)
-
-La Réalité:
-
-Les meilleurs DJs en club utilisent le Camelot Wheel. C'est un secret professionnel qui rend les transitions parfaites.`,
+Le truc fou ? Les meilleurs DJs en club utilisent exactement ça. C'est pas de la triche, c'est du professionnalisme. Et maintenant, tu connais le secret.`,
       keyTakeaway:
-        "Le Camelot Wheel te montre exactement quelles clés sont compatibles. Utilise-le pour des transitions harmoniques parfaites.",
+        "Le Camelot Wheel te donne 3 options compatibles à chaque fois. Utilise-le et tes transitions vont sonner pro instantanément.",
       exercise: {
-        title: "Crée ta première transition harmonique",
-        description: "Pratique le mixage harmonique avec le Camelot Wheel",
+        title: "Ta première transition harmonique",
+        description: "Mets le Camelot Wheel en pratique sur ta table",
         steps: [
-          "Choisis une chanson (ex: 8A)",
-          "Utilise le Camelot Wheel pour trouver une chanson compatible (8B, 9A, ou 7A)",
-          "Télécharge les deux chansons",
-          "Essaie de les mixer (mentalement ou avec un logiciel)",
-          "Écoute le résultat - remarque comme c'est fluide!",
-          "Répète avec 3 autres paires",
+          "Choisis un morceau et note sa clé Camelot (ex: 8A)",
+          "Cherche dans ta bibliothèque un morceau en 8B, 9A ou 7A",
+          "Charge les deux morceaux sur tes platines",
+          "Fais ta transition comme d'habitude — mais écoute la différence harmonique",
+          "Sens comme c'est fluide ? C'est ça le pouvoir du Camelot Wheel",
+          "Refais ça avec 3 autres paires pour ancrer le réflexe",
         ],
         estimatedTime: "15 minutes",
       },
       tips: [
-        "Imprime le Camelot Wheel et garde-le à côté de toi",
-        "Mémorise les positions compatibles (ça devient automatique)",
-        "Le Camelot Wheel fonctionne pour TOUS les genres musicaux",
+        "Imprime le Camelot Wheel ou mets-le en fond d'écran — tu vas le consulter souvent",
+        "Au bout de quelques semaines, tu connaîtras les positions par cœur",
+        "Le Camelot Wheel marche pour TOUS les genres — House, Techno, Hip-Hop, tout",
       ],
     },
     {
@@ -141,62 +111,45 @@ Les meilleurs DJs en club utilisent le Camelot Wheel. C'est un secret profession
       subtitle: "Vois comment les pros font une transition harmonique",
       videoUrl: "https://www.youtube.com/embed/YgL1tn6zOEw",
       videoDescription:
-        "Regarde un DJ professionnel faire une transition harmonique parfaite en direct.",
-      content: `Mise en Situation Complète:
+        "Regarde un DJ pro exécuter une transition harmonique parfaite — et comprends chaque étape.",
+      content: `Allez, on passe à la pratique. Voilà exactement comment ça se passe quand tu fais une transition harmonique en situation :
 
-Tu es en train de mixer. Les deux chansons suivantes sont en clés compatibles:
-- Chanson A: 8A (La mineur)
-- Chanson B: 9A (Mi mineur) - compatible!
+Tu joues un morceau en 8A (La mineur). Le prochain est en 9A (Mi mineur) — compatible, parfait.
 
-Étape 1: Préparation (15 secondes avant)
-- La Chanson A joue
-- Tu vérifies que la Chanson B est bien en 9A
-- Tu baisses les basses de la Chanson B
-- Tu augmentes les aigus
-- La foule sent la tension
+Étape 1 — La préparation (15 secondes avant la transition)
+Le morceau A tourne. Tu charges le morceau B sur l'autre platine. Tu vérifies : 9A, check. Tu baisses les basses de B à zéro, tu montes un peu les aigus. La foule sent que quelque chose arrive — la tension se crée.
 
-Étape 2: Écoute (5 secondes)
-- Tu écoutes les deux chansons ensemble
-- Elles sonnent harmoniques (pas de dissonance!)
-- C'est parfait
+Étape 2 — L'écoute au casque (5 secondes)
+Tu lances B dans ton casque, tu écoutes les deux ensemble. Pas de dissonance, pas de grincement — les clés s'entendent bien. Tu sais que c'est bon.
 
-Étape 3: Le Mix (8 secondes)
-- Tu augmentes le volume de la Chanson B
-- Tu diminues le volume de la Chanson A
-- Les deux jouent ensemble
-- L'harmonie est naturelle et fluide
-- La foule ne réalise même pas que tu as changé de chanson
+Étape 3 — Le mix (8 secondes)
+Tu montes progressivement le volume de B. Tu baisses doucement A. Les deux morceaux jouent ensemble et c'est harmonieux — la foule est dedans sans même réaliser que tu changes de morceau. Tu ramènes les basses de B petit à petit.
 
-Étape 4: Le Coup (2 secondes)
-- Tu coupes la Chanson A
-- La Chanson B prend le contrôle
-- La foule explose!
+Étape 4 — Le switch (2 secondes)
+Tu coupes A. B prend toute la place. La foule explose. Transition invisible.
 
-La Différence Clé:
+Durée totale : 30 secondes. Et le résultat est magique.
 
-Avec le mixage harmonique, la transition sonne MUSICALE et NATURELLE. Sans le Camelot Wheel, ça sonne "bizarre".
-
-Pourquoi Les Pros Utilisent Ça:
-
-C'est la différence entre un DJ amateur et un DJ professionnel. Le mixage harmonique crée une expérience musicale cohérente et fluide.`,
+La grande différence avec une transition « classique » ? Ici, les deux morceaux chantent ensemble au lieu de se battre. C'est musical, pas juste technique. Et c'est exactement ce qui fait qu'un DJ sonne pro.`,
       keyTakeaway:
-        "Le mixage harmonique crée des transitions musicales naturelles et fluides. C'est ce qui rend un DJ vraiment professionnel.",
+        "Une transition harmonique bien exécutée est invisible pour la foule — et c'est exactement le but. Quand personne ne remarque le changement, t'as tout gagné.",
       exercise: {
-        title: "Analyse des transitions harmoniques professionnelles",
-        description: "Apprends en regardant comment les pros font",
+        title: "Exécute ta transition harmonique",
+        description: "Fais-le sur ta table, en vrai, maintenant",
         steps: [
-          "Regarde 3 vidéos de DJs en club",
-          "Essaie d'identifier les transitions harmoniques",
-          "Note les clés musicales si possible",
-          "Remarque comment les transitions sonnent fluides",
-          "Essaie de reproduire le même style",
+          "Choisis deux morceaux dont les clés Camelot sont compatibles",
+          "Charge-les sur tes platines et cale les BPM",
+          "Baisse les basses du morceau B, monte ses aigus",
+          "Lance B et écoute les deux ensemble au casque",
+          "Fais la transition progressive : monte B, baisse A, ramène les basses",
+          "Coupe A proprement — et savoure le résultat",
         ],
         estimatedTime: "15 minutes",
       },
       tips: [
-        "Le mixage harmonique demande de la pratique",
-        "Commence par des clés très proches",
-        "Écoute des DJs qui utilisent le Camelot Wheel",
+        "Si t'as pas encore de matos, fais l'exercice sur un logiciel gratuit comme Mixxx",
+        "Enregistre ta transition et réécoute-la — tu vas entendre la fluidité",
+        "Plus tu pratiques, plus ça devient un automatisme",
       ],
     },
     {
@@ -205,61 +158,41 @@ C'est la différence entre un DJ amateur et un DJ professionnel. Le mixage harmo
       subtitle: "Quand ignorer le Camelot Wheel (et pourquoi)",
       videoUrl: "https://www.youtube.com/embed/1sC-sZhSxU8",
       videoDescription:
-        "Découvre quand et comment les DJs avancés mélangent des clés incompatibles.",
-      content: `Quand Ignorer le Camelot Wheel?
+        "Découvre quand et comment les DJs avancés cassent les règles du Camelot Wheel — volontairement.",
+      content: `T'as déjà les bases solides — maintenant on va parler de quand casser les règles.
 
-Le Camelot Wheel est un guide, pas une règle absolue. Les meilleurs DJs savent quand le ignorer.
+Le Camelot Wheel, c'est un guide génial. Mais ce n'est pas une loi. Les meilleurs DJs savent exactement quand l'ignorer pour créer quelque chose de spécial.
 
-Cas 1: Les Transitions Créatives
+Premier cas : la tension créative
+Parfois, une petite dissonance volontaire crée un moment unique. Tu mélanges deux clés qui ne matchent pas, la foule sent la tension monter… et tu résous avec un morceau en clé compatible. Boum. L'impact est x10.
 
-Parfois, une dissonance intentionnelle crée un moment unique:
-- Tension musicale
-- Surprise pour la foule
-- Moment mémorable
+Deuxième cas : les genres qui s'en fichent
+En Hip-Hop, en Trap, en certains styles de Techno, le rythme domine tellement que la clé passe au second plan. Les beats et l'énergie comptent plus que l'harmonie pure. Dans ces genres, fie-toi d'abord à ton oreille.
 
-Exemple: Mélanger deux clés incompatibles pour créer du suspense, puis résoudre avec une clé compatible.
+Troisième cas : les effets comme passerelle
+Tu peux utiliser un reverb pour « flouter » le passage entre deux clés incompatibles. Un delay bien placé, un filtre qui monte… ces effets créent un pont sonore qui masque la dissonance le temps de la transition.
 
-Cas 2: Les Genres Mixtes
+La règle d'or : maîtrise le Camelot Wheel à fond d'abord. Quand tu le connais par cœur, tu peux le contourner avec intention. C'est la différence entre quelqu'un qui ignore les règles par ignorance et quelqu'un qui les brise par choix artistique.
 
-Certains genres (Hip-Hop, Trap) utilisent moins le Camelot Wheel. Pourquoi?
-- Les beats dominent la clé
-- La progression est plus importante que l'harmonie
-- Les DJs se concentrent sur le rythme
-
-Cas 3: Les Effets Créatifs
-
-Utiliser des clés incompatibles avec des effets:
-- Reverb pour "flouter" la dissonance
-- Delay pour créer de la profondeur
-- Pitch shift pour ajuster en temps réel
-
-La Leçon Importante:
-
-Maîtrise d'abord le Camelot Wheel. Une fois que tu le maîtrises, tu peux le ignorer intentionnellement pour créer des moments uniques.
-
-Les Meilleurs DJs:
-
-- Connaissent le Camelot Wheel par cœur
-- L'utilisent 80% du temps
-- L'ignorent intentionnellement 20% du temps pour créer de la magie`,
+Les meilleurs DJs au monde ? Ils utilisent le Camelot Wheel 80 % du temps. Et les 20 % restants, c'est là qu'ils créent la magie.`,
       keyTakeaway:
-        "Maîtrise le Camelot Wheel d'abord. Ensuite, tu peux l'ignorer intentionnellement pour créer des moments uniques.",
+        "Maîtrise d'abord les règles, et après tu pourras les casser avec style. C'est comme ça que naissent les moments inoubliables.",
       exercise: {
-        title: "Expérimente avec des clés incompatibles",
-        description: "Apprends à créer des transitions créatives",
+        title: "Expérimente avec la dissonance contrôlée",
+        description: "Apprends à briser les règles intentionnellement sur ta table",
         steps: [
-          "Choisis deux chansons en clés incompatibles",
-          "Essaie de les mixer (mentalement ou avec un logiciel)",
-          "Remarque la dissonance",
-          "Ajoute des effets (reverb, delay) pour 'flouter' la dissonance",
-          "Essaie de créer un moment unique et mémorable",
+          "Choisis deux morceaux dont les clés NE sont PAS compatibles",
+          "Fais la transition normalement — écoute la dissonance",
+          "Maintenant, refais-la en ajoutant un filtre ou un reverb pendant le passage",
+          "Compare les deux versions — sens la différence ?",
+          "Essaie de créer un moment de tension-résolution : incompatible → compatible",
         ],
         estimatedTime: "10 minutes",
       },
       tips: [
-        "Les transitions créatives demandent de la confiance",
-        "Commence par des clés légèrement incompatibles",
-        "Écoute comment les DJs avancés font ça",
+        "Commence par des clés juste « un peu » incompatibles, pas aux extrêmes",
+        "La dissonance créative demande de la confiance — ose essayer",
+        "Écoute comment des DJs comme Solomun ou Dixon jouent avec les clés",
       ],
     },
   ],
@@ -282,62 +215,44 @@ export const level5Module: CourseModule = {
       subtitle: "La structure que tous les grands DJs utilisent",
       videoUrl: "https://www.youtube.com/embed/hjkTkb-_7mQ",
       videoDescription:
-        "Découvre la structure universelle d'un set professionnel.",
-      content: `La Structure d'un Set:
+        "On t'emmène dans les coulisses de la structure d'un set professionnel.",
+      content: `On passe à un sujet qui va changer ta façon de voir le DJing : la structure de ton set.
 
-Tous les grands DJs suivent une structure similaire. C'est la base du succès.
+Un bon set, c'est pas juste des bons morceaux enchaînés. C'est une histoire. Un voyage. Et comme tout bon voyage, il a un début, un milieu et une fin.
 
-Phase 1: L'Intro (0-15 minutes)
-- Objectif: Créer une ambiance
-- Énergie: Basse (30-40% du potentiel)
-- Tempo: Lent et progressif
-- Ressenti: Calme, exploration, découverte
-- Exemple: Grooves simples, mélodies claires
+Voici les 4 phases que TOUS les grands DJs utilisent :
 
-Phase 2: La Montée (15-45 minutes)
-- Objectif: Augmenter l'énergie progressivement
-- Énergie: Moyenne (50-70%)
-- Tempo: Augmente graduellement
-- Ressenti: Engagement croissant, anticipation
-- Exemple: Ajout de couches, complexité croissante
+Phase 1 — L'intro (0-15 minutes)
+Tu poses l'ambiance. L'énergie est basse, autour de 30-40 %. Des grooves simples, des mélodies claires. La foule arrive, s'installe, commence à sentir le vibe. Pas de précipitation.
 
-Phase 3: Le Pic (45-75 minutes)
-- Objectif: Libération totale d'énergie
-- Énergie: Maximale (90-100%)
-- Tempo: Rapide et intense
-- Ressenti: Euphorie, danse totale, libération
-- Exemple: Tous les éléments ensemble, beats puissants
+Phase 2 — La montée (15-45 minutes)
+Là, tu commences à construire. L'énergie passe à 50-70 %. Le tempo augmente doucement. Tu ajoutes des couches, de la complexité. La foule s'engage de plus en plus. L'anticipation monte.
 
-Phase 4: La Descente (75-90 minutes)
-- Objectif: Revenir à la réalité progressivement
-- Énergie: Décroissante (50-30%)
-- Tempo: Ralentit graduellement
-- Ressenti: Satisfaction, gratitude, fin naturelle
-- Exemple: Retour aux grooves simples
+Phase 3 — Le pic (45-75 minutes)
+C'est le moment de tout lâcher. Énergie à 90-100 %. Tempo intense. Tous les éléments ensemble. C'est l'euphorie, la danse totale, la libération. C'est pour CE moment que les gens sont venus.
 
-Pourquoi C'est Important?
+Phase 4 — La descente (75-90 minutes)
+Tu ramènes tout le monde sur terre, en douceur. L'énergie redescend à 50-30 %. Le tempo ralentit. La foule respire, sourit, remercie. C'est la fin naturelle d'une belle histoire.
 
-Un set sans structure c'est comme une histoire sans début ni fin. La foule se perd.
-
-Un set bien structuré c'est comme une symphonie: chaque partie a un sens et crée une expérience complète.`,
+Pourquoi c'est si important ? Parce qu'un set sans structure, c'est comme un film sans scénario — les gens décrochent. Un set bien construit, c'est une expérience émotionnelle complète. Et c'est ça qui fait revenir les gens.`,
       keyTakeaway:
-        "Un set parfait suit 4 phases: Intro (calme) → Montée (engagement) → Pic (euphorie) → Descente (satisfaction).",
+        "Intro → Montée → Pic → Descente. Quand tu structures ton set comme une histoire, la foule vit une vraie expérience — et elle s'en souvient.",
       exercise: {
-        title: "Analyse la structure d'un set professionnel",
-        description: "Apprends en écoutant comment les pros structurent",
+        title: "Décortique un set de pro",
+        description: "Écoute activement un set complet et repère les 4 phases",
         steps: [
-          "Écoute un set complet d'un DJ professionnel (60-90 min)",
-          "Identifie les 4 phases",
-          "Note les moments clés (transitions, pics, descentes)",
-          "Remarque comment l'énergie progresse",
-          "Essaie de reproduire la même structure",
+          "Mets un set complet d'un DJ que t'admires (60-90 min sur YouTube ou SoundCloud)",
+          "Chronomètre et note quand chaque phase commence et finit",
+          "Repère les moments-clés : quand l'énergie monte, où est le pic, comment il redescend",
+          "Observe comment les transitions servent la progression globale",
+          "Essaie de dessiner la courbe d'énergie du set sur un papier",
         ],
         estimatedTime: "90 minutes",
       },
       tips: [
-        "La structure est flexible - adapte-la à ton public",
-        "Les meilleurs DJs sentent l'énergie de la foule",
-        "La progression est plus importante que la perfection",
+        "La structure est un guide, pas une prison — adapte-la à ton public et au contexte",
+        "Les meilleurs DJs ressentent l'énergie de la salle et ajustent en temps réel",
+        "La progression compte plus que la perfection de chaque transition",
       ],
     },
     {
@@ -346,67 +261,54 @@ Un set bien structuré c'est comme une symphonie: chaque partie a un sens et cr�
       subtitle: "Comment choisir les chansons dans le bon ordre",
       videoUrl: "https://www.youtube.com/embed/7JAoRPqQZYw",
       videoDescription:
-        "Vois comment les pros choisissent l'ordre des chansons pour une progression fluide.",
-      content: `Comment Choisir l'Ordre des Chansons?
+        "Découvre la logique derrière l'ordre des morceaux dans un set qui fait danser du début à la fin.",
+      content: `Maintenant qu'on connaît les 4 phases, la question c'est : comment je choisis mes morceaux pour que ça progresse naturellement ?
 
-Ce n'est pas aléatoire. Il y a une logique.
+C'est pas du hasard. C'est de la logique. Et une fois que tu l'as comprise, tu ne verras plus jamais tes playlists de la même façon.
 
-Critères de Progression:
+Voici les 4 critères à suivre :
 
-1. Le BPM (Tempo)
-   - Intro: 120 BPM
-   - Montée: 120 → 130 BPM (progression graduelle)
-   - Pic: 130-140 BPM (maximum)
-   - Descente: 140 → 120 BPM (retour progressif)
+1. Le BPM — ta rampe de lancement
+Intro : 120 BPM. Montée : 120 → 130 BPM, progressivement. Pic : 130-140 BPM, maximum d'intensité. Descente : retour vers 120 BPM, tout en douceur.
 
-2. L'Énergie Musicale
-   - Intro: Grooves simples, peu de couches
-   - Montée: Ajout progressif de couches (drums, synths, effets)
-   - Pic: Tous les éléments ensemble, maximum de densité
-   - Descente: Retrait progressif des éléments
+2. L'énergie musicale — les couches sonores
+Tu commences simple (un groove, peu d'éléments), puis tu empiles : drums, synthés, effets… Au pic, tout est là. Et à la descente, tu retires couche par couche.
 
-3. Les Clés Musicales
-   - Utilise le Camelot Wheel pour des transitions fluides
-   - Évite les sauts de clé trop importants
-   - Crée une cohérence harmonique
+3. Les clés musicales — le Camelot Wheel
+Tu utilises ce qu'on a vu au niveau 4. Des clés compatibles entre chaque morceau pour que tout sonne harmonieux.
 
-4. La Dynamique
-   - Alterne entre moments calmes et moments intenses
-   - Crée du suspense avec des moments de silence
-   - Libère la tension avec des moments d'euphorie
+4. La dynamique — le jeu de contrastes
+Alterne moments calmes et moments intenses. Crée du suspense avec des silences ou des breakdowns. Puis libère la tension avec un drop.
 
-Exemple Pratique:
+Voilà un exemple concret :
+Morceau 1 : 120 BPM, 8A — groove simple
+Morceau 2 : 122 BPM, 8B — groove + drums
+Morceau 3 : 124 BPM, 9A — groove + drums + synthé
+Morceau 4 : 126 BPM, 9B — groove + drums + synthé + effets
+Morceau 5 : 128 BPM, 10A — TOUS les éléments → PIC
+Morceau 6 : 126 BPM, 10B — on retire progressivement
+Morceau 7 : 124 BPM, 11A — retour à la simplicité
+Morceau 8 : 122 BPM, 11B — groove simple → fin
 
-Chanson 1: 120 BPM, 8A, Groove simple
-Chanson 2: 122 BPM, 8B, Groove + drums
-Chanson 3: 124 BPM, 9A, Groove + drums + synth
-Chanson 4: 126 BPM, 9B, Groove + drums + synth + effets
-Chanson 5: 128 BPM, 10A, Tous les éléments (PIC!)
-Chanson 6: 126 BPM, 10B, Retrait progressif
-Chanson 7: 124 BPM, 11A, Retour à la simplicité
-Chanson 8: 122 BPM, 11B, Groove simple (FIN)
-
-La Logique:
-
-Chaque chanson augmente légèrement le BPM et l'énergie. La foule ne réalise pas qu'elle est montée graduellement. C'est naturel et fluide.`,
+Tu vois le principe ? Chaque morceau monte d'un cran en BPM et en énergie. La foule suit sans même s'en rendre compte. C'est naturel, fluide, irrésistible.`,
       keyTakeaway:
-        "Progresse graduellement: BPM +2, énergie +10%, clés compatibles. La progression doit être naturelle et fluide.",
+        "BPM +2, énergie +10 %, clés compatibles — suis cette recette et ta progression sera naturelle et addictive.",
       exercise: {
-        title: "Crée ta première setlist structurée",
-        description: "Pratique la création d'une progression musicale",
+        title: "Construis ta première setlist structurée",
+        description: "Mets en pratique la logique de progression sur tes morceaux",
         steps: [
-          "Choisis 8-10 chansons que tu aimes",
-          "Note le BPM et la clé de chaque chanson",
-          "Ordonne-les pour une progression logique",
-          "Vérifie que chaque transition est fluide",
-          "Écoute-les dans l'ordre - remarque la progression",
+          "Prends 8 à 10 morceaux que tu adores",
+          "Note le BPM et la clé Camelot de chacun",
+          "Ordonne-les pour créer une progression logique (BPM croissant, clés compatibles)",
+          "Vérifie que chaque transition a du sens en termes d'énergie",
+          "Écoute ta setlist dans l'ordre — tu vas sentir la montée",
         ],
         estimatedTime: "20 minutes",
       },
       tips: [
-        "La progression est plus importante que les chansons individuelles",
-        "Adapte-toi à ton public - sois flexible",
-        "Les meilleurs DJs créent des setlists sur le moment",
+        "L'ordre de tes morceaux compte autant que leur qualité individuelle",
+        "Sois flexible — en live, tu devras parfois changer ton plan",
+        "Les meilleurs DJs construisent leur setlist en temps réel, mais ils connaissent la logique par cœur",
       ],
     },
     {
@@ -415,68 +317,49 @@ Chaque chanson augmente légèrement le BPM et l'énergie. La foule ne réalise 
       subtitle: "L'art invisible du DJing professionnel",
       videoUrl: "https://www.youtube.com/embed/-DOYZcBwS08",
       videoDescription:
-        "Découvre comment les pros lisent la foule et adaptent leur set en direct.",
-      content: `Lire la Foule: Le Secret des Grands DJs
+        "Découvre comment les pros sentent l'énergie de la salle et ajustent leur set en direct.",
+      content: `On arrive au sujet le plus important du DJing. Plus important que le beatmatching, plus important que le Camelot Wheel : savoir lire ta foule.
 
-La meilleure setlist du monde ne sert à rien si tu ne lis pas la foule.
+La meilleure setlist du monde ne vaut rien si tu ne regardes pas ce qui se passe devant toi.
 
-Comment Lire la Foule?
+Voici comment lire la piste :
 
-1. L'Énergie Générale
-   - Foule qui danse? Augmente l'énergie
-   - Foule qui discute? Baisse l'énergie
-   - Foule immobile? Change de chanson
+L'énergie générale
+Les gens dansent ? Tu es sur la bonne voie, continue à monter. Les gens discutent au bar ? L'énergie est trop basse ou trop haute pour le moment. La piste se vide ? Alerte rouge — il faut changer de cap.
 
-2. Le Langage Corporel
-   - Les gens sautent? Ils aiment
-   - Les gens bougent lentement? Ils sont fatigués
-   - Les gens se regardent? Ils attendent quelque chose
+Le langage corporel
+Les gens sautent, lèvent les mains ? Ils adorent, donne-leur plus. Les gens bougent à peine ? Ils fatiguent, pense à faire respirer. Les gens se regardent bizarrement ? Ta dernière transition n'a pas convaincu.
 
-3. Les Signaux Subtils
-   - Quelques personnes qui dansent? Ça va venir
-   - Beaucoup de gens qui dansent? Maintiens l'énergie
-   - Gens qui quittent la piste? Attention, tu perds la foule
+Les signaux subtils
+Quelques personnes commencent à bouger ? C'est le début, ça va prendre — ne lâche pas. Beaucoup de monde danse ? Maintiens le cap, t'es dans le sweet spot. Des gens quittent la piste ? C'est le signe qu'il faut réagir vite.
 
-Adapter en Temps Réel:
+Et voilà comment tu adaptes en temps réel :
 
-Scénario 1: La Foule Est Fatiguée
-- Problème: Énergie baisse, gens qui quittent
-- Solution: Baisse le BPM, change le style, crée du suspense
-- Résultat: La foule revient
+La foule fatigue ? Baisse le BPM, change de style, crée un moment de respiration. Laisse-les souffler, puis relance.
 
-Scénario 2: La Foule Veut Plus
-- Problème: Tout le monde danse, ils veulent plus
-- Solution: Augmente l'énergie, ajoute des effets, crée des pics
-- Résultat: Euphorie totale
+La foule en redemande ? Pousse l'énergie, ajoute des effets, crée un pic. C'est le moment de tout donner.
 
-Scénario 3: La Foule Est Confuse
-- Problème: Transition bizarre, gens qui se regardent
-- Solution: Reviens à quelque chose de familier, puis progresse lentement
-- Résultat: La foule se réoriente
+La foule est perdue ? Reviens à un morceau que tout le monde connaît ou à un groove simple et familier. Recrée la connexion, puis progresse à nouveau.
 
-La Réalité:
-
-Les meilleurs DJs n'ont pas de setlist rigide. Ils ont une structure générale, mais ils l'adaptent en temps réel en fonction de la foule.
-
-C'est l'art invisible du DJing professionnel.`,
+La vraie vérité : les meilleurs DJs n'ont jamais de setlist 100 % figée. Ils ont un plan, une direction, mais ils s'adaptent constamment à ce qu'ils voient et sentent. C'est ça, l'art invisible du DJing.`,
       keyTakeaway:
-        "Lis la foule et adapte en temps réel. La meilleure setlist du monde ne sert à rien si tu ne lis pas la foule.",
+        "Tes yeux et tes oreilles sont tes meilleurs outils. Regarde ta foule, ressens l'énergie, et adapte en temps réel — c'est ça qui fait un vrai DJ.",
       exercise: {
-        title: "Pratique la lecture de foule (mentalement)",
-        description: "Visualise comment adapter en temps réel",
+        title: "Entraîne-toi à scanner la piste",
+        description: "Développe le réflexe de lire l'énergie autour de toi",
         steps: [
-          "Imagine une foule en train de danser",
-          "L'énergie baisse - que fais-tu?",
-          "L'énergie augmente - que fais-tu?",
-          "Il y a une transition bizarre - que fais-tu?",
-          "Répète jusqu'à ce que ça devienne naturel",
+          "La prochaine fois que tu es en soirée, observe le DJ et la foule",
+          "Toutes les 2-3 minutes, évalue : l'énergie monte, stagne ou descend ?",
+          "Quand le DJ change de morceau, regarde la réaction : les gens bougent plus ? moins ?",
+          "Note mentalement ce que TU aurais fait différemment à certains moments",
+          "Répète cet exercice à chaque soirée — ça va devenir un réflexe",
         ],
         estimatedTime: "10 minutes",
       },
       tips: [
-        "La lecture de foule s'apprend avec l'expérience",
-        "Écoute ton instinct",
-        "Les meilleurs DJs sont flexibles et adaptables",
+        "La lecture de foule, ça s'apprend sur le terrain — sors, observe, ressens",
+        "Fais confiance à ton instinct, il se trompe moins souvent qu'on croit",
+        "Un bon DJ est avant tout un bon observateur",
       ],
     },
   ],

@@ -55,257 +55,285 @@ type LocalizedModuleOverride = {
 const EN_LEVEL_6_TO_10_OVERRIDES: Record<number, LocalizedModuleOverride> = {
   1: {
     title: "DJ Fundamentals",
-    description: "Build strong FLX/Rekordbox foundations before advanced transitions.",
+    description: "Welcome to your DJ journey! We're building rock-solid foundations with your FLX controller and Rekordbox — the stuff every great DJ wishes they'd nailed from day one.",
     slides: {
       1: {
         title: "Rekordbox and controller fundamentals",
         subtitle: "Preparation mode vs performance mode",
         videoDescription:
-          "Understand your workflow before touching complex transitions.",
+          "Your first real look behind the curtain — how working DJs prepare before they ever hit play in front of a crowd.",
         content:
-          "At level 1 your goal is reliable setup and navigation: import, analyze, cue points, and clean loading workflow. This is where consistency starts.",
+          "Welcome aboard! Before you start mixing bangers, let's make sure your workspace is dialed in. Think of Rekordbox as your DJ command center — it's where you import tracks, analyze their BPM and beat grids, set hot cues, and build playlists that actually make sense for a live set. Right now your only mission is to get comfortable navigating this tool so loading a track feels like second nature. Every pro DJ you admire started right here, getting their library tight. Nail this step, and everything that follows — transitions, EQ work, reading a crowd — becomes ten times easier because you're never fighting your own setup.",
         keyTakeaway:
-          "Strong preparation reduces mistakes and improves confidence in every next level.",
+          "A well-prepared library is your secret weapon. When your tracks are organized and your cues are set, you can focus on the fun stuff — actually mixing.",
         exercise: {
-          title: "Prepare 5 tracks correctly",
-          description: "Create one clean training playlist.",
+          title: "Build your first battle-ready playlist",
+          description: "Let's get hands-on! You're going to prepare 5 tracks like a pro would before a gig.",
           steps: [
-            "Import 5 tracks with similar BPM range.",
-            "Analyze BPM/grid and verify downbeats.",
-            "Set 4 useful hot cues per track.",
-            "Load tracks on both decks and test cue behavior.",
+            "Pick 5 tracks you love that sit in a similar BPM range (try to stay within ±5 BPM).",
+            "Import them into Rekordbox and run the auto-analysis — then double-check that the downbeats actually land on the 1.",
+            "Set at least 4 hot cues per track: think intro, drop, breakdown, and outro. Label them so future-you knows what they mean!",
+            "Load tracks onto both decks and tap each cue to make sure they fire where you expect — fix any that feel off.",
           ],
           estimatedTime: "15 minutes",
         },
         tips: [
-          "Do not skip grid checks.",
-          "Name your cues with intent.",
-          "Keep one backup playlist.",
+          "Always double-check your beat grids manually — auto-analysis is good but not perfect, especially on tracks with live drums or tempo changes.",
+          "Name your hot cues something meaningful like 'Drop' or 'Vocal In' instead of leaving them blank — your future self will thank you mid-set.",
+          "Start a backup playlist now. Seriously. Lost playlists happen, and rebuilding from scratch is no fun.",
         ],
       },
       2: {
         title: "Hardware and signal flow",
         subtitle: "Headphones, monitor, gain staging basics",
-        videoDescription: "Set clean monitoring before practicing transitions.",
+        videoDescription: "How to set up your headphones and levels so you can actually hear what you're doing — the skill nobody talks about but everyone needs.",
         content:
-          "Good DJing starts with hearing clearly. Configure cue/master balance and keep gain structure stable before trying creative moves.",
+          "Here's something most beginners skip: learning how to actually hear your mix properly. Your headphones are your preview window — they let you listen to the next track before the audience hears it. You need to get comfortable switching between cueing the incoming track and monitoring the master output. And gain staging? That's just making sure both tracks sit at a similar volume before you blend them. If one track is way louder than the other, no amount of fancy EQ work will save you. Get this right and every transition you practice from here on will sound cleaner and feel more confident.",
         keyTakeaway:
-          "If monitoring is unclear, transition quality collapses.",
+          "If you can't hear your mix clearly, you can't mix well — period. Solid monitoring and clean gain staging are the invisible foundations of every smooth transition.",
         exercise: {
-          title: "Monitoring setup drill",
-          description: "Build repeatable listening conditions.",
+          title: "Headphone confidence challenge",
+          description: "Time to get your ears trained! This quick drill builds the monitoring habits you'll use in every single session going forward.",
           steps: [
-            "Set cue/master blend in headphones.",
-            "Match track gain roughly before transition.",
-            "Switch between cue and master every 8 bars.",
+            "Load two tracks and set your cue/master blend in your headphones — find the sweet spot where you can hear both clearly.",
+            "Match the gain on both tracks so they feel equally loud (use your ears more than the meters!).",
+            "Practice flipping between cue and master every 8 bars — get used to that mental switch of 'what the crowd hears' vs 'what I'm preparing'.",
           ],
           estimatedTime: "10 minutes",
         },
         tips: [
-          "Avoid red master levels.",
-          "Use ears first, visuals second.",
-          "Consistent gain gives cleaner EQ work later.",
+          "If your master meter is hitting red, you're too loud — back it off. Distortion kills vibe faster than anything.",
+          "Train your ears to be the boss, not your eyes. Meters are helpful guides, but your hearing is the final judge.",
+          "Getting gain staging right now makes EQ work so much easier later — think of it as laying a clean foundation before building the house.",
         ],
       },
       3: {
         title: "Tempo and phrasing intro",
         subtitle: "Align timing before EQ tricks",
-        videoDescription: "Learn timing control and phrase awareness.",
+        videoDescription: "This is where the magic starts — understanding why some mixes sound seamless and others sound like a train wreck.",
         content:
-          "Tempo alignment and phrase awareness are the basis of invisible transitions. Effects cannot fix poor timing.",
+          "Okay, this is a big one. Tempo matching means getting two tracks running at the same speed so the beats line up. Phrasing means starting your blend at musically logical moments — usually every 8 or 16 bars where a new section begins. When you nail both, transitions feel invisible. When you don't, even the best track selection sounds messy. Don't stress if your first attempts drift a bit — that's completely normal. The jog wheel and pitch fader are your correction tools, and the more you use them, the more instinctive it becomes. Think of it like learning to drive: clunky at first, smooth as butter once the muscle memory kicks in.",
         keyTakeaway:
-          "Timing before creativity.",
+          "Timing is everything. No effect, no EQ trick, and no fancy technique can fix a transition where the beats aren't aligned and the phrases don't match up.",
         exercise: {
-          title: "8-bar timing drill",
-          description: "Practice controlled entry timing.",
+          title: "Phrase-lock challenge",
+          description: "Let's train your timing instincts with a focused drill — this is the exercise that separates 'playing songs' from 'actually DJing'.",
           steps: [
-            "Start track B on phrase start.",
-            "Correct slight drift with pitch/jog.",
-            "Repeat on 5 different track pairs.",
+            "Queue up track B and drop it right on the start of a new phrase in track A (listen for that energy shift every 8 or 16 bars).",
+            "Let them run together and gently correct any drift using the jog wheel or pitch fader — small nudges, not big swings!",
+            "Repeat this with 5 different track pairs. You'll start to feel the rhythm of when phrases begin naturally.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Small corrections are better than panic moves.",
-          "Phrase timing matters as much as BPM.",
-          "Record short drills for review.",
+          "Tiny corrections beat big panicked moves every time — a gentle nudge of the jog wheel is all you usually need.",
+          "Phrase timing is just as important as BPM matching. Two tracks at identical BPM will still sound terrible if you start the blend mid-phrase.",
+          "Record yourself doing these drills and listen back — you'll catch timing issues your ears miss in the moment.",
         ],
       },
       4: {
         title: "First clean blend",
         subtitle: "Simple transition with control",
-        videoDescription: "Execute your first stable blend from A to B.",
+        videoDescription: "Your very first real transition — this is the moment it all starts to feel like DJing.",
         content:
-          "Use a minimal process: align, pre-listen, blend, release. Keep it simple and repeatable.",
+          "This is it — your first real blend! Keep it simple: align the tempos, pre-listen to track B in your headphones to find the right entry point, bring it in with the volume fader or EQ, and then release track A cleanly. That's the whole recipe. You're not trying to impress anyone right now — you're building the foundation that every advanced technique sits on top of. A clean, simple transition that flows naturally will always sound better than a complicated one that falls apart halfway through. Don't overthink it. Trust the process you've been practicing, take a breath, and let the tracks do the work.",
         keyTakeaway:
-          "Clean and simple beats complex and unstable.",
+          "A smooth, simple blend will always beat a messy complex one. Master the basics and the creative stuff becomes way easier to add later.",
         exercise: {
-          title: "2-track clean blend",
-          description: "One full transition without unnecessary FX.",
+          title: "Your first real mix!",
+          description: "Time to put it all together! This is the moment where preparation meets performance — and it's going to feel awesome.",
           steps: [
-            "Align BPM and phrase start.",
-            "Blend with controlled volume and EQ.",
-            "Exit outgoing track cleanly.",
+            "Pick two tracks you prepped earlier. Match the BPM and find a phrase start where track B will enter naturally.",
+            "Blend track B in using smooth volume and EQ adjustments — don't rush it, let the overlap breathe for 8-16 bars.",
+            "Bring track A out cleanly at a phrase boundary. Listen to the result — did it feel smooth? That's what we're chasing!",
           ],
           estimatedTime: "10 minutes",
         },
-        tips: ["Avoid over-touching controls.", "Stay phrase-aware.", "Prioritize smoothness."],
+        tips: [
+          "Less is more right now — resist the urge to touch every knob. A steady hand on the volume fader is more powerful than you think.",
+          "Stay aware of phrase boundaries throughout the blend. Starting and ending on phrases is what makes a transition feel 'right'.",
+          "If it doesn't go perfectly, that's totally fine! Every DJ on the planet has botched transitions. What matters is you tried and you'll learn from it.",
+        ],
       },
       5: {
-        title: "Level 1 validation",
+        title: "Level 1 graduation",
         subtitle: "From setup confidence to repeatability",
-        videoDescription: "Consolidate your first DJ workflow.",
+        videoDescription: "Nice work getting this far! Let's lock in everything you've learned and prove to yourself that you've got real DJ skills now.",
         content:
-          "This slide confirms your level-1 skill: setup, timing, and simple blend execution under no stress.",
+          "Look at you — you've gone from zero to actually mixing tracks! This final slide is about proving that your skills are consistent, not just lucky. You're going to chain multiple transitions together, which is what real DJing actually is: an ongoing flow, not just one good blend in isolation. Don't stress if it's not perfect yet — every pro DJ started exactly where you are right now. The goal here is repeatability. If you can do three clean transitions in a row without stopping, you've genuinely built a solid foundation. That's a real achievement, and everything from here builds on this confidence.",
         keyTakeaway:
-          "Repeatability is your first professional habit.",
+          "Repeatability is your first real DJ superpower. Anyone can get lucky once — being able to do it again and again is what makes you a DJ.",
         exercise: {
-          title: "Three clean transitions in a row",
-          description: "Stability challenge without reset.",
+          title: "The three-in-a-row challenge",
+          description: "This is your Level 1 graduation test! Chain three transitions without stopping — no resets, no do-overs. You've got this!",
           steps: [
-            "Prepare 4 tracks.",
-            "Mix 3 transitions back-to-back.",
-            "Review where timing or levels drifted.",
+            "Line up 4 tracks from your prepared playlist — think of this as a mini-set.",
+            "Mix through all 3 transitions back-to-back without pausing. Keep breathing, stay in the groove, and trust your prep.",
+            "Listen back to the recording. Note where things felt smooth and where timing or levels drifted — that's your roadmap for Level 2!",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Do not chase speed yet.",
-          "Consistency first.",
-          "Write one improvement point after each run.",
+          "Don't chase speed — smooth and controlled at a comfortable pace is worth way more than fast and sloppy right now.",
+          "Consistency is the name of the game at this stage. If you can repeat it, you own it.",
+          "After each run, write down one specific thing to improve. Not five things — just one. That focused approach compounds fast.",
         ],
       },
     },
   },
   2: {
     title: "EQ Fundamentals",
-    description: "Control frequency space for smoother, cleaner transitions.",
+    description: "Time to unlock one of the most powerful tools on your mixer! EQ is how you carve out space so two tracks can coexist beautifully instead of fighting each other.",
     slides: {
       1: {
         title: "Frequency roles in a transition",
         subtitle: "Bass, mids, highs and energy balance",
-        videoDescription: "Understand what each EQ band contributes musically.",
+        videoDescription: "Ever wonder why some blends sound clean while others turn to mush? This is the answer — understanding what each EQ knob actually does to your music.",
         content:
-          "Bass drives body, mids carry identity, highs shape clarity. In transitions, your job is to avoid masking and keep energy readable.",
+          "Let's break down what's actually happening when you twist those three EQ knobs. The bass (low) carries the weight and groove — it's what makes people move their feet. The mids hold the melody, vocals, and the identity of the track — it's how people recognize what's playing. The highs bring clarity, sparkle, and energy — think hi-hats, cymbals, and the airiness on top. When you're blending two tracks, the problem is that both tracks have all three of these layers. If you just slam both tracks together at full volume, the frequencies stack on top of each other and everything turns muddy. Your job as a DJ is to manage this frequency space — making room for the incoming track while gracefully reducing the outgoing one. It's like a conversation: one voice rises while the other lowers.",
         keyTakeaway:
-          "EQ is space management, not random knob movement.",
+          "EQ isn't about random knob twisting — it's about managing space. When you control which frequencies dominate at each moment, your blends go from messy to magical.",
         exercise: {
-          title: "Band isolation listening",
-          description: "Train your ear per frequency area.",
+          title: "Frequency detective challenge",
+          description: "Train your ears to hear each frequency band separately — this is the listening skill that separates good DJs from great ones!",
           steps: [
-            "Listen to one track and focus on bass only.",
-            "Repeat for mids and highs.",
-            "Note which band dominates each section.",
+            "Pick a track you know well. Play it and close your eyes — focus only on the bass. Feel it in your chest. Notice when it hits hardest.",
+            "Play it again and this time tune your attention to the mids only. Can you follow the melody? Notice how vocals and synths live here.",
+            "One more time — now focus only on the highs. Listen for the hi-hats, the crispness, the shimmer. Note which sections feel brighter vs darker.",
           ],
           estimatedTime: "10 minutes",
         },
-        tips: ["Mids often clash first.", "Low-end should be handed over, not stacked." , "Subtle EQ wins."],
+        tips: [
+          "Mids clash first and hardest during a blend — two melodies fighting for attention is the fastest way to ruin a transition.",
+          "Low-end should be handed over like a baton, not stacked. Two full basslines at the same time is almost always mud city.",
+          "Subtle EQ moves are almost always better than dramatic ones. The crowd should feel the change, not hear you yanking knobs.",
+        ],
       },
       2: {
         title: "Bass handover logic",
         subtitle: "Avoid mud while keeping impact",
-        videoDescription: "Practice controlled low-end transfer.",
+        videoDescription: "The bass swap is one of the most important DJ techniques you'll ever learn — this is how the pros keep the dancefloor locked during every transition.",
         content:
-          "Do not run full subs from both tracks for long. Build entry with mids/highs, then hand low-end at phrase boundary.",
+          "Here's a golden rule: never run full bass from both tracks at the same time for more than a couple of bars. It sounds muddy, loses punch, and confuses the groove. Instead, think of the bass as a baton in a relay race — one track hands it off to the other at a clean moment. The technique: bring in your new track with the bass cut or reduced, let the mids and highs establish presence first, then at a phrase boundary swap the bass over — cut the outgoing bass and bring in the incoming bass simultaneously. When done right, the crowd feels a seamless shift of energy without any muddy overlap. This single technique will make your transitions sound 10x more professional overnight.",
         keyTakeaway:
-          "A clean bass handover keeps the dancefloor locked.",
+          "A clean bass handover is the difference between a transition that sounds amateur and one that sounds professional. Swap, don't stack!",
         exercise: {
-          title: "Low-end swap drill",
-          description: "Practice bass transfer timing.",
+          title: "The bass relay drill",
+          description: "Time to practice the most satisfying moment in DJing — that clean bass swap that makes everything click into place!",
           steps: [
-            "Blend incoming track with low bass.",
-            "At phrase start, reduce outgoing low and raise incoming low.",
-            "Keep master clarity consistent.",
+            "Start blending your incoming track with its bass dialed down — let the mids and highs introduce themselves over 8 bars.",
+            "When you hit a phrase start, swap the bass: cut the outgoing track's low end and bring in the incoming track's bass in one smooth move.",
+            "Listen to the master output — did the energy stay consistent? The low-end should feel like one continuous groove, not two separate ones.",
           ],
           estimatedTime: "10 minutes",
         },
-        tips: ["Phrase timing matters.", "Avoid abrupt low-end jumps.", "Check result in recording."],
+        tips: [
+          "Phrase boundaries are your best friend for bass swaps — the musical structure naturally supports a clean handover at these points.",
+          "Avoid abrupt bass jumps. Even a fast swap should feel intentional, not like something broke. Smooth the movement over a beat or two if needed.",
+          "Record yourself and listen back. Bass mud is sometimes hard to hear in the moment but super obvious in a recording.",
+        ],
       },
       3: {
         title: "EQ transition execution",
         subtitle: "One full transition with controlled spectrum",
-        videoDescription: "Apply EQ strategy in a complete blend.",
+        videoDescription: "Let's put it all together — everything you've learned about frequencies, bass handovers, and space management in one complete transition.",
         content:
-          "This slide turns theory into execution. Keep changes intentional and audible, not exaggerated.",
+          "Alright, this is where theory becomes real. You're going to plan and execute a full transition using deliberate EQ decisions from start to finish. Before you start, map it out: how will you introduce the incoming track? Which frequencies will you bring in first? Where will you swap the bass? When will you pull back the outgoing track? Having a plan doesn't make you rigid — it makes you confident. During the blend, keep your movements intentional. Every knob turn should have a reason. If you catch yourself fidgeting with EQ just because you're nervous, take your hands off and listen. The best EQ work often involves fewer moves than you'd expect. After you're done, listen back and ask yourself: did it sound like two tracks coexisting, or two tracks fighting?",
         keyTakeaway:
-          "Controlled EQ movement creates professional smoothness.",
+          "Controlled, intentional EQ movements are what create that buttery-smooth professional sound. Plan your moves, execute with confidence, and remember — less is usually more.",
         exercise: {
-          title: "Full EQ transition",
-          description: "Run one transition with clear EQ plan.",
+          title: "The full EQ transition showdown",
+          description: "Your EQ graduation challenge! Plan every frequency move before you start, then execute it in one clean take.",
           steps: [
-            "Plan entry, overlap, and release moments.",
-            "Execute with minimal unnecessary movement.",
-            "Review and simplify any messy section.",
+            "Before touching any controls, map out your plan: when will the incoming track enter? Where's the bass swap? When does the outgoing track exit?",
+            "Execute the transition with minimal, deliberate movements. If a knob doesn't need turning, leave it alone — confident stillness is a skill!",
+            "Listen back critically. Was there any moment where things got muddy or the energy dipped? Simplify that section and try again.",
           ],
           estimatedTime: "12 minutes",
         },
-        tips: ["Clarity before loudness.", "Less is often better.", "Consistency beats drama."],
+        tips: [
+          "Chase clarity, not volume. A clean, clear mix at moderate volume always beats a loud, muddy one.",
+          "When in doubt, do less. Some of the best transitions in the world use just two or three subtle EQ adjustments total.",
+          "Consistency beats drama every time. A smooth blend that barely anyone notices is way more professional than a showy one that draws attention to itself.",
+        ],
       },
     },
   },
   3: {
     title: "Core Transitions",
-    description: "Master preparation, blend timing, and clean release.",
+    description: "This is where it starts clicking! You're going to build a repeatable transition framework — prepare, blend, release — that makes every mix feel intentional and smooth.",
     slides: {
       1: {
         title: "Three-phase transition model",
         subtitle: "Prepare, blend, release",
-        videoDescription: "Build a repeatable transition structure.",
+        videoDescription: "The secret framework that working DJs use for every single transition — once you learn this, you'll never feel lost in a blend again.",
         content:
-          "Reliable transitions follow structure: prep timing, controlled overlap, and clean release point.",
+          "Every great transition follows the same three phases, whether the DJ is playing a warehouse rave or a sunset beach set. Phase one: Prepare — you've got your next track selected, BPM matched, and you know exactly which phrase you're dropping it on. Phase two: Blend — the tracks overlap for a controlled period, usually 16 to 32 bars, while you manage EQ and levels to keep things clean. Phase three: Release — you pull the outgoing track out at a phrase boundary so the new track takes over seamlessly. Having this framework in your head eliminates that 'what do I do now?' feeling mid-transition. You always know where you are in the process. It's like having GPS for your mix — you might take different routes, but you always know the destination.",
         keyTakeaway:
-          "Structure reduces hesitation and errors.",
+          "The three-phase model gives you a clear roadmap for every transition. When you know the structure, you stop hesitating and start flowing.",
         exercise: {
-          title: "3-phase mapping",
-          description: "Mark each phase in real tracks.",
+          title: "Blueprint your blend",
+          description: "Let's plan a transition on paper before you touch the decks — this planning habit is what separates pros from amateurs!",
           steps: [
-            "Pick two tracks and label phrase windows.",
-            "Define prep, blend, release bars.",
-            "Execute and compare with your map.",
+            "Pick two tracks and identify the phrase windows — where are the 8-bar and 16-bar sections? Mark where energy shifts happen.",
+            "Map out your three phases: at which bar will you start the blend? How long is the overlap? Where exactly will you release the outgoing track?",
+            "Now execute it for real and compare with your plan. Did you stick to it? Where did you deviate, and was that deviation a good instinct or a panic move?",
           ],
           estimatedTime: "10 minutes",
         },
-        tips: ["Map before mix.", "Stay phrase-aware.", "Do not rush release."],
+        tips: [
+          "Plan before you play — even spending 30 seconds mentally mapping a transition makes it dramatically smoother.",
+          "Stay phrase-aware throughout all three phases. Phrases are the grammar of dance music; mix with them, not against them.",
+          "Don't rush the release phase. Pulling the outgoing track too early is one of the most common beginner mistakes. Let it breathe out naturally.",
+        ],
       },
       2: {
         title: "Timing under control",
         subtitle: "Keep groove stable during overlap",
-        videoDescription: "Maintain phase coherence while blending.",
+        videoDescription: "The overlap is where transitions live or die — let's make sure yours stay rock-solid even when two tracks are running together for 16+ bars.",
         content:
-          "During overlap, tiny timing corrections preserve groove and confidence.",
+          "The overlap phase is where most transitions fall apart, and it's almost always because of small timing drift that snowballs. Here's the thing: even when BPMs are matched perfectly, tracks can drift slightly out of phase. Your job during the overlap is to monitor this and make tiny corrections before it becomes audible to anyone else. Use your headphones actively — flip between cue and master to check alignment. If you hear the beats starting to flam (that stuttery double-hit sound), gently nudge the jog wheel. The keyword is gently. Big corrections sound worse than the drift itself. Think of it like steering a car: small, constant adjustments keep you in the lane. Jerking the wheel causes a crash. The confidence you build here — holding two tracks in perfect sync for 16, 32, even 64 bars — is what lets you attempt longer, more creative transitions later.",
         keyTakeaway:
-          "Small timing control decisions prevent major transition failures.",
+          "Small, early timing corrections keep the groove alive. Catch drift before it becomes a problem and you'll hold transitions together with total confidence.",
         exercise: {
-          title: "Overlap timing drill",
-          description: "Hold groove for 16 bars.",
+          title: "The 16-bar groove lock",
+          description: "Can you hold two tracks perfectly synced for 16 bars straight? This drill builds the micro-correction instincts that every pro relies on!",
           steps: [
-            "Blend two tracks for 16 bars.",
-            "Correct drift with minimal jog/pitch action.",
-            "Release on phrase start.",
+            "Blend two tracks and let them run together for a full 16 bars — focus entirely on keeping the beats locked together.",
+            "When you hear any drift, correct it with the smallest possible jog wheel nudge. Challenge yourself to make corrections so small that nobody watching would even notice your hand moved.",
+            "Release cleanly on a phrase start. If you held it tight for the full 16 bars, congratulations — that's genuinely solid! Try 32 bars next.",
           ],
           estimatedTime: "10 minutes",
         },
-        tips: ["Use headphones actively.", "Correct early.", "Avoid panic gestures."],
+        tips: [
+          "Use your headphones aggressively during overlap — alternate between cue and master to catch drift the instant it starts.",
+          "Correct early, correct small. A tiny nudge at bar 2 is invisible. A big correction at bar 14 is a trainwreck everyone hears.",
+          "If you feel the urge to make a big, panicked correction, take a breath first. Rushed moves almost always make things worse.",
+        ],
       },
       3: {
         title: "Invisible transition target",
         subtitle: "Smoothness as core quality metric",
-        videoDescription: "Make track changes feel natural to listeners.",
+        videoDescription: "The ultimate goal — transitions so smooth that someone listening wouldn't even realize the track changed. This is where you start thinking like a pro.",
         content:
-          "A strong transition sounds inevitable, not forced. The crowd should feel continuity.",
+          "Here's the benchmark you're aiming for: a transition so seamless that if someone was dancing with their eyes closed, they'd feel the music evolve but never feel a jarring 'change.' That's an invisible transition, and it's the gold standard. Everything you've learned — EQ management, phrase timing, bass handovers, groove locking — comes together here. An invisible transition isn't about tricks or complexity; it's about making the right moves at exactly the right moments. The crowd should feel continuity, like one long musical journey. When you pull off your first truly invisible blend, it's one of the best feelings in DJing. And once you can do it consistently, you've earned the right to break the rules creatively — because you understand what the rules are for.",
         keyTakeaway:
-          "Invisible transitions are the benchmark of control.",
+          "Invisible transitions are the ultimate proof that you're in control. When the music flows like water and nobody notices the switch, that's mastery in action.",
         exercise: {
-          title: "Two invisible transitions",
-          description: "Aim for seamless flow.",
+          title: "The blind test challenge",
+          description: "Time for the real test — can you fool yourself? Record two transitions and listen back without looking at the waveforms. Pure ears only!",
           steps: [
-            "Perform two transitions with same process.",
-            "Record and listen without watching waveforms.",
-            "Adjust where transition felt obvious.",
+            "Perform two transitions using everything you've learned — three-phase model, EQ management, bass handover, groove locking. Give it your best shot.",
+            "Hit record, then listen back with your eyes closed or looking away from the screen. Can you pinpoint the exact moment each transition happens?",
+            "If you can hear the transition clearly, identify what gave it away and refine that specific element. If you can't tell — you nailed it!",
           ],
           estimatedTime: "12 minutes",
         },
-        tips: ["Continuity over tricks.", "Trust ears, not only screen.", "Refine, do not rush."],
+        tips: [
+          "Chase continuity, not flash. The most impressive thing a DJ can do is make 20 tracks feel like one unbroken journey.",
+          "Trust your ears over your screen. Waveforms can look messy while sounding perfect, and vice versa. Your ears are always the final judge.",
+          "Refinement beats repetition. Don't just do more reps — identify the one weak spot in each transition and fix that specifically before your next attempt.",
+        ],
       },
     },
   },
@@ -397,444 +425,456 @@ const EN_LEVEL_6_TO_10_OVERRIDES: Record<number, LocalizedModuleOverride> = {
   },
   5: {
     title: "Set Structure",
-    description: "Design engaging energy progression across a full set.",
+    description: "You've mastered individual transitions — now it's time to think bigger. This level is about designing a full set that takes your audience on an emotional journey from the first track to the last.",
     slides: {
       1: {
         title: "Energy architecture",
         subtitle: "Intro, build, peak, release",
-        videoDescription: "Create a coherent emotional trajectory.",
+        videoDescription: "The difference between a DJ who plays great tracks and a DJ who delivers an unforgettable experience? It's energy architecture — and you're about to learn it.",
         content:
-          "A strong set controls pace and expectation instead of random intensity spikes.",
+          "Think about the best DJ set you've ever heard. Chances are it wasn't just a random collection of bangers — it was a journey. It started somewhere calm, built anticipation, hit incredible peaks, gave you moments to breathe, and left you wanting more. That's energy architecture, and it's what separates a playlist from a performance. The four phases are your building blocks: Intro sets the mood and pulls people in. Build creates anticipation — the energy is rising and the crowd can feel something coming. Peak is the climax — maximum intensity, maximum release. And the cooldown brings things back down gracefully, leaving a lasting impression. You don't have to be rigid about this structure, but having it as your starting framework means every set has intentional shape instead of random energy spikes.",
         keyTakeaway:
-          "Energy structure is central to crowd retention.",
+          "A great set tells a story with energy. When you control the pacing — intro, build, peak, release — the crowd goes on a journey instead of just hearing songs.",
         exercise: {
-          title: "Energy map",
-          description: "Design one short structured set.",
+          title: "Design your dream mini-set",
+          description: "Let's architect a set on paper before you play it! This is how the big-name DJs prepare — and it's more fun than you'd expect.",
           steps: [
-            "Define 4 energy phases.",
-            "Assign tracks to each phase.",
-            "Prepare transition intents between phases.",
+            "Define your 4 energy phases: what mood does each one have? What BPM range and energy level fits each? Imagine the crowd's face at each stage.",
+            "Assign 2-3 tracks from your library to each phase. Think about how each track's energy and key fits the story you're trying to tell.",
+            "Plan your transition strategy between phases. The shift from Build to Peak is especially important — how will you make that moment land? What about the come-down after Peak?",
           ],
           estimatedTime: "10 minutes",
         },
-        tips: ["Think journey, not playlist.", "Control pacing.", "Keep room to adapt."],
+        tips: [
+          "Think journey, not playlist. A playlist is a list of good songs. A set is a story told with music. Always ask yourself: where am I taking the listener?",
+          "Pacing is everything. The best DJs know when to push hard and when to let the crowd breathe. Non-stop bangers actually kills energy — people need contrast to feel the peaks.",
+          "Leave room to adapt. Your energy map is a guide, not a script. If the moment calls for a change, trust your instincts and adjust on the fly.",
+        ],
       },
       2: {
         title: "Adapt in real time",
         subtitle: "When to push, hold, or reset",
-        videoDescription: "Translate crowd response into set decisions.",
+        videoDescription: "Your plan meets reality — here's how to read the room and make smart decisions on the fly without losing your set's direction.",
         content:
-          "Your structure is a guide, not a prison. Adapt based on real audience response.",
+          "Here's the truth every experienced DJ knows: no set goes exactly as planned, and that's actually a good thing. Your energy map is your compass, but the crowd is the terrain, and terrain changes. Maybe you planned a big build but the crowd is already at peak energy — do you push harder or ride the wave? Maybe your chill intro is losing people's attention — do you accelerate or trust the process? These are the decisions that make live DJing an art, not just a playlist. The skill is reading the room and making adjustments without losing your overall direction. Think of three simple moves: Push (increase energy/tempo/intensity), Hold (stay at the current level because it's working), or Reset (drop things down to create breathing room and set up a bigger peak). Every few transitions, check in with the room and consciously choose one of these three.",
         keyTakeaway:
-          "Flexibility with structure is a pro skill.",
+          "Flexibility within structure is what makes a DJ feel live and connected. Plan your journey, but let the crowd guide how fast you travel.",
         exercise: {
-          title: "Decision checkpoints",
-          description: "Re-evaluate every few transitions.",
+          title: "The DJ decision game",
+          description: "Practice making push/hold/reset decisions in real time — this drill builds the read-the-room instincts that separate bedroom DJs from real performers!",
           steps: [
-            "Set a checkpoint every 2 transitions.",
-            "Rate crowd state.",
-            "Choose push/hold/reset strategy.",
+            "Start mixing your planned set, but set a checkpoint every 2 transitions. At each checkpoint, pause mentally and imagine a crowd reaction — are they feeling it? Getting bored? Going wild?",
+            "Based on your imagined crowd state, consciously choose: Push (pick a higher-energy next track), Hold (stay on course), or Reset (drop the energy to build back up).",
+            "After the set, review your decisions. Did each push/hold/reset feel intentional and motivated? Would you make the same call again? This reflection is where the learning really happens.",
           ],
           estimatedTime: "10 minutes",
         },
-        tips: ["Stay observant.", "Decide quickly.", "Protect momentum."],
+        tips: [
+          "Stay observant and present. It's easy to get lost in your own headphones and forget you're playing for people. Check in with the room constantly.",
+          "Make your decisions quickly and commit to them. A confident wrong call is better than a hesitant right one — audiences feel your energy.",
+          "Protect your momentum. The worst thing you can do is kill a good vibe with an indecisive transition. When in doubt, hold what's working.",
+        ],
       },
       3: {
         title: "Structure validation",
         subtitle: "Run and review a complete mini-set",
-        videoDescription: "Validate your structure with one full run.",
+        videoDescription: "This is your Level 5 final — a complete mini-set from intro to outro, recorded and reviewed. You're about to see how far you've come!",
         content:
-          "Execute your structure end-to-end, then review weak transitions and energy drops.",
+          "This is it — the culmination of everything you've built across all five levels. You're going to play a complete mini-set with intentional energy architecture, live adaptation decisions, clean transitions, harmonic awareness, and solid EQ work. Record the whole thing, because you're going to review it like a pro afterward. The review is just as important as the performance. Listen for your strong moments — the transitions where everything clicked — and your weak spots where energy dipped or timing wavered. This isn't about being perfect; it's about having awareness of your own mixing. Every pro DJ records their sets and reviews them. It's how they find their blind spots and level up session after session. When you can play a structured mini-set, review it honestly, fix the weak points, and replay it better — you've developed a practice habit that will compound forever.",
         keyTakeaway:
-          "Review transforms a good set into a repeatable set.",
+          "Recording and reviewing your sets is the single most powerful improvement habit in DJing. It turns every session into a learning opportunity and every weakness into a clear action item.",
         exercise: {
-          title: "25-minute structured run",
-          description: "One full run plus review notes.",
+          title: "The mini-set masterclass",
+          description: "Your Level 5 graduation! Play a full 25-minute mini-set, then review it like a pro coach would. This is where everything comes together!",
           steps: [
-            "Play full mini-set in one take.",
-            "Mark 2 strong moments and 2 weak moments.",
-            "Rebuild weak transitions and replay.",
+            "Hit record and play your full planned mini-set in one take — intro through outro, no stopping. Trust your preparation and let the music flow.",
+            "Listen back and mark your 2 strongest moments (the transitions that made you smile) and 2 weakest moments (where things felt off). Be honest but kind with yourself!",
+            "Rebuild the weak transitions with specific fixes — was it timing? EQ? Track selection? Key clash? Fix the root cause and replay those sections until they shine.",
           ],
           estimatedTime: "12 minutes",
         },
-        tips: ["Record every full run.", "Score your own set objectively.", "Iterate weekly."],
+        tips: [
+          "Record every single full run. Even the messy ones. Comparing this week's recording to last week's is the most motivating thing in the world when you can actually hear your progress.",
+          "Score your own set honestly but fairly. You're not comparing yourself to Carl Cox — you're comparing yourself to yesterday's you. That's the only benchmark that matters.",
+          "Make this a weekly ritual. One structured mini-set per week, recorded and reviewed, will make you better faster than hours of aimless noodling on the decks.",
+        ],
       },
     },
   },
   6: {
-    title: "Advanced Techniques: Loops, FX and Energy Control",
-    description: "Move from clean transitions to creative transitions without losing groove.",
+    title: "Advanced Techniques: Loops, FX & Energy Control",
+    description: "You've nailed the fundamentals — now it's time to add flair. This is where your mixes start sounding truly yours.",
     slides: {
       1: {
-        title: "Useful loops vs decorative loops",
-        subtitle: "Extend a phrase without tiring the dancefloor",
-        videoDescription: "Use loops as a musical tool, not as a cover-up.",
+        title: "Loops that actually work",
+        subtitle: "Use loops as a weapon, not a crutch",
+        videoDescription: "Learn to use loops like a pro — with purpose, timing, and confidence.",
         content:
-          "A loop should solve a phrase issue, secure an entry, or build tension. If it runs too long, emotion drops. Pro objective: short loop, clear intention, clean release.",
-        keyTakeaway: "A loop solves one precise phrase problem, then disappears on time.",
+          "Here's a secret most beginners don't get: a loop isn't there to buy you time — it's there to build a moment. The best DJs in the world use a 4-beat loop to stretch the tension right before a drop, or to hold a groove while they bring in the next track seamlessly. But if you let it run too long, the crowd feels it — the energy just… deflates. Think of a loop like a held breath: powerful for a few seconds, awkward after ten. Your goal is surgical precision — get in, create the moment, get out clean.",
+        keyTakeaway: "A great loop has one job — solve one problem, create one moment, then disappear before anyone notices it was there.",
         exercise: {
-          title: "4/8-beat loop drill",
-          description: "Compare short-loop impact vs overextended loops.",
+          title: "The Loop Sniper Challenge",
+          description: "Train yourself to make loops short, intentional, and perfectly timed.",
           steps: [
-            "Pick two tracks with close BPM and different intros.",
-            "On track A, enable a 4-beat loop at end of phrase.",
-            "Start track B, align in headphones, blend in progressively.",
-            "Release the loop on the next phrase start.",
+            "Grab two tracks with close BPMs but different intro energy.",
+            "On Track A, drop a 4-beat loop right at the end of a phrase — feel the tension build.",
+            "Cue up Track B in your headphones, get it locked, and start blending it in.",
+            "Release the loop exactly on the next phrase start — nail that timing and feel the payoff.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Prepare your loop exit before enabling the loop.",
-          "Do not hide weak beatmatching with loops.",
-          "Record yourself: over-looping is easy to hear.",
+          "Pro move: always know your exit point BEFORE you hit the loop button. Never loop without a plan.",
+          "If you're using loops to cover up shaky beatmatching, go back and tighten that skill first — loops should enhance, not hide.",
+          "Record yourself and listen back — over-looping is one of the easiest habits to catch on tape.",
         ],
       },
       2: {
-        title: "FX: build tension without blurring the mix",
-        subtitle: "Filter, echo, reverb with phrase timing",
-        videoDescription: "Use effects to support story, not to overload transitions.",
+        title: "FX that tell a story",
+        subtitle: "Filters, echoes & reverbs that build emotion — not noise",
+        videoDescription: "Discover how to use effects like seasoning — just enough to elevate, never enough to overpower.",
         content:
-          "Great FX use means controlled wet level, phrase-aware timing, and musical intent. Club clarity always wins over show-off complexity.",
-        keyTakeaway: "One well-timed effect beats three stacked effects.",
+          "Let's talk about the number one mistake intermediate DJs make with effects: they use too many, too loud, too often. Here's the truth — a single, well-timed filter sweep can give the crowd chills. A subtle echo trail on an outgoing vocal can make a transition feel cinematic. But stack three effects at once? You just turned your mix into a muddy mess. The best club DJs in the world barely touch their FX — but when they do, it's magic. Clarity always beats complexity on a big sound system.",
+        keyTakeaway: "One perfectly timed effect will always hit harder than three stacked on top of each other. Less is more — always.",
         exercise: {
-          title: "One-effect routine",
-          description: "Build consistency before complexity.",
+          title: "The Minimalist FX Challenge",
+          description: "Prove to yourself that restraint is the ultimate superpower.",
           steps: [
-            "Run one transition with no effects.",
-            "Repeat with only light filter movement.",
-            "Third pass: add short echo on outgoing track.",
-            "Review and keep the cleanest version.",
+            "Mix one full transition with zero effects — just EQ and faders. Notice how clean it sounds.",
+            "Now run the same transition with only a gentle filter movement on the outgoing track.",
+            "Third attempt: add a short echo tail on the outgoing track as it exits. Keep it subtle.",
+            "Listen to all three back-to-back. Which one actually sounds the best? You might be surprised.",
           ],
           estimatedTime: "10 minutes",
         },
         tips: [
-          "If effect is louder than musical intent, reduce wet.",
-          "Trigger effects on phrase boundaries.",
-          "Always keep a dry reset option.",
+          "Golden rule: if you can hear the effect more than the music, your wet level is too high. Pull it back.",
+          "Time your effects to phrase boundaries — a reverb that starts mid-phrase sounds random, but one on the downbeat sounds intentional.",
+          "Always keep your finger near the dry/kill button. The ability to instantly cut an effect clean is a pro skill most people overlook.",
         ],
       },
       3: {
-        title: "Full creative transition",
-        subtitle: "Loop + EQ + FX + clean exit",
-        videoDescription: "Assemble advanced tools into one controlled transition.",
+        title: "The full creative transition",
+        subtitle: "Loop + EQ + FX + clean exit — all in one flow",
+        videoDescription: "Combine everything you've learned into transitions that feel effortless and sound incredible.",
         content:
-          "Advanced skill is sequencing actions under pressure: prepare, create tension, release, recover. You should execute this reliably, even in imperfect booth conditions.",
-        keyTakeaway: "Creativity equals control plus fast recovery.",
+          "This is where it all comes together, and honestly? This is where DJing gets really fun. A creative transition isn't just technical — it's like choreography. You set the loop, sculpt the EQ, add a touch of FX for drama, and release everything right on the phrase. When you nail it, the crowd doesn't even realize a new track started — they just feel the energy shift. The key is sequencing: know what happens first, second, third. And always have a bail-out plan, because even the pros don't land every creative transition perfectly on the first try.",
+        keyTakeaway: "True creativity isn't chaos — it's controlled moves with fast recovery. The best transitions look effortless because they were practiced relentlessly.",
         exercise: {
-          title: "Two-transition booth scenario",
-          description: "Simulate pressure with back-to-back transitions.",
+          title: "The Pressure Cooker — Back-to-Back Creative Transitions",
+          description: "Simulate real booth pressure with two creative transitions in a row, no breaks.",
           steps: [
-            "Transition 1: short loop + bass swap + clean release.",
-            "Transition 2: filter + echo out, no loop.",
-            "Record both in one take and review weak spots.",
+            "Transition 1: Set a short loop, execute a bass swap, add a subtle FX, release clean on the phrase.",
+            "Transition 2: Filter sweep into an echo tail — no loop this time. Different technique, same control.",
+            "Record both in one continuous take. No restarts. Then listen back and honestly identify your weak spots.",
           ],
           estimatedTime: "13 minutes",
         },
         tips: [
-          "Audience remembers energy continuity, not technical complexity.",
-          "Keep a simplified version of each creative move.",
-          "Canceling an effect at the right time is pro behavior.",
+          "The crowd remembers how the energy felt, not how many buttons you pressed. Prioritize flow over flash.",
+          "For every creative move, have a simplified backup version ready. If the complex version isn't clicking, go simple — nobody will know.",
+          "Knowing when to kill an effect is just as important as knowing when to trigger it. A clean cut at the right moment? That's peak pro behavior.",
         ],
       },
     },
   },
   7: {
     title: "Reading the Crowd",
-    description: "Make fast decisions from real dancefloor signals.",
+    description: "This is what separates a playlist-player from a real DJ. You're about to learn the most underrated skill in the game.",
     slides: {
       1: {
-        title: "Weak crowd signals",
-        subtitle: "Observe before energy actually drops",
-        videoDescription: "Detect fatigue, peak, and relaunch signals early.",
+        title: "Spotting the signs before energy drops",
+        subtitle: "Read the room like a pro — before it's too late",
+        videoDescription: "Train your eyes to catch what most DJs miss: the early warning signs of a fading dancefloor.",
         content:
-          "Pro DJs react early: micro-drop in engagement, floor compression, bar traffic, and delayed drop response. You should adjust before decline becomes obvious.",
-        keyTakeaway: "Diagnose early and correct in 1-2 tracks max.",
+          "Here's something nobody teaches in YouTube tutorials: the best DJs aren't reacting to the crowd — they're anticipating. By the time the dancefloor is obviously dying, you're already two tracks too late. What you want to watch for are the micro-signals: people checking their phones more, small groups drifting toward the bar, delayed reactions to drops, the edges of the floor thinning out. These are whispers before the scream. When you catch them early, you can adjust with one track instead of scrambling for three. This skill alone will make you better than 80% of DJs out there.",
+        keyTakeaway: "The pros don't wait for the floor to empty — they read the micro-signals and adjust within 1-2 tracks. Train your eyes as much as your ears.",
         exercise: {
-          title: "60-second crowd scan",
-          description: "Build active observation during your set.",
+          title: "The 60-Second Crowd Scan",
+          description: "Build a habit of actively reading the room — even during practice sessions with videos.",
           steps: [
-            "Track floor density, drop reaction, and movement flow.",
-            "Label state: rising, stable, or dropping.",
-            "Pick intent for next track: push, hold, or pivot.",
+            "During a mix, pause and scan: floor density, body movement intensity, reaction timing to drops.",
+            "Label the current state in your head: rising, stable, or dropping.",
+            "Based on your read, decide your intent for the next track: push harder, hold steady, or pivot direction.",
           ],
           estimatedTime: "8 minutes",
         },
         tips: [
-          "Noisy crowd is not always engaged crowd.",
-          "A quick correction is cheaper than prolonged inertia.",
-          "Prepare emergency tracks for multiple energy directions.",
+          "A loud crowd isn't always an engaged crowd — watch the feet, not the mouths. Dancing tells the truth.",
+          "Quick course corrections are cheap. Waiting and hoping things improve? That's expensive. Act early.",
+          "Always have 2-3 emergency tracks loaded that can shift energy in completely different directions. Your safety net should be ready before you need it.",
         ],
       },
       2: {
-        title: "Fast decisions under pressure",
-        subtitle: "Choose the next move in under 10 seconds",
-        videoDescription: "A practical decision framework for tense moments.",
+        title: "Making fast decisions under pressure",
+        subtitle: "When doubt creeps in, your framework kicks in",
+        videoDescription: "Build a bulletproof decision system so you never freeze behind the decks.",
         content:
-          "Under pressure, you need a clear framework: keep, push, or pivot. The worst pattern is long hesitation.",
-        keyTakeaway: "Simple decisions reduce stress and improve consistency.",
+          "Picture this: the floor energy is ambiguous, you've got 30 seconds before the current track winds down, and you're not sure which direction to go. This is where most DJs freeze — and freezing is the worst thing you can do. The solution? A dead-simple framework: Keep, Push, or Pivot. Keep means you stay in the same lane — similar energy, similar vibe. Push means you crank it up a notch. Pivot means you change direction entirely. That's it. Three options. Pick one in under 10 seconds and commit. A fast, good-enough decision will always beat a perfect decision that came 30 seconds too late.",
+        keyTakeaway: "Hesitation is your enemy behind the decks. A simple Keep/Push/Pivot framework eliminates panic and keeps your sets flowing.",
         exercise: {
-          title: "Three-option drill",
-          description: "Train fast choices across crowd states.",
+          title: "The 10-Second Decision Drill",
+          description: "Train your brain to make fast, confident choices — because in the booth, you won't have time to think twice.",
           steps: [
-            "Simulate cold, stable, and peak crowd states.",
-            "For each state, decide in 10 seconds: keep/push/pivot.",
-            "Execute one transition matching your choice.",
+            "Imagine three scenarios: cold crowd (barely moving), stable crowd (vibing but not peaking), peak crowd (hands up, going wild).",
+            "For each scenario, give yourself exactly 10 seconds to choose: Keep, Push, or Pivot. Say it out loud.",
+            "Now execute one transition that matches your decision. Commit fully — no second-guessing mid-transition.",
           ],
           estimatedTime: "10 minutes",
         },
         tips: [
-          "A fast, good-enough decision beats no decision.",
-          "Keep utility tracks tagged by crowd scenario.",
-          "When unsure, stabilize first.",
+          "A fast good-enough call beats no call every single time. Commit and adjust later if needed.",
+          "Tag your utility tracks by crowd scenario — 'floor saver', 'peak builder', 'cool down'. When pressure hits, you'll thank yourself.",
+          "When you genuinely can't tell what the crowd needs? Stabilize. Hold the current energy, buy yourself a track to observe, then decide.",
         ],
       },
       3: {
         title: "Live error recovery",
-        subtitle: "Recover quickly and keep the floor alive",
-        videoDescription: "Recovery techniques when transitions fail.",
+        subtitle: "Every great DJ has messed up live — what separates them is recovery speed",
+        videoDescription: "Learn recovery techniques that turn mistakes into moments nobody even notices.",
         content:
-          "All DJs miss transitions. Professionals recover instantly by simplifying, restoring groove, and relaunching confidently.",
-        keyTakeaway: "You are judged by recovery quality, not error absence.",
+          "Let me tell you something that might change your entire perspective: every single DJ you admire has botched a transition in front of a crowd. Every. Single. One. The difference between a pro and an amateur isn't the absence of mistakes — it's what happens in the five seconds after. Pros simplify instantly: they cut back to one clean track, restore the groove, and relaunch with confidence. The crowd forgives a stumble they barely noticed. They never forgive a DJ who panics, fumbles for 30 seconds, and kills the energy. Recovery speed is a trainable skill, and this exercise is going to build that muscle.",
+        keyTakeaway: "Nobody judges you for making a mistake. They judge you for how long it takes to fix it. Fast, calm recovery is the hallmark of a professional.",
         exercise: {
-          title: "Recovery drill",
-          description: "Turn a failed transition into a clean relaunch.",
+          title: "The Recovery Drill",
+          description: "Deliberately create a mess — then prove you can get out of it clean. This builds real confidence.",
           steps: [
-            "Intentionally create a light drift.",
-            "Return to simple EQ and clear timing.",
-            "Relaunch with a safe track in under 20 seconds.",
+            "Intentionally let a transition drift — misalign the beats slightly or bring in a clashing key.",
+            "Immediately simplify: pull back to clean EQ, kill the problem source, restore clear timing on one deck.",
+            "Within 20 seconds, relaunch with a safe, reliable track. The goal: nobody would know anything went wrong.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "A 2-second breath can save a set.",
-          "Your emergency track must be pre-tagged.",
-          "Simplifying is professional, not weak.",
+          "A calm 2-second breath behind the decks can save your entire set. Panic is contagious — composure is too.",
+          "Your emergency track should be pre-loaded and pre-tagged at all times. When disaster strikes, you don't have time to browse.",
+          "Simplifying in a crisis isn't a sign of weakness — it's the most professional thing you can do. The crowd respects groove over ego.",
         ],
       },
     },
   },
   8: {
     title: "Set Construction",
-    description: "Design a 45-60 minute set that holds from start to finish.",
+    description: "You're not just mixing tracks anymore — you're building journeys. This is where you learn to think like a storyteller.",
     slides: {
       1: {
-        title: "Macro set architecture",
-        subtitle: "Intro, rise, peak, breathing, exit",
-        videoDescription: "Build a clear emotional path for the audience.",
+        title: "Designing your set architecture",
+        subtitle: "Every great set tells a story — intro, rise, peak, breathe, exit",
+        videoDescription: "Learn to plan a set like a movie director plans a film — with intention, emotion, and a killer ending.",
         content:
-          "A strong set is a trajectory, not a random playlist. You should know where you are in the story at every moment.",
-        keyTakeaway: "A successful set follows a readable emotional curve.",
+          "Here's what separates a DJ set from a playlist on shuffle: a story. Think about the best sets you've ever heard — they took you somewhere. They started mellow, built anticipation, hit a peak that gave you chills, let you breathe, then brought you back up before landing perfectly. That's not an accident — that's architecture. You need to know where you are in the emotional arc at every single moment. Are you in the intro? The climb? The peak? The cooldown? If you can't answer that question at any point during your set, you're just playing songs. From now on, you're telling stories.",
+        keyTakeaway: "A great set follows a clear emotional curve that the crowd can feel even if they can't describe it. Plan the journey before you hit Play.",
         exercise: {
-          title: "45-minute blueprint",
-          description: "Write a full structure before mixing.",
+          title: "The 45-Minute Blueprint Challenge",
+          description: "Design a complete set structure on paper before you touch the decks — this is how pros prepare.",
           steps: [
-            "Define 5 energy blocks with target duration.",
-            "Assign key tracks to each block.",
-            "Prepare one alternative per block.",
+            "Map out 5 energy blocks: Opening (low/mid), Build (rising), Peak (maximum energy), Breathing Room (cooldown), and Finale (strong exit).",
+            "Assign 2-3 key tracks to each block — tracks you know will deliver the right energy.",
+            "For each block, prepare one alternative track in case the vibe calls for a different direction. Flexibility is power.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Write the plan, then adapt in real time.",
-          "Transitions between blocks matter most.",
-          "Always prepare a clean landing.",
+          "Write the plan, then be ready to throw parts of it away. A blueprint gives you direction — the dancefloor gives you the final say.",
+          "The transitions between energy blocks are the make-or-break moments. Nail those, and the rest takes care of itself.",
+          "Always plan your landing. The last 2-3 tracks of your set are what people remember. Don't just fade out — close with purpose.",
         ],
       },
       2: {
-        title: "Micro-structure and pivot points",
-        subtitle: "Secure critical transitions between blocks",
-        videoDescription: "Translate macro planning into transition decisions.",
+        title: "Pivot points — the transitions that define your set",
+        subtitle: "Your set lives or dies on 4-5 key moments",
+        videoDescription: "Identify and master the handful of critical transitions that make or break your entire set.",
         content:
-          "Your set quality depends on a handful of high-impact transitions. Prepare them like scripted scenes.",
-        keyTakeaway: "A set is a sequence of mastered transition pivots.",
+          "Here's an insider truth: a 45-minute set has maybe 12-15 transitions, but only 4 or 5 of them really matter. These are your pivot points — the moments where you shift energy direction, change the vibe, or take the crowd somewhere new. The transition from your build to your peak? That's a pivot. The cooldown after a massive drop? Pivot. The surprise genre shift that makes the crowd lose their minds? Huge pivot. These moments need to be rehearsed like scripted scenes in a movie. You can improvise the connecting transitions, but your pivots should be bulletproof.",
+        keyTakeaway: "Don't try to make every transition a masterpiece. Focus your energy on the 4-5 pivot points that actually shape the crowd's experience.",
         exercise: {
-          title: "Four critical transitions",
-          description: "Prepare your highest-impact moments.",
+          title: "Master Your Four Key Pivots",
+          description: "Identify and rehearse the transitions that will define your set — these are your money moments.",
           steps: [
-            "Select 4 high-risk transitions.",
-            "Write entry cue, EQ/FX action, and exit cue.",
-            "Rehearse these 4 transitions repeatedly.",
+            "From your blueprint, identify 4 high-risk transitions — the moments where energy direction changes significantly.",
+            "For each one, write out: the entry cue, what you'll do with EQ/FX during the blend, and the exit cue.",
+            "Rehearse these 4 transitions on repeat until they're second nature. You should be able to nail them with your eyes closed.",
           ],
           estimatedTime: "11 minutes",
         },
         tips: [
-          "Each critical transition needs a simple fallback version.",
-          "Avoid changing too many parameters at once.",
-          "Consistency beats forced originality.",
+          "Every critical transition needs a simpler fallback version. If the complex version isn't landing, pivot to the safe option — the crowd will never know.",
+          "Don't change too many things at once during a pivot. EQ shift + FX + loop + volume change all at once? That's a recipe for chaos. Sequence your moves.",
+          "Consistency will always beat forced originality. A reliable transition that lands every time is worth more than a flashy one that works 50% of the time.",
         ],
       },
       3: {
-        title: "Booth-export set preparation",
-        subtitle: "Move from bedroom practice to club context",
-        videoDescription: "Practical prep for playlists, USBs, and backups.",
+        title: "From bedroom to booth — real-world preparation",
+        subtitle: "Professionalism starts before you ever press Play",
+        videoDescription: "Get your set club-ready with the same prep routine professional DJs use before every gig.",
         content:
-          "Club performance requires technical reliability: export flow, backups, and emergency playlist design.",
-        keyTakeaway: "Professionalism starts before pressing Play.",
+          "You've come a long way — your mixing is tight, your set is planned, your pivots are rehearsed. But here's where a lot of talented bedroom DJs stumble: the technical prep for a real gig. A corrupt USB, a track with a bad BPM grid, a missing file — any of these can unravel an otherwise perfect set. The pros don't leave this to chance. They have systems: primary and backup USBs, verified grids on every critical track, and an emergency crate of crowd-pleasers ready to go. This isn't the glamorous part of DJing, but it's what separates the DJs who get rebooked from the ones who don't.",
+        keyTakeaway: "Technical preparation is the unsexy secret behind every smooth performance. The crowd sees confidence — but behind it is obsessive preparation.",
         exercise: {
-          title: "Pre-booth checklist",
-          description: "Validate your set as if you play tomorrow.",
+          title: "The Pre-Gig Checklist",
+          description: "Run through this as if you're playing a club tomorrow night. Build the habit now — it'll save you when it counts.",
           steps: [
-            "Prepare primary and backup USB.",
-            "Verify BPM/grid on critical tracks.",
-            "Build a 10-track emergency crate.",
+            "Prepare your primary USB with your full set. Then prepare a backup USB with the same content. Always two copies.",
+            "Open every critical track and verify: BPM is correct, beat grid is locked, no audio glitches in the waveform.",
+            "Build a 10-track emergency crate — tracks that work in any situation, any energy level. This is your panic button playlist.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Test USB on another setup when possible.",
-          "Name playlists by energy intent.",
-          "Prepared worst case equals best performance.",
+          "If you can test your USB on a different setup before the gig, do it. File compatibility issues are real and they're devastating to discover mid-set.",
+          "Name your playlists by energy intent, not genre. 'Floor Savers', 'Peak Bangers', 'Smooth Openers' — when adrenaline hits, you want instant clarity.",
+          "The DJ who prepares for the worst case delivers the best performance. Over-preparation isn't paranoia — it's professionalism.",
         ],
       },
     },
   },
   9: {
     title: "Club Performance",
-    description: "Execute reliably under real booth pressure.",
+    description: "This is it — the real stage. Everything you've learned comes together under the lights. Let's make sure you're ready.",
     slides: {
       1: {
-        title: "Pre-live mental routine",
-        subtitle: "Stay stable when adrenaline spikes",
-        videoDescription: "Preparation habits for clean public execution.",
+        title: "Your pre-performance mental routine",
+        subtitle: "How to stay sharp when the adrenaline hits",
+        videoDescription: "Build a pre-gig ritual that keeps you calm, focused, and ready to deliver your best.",
         content:
-          "Stress is normal. The goal is ritualized focus: breathing, technical checks, and first-transition visualization.",
-        keyTakeaway: "A short routine prevents impulsive mistakes.",
+          "Let's be real: the first time you stand behind real decks with a crowd watching, your heart is going to pound. Your hands might shake a little. Your brain might go blank for a second. That's completely normal — it happens to everyone, even DJs with hundreds of gigs under their belt. The difference is that pros have a ritual. They don't rely on willpower or 'hoping they'll feel ready.' They have a 5-minute routine they run every single time: controlled breathing to calm the nervous system, a quick technical check so there are no surprises, and a mental visualization of their first two transitions. By the time they press Play, they're not reacting to stress — they're executing a plan.",
+        keyTakeaway: "Nerves are normal and never fully go away. The pros don't fight them — they have a routine that turns anxiety into focused energy.",
         exercise: {
-          title: "5-minute routine",
-          description: "Set your performance state before playing.",
+          title: "The 5-Minute Pre-Game Ritual",
+          description: "Practice this every time you mix — even at home. When game day comes, it'll be second nature.",
           steps: [
-            "60 seconds controlled breathing.",
-            "Check gain, cue, booth monitor, opening track.",
-            "Visualize first two transitions.",
+            "60 seconds of controlled breathing: 4 seconds in, 4 seconds hold, 6 seconds out. Feel your heart rate drop.",
+            "Technical check: gain levels, cue point, booth monitor volume, opening track loaded and cued. No surprises.",
+            "Close your eyes and visualize your first two transitions — hear them in your head before they happen in the room.",
           ],
           estimatedTime: "6 minutes",
         },
         tips: [
-          "Your intro should be your safest transition.",
-          "Keep a mental script for incidents.",
-          "Comfort setup improves decisions.",
+          "Your opening transition should always be your safest, most reliable one. Save the creative risks for when you've settled into the groove.",
+          "Have a mental script for common incidents: track won't load, crowd is cold, sound cuts out. Knowing your response in advance prevents panic.",
+          "Set up your booth exactly how you like it before the set starts. Comfort with your equipment directly improves your decision-making under pressure.",
         ],
       },
       2: {
-        title: "Sound system adaptation",
-        subtitle: "Adjust to room acoustics and booth return",
-        videoDescription: "Adapt behavior to real system response.",
+        title: "Adapting to the room and sound system",
+        subtitle: "The same mix sounds different in every venue — learn to adjust fast",
+        videoDescription: "Discover how professional DJs calibrate their style to any room within the first three tracks.",
         content:
-          "The same transition sounds different in every room. You must calibrate against actual PA response, not studio memory.",
-        keyTakeaway: "Pro DJs adapt to the room, not just to habit.",
+          "Here's something that surprises a lot of bedroom DJs the first time they play out: that transition you perfected at home? It sounds completely different on a club system. The bass might be overwhelming, the highs might cut through too sharply, the reverb in the room might blur your clean blends. Every venue is different, and the best DJs in the world spend their first 2-3 tracks calibrating — not showing off. They're listening to how bass sits in the room, testing how their transitions translate on the PA, and making EQ adjustments based on what they actually hear, not what they remember from practice. This is advanced territory — be proud you're here, because most DJs never learn this.",
+        keyTakeaway: "Pro DJs don't play the same way everywhere — they adapt to every room within the first few tracks. Your ears are your most important piece of equipment.",
         exercise: {
-          title: "3-track calibration",
-          description: "Calibrate your style to real system response.",
+          title: "The 3-Track Room Calibration",
+          description: "Train yourself to read a sound system and adapt your style quickly — this is what booked DJs do instinctively.",
           steps: [
-            "Track 1: read bass and clarity.",
-            "Track 2: test one clean transition.",
-            "Track 3: correct EQ/gain according to room feedback.",
+            "Track 1: Play a track you know intimately. Listen for how the bass sits, whether mids are clear, if highs feel harsh. Read the room.",
+            "Track 2: Execute one clean transition. How does it feel through the PA? Does the blend sound muddy or tight?",
+            "Track 3: Based on what you've heard, adjust your EQ approach and gain staging. This is your calibrated baseline for the rest of the set.",
           ],
           estimatedTime: "9 minutes",
         },
         tips: [
-          "If room is boomy, simplify low-end first.",
-          "Keep headroom margin.",
-          "Never fix clarity by only raising volume.",
+          "If the room sounds boomy and bass-heavy, your first move should be simplifying your low-end work. Less bass layering, cleaner swaps.",
+          "Always keep headroom. If you're pushing your meters into the red to 'sound louder,' you're actually making it worse. Leave space for dynamics.",
+          "Never try to fix clarity issues by just turning up the volume. That makes everything louder AND muddier. Fix the EQ first, always.",
         ],
       },
       3: {
-        title: "Incident handling",
-        subtitle: "When track fails, cable shifts, or crowd drops",
-        videoDescription: "Recover fast without breaking audience experience.",
+        title: "Handling real incidents like a pro",
+        subtitle: "Cables fail, tracks glitch, crowds drop — here's how you survive",
+        videoDescription: "Build the operational toughness that separates reliable, bookable DJs from one-hit wonders.",
         content:
-          "Club-level performance means continuity despite incidents. Diagnose fast, stabilize, and relaunch confidently.",
-        keyTakeaway: "Operational robustness separates fragile from pro DJs.",
+          "Here's the truth about live performance: things will go wrong. A track you didn't analyze properly has a weird intro. A cable comes loose. The crowd that was going crazy suddenly gets distracted by something at the bar. These aren't hypothetical — these are Tuesday night realities for working DJs. What defines you in these moments isn't technical skill — it's operational toughness. Can you diagnose the problem in 3 seconds? Can you stabilize in 10? Can you relaunch the energy within two tracks? If yes, you're a professional. If you panic and fumble? You won't get called back. This is the skill that gets you rebooked.",
+        keyTakeaway: "Live performance isn't about perfection — it's about continuity. Diagnose fast, stabilize immediately, relaunch confidently. That's the pro loop.",
         exercise: {
-          title: "Incident simulation",
-          description: "Simulate three failures and keep momentum.",
+          title: "The Incident Simulation Challenge",
+          description: "Deliberately create three different problems during a practice set — then prove you can handle all of them without stopping.",
           steps: [
-            "Bad analyzed track -> quick correction.",
-            "Failed transition -> immediate safe-track recovery.",
-            "Energy drop -> relaunch in under two tracks.",
+            "Scenario 1: Load a track with bad analysis (wrong BPM grid). Catch it and correct before the audience would notice.",
+            "Scenario 2: Botch a transition on purpose. Immediately recover with a safe track — smooth and confident.",
+            "Scenario 3: Simulate an energy drop mid-set. Relaunch the dancefloor within two tracks using your emergency crate.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Keep an anti-panic crate always ready.",
-          "Shorten thinking loop: diagnose -> act -> stabilize.",
-          "Calm behavior is audible in your mix.",
+          "Your anti-panic crate should always be loaded and ready. 5-8 tracks that work in any situation. This is your insurance policy.",
+          "Drill the recovery loop until it's automatic: Diagnose → Act → Stabilize. The shorter that loop, the more professional you are.",
+          "Calm behavior is literally audible in your mix. When you're panicking, you rush transitions, over-EQ, and make things worse. Breathe, then act.",
         ],
       },
     },
   },
   10: {
     title: "Complete Mastery",
-    description: "Move from good DJ to identifiable, reliable, bookable DJ.",
+    description: "Look how far you've come. This is where you stop being 'someone who DJs' and start being a DJ. Let's make it official.",
     slides: {
       1: {
-        title: "Build your artistic identity",
-        subtitle: "Your sound, your energy, your positioning",
-        videoDescription: "Turn technical skills into recognisable identity.",
+        title: "Finding your artistic identity",
+        subtitle: "Your sound, your energy, your signature — this is what makes you bookable",
+        videoDescription: "Transform your technical skills into something more powerful: a recognizable identity that's uniquely yours.",
         content:
-          "At this stage, your objective is not only clean mixing. You should become recognizable through curation, transitions, energy control, and stage attitude.",
-        keyTakeaway: "Mastery is repeated coherence over time.",
+          "Here's the biggest shift that happens at this level: it's no longer about mixing cleanly. You already know how to do that. Now it's about identity. When someone hears your set, can they tell it's you? Not because of a gimmick — but because of how you curate tracks, how you build energy, the transitions you favor, the moments you create. Think about the DJs you admire most — they have a vibe, a fingerprint. That's what you're building now. Your track selection tells people who you are more than any amount of technical skill ever could. A DJ who plays the same tracks as everyone else but mixes perfectly is forgettable. A DJ with a clear sonic identity and decent mixing? Unforgettable.",
+        keyTakeaway: "Mastery isn't about mixing perfectly — it's about being consistently, recognizably you. Identity is built through curation, not complexity.",
         exercise: {
-          title: "20-minute signature set",
-          description: "Create a mini-format that sounds like you.",
+          title: "Your 20-Minute Signature Set",
+          description: "Build a mini-set that sounds like nobody else. This is your artistic fingerprint.",
           steps: [
-            "Pick 6-8 tracks reflecting your identity.",
-            "Write one transition intent line per transition.",
-            "Record and identify 3 unique strengths.",
+            "Hand-pick 6-8 tracks that genuinely represent YOUR taste — not what's trending, not what other DJs play. Tracks that feel like you.",
+            "For each transition, write one sentence describing your intent: 'Build tension slowly,' 'Surprise key change,' 'Let the vocal breathe.'",
+            "Record the full mini-set, listen back, and identify 3 things that feel uniquely yours. Those are your strengths — double down on them.",
           ],
           estimatedTime: "15 minutes",
         },
         tips: [
-          "Selection identity matters more than effect quantity.",
-          "Do not clone another DJ full set.",
-          "Reliable quality beats occasional brilliance.",
+          "Your track selection is your identity. Spend more time on curation than on learning new FX tricks — that's what gets you remembered.",
+          "Study DJs you love, but never try to clone their sets. Absorb their philosophy, then express it in your own voice.",
+          "Reliable quality beats occasional brilliance every time. The DJ who delivers 8/10 every night gets booked more than the one who swings between 6 and 10.",
         ],
       },
       2: {
-        title: "Capstone: 45-minute club set",
-        subtitle: "Final validation of your Mixy path",
-        videoDescription: "Apply all skills in one complete set.",
+        title: "The Capstone: your 45-minute club set",
+        subtitle: "Everything you've learned, in one uninterrupted performance",
+        videoDescription: "This is your final Mixy challenge — a full set that proves you're ready for any stage.",
         content:
-          "The capstone validates your full stack: structure, transitions, crowd logic, recovery, and technical reliability in one run.",
-        keyTakeaway: "If this set is stable, your operational level is real.",
+          "This is the moment. Everything — the beatmatching, the phrasing, the EQ work, the creative transitions, the crowd reading, the set architecture, the error recovery, the booth preparation — it all comes together in one 45-minute set. No pauses. No restarts. Just you, your tracks, and the story you're telling. This isn't a test you can fail — it's a performance you learn from. Record it, review it honestly, identify what worked and what didn't, then do it again with corrections. When you can run a full set that feels stable, intentional, and emotionally compelling from start to finish? That's not just a Mixy milestone — that's a real, operational DJ skill that venues will pay for.",
+        keyTakeaway: "If you can deliver a stable, emotionally compelling 45-minute set in one take, your DJ skills are real. This isn't a certificate — it's proof.",
         exercise: {
-          title: "Final Mixy project",
-          description: "Design, perform, review, and improve one full set.",
+          title: "The Final Mixy Set",
+          description: "Design it. Perform it. Review it. Improve it. This is your graduation project — give it everything you've got.",
           steps: [
-            "Prepare one 45-minute set with A/B plans.",
-            "Perform in one take without pause.",
-            "Review transitions, energy, incidents, and recovery.",
-            "Replay with top 3 weaknesses corrected.",
+            "Build your full 45-minute set using your blueprint method. Include A/B alternatives for key moments in case you need to adapt.",
+            "Perform the entire set in one take. No pausing, no restarting. Treat it like a real gig with a real crowd watching.",
+            "Listen back critically. Review every transition, every energy shift, every recovery moment. Be honest with yourself.",
+            "Identify your top 3 weak points, fix them, and perform the set again. Notice how much better the second run feels.",
           ],
           estimatedTime: "20 minutes",
         },
         tips: [
-          "Goal is not zero mistakes, goal is zero panic.",
-          "Set readability matters from start to finish.",
-          "Archive recordings to track true progression.",
+          "The goal isn't zero mistakes — it's zero panic. Mistakes happen to everyone. What matters is that you handle them with composure.",
+          "Your set should be 'readable' from start to finish — meaning anyone listening can feel the emotional journey, even if they can't explain it.",
+          "Archive every recording. Seriously. Six months from now, you'll listen back to today's set and be amazed at how far you've come. That's the most motivating thing in the world.",
         ],
       },
       3: {
-        title: "After level 10: pro roadmap",
-        subtitle: "Keep improving without plateau",
-        videoDescription: "8-week training plan to consolidate pro level.",
+        title: "Beyond Level 10: your pro roadmap",
+        subtitle: "The best DJs never stop training — here's how to keep growing",
+        videoDescription: "Build a sustainable long-term practice system so you keep improving for years, not weeks.",
         content:
-          "Level 10 is a transition point. Continue with weekly technical drills, full-set sessions, review rituals, and objective KPIs.",
-        keyTakeaway: "Professional DJs keep training with structure.",
+          "Congratulations — reaching Level 10 is a genuine achievement, and you should be incredibly proud. But here's the honest truth from every working DJ: this isn't the finish line. It's the starting line of your professional journey. The DJs who build real careers aren't the ones with the most talent — they're the ones with the most discipline. They have a weekly practice routine: technical drills to keep their skills sharp, full-set sessions to build stamina, review rituals to catch bad habits early, and measurable KPIs to track real progress. The path from here isn't about learning new tricks — it's about deepening everything you already know and making it bulletproof under any conditions.",
+        keyTakeaway: "Level 10 isn't the end — it's where the real journey begins. The pros who stay at the top do it with structured, disciplined practice. Week after week, year after year.",
         exercise: {
-          title: "8-week plan",
-          description: "Build a sustainable improvement routine.",
+          title: "Your 8-Week Pro Development Plan",
+          description: "Build a sustainable practice routine that keeps you improving long after Mixy. This is how careers are built.",
           steps: [
-            "Schedule 2 technical sessions + 1 full set each week.",
-            "Track KPIs: transitions, tempo stability, energy quality.",
-            "Publish one clip weekly and collect focused feedback.",
+            "Schedule your week: 2 focused technical sessions (transitions, EQ, FX) + 1 full-set session. Put it in your calendar like a real commitment.",
+            "Track your KPIs every session: transition quality, tempo consistency, energy flow, recovery speed. Numbers don't lie.",
+            "Share one clip per week publicly and ask for specific, focused feedback. Growth accelerates when you open yourself to outside perspective.",
           ],
           estimatedTime: "15 minutes",
         },
         tips: [
-          "If you do not measure, you stagnate.",
-          "Run a review ritual after each set.",
-          "Long-term progress is discipline.",
+          "What you don't measure, you can't improve. Track your progress with the same seriousness a pro athlete tracks their stats.",
+          "After every set — practice or live — run a quick review: what worked, what didn't, what do I drill next? Make this ritual non-negotiable.",
+          "Long-term progress isn't about motivation — it's about discipline. Motivation fades. Systems don't. Build the system and trust the process.",
         ],
       },
     },
@@ -873,20 +913,20 @@ function localizeModules(modules: CourseModule[], language: Language): CourseMod
  */
 export const level1ModuleFlx4: CourseModule = {
   level: 1,
-  title: "Les fondamentaux du DJ",
+  title: "Tes premiers pas de DJ",
   description:
-    "Prépare ton logiciel, ton contrôleur et tes morceaux pour que tes prochains mix soient beaucoup plus fluides.",
+    "On pose les bases ensemble : ton logiciel, ton contrôleur, tes premiers réflexes. Après ça, tu seras déjà capable de lancer tes morceaux et de comprendre comment tout fonctionne. C'est parti !",
   userLevels: ["beginner"],
   totalSlides: 5,
   estimatedDuration: "40 minutes",
   slides: [
     {
       slideNumber: 1,
-      title: "Premiers pas sur Rekordbox",
-      subtitle: "Ton logiciel DJ, ton contrôleur et tes premiers réflexes",
+      title: "Bienvenue dans le monde du DJing !",
+      subtitle: "Rekordbox, ta FLX4 et tes tout premiers réflexes",
       videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
-        "Parcours Performance (et repères visuels) dans Rekordbox — idéal avant de brancher la table. Active les sous-titres YouTube si besoin.",
+        "Découvre le mode Performance de Rekordbox — regarde cette vidéo tranquillement avant de brancher ta table. Active les sous-titres si besoin !",
       illustrations: [
         {
           url: "https://www.pioneerdj.com/-/media/pioneerdj/images/products/controller/ddj-flx4/black/ddj-flx4-angle-ttl-1200.jpg",
@@ -895,273 +935,269 @@ export const level1ModuleFlx4: CourseModule = {
             "FLX4 : jogs, faders, mixer au centre, pads en dessous. Garde en tête que **Shift** + pad ou bouton ouvre souvent la « 2e couche » (voir le manuel Layer).",
         },
       ],
-      content: `**Bienvenue dans ta première leçon DJ !** Tu vas apprendre à utiliser Rekordbox et découvrir les bases du contrôleur DDJ-FLX4, un des meilleurs setups pour débuter.
-      
-      L’objectif ici : comprendre l’écran, les boutons et les réflexes essentiels pour être à l’aise rapidement. Pas besoin de tout retenir d’un coup : avance tranquillement slide par slide et amuse-toi avec les exercices.
-      
-      **Rekordbox, c’est quoi ?**
-      C’est le logiciel qui fait le lien entre ton ordinateur et ta table. Il affiche tes morceaux, le tempo (BPM), et les formes d’onde pour que tu puisses voir ta musique en plus de l’entendre.
-      
-      **Deux modes à connaître**
-      - **Export** : tu prépares ta musique (playlists, tempo, repères) — c’est ta boîte à outils avant le mix.
-      - **Performance** : c’est le mode DJ, celui où tu branches ta table et tu mixes en direct.
-      
-      **Ta DDJ-FLX4 en bref**
-      Deux platines, un mixer au centre, des pads en dessous. Beaucoup de fonctions passent par la touche **Shift** (une sorte de « 2e couche ») — on les découvrira au fur et à mesure, pas de stress.
-      
-      **Tes premiers réflexes**
-      1. Importe quelques morceaux dans Rekordbox
-      2. Crée une petite playlist d’entraînement (5 titres au tempo proche, ex. 124–128 BPM)
-      3. Lance l’analyse pour que le logiciel détecte le tempo automatiquement
-      4. Charge un morceau sur chaque platine et écoute au casque`,
+      content: `**Hey, bienvenue ! Tu es officiellement en route pour devenir DJ.**
+
+Pas de stress, on va tout voir ensemble, étape par étape. Aujourd'hui, on s'attaque à Rekordbox et à ta DDJ-FLX4 — un super setup pour débuter.
+
+**Rekordbox, c'est quoi en gros ?**
+C'est le logiciel qui fait le pont entre ton ordi et ta table. Il affiche tes morceaux, le tempo (BPM), et les formes d'onde pour que tu puisses **voir** ta musique en plus de l'entendre. C'est un peu ton tableau de bord de DJ.
+
+**Les deux modes à retenir**
+- **Export** : c'est ton atelier. Tu prépares ta musique (playlists, tempo, repères) — tranquille chez toi, sans pression.
+- **Performance** : c'est la scène ! Tu branches ta FLX4 et tu mixes en direct.
+
+**Ta DDJ-FLX4 en un coup d'œil**
+Deux platines, un mixer au centre, des pads en bas. Plein de fonctions passent par la touche **Shift** (une sorte de « deuxième couche ») — on les découvrira au fur et à mesure, pas besoin de tout maîtriser maintenant.
+
+**Tes tout premiers réflexes de DJ**
+1. Importe quelques morceaux dans Rekordbox
+2. Crée une petite playlist d'entraînement (5 titres au tempo proche, genre 124–128 BPM)
+3. Lance l'analyse pour que le logiciel détecte le tempo automatiquement
+4. Charge un morceau sur chaque platine et écoute au casque
+
+T'inquiète, c'est normal si tout n'est pas clair du premier coup. L'important c'est de manipuler, de toucher aux boutons, d'explorer. C'est comme ça qu'on apprend !`,
       keyTakeaway:
-        "Export pour préparer, Performance pour mixer. Importe, analyse, écoute au casque — c'est la routine de base de tout DJ.",
+        "Export pour préparer, Performance pour mixer. Importe, analyse, écoute au casque — c'est la routine de tout DJ. Tu viens de poser ta première brique !",
       exercise: {
-        title: "Préparer 5 morceaux propres dans Rekordbox",
-        description: "Même sans table branchée, c'est l'exercice n°1 des DJs Rekordbox",
+        title: "Prépare tes 5 premiers morceaux dans Rekordbox",
+        description:
+          "C'est l'exercice n°1 de tout DJ — même les pros font ça avant chaque set !",
         steps: [
-          "Installe Rekordbox (dernière version stable) et ouvre le mode Performance en essai.",
-          "Crée une playlist « Entraînement Mixy » avec 5 titres du même style.",
-          "Sélectionne-les → clic droit → analyse (tempo / grille si proposé).",
-          "Ouvre un morceau, zoome la waveform et vérifie que chaque kick tombe sur une ligne de grille.",
-          "Pose 4 Hot Cues : intro, avant refrain, drop, outro (raccourcis affichés dans Rekordbox selon ton clavier).",
-          "Charge le même titre sur les decks A et B : écoute A au casque, B en silence — entends-tu le beat identique des deux côtés ?",
+          "Installe Rekordbox (dernière version stable) et ouvre le mode Performance.",
+          "Crée une playlist « Entraînement Mixy » avec 5 titres du même style que tu kiffes.",
+          "Sélectionne-les → clic droit → Analyse (tempo / grille).",
+          "Ouvre un morceau, zoome sur la waveform et vérifie que chaque kick tombe bien sur une ligne de grille.",
+          "Pose 4 Hot Cues par morceau : intro, avant le refrain, drop, outro.",
+          "Charge le même titre sur les decks A et B : écoute A au casque, B en silence — tu entends le beat identique des deux côtés ?",
         ],
         estimatedTime: "15 minutes",
       },
       tips: [
-        "FLX4 peut ouvrir deux ports USB-C : lis la petite icône près de chaque port sur TON manuel (données vs charge).",
-        "Si tu mixes du streaming, vérifie les conditions d'utilisation et la stabilité réseau.",
-        "Garde un backup USB exporté si tu joues hors de chez toi.",
+        "La FLX4 a parfois deux ports USB-C : vérifie dans ton manuel lequel est données et lequel est charge.",
+        "Si tu utilises du streaming, vérifie la stabilité de ta connexion — rien de pire qu'un morceau qui coupe en plein mix !",
+        "Garde toujours une clé USB de backup exportée, au cas où tu joues ailleurs que chez toi.",
       ],
     },
     {
       slideNumber: 2,
-      title: "Brancher la FLX4 : USB, Master, casque",
-      subtitle: "Enceintes actives, gain propre, écoute DJ — ports USB parfois doubles",
+      title: "On branche tout : USB, enceintes, casque",
+      subtitle: "La chaîne audio de A à Z — propre et sans grésillements",
       videoUrl: "https://www.youtube.com/embed/kZKBeztMbZY",
       videoDescription:
-        "Tour complet débutant sur la DDJ-FLX4 : vue matérielle, faders, branchements — en anglais mais très visuel ; active les sous-titres auto.",
-      content: `**Chaîne audio simple (répète ce schéma mentalement)**
-Ordinateur → **USB** → contrôleur → **MASTER OUT (RCA ou XLR selon modèle)** → enceintes **actives** ou table de son / ampli → enceintes passives.
+        "Tour complet débutant sur la DDJ-FLX4 : branchements, faders, vue du matériel — en anglais mais très visuel, active les sous-titres auto.",
+      content: `**Allez, on passe aux choses sérieuses : le branchement !** C'est pas la partie la plus glamour, mais crois-moi, un bon branchement c'est la base d'un bon son.
 
-**Étape par étape (sécurité + propre)**
-- Mets tous les faders et le **master** à zéro avant d'allumer les enceintes.
-- Branche **USB** entre PC/Mac et contrôleur (certains modèles ont deux ports : repère sur le manuel lequel est **données / alimentation**).
-- **Sortie Master** : câble fourni souvent en **RCA** → entrée **LINE** des enceintes monitoring (pas « Phono »). Vis **rouge/blanc** cohérentes.
-- **Casque** sur la prise **PHONES** 6,35 mm : tu pré-écoutes le deck que tu prépares avec le **cue** (écoute DJ) sans l'envoyer tout de suite dans la salle.
+**La chaîne audio, c'est simple :**
+Ordinateur → **USB** → contrôleur → **MASTER OUT (RCA)** → enceintes actives (ou ampli + enceintes passives).
 
-**Réglages de base avant le son fort**
-- **Trim / Gain** par voie : monte jusqu'à voir le signal dans la zone **verte / orange** sans saturer en permanence dans le rouge.
-- **EQ au centre** (12h) pour commencer — tu les bougeras pour les transitions (niveau 2).
-- **Crossfader** : pour tes premiers exercices Mixy, laisse-le **au centre** et joue surtout des **channel faders** : c'est plus pédagogique.
+**Étape par étape (pour un son propre dès le départ)**
+- Mets **tous les faders et le master à zéro** avant d'allumer quoi que ce soit. C'est un réflexe de pro !
+- Branche le câble **USB** entre ton PC/Mac et la FLX4.
+- **Sortie Master** : câble RCA fourni → entrée **LINE** des enceintes (pas « Phono » !). Rouge avec rouge, blanc avec blanc.
+- **Casque** sur la prise **PHONES** (6,35 mm) : c'est là que tu prépares ton prochain morceau en secret, sans que le public entende.
 
-**Si tu n'as pas de grosse sono**
-- Des **enceintes monitoring** actives proches de toi suffisent pour t'entraîner ; baisse les basses si tu es en appart (voisins).
+**Les réglages de base avant de monter le son**
+- **Trim / Gain** par voie : monte doucement jusqu'à voir le signal dans le vert/orange. Si ça tape dans le rouge, c'est trop fort — baisse !
+- **EQ** : laisse tout au centre (position midi) pour commencer. On verra les EQ en détail au niveau 2.
+- **Crossfader** : pour tes premiers exercices, laisse-le **au centre** et joue plutôt avec les **channel faders** — c'est beaucoup plus précis pour apprendre.
 
-**Ressource visuelle complémentaire**
-- Vidéo « allumer / USB » (très court) : https://www.youtube.com/watch?v=EIUd_xdBYGs
-
-**Lien utile**
-- Support Pioneer : https://support.pioneerdj.com (pilotes, firmware, manuels).`,
+**Pas de grosse sono ? Pas de souci !**
+Des petites enceintes monitoring actives font très bien l'affaire pour s'entraîner. Et si tu es en appart, baisse un peu les basses — tes voisins te remercieront.`,
       keyTakeaway:
-        "USB + Master vers une entrée ligne propre, casque sur PHONES pour préparer. Zéro saturation, trims calmes, puis tu montes le master.",
+        "USB vers la table, Master vers les enceintes en LINE, casque sur PHONES pour préparer. Zéro saturation, on monte doucement. T'as le setup d'un vrai DJ !",
       exercise: {
-        title: "Check-list branchement « sans grésillement »",
-        description: "À refaire avant chaque session longue",
+        title: "Check-list branchement « zéro grésillement »",
+        description:
+          "Fais cette check-list avant chaque session — ça deviendra un automatisme !",
         steps: [
-          "Table et PC éteints ou faders à zéro — branche les câbles Master.",
-          "Branche le casque, allume la table puis le PC, ouvre Rekordbox Performance.",
-          "Sur un seul deck, lance un morceau : vérifie le **VU-meter** et baisse le trim si tu touches le rouge en continu.",
-          "Active le **cue** casque sur ce deck : tu dois l'entendre clairement sans que le master ne hurle.",
-          "Notes sur un papier : « câble Master droit », « volume enceintes à -6 dB » pour te souvenir demain.",
+          "Faders à zéro, enceintes éteintes — branche les câbles Master (RCA → LINE).",
+          "Branche le casque, allume la FLX4 puis l'ordi, ouvre Rekordbox en mode Performance.",
+          "Lance un morceau sur un seul deck : vérifie le VU-mètre. Si ça touche le rouge en continu, baisse le trim.",
+          "Active le **cue** casque sur ce deck : tu dois l'entendre clairement au casque sans que le master envoie du son.",
+          "Note tes réglages quelque part : « volume enceintes à -6 dB, trim à 2h » — comme ça demain tu retrouves ton setup direct.",
         ],
         estimatedTime: "10 minutes",
       },
       tips: [
-        "Note la position de ta prise Casque sur le manuel (bouton split cue / mix selon modèle).",
-        "Un câble RCA trop long ou mal blindé peut ramasser du bruit : change de câble avant d'accuser Rekordbox.",
-        "Firmware : une mise à jour peut corriger des bugs audio — fais-la tranquillement avant un live.",
+        "Repère le bouton split cue / mix sur ta FLX4 — ça change comment tu entends le casque.",
+        "Un câble RCA trop long ou mal blindé peut ramasser du bruit parasite : change de câble avant d'accuser Rekordbox !",
+        "Pense à mettre à jour le firmware de ta table — ça corrige parfois des bugs audio. Fais-le tranquillement, jamais juste avant un live.",
       ],
     },
     {
       slideNumber: 3,
-      title: "Le BPM: Le Coeur du Rythme",
-      subtitle: "Pourquoi deux chansons ne sonnent pas toujours bien ensemble",
+      title: "Le BPM : le cœur de ta musique",
+      subtitle: "Pourquoi deux morceaux ne sonnent pas toujours bien ensemble",
       videoUrl: "https://www.youtube.com/embed/3Gn8p0taPUg",
       videoDescription:
-        "Tu vois le tempo affiché dans Rekordbox et la grille sur la waveform — utile pour relier oreille et écran.",
-      content: `Imagine deux metronomes:
-- Metronome 1: 120 clics par minute
-- Metronome 2: 140 clics par minute
-- Resultat: Chaos total
+        "Tu vois le tempo affiché dans Rekordbox et la grille sur la waveform — super utile pour relier l'oreille et l'écran.",
+      content: `**OK, là on rentre dans le vif du sujet.** Le BPM, c'est LE concept fondamental du DJing. Mais t'inquiète, c'est beaucoup plus simple que ça en a l'air.
 
-Le BPM (Beats Per Minute):
-C'est simplement le nombre de battements par minute. C'est comme le pouls de la musique.
+**Le BPM (Beats Per Minute), c'est quoi ?**
+C'est tout simplement le nombre de battements par minute. C'est le pouls de ta musique, son rythme cardiaque.
 
-Exemples Reels:
-- House Music: 120-130 BPM (c'est le groove regulier)
-- Techno: 120-140 BPM (un peu plus rapide)
-- Hip-Hop: 85-115 BPM (plus lent, plus groovy)
-- Drum & Bass: 160-180 BPM (tres rapide!)
+**Imagine deux métronomes :**
+- Métronome 1 : 120 clics par minute
+- Métronome 2 : 140 clics par minute
+- Résultat : chaos total ! Ça claque dans tous les sens.
 
-Le Secret du DJing:
-Mettre deux chansons au MEME BPM = elles sonnent bien ensemble
-Deux BPM differents = chaos
+**Les BPM par genre (pour te repérer) :**
+- House : 120–130 BPM (le groove régulier, parfait pour débuter)
+- Techno : 125–140 BPM (un peu plus rapide, plus d'énergie)
+- Hip-Hop : 85–115 BPM (plus lent, plus groovy)
+- Drum & Bass : 160–180 BPM (là ça envoie du lourd !)
 
-**Sur ta DDJ + Rekordbox**
-- Le tempo affiché par deck (ex. 124,0) doit correspondre à ce que tu entends après analyse correcte.
-- Les boutons **Sync** existent pour t'aider au début : apprends quand même à **sentir** le décalage au casque — c'est ce qui te sauve quand la grille est fausse ou en live sans écran.
+**Le secret du DJing, c'est ça :**
+Deux morceaux au **même BPM** = ils sonnent bien ensemble. Deux BPM différents = le chaos. C'est aussi simple que ça.
 
-C'est Tout Pour Maintenant:
-Tu n'as pas besoin de comprendre la theorie musicale. Tu as juste besoin de comprendre que le BPM c'est le rythme, et que deux rythmes differents ne fonctionnent pas ensemble.`,
+**Sur ta FLX4 + Rekordbox**
+- Le tempo est affiché par deck (ex. 124,0). Après analyse, ce chiffre doit correspondre à ce que tu entends.
+- Le bouton **Sync** existe pour t'aider au début — et c'est OK de l'utiliser ! Mais entraîne-toi aussi à **sentir** le décalage au casque. C'est ce réflexe-là qui te sauvera quand la grille sera fausse ou en live sans écran.
+
+**Tu retiens juste ça pour l'instant :**
+Le BPM c'est le rythme. Deux rythmes identiques = harmonie. Deux rythmes différents = on court à la catastrophe. Simple, efficace, fondamental.`,
       keyTakeaway:
-        "Le BPM c'est le rythme. Deux chansons au meme BPM sonnent bien ensemble.",
+        "Le BPM c'est le pouls de ta musique. Deux morceaux au même BPM = magie. Tu viens de comprendre le concept le plus important du DJing, bravo !",
       exercise: {
-        title: "Identifie le BPM en ecoutant",
-        description: "Entraine-toi a sentir le BPM d'une chanson",
+        title: "Ressens le BPM avec ton corps",
+        description:
+          "Avant même de toucher la table, apprends à sentir le rythme — c'est ton meilleur outil !",
         steps: [
-          "Choisis une chanson que tu aimes",
-          "Ecoute-la et compte les battements: 1-2-3-4, 1-2-3-4...",
-          "Compte pendant 15 secondes (environ 30-40 battements)",
-          "Multiplie par 4 pour obtenir le BPM approximatif",
-          "Utilise Shazam ou une app pour verifier",
-          "Repete avec 5 chansons differentes",
+          "Choisis un morceau que tu kiffes et lance-le.",
+          "Tape du pied ou hoche la tête sur chaque battement : 1-2-3-4, 1-2-3-4…",
+          "Compte les battements pendant 15 secondes.",
+          "Multiplie par 4 → tu as le BPM approximatif !",
+          "Vérifie avec Rekordbox ou Shazam : t'étais proche ?",
+          "Recommence avec 4 autres morceaux de styles différents — tu vas voir, ton oreille s'affine vite.",
         ],
         estimatedTime: "5 minutes",
       },
       tips: [
-        "Le BPM c'est juste un nombre - pas besoin de paniquer",
-        "Tu peux sentir le BPM avec ton corps (danse!)",
-        "Les chansons du meme genre ont souvent des BPM similaires",
+        "Le BPM c'est juste un nombre — pas besoin de stresser, ça vient naturellement.",
+        "Tu peux sentir le BPM avec ton corps : danse, tape du pied, bouge la tête !",
+        "Les morceaux du même genre ont souvent des BPM proches — c'est pour ça que les DJs mixent par genre au début.",
       ],
     },
     {
       slideNumber: 4,
-      title: "Le Pitch: Ajuster la Vitesse",
-      subtitle: "Comment changer le BPM d'une chanson sans la deformer",
+      title: "Le Pitch : ajuster la vitesse comme un pro",
+      subtitle: "Comment aligner deux morceaux qui n'ont pas le même BPM",
       videoUrl: "https://www.youtube.com/embed/EQeEyyipaDE",
       videoDescription:
-        "Exemple sur DDJ-FLX4 : tempo / beatmatch — relie ce que tu fais au doigt avec le BPM affiché.",
-      content: `Le Probleme:
-Tu as deux chansons que tu aimes, mais elles n'ont pas le meme BPM.
-- Chanson A: 120 BPM
-- Chanson B: 130 BPM
-- Resultat: Elles ne sonnent pas bien ensemble
+        "Exemple sur DDJ-FLX4 : tempo / beatmatch — tu vas voir le lien entre le mouvement du fader et le BPM affiché.",
+      content: `**Maintenant qu'on a compris le BPM, on passe à l'outil qui va te permettre de tout aligner : le Pitch.**
 
-La Solution: Le Pitch
-Le Pitch c'est un curseur qui change la vitesse de la chanson.
-- Augmente le Pitch -> la chanson devient plus rapide
-- Baisse le Pitch -> la chanson devient plus lente
+**Le problème :**
+Tu as deux morceaux que tu adores, mais ils n'ont pas le même BPM.
+- Morceau A : 120 BPM
+- Morceau B : 128 BPM
+- Résultat : ils ne collent pas ensemble
 
-Comment Ca Marche:
-Imagine un disque vinyle:
-- Si tu le fais tourner plus vite -> la musique est plus rapide
-- Si tu le fais tourner plus lentement -> la musique est plus lente
+**La solution : le fader de Pitch**
+C'est ce curseur sur ta FLX4 qui accélère ou ralentit un morceau.
+- Tu pousses le pitch vers le bas → le morceau accélère
+- Tu tires le pitch vers le haut → le morceau ralentit
+(Attention, c'est parfois inversé selon les modèles — vérifie sur le tien !)
 
-Le Pitch digital fonctionne exactement comme ca.
+**Exemple concret :**
+- Morceau A : 120 BPM (tu le laisses tel quel)
+- Morceau B : 128 BPM (tu le ralentis à 120 avec le pitch)
+- Résultat : les deux tournent à 120 BPM = c'est aligné, c'est propre !
 
-Exemple Pratique:
-- Chanson A: 120 BPM (tu la laisses a 120)
-- Chanson B: 130 BPM (tu la ralentis a 120 avec le Pitch)
-- Resultat: Les deux jouent a 120 BPM = parfait!
+**Bon à savoir :**
+- Le pitch change aussi légèrement la tonalité (le morceau sonne un poil plus aigu ou plus grave). C'est normal, ça fait partie du jeu.
+- **Key Lock / Master Tempo** dans Rekordbox permet de limiter cet effet sur les voix — teste-le au casque, tu vas entendre la différence.
+- Au-delà de ±8–10 %, ça commence à sonner bizarre. Reste dans une fourchette raisonnable.
 
-Important:
-- Le Pitch change aussi la tonalite (la chanson sonne plus aigue ou plus grave)
-- C'est normal et ca fait partie du DJing
-- Les DJs professionnels acceptent ce changement
+**Sur ta DDJ-FLX4**
+- Le fader de tempo est en général à côté du jog. Vérifie sur ton manuel la plage (±6 %, ±10 %, etc.) et le bouton « tempo range » si ta table en a un.
+- Commence par des ajustements doux : 2-3 BPM max. Tu verras, ça suffit souvent.
 
-Limitation:
-Tu ne peux pas changer le BPM de plus de +/- 10% sans que ca sonne bizarre.
-- Si une chanson est a 100 BPM, tu peux la mettre jusqu'a 110 BPM max
-- Au-dela, ca sonne deforme
-
-**Hardware DDJ-FLX4**
-- Le **fader de tempo** (pitch) est en général au-dessus ou à côté du jog : vérifie sur ton manuel la plage **±%** et l'interrupteur « tempo range » si présent.
-- **Key Lock / Master Tempo** (si activé dans Rekordbox) : change le tempo sans trop bouger la hauteur — pratique pour rester proche du BPM cible sans casser la voix.`,
+C'est là que ça devient vraiment fun : tu commences à **contrôler** ta musique !`,
       keyTakeaway:
-        "Le Pitch te permet d'ajuster la vitesse d'une chanson pour qu'elle corresponde a une autre.",
+        "Le pitch te permet d'aligner la vitesse de deux morceaux. Petits ajustements = gros résultats. Tu tiens l'outil clé du beatmatching !",
       exercise: {
-        title: "Pratique l'ajustement du Pitch",
-        description: "Apprends a sentir comment le Pitch change le son",
+        title: "Joue avec le pitch sur ta FLX4",
+        description:
+          "C'est en manipulant qu'on comprend — on y va !",
         steps: [
-          "Choisis une chanson que tu connais bien",
-          "Imagine-toi la ralentir de 5 BPM - comment ca sonne?",
-          "Imagine-toi l'accelerer de 5 BPM - comment ca sonne?",
-          "Imagine-toi l'accelerer de 10 BPM - ca commence a sonner bizarre?",
-          "Comprends maintenant pourquoi les DJs ne changent pas trop le Pitch",
+          "Charge un morceau que tu connais bien sur le deck A. Lance-le.",
+          "Bouge le fader de pitch doucement vers le bas : tu entends le morceau accélérer ?",
+          "Remonte-le doucement : il ralentit. Tu sens la différence ?",
+          "Maintenant charge le même morceau sur le deck B. Décale le pitch de +3 BPM sur B.",
+          "Écoute les deux au casque en même temps : tu entends le décalage rythmique ? C'est ça qu'on va apprendre à corriger !",
+          "Remets les deux au même BPM et savoure : quand c'est aligné, c'est magique.",
         ],
-        estimatedTime: "3 minutes",
+        estimatedTime: "5 minutes",
       },
       tips: [
-        "Les meilleurs DJs changent le Pitch tres legerement",
-        "Ca demande de la pratique pour bien sentir",
-        "Commence par des changements extremes, puis affine",
+        "Les meilleurs DJs font des ajustements très légers — la finesse, c'est la clé.",
+        "Commence par des morceaux proches en BPM (2-3 BPM d'écart max), puis augmente la difficulté.",
+        "Active Key Lock si les voix sonnent bizarre après un gros changement de tempo.",
       ],
     },
     {
       slideNumber: 5,
-      title: "La Synchronisation en Action",
-      subtitle: "Mets deux chansons ensemble pour la premiere fois",
+      title: "Ta première transition !",
+      subtitle: "Allez, on met deux morceaux ensemble pour de vrai",
       videoUrl: "https://www.youtube.com/embed/SR1xPdJs1k4",
       videoDescription:
-        "Transition type « drop mix » sur FLX4 : inspiration pour enchaîner proprement une fois le tempo aligné.",
-      content: `Mise en Situation Reelle:
-Tu es en train de mixer. Voici ce qui se passe:
+        "Transition type « drop mix » sur DDJ-FLX4 : inspiration pour enchaîner proprement une fois le tempo aligné.",
+      content: `**C'est le moment que tu attendais : ta toute première transition !** Tout ce qu'on a vu avant, c'était pour arriver là. Tu es prêt.
 
-Etape 1: Preparation (30 secondes avant)
-- Tu as la Chanson A qui joue (120 BPM)
-- Tu veux passer a la Chanson B (130 BPM)
-- Tu mets la Chanson B dans ton autre platine
-- Tu ajustes le Pitch a 120 BPM (pour qu'elle corresponde)
+**Voilà comment ça se passe, étape par étape :**
 
-Etape 2: Ecoute (10 secondes)
-- Tu ecoutes les deux chansons ensemble dans tes ecouteurs
-- Tu verifies que les rythmes correspondent
-- Si c'est parfait, tu passes a l'etape 3
-- Si ce n'est pas parfait, tu ajustes le Pitch un peu plus
+**Étape 1 — Préparation (30 secondes avant)**
+- Le morceau A tourne sur le deck A (ex. 124 BPM)
+- Tu charges le morceau B sur le deck B
+- Tu ajustes le pitch pour que B soit aussi à 124 BPM
+- Tu écoutes B au casque avec le bouton **Cue**
 
-Etape 3: Le Mix (5 secondes)
-- Tu augmentes le volume de la Chanson B
-- Tu diminues le volume de la Chanson A
-- Les deux jouent ensemble brievement
-- La foule ne realise meme pas que tu as change de chanson
+**Étape 2 — Écoute et calage (10 secondes)**
+- Tu écoutes A et B ensemble dans ton casque
+- Tu vérifies que les kicks tombent en même temps
+- Si ça décale un peu, tu donnes un petit coup de jog pour recaler
+- Quand c'est calé → on passe à la suite !
 
-Etape 4: Le Coup (1 seconde)
-- Tu coupes completement la Chanson A
-- La Chanson B prend le controle
-- C'est fait!
+**Étape 3 — Le mix (5-10 secondes)**
+- Tu montes doucement le channel fader de B
+- Tu baisses progressivement celui de A
+- Les deux morceaux jouent ensemble — et ça sonne bien !
+- Le public ne se rend même pas compte que tu changes de morceau
 
-Pourquoi C'est Important:
-- C'est la base du DJing
-- Si tu maitrises ca, tu peux mixer n'importe quoi
-- C'est ce qui rend un DJ professionnel
+**Étape 4 — La bascule (1-2 secondes)**
+- Tu coupes complètement A
+- B prend le contrôle
+- C'est fait ! Ta première transition !
 
-La Realite:
-- Ca parait complique sur le papier
-- En pratique, ca devient naturel apres quelques essais
-- Les meilleurs DJs le font sans y penser`,
+**La vérité :**
+- Ça a l'air compliqué écrit comme ça, mais en vrai ça devient naturel très vite
+- Ta première transition sera peut-être pas parfaite — et c'est **totalement normal**
+- Même les plus grands DJs ont galéré au début
+- L'important c'est de s'entraîner, de s'amuser, et de recommencer
+
+**Tu viens de franchir un cap énorme.** Tu sais maintenant préparer tes morceaux, brancher ta table, comprendre le BPM, ajuster le pitch, et faire une transition. C'est la base de TOUT le DJing. Le reste, c'est de la pratique et de la créativité !`,
       keyTakeaway:
-        "La synchronisation c'est: identifier le BPM, ajuster le Pitch, ecouter, puis mixer. C'est tout.",
+        "Préparer, écouter, mixer, basculer — c'est tout ! Ta première transition est un moment magique. Sois fier de toi, tu es officiellement DJ !",
       exercise: {
-        title: "Pratique la synchronisation mentale",
-        description: "Avant de toucher a un equipement, visualise le processus",
+        title: "Fais ta première vraie transition sur la FLX4",
+        description:
+          "C'est le grand moment — lance-toi, on y croit !",
         steps: [
-          "Choisis deux chansons: une a 120 BPM, une a 130 BPM",
-          "Ecoute la premiere jusqu'a 30 secondes avant la fin",
-          "Imagine que tu mets la deuxieme dans l'autre platine",
-          "Imagine que tu ajustes le Pitch a 120 BPM",
-          "Imagine que tu ecoutes les deux ensemble",
-          "Imagine que tu les mixes (volume de l'une monte, l'autre baisse)",
-          "Imagine que tu coupes la premiere",
-          "Repete jusqu'a ce que ca te semble naturel",
+          "Charge deux morceaux au BPM proche (max 3 BPM d'écart) sur les decks A et B.",
+          "Aligne le tempo de B sur celui de A avec le pitch.",
+          "Lance B et écoute-le au casque avec le bouton Cue. Tape du pied pour vérifier que les beats collent.",
+          "Quand tu sens que c'est calé, monte doucement le fader de B.",
+          "Baisse progressivement le fader de A pendant 8 temps (compte dans ta tête : 1-2-3-4-5-6-7-8).",
+          "Coupe A. B joue tout seul. Félicitations, t'as fait ta première transition !",
+          "Recommence 3 fois avec des morceaux différents — chaque fois, ça sera plus facile.",
         ],
-        estimatedTime: "7 minutes",
+        estimatedTime: "10 minutes",
       },
       tips: [
-        "La synchronisation c'est 80% du DJing",
-        "Les 20% restants c'est la creativite et la lecture de foule",
-        "Maitrise d'abord la synchronisation, puis explore le reste",
+        "La synchronisation, c'est 80 % du DJing. Le reste, c'est ta personnalité et ta créativité.",
+        "Si ça décale pendant le mix, un petit coup de jog rattrape tout — personne ne remarquera.",
+        "Enregistre tes sessions ! Réécouter, c'est le meilleur moyen de progresser.",
       ],
     },
   ],
@@ -1172,365 +1208,348 @@ La Realite:
  */
 export const level1ModuleFlx3Xdj: CourseModule = {
   level: 1,
-  title: "Les fondamentaux du DJ",
+  title: "Tes premiers pas de DJ",
   description:
-    "Prépare ton logiciel, ton contrôleur et tes morceaux pour que tes prochains mix soient beaucoup plus fluides.",
+    "On pose les bases ensemble : ton logiciel, ton contrôleur, tes premiers réflexes. Après ça, tu seras déjà capable de lancer tes morceaux et de comprendre comment tout fonctionne. C'est parti !",
   userLevels: ["beginner"],
   totalSlides: 5,
   estimatedDuration: "40 minutes",
   slides: [
     {
       slideNumber: 1,
-      title: "Premiers pas sur Rekordbox",
-      subtitle: "Ton logiciel DJ, ton contrôleur et tes premiers réflexes",
+      title: "Bienvenue dans le monde du DJing !",
+      subtitle: "Rekordbox, ton setup FLX3 / XDJ-RX et tes tout premiers réflexes",
       videoUrl: "https://www.youtube.com/embed/EIUd_xdBYGs",
       videoDescription:
-        "Modes Export & Performance dans Rekordbox — indispensable avant de brancher une FLX3, et pour préparer les clés USB d’un XDJ-RX.",
+        "Modes Export & Performance dans Rekordbox — indispensable avant de brancher ta FLX3, et pour préparer les clés USB d'un XDJ-RX.",
       illustrations: [
         {
           url: "https://www.pioneerdj.com/-/media/pioneerdj/images/products/controller/ddj-flx3/black/ddj-flx3-angle-ttl-1200.jpg",
           alt: "Contrôleur DJ DDJ-FLX3 — voie mixer et sections effets",
           caption:
-            "Sur FLX3, beaucoup de fonctions ont un bouton dédié (ex. Smart CFX). Sur XDJ-RX, l’équivalent se règle souvent à l’écran + molettes, comme sur des CDJ.",
+            "Sur FLX3, beaucoup de fonctions ont un bouton dédié (ex. Smart CFX). Sur XDJ-RX, l'équivalent se règle souvent à l'écran + molettes, comme sur des CDJ.",
         },
       ],
-      content: `**Bienvenue dans ta première leçon DJ !** Tu vas apprendre à utiliser Rekordbox et découvrir les bases de ton setup (DDJ-FLX3 ou XDJ-RX), des contrôleurs utilisés par beaucoup de DJs en club.
-      
-      L’objectif ici : comprendre l’écran, les boutons et les réflexes essentiels pour être à l’aise rapidement. Pas besoin de tout retenir d’un coup : avance tranquillement slide par slide et amuse-toi avec les exercices.
-      
-      **Rekordbox, c’est quoi ?**
-      C’est le logiciel qui fait le lien entre ton ordinateur et ta table. Il affiche tes morceaux, le tempo (BPM), et les formes d’onde pour que tu puisses voir ta musique en plus de l’entendre.
-      
-      **Deux modes à connaître**
-      - **Export** : tu prépares ta musique (playlists, tempo, repères). Indispensable si tu utilises un XDJ-RX avec clé USB.
-      - **Performance** : c’est le mode DJ en direct, celui où tu branches ta FLX3 et tu mixes.
-      
-      **Ton setup en bref**
-      - **DDJ-FLX3** : plus de boutons visibles que sur une FLX4, accès direct aux effets (Smart CFX, Beat FX) — on les découvrira progressivement.
-      - **XDJ-RX** : tu peux mixer sans ordinateur grâce aux clés USB. L’écran intégré remplace le laptop.
-      
-      **Tes premiers réflexes**
-      1. Importe quelques morceaux dans Rekordbox
-      2. Crée une petite playlist d’entraînement (5 titres au tempo proche, ex. 124–128 BPM)
-      3. Lance l’analyse pour que le logiciel détecte le tempo automatiquement
-      4. Charge un morceau sur chaque platine et écoute au casque`,
+      content: `**Hey, bienvenue ! Tu es officiellement en route pour devenir DJ.**
+
+Pas de stress, on va tout voir ensemble. Aujourd'hui, on découvre Rekordbox et ton setup (DDJ-FLX3 ou XDJ-RX) — des machines qu'on retrouve dans beaucoup de clubs et de soirées.
+
+**Rekordbox, c'est quoi en gros ?**
+C'est le logiciel qui fait le pont entre ton ordi et ta table. Il affiche tes morceaux, le tempo (BPM), et les formes d'onde pour que tu puisses **voir** ta musique en plus de l'entendre.
+
+**Les deux modes à retenir**
+- **Export** : c'est ton atelier. Tu prépares ta musique chez toi (playlists, tempo, repères). **Indispensable si tu utilises un XDJ-RX avec clé USB.**
+- **Performance** : c'est la scène ! Tu branches ta FLX3 et tu mixes en direct.
+
+**Ton setup en un coup d'œil**
+- **DDJ-FLX3** : plus de boutons visibles qu'une FLX4, accès direct aux effets (Smart CFX, Beat FX) — on les découvrira progressivement.
+- **XDJ-RX** : tu peux mixer **sans ordinateur** grâce aux clés USB. L'écran intégré remplace le laptop — la logique club, quoi !
+
+**Tes tout premiers réflexes de DJ**
+1. Importe quelques morceaux dans Rekordbox
+2. Crée une petite playlist d'entraînement (5 titres au tempo proche, genre 124–128 BPM)
+3. Lance l'analyse pour que le logiciel détecte le tempo automatiquement
+4. Charge un morceau sur chaque platine et écoute au casque
+
+C'est normal si tout n'est pas clair du premier coup. L'important c'est de manipuler et d'explorer — c'est comme ça qu'on apprend !`,
       keyTakeaway:
-        "Export pour préparer, Performance pour mixer. Que ce soit FLX3 ou XDJ-RX, la méthode reste la même : importe, analyse, écoute au casque.",
+        "Export pour préparer, Performance pour mixer. Que ce soit FLX3 ou XDJ-RX, la méthode reste la même : importe, analyse, écoute au casque. Tu viens de poser ta première brique !",
       exercise: {
-        title: "Préparer 5 morceaux + 1 scénario Export",
-        description: "Base commune aux deux machines",
+        title: "Prépare tes 5 premiers morceaux + test Export",
+        description:
+          "La base commune aux deux machines — c'est par là que tout commence !",
         steps: [
-          "Crée une playlist « Mixy FLX3/XDJ » avec 5 morceaux du même style.",
-          "Analyse-les (BPM / grille) et corrige une grille si besoin.",
-          "Pose 4 Hot Cues par morceau (intro, pont, drop, outro).",
-          "Si tu vises un **XDJ-RX** : exporte la playlist sur une clé USB (Export mode) et vérifie qu’elle s’affiche dans Rekordbox « Device » / lecteur test.",
+          "Crée une playlist « Mixy FLX3/XDJ » avec 5 morceaux du même style que tu adores.",
+          "Analyse-les (BPM / grille) et corrige une grille si le kick ne tombe pas pile sur les lignes.",
+          "Pose 4 Hot Cues par morceau : intro, pont, drop, outro.",
+          "Si tu vises un **XDJ-RX** : exporte la playlist sur une clé USB (mode Export) et vérifie qu'elle s'affiche correctement.",
           "Si tu vises une **FLX3** : charge un titre sur A et B en Performance et vérifie le beat au casque.",
         ],
         estimatedTime: "18 minutes",
       },
       tips: [
-        "Sur FLX3, note les noms des pads (Serato / Rekordbox) dans le mode d’emploi : ils changent selon la couche.",
-        "Sur XDJ-RX, garde une clé de backup : les USB sont ton « disque dur scène ».",
-        "Ne monte pas le master tant que les trims ne sont pas calibrés.",
+        "Sur FLX3, note les noms des pads dans le mode d'emploi : ils changent selon la couche active.",
+        "Sur XDJ-RX, garde une clé de backup — les USB, c'est ton « disque dur scène ».",
+        "Ne monte pas le master tant que les trims ne sont pas calibrés. Patience !",
       ],
     },
     {
       slideNumber: 2,
-      title: "Brancher la FLX3 ou l’XDJ-RX",
+      title: "On branche tout : FLX3 ou XDJ-RX",
       subtitle: "FLX3 : USB + casque + master — XDJ : clés USB + enceintes + casque",
       videoUrl: "https://www.youtube.com/embed/jHaANgaTClU",
       videoDescription:
-        "Vidéo exemple contrôleur FLX (visuel ports) — pour XDJ-RX, ajoute l’étape « playlists sur clé USB » avant d’allumer.",
-      content: `**DDJ-FLX3 (avec ordinateur)**
-Ordinateur → **USB** → contrôleur → **MASTER OUT** → enceintes actives (entrée ligne). **Casque** sur **PHONES**. Même logique qu’une FLX4, mais vérifie sur **ton** manuel la présence d’entrées **MIC** ou **AUX** si tu ajoutes un micro.
+        "Vidéo exemple contrôleur FLX (visuel des ports) — pour XDJ-RX, ajoute l'étape « playlists sur clé USB » avant d'allumer.",
+      content: `**Allez, on branche tout !** C'est pas la partie la plus fun, mais un branchement propre = un son propre. Et ça, ça change tout.
 
-**XDJ-RX (sans PC requis en mix)**
+**DDJ-FLX3 (avec ordinateur)**
+Ordinateur → **USB** → contrôleur → **MASTER OUT** → enceintes actives (entrée LINE). **Casque** sur **PHONES**. Vérifie sur **ton** manuel s'il y a des entrées MIC ou AUX en plus.
+
+**XDJ-RX (sans PC en mix)**
 - Branche les **enceintes** sur la sortie **Master** (RCA/XLR selon modèle).
 - **Casque** sur la prise DJ / booth.
-- Insère une ou deux **clés USB** avec tes playlists **Export** ; sélectionne les morceaux depuis les **écrans**.
+- Insère une ou deux **clés USB** avec tes playlists exportées ; sélectionne les morceaux depuis les **écrans**.
+- Le PC, tu ne t'en sers que pour préparer chez toi — en mix, l'XDJ est autonome !
 
-**Points communs**
-- Faders et master à **zéro** avant d’allumer la sono.
-- Régle les **trims** : signal dans le vert/orange, pas de rouge continu.
-- Pour l’appart : petites enceintes actives ; fais attention aux basses vers les voisins.
+**Points communs (les deux machines)**
+- Faders et master à **zéro** avant d'allumer la sono. Toujours !
+- Règle les **trims** : signal dans le vert/orange, jamais dans le rouge en continu.
+- Pas de grosse sono ? Des petites enceintes actives font très bien l'affaire pour s'entraîner.
 
-**Support**
-- Manuels & firmware : https://www.pioneerdj.com/fr-fr/support/`,
+**Support & manuels**
+- Manuels, firmware, pilotes : https://www.pioneerdj.com/fr-fr/support/`,
       keyTakeaway:
-        "FLX3 = chaîne laptop‑contrôleur‑sono. XDJ-RX = clé USB + enceintes + casque, PC seulement pour préparer chez toi.",
+        "FLX3 = chaîne laptop–contrôleur–sono. XDJ-RX = clé USB + enceintes + casque, le PC sert juste pour la prépa. Dans les deux cas, le réflexe c'est : faders à zéro, on monte progressivement !",
       exercise: {
-        title: "Check-list selon ta machine",
-        description: "Une fois avant chaque session",
+        title: "Check-list branchement selon ta machine",
+        description:
+          "Une routine à faire avant chaque session — en 5 minutes c'est plié !",
         steps: [
-          "Note sur papier : « FLX3 + PC » ou « XDJ seul ».",
+          "Note sur un papier : « FLX3 + PC » ou « XDJ seul ».",
           "FLX3 : câble USB données OK ? XDJ : clé reconnue sur le lecteur ?",
-          "Enceintes sur entrée ligne, pas phono ; master monté progressivement.",
-          "Casque : pré-écoute d’un deck sans saturer le master.",
+          "Enceintes sur entrée LINE (pas phono !) ; master monté progressivement.",
+          "Casque : pré-écoute un deck au casque sans saturer le master.",
+          "Si tout est clean, lance un morceau et savoure — t'as un setup qui tourne !",
         ],
         estimatedTime: "10 minutes",
       },
       tips: [
-        "XDJ : formate tes clés FAT32 si le manuel le recommande.",
-        "FLX3 : mets à jour Rekordbox et le firmware de la table le même week-end pour éviter les bugs.",
-        "Garde une multiprise propre + un câble de secours.",
+        "XDJ : formate tes clés en FAT32 si le manuel le recommande — ça évite les mauvaises surprises.",
+        "FLX3 : mets à jour Rekordbox et le firmware le même jour pour éviter les incompatibilités.",
+        "Garde toujours une multiprise propre et un câble de secours dans ton sac de DJ.",
       ],
     },
-    level1ModuleFlx4.slides[2],
+    {
+      ...level1ModuleFlx4.slides[2],
+      videoDescription:
+        "Tu vois le tempo affiché dans Rekordbox et la grille sur la waveform — super utile pour relier l'oreille et l'écran, que tu sois sur FLX3 ou XDJ-RX.",
+    },
     {
       ...level1ModuleFlx4.slides[3],
       videoDescription:
-        "Tempo & pitch : applique la même logique sur le fader de la FLX3 ou la molette tempo d’un XDJ-RX.",
-      content: `Le Probleme:
-Tu as deux chansons que tu aimes, mais elles n'ont pas le meme BPM.
-- Chanson A: 120 BPM
-- Chanson B: 130 BPM
-- Resultat: Elles ne sonnent pas bien ensemble
+        "Exemple de tempo / beatmatch — la logique est la même sur FLX3 et XDJ-RX, seul l'emplacement du fader change.",
+      content: `**Maintenant qu'on a compris le BPM, on passe à l'outil qui va te permettre de tout aligner : le Pitch.**
 
-La Solution: Le Pitch
-Le Pitch c'est un curseur qui change la vitesse de la chanson.
-- Augmente le Pitch -> la chanson devient plus rapide
-- Baisse le Pitch -> la chanson devient plus lente
+**Le problème :**
+Tu as deux morceaux que tu adores, mais ils n'ont pas le même BPM.
+- Morceau A : 120 BPM
+- Morceau B : 128 BPM
+- Résultat : ils ne collent pas ensemble
 
-Comment Ca Marche:
-Imagine un disque vinyle:
-- Si tu le fais tourner plus vite -> la musique est plus rapide
-- Si tu le fais tourner plus lentement -> la musique est plus lente
+**La solution : le fader de Pitch**
+C'est ce curseur qui accélère ou ralentit un morceau.
+- Tu pousses le pitch vers le bas → le morceau accélère
+- Tu tires le pitch vers le haut → le morceau ralentit
+(Attention, c'est parfois inversé selon les modèles — vérifie sur le tien !)
 
-Le Pitch digital fonctionne exactement comme ca.
+**Exemple concret :**
+- Morceau A : 120 BPM (tu le laisses tel quel)
+- Morceau B : 128 BPM (tu le ralentis à 120 avec le pitch)
+- Résultat : les deux tournent à 120 BPM = c'est aligné, c'est propre !
 
-Exemple Pratique:
-- Chanson A: 120 BPM (tu la laisses a 120)
-- Chanson B: 130 BPM (tu la ralentis a 120 avec le Pitch)
-- Resultat: Les deux jouent a 120 BPM = parfait!
+**Bon à savoir :**
+- Le pitch change aussi légèrement la tonalité. C'est normal, ça fait partie du jeu.
+- Au-delà de ±8–10 %, ça commence à sonner bizarre. Reste dans une fourchette raisonnable.
 
-Important:
-- Le Pitch change aussi la tonalite (la chanson sonne plus aigue ou plus grave)
-- C'est normal et ca fait partie du DJing
-- Les DJs professionnels acceptent ce changement
+**Sur ta DDJ-FLX3**
+- Le **pitch** est en façade par deck ; **Tempo Range** élargit ou réduit la plage utile. **Smart CFX** colore le son — un réglage à la fois au début !
 
-Limitation:
-Tu ne peux pas changer le BPM de plus de +/- 10% sans que ca sonne bizarre.
+**Sur ton XDJ-RX**
+- Le tempo se pilote via **l'écran** / la **molette** du deck : le BPM affiché doit coller à ce que tu entends. **Key Lock / Master Tempo** dans le menu pour limiter la déformation des voix.
 
-**Hardware DDJ-FLX3**
-- Le **pitch** est en façade par deck ; **Tempo Range** élargit ou réduit la plage utile (lis la valeur affichée avant de tirer le fader). **Smart CFX** colore le son — un réglage à la fois au début.
+**Rekordbox (pour les deux)**
+- Active **Key Lock / Master Tempo** si tu veux changer le tempo sans trop affecter la hauteur — à tester au casque.
 
-**Hardware XDJ-RX**
-- Le tempo se pilote sur **l’écran** / la **molette** du deck : le BPM affiché doit coller à ce que tu entends après analyse. **Key Lock / Master Tempo** dans le menu si tu veux limiter la déformation de la voix.
-
-**Rekordbox (les deux)**
-- Active **Key Lock / Master Tempo** si tu veux optimiser le tempo sans trop bouger la hauteur — à tester au casque avant d’envoyer en salle.`,
+C'est là que ça devient vraiment fun : tu commences à **contrôler** ta musique !`,
       keyTakeaway:
-        "Même logique de pitch partout : FLX3 = faders visibles ; XDJ-RX = contrôle à l’écran + Rekordbox pour la prépa.",
+        "Même logique de pitch partout : FLX3 = faders visibles ; XDJ-RX = contrôle à l'écran. Tu tiens l'outil clé du beatmatching !",
     },
-    level1ModuleFlx4.slides[4],
+    {
+      ...level1ModuleFlx4.slides[4],
+      videoDescription:
+        "Transition type « drop mix » : inspiration pour enchaîner proprement une fois le tempo aligné. Applique ça sur ta FLX3 ou ton XDJ-RX !",
+    },
   ],
 };
 
 /**
- * NIVEAU 2: LES EQUALISEURS (Débutant+)
+ * NIVEAU 2: LES ÉQUALISEURS (Débutant+)
  */
 export const level2Module: CourseModule = {
   level: 2,
-  title: "Les Equaliseurs (EQ): Le Secret des Transitions Fluides",
-  description: "Comment faire sonner deux chansons ensemble sans que ce soit horrible",
+  title: "Les Équaliseurs (EQ) : ton arme secrète pour des transitions propres",
+  description:
+    "Apprends à sculpter le son pour que deux morceaux se mélangent sans saturer — c'est ça qui fait la différence entre un mix amateur et un mix pro !",
   userLevels: ["beginner"],
   totalSlides: 3,
   estimatedDuration: "15 minutes",
   slides: [
     {
       slideNumber: 1,
-      title: "Les 3 Bandes de Frequences",
-      subtitle: "Comprends ce que tu entends vraiment",
+      title: "Les 3 bandes de fréquences",
+      subtitle: "Comprends ce que tu entends vraiment dans un morceau",
       videoUrl: "https://www.youtube.com/embed/Fd9jEpFG6II",
       videoDescription:
-        "Decouvre les trois parties d'une chanson que tu peux controler avec l'EQ.",
-      content: `**EQ sur ta FLX / Rekordbox**
-- Chaque voie du mélangeur a 3 potentiomètres **High / Mid / Low** (parfois **Trim** au sommet de la voie pour le gain d'entrée).
-- Dans Rekordbox Performance, les mêmes bandes existent à l'écran : bouger un **knob physique** ou le curseur logiciel, c'est le même principe.
+        "Découvre les trois couches d'un morceau que tu peux contrôler avec l'EQ — ça va changer ta façon d'écouter la musique !",
+      content: `**Allez, on passe au niveau supérieur !** Tu sais déjà lancer tes morceaux et faire une transition. Maintenant on va apprendre à **sculpter le son** — et crois-moi, c'est là que ça devient vraiment intéressant.
 
-Imagine une chanson comme un sandwich a 3 etages:
+**L'EQ sur ta table / Rekordbox**
+Chaque voie du mixer a 3 potards **High / Mid / Low** (plus le **Trim** en haut pour le volume d'entrée). Dans Rekordbox, les mêmes bandes existent à l'écran — bouger un potard physique ou le curseur logiciel, c'est exactement la même chose.
 
-Etage 1: Les Basses (Low) - Le Fondement
-- Frequences: 20-250 Hz
-- C'est ce que tu SENS dans ton ventre
-- C'est le "boom boom boom" du kick
-- Exemple: Le battement du coeur de la musique
+**Imagine un morceau comme un gâteau à 3 étages :**
 
-Etage 2: Les Mediums (Mid) - Le Coeur
-- Frequences: 250-4000 Hz
-- C'est ce que tu ENTENDS clairement
-- C'est la voix, les melodies, les synthes
-- Exemple: La melodie principale
+**Étage 1 : Les Basses (Low) — Le fondement**
+- Fréquences : 20–250 Hz
+- C'est ce que tu **SENS** dans ton ventre, dans ta poitrine
+- C'est le « boum boum boum » du kick, la grosse caisse
+- C'est ce qui fait danser les gens
 
-Etage 3: Les Aigus (High) - L'Energie
-- Frequences: 4000+ Hz
-- C'est ce qui cree de la CLARTE et de l'ENERGIE
-- C'est les cymbales, les hi-hats, les effets
-- Exemple: Le "tss tss tss" des cymbales
+**Étage 2 : Les Médiums (Mid) — Le cœur**
+- Fréquences : 250–4000 Hz
+- C'est ce que tu **ENTENDS** le plus clairement
+- Les voix, les mélodies, les synthés, les instruments
+- C'est le contenu « musical » principal
 
-Pourquoi C'est Important:
-- Chaque chanson a un equilibre different
-- Certaines ont beaucoup de basses, d'autres non
-- L'EQ te permet d'ajuster cet equilibre
-- Resultat: deux chansons qui sonnent bien ensemble`,
+**Étage 3 : Les Aigus (High) — L'énergie**
+- Fréquences : 4000+ Hz
+- C'est ce qui crée de la **clarté** et du **pétillant**
+- Les cymbales, les hi-hats, les effets brillants
+- C'est le « tss tss tss » qui donne de l'air au mix
+
+**Pourquoi c'est important pour toi ?**
+Quand tu mixes deux morceaux en même temps, leurs basses s'additionnent, leurs médiums s'additionnent, leurs aigus s'additionnent. Si tu ne gères pas ça, le résultat est une bouillie sonore. L'EQ te permet de **faire de la place** pour que les deux morceaux cohabitent proprement.
+
+Tu vas voir, une fois que tu comprends ça, tu n'écoutes plus jamais la musique de la même façon !`,
       keyTakeaway:
-        "Chaque chanson a 3 etages: Basses (boom), Mediums (melodies), Aigus (energie). L'EQ te permet de les controler.",
+        "Basses = ce que tu sens, Médiums = ce que tu entends, Aigus = ce qui brille. L'EQ te donne le contrôle sur chaque couche. Tu viens de débloquer une super-compétence !",
       exercise: {
-        title: "Ecoute les 3 bandes separement",
-        description: "Entraine-toi a reconnaitre chaque bande",
+        title: "Isole les 3 bandes sur ta table",
+        description:
+          "Rien de mieux que de l'entendre par toi-même — c'est un exercice qui va te bluffer !",
         steps: [
-          "Ecoute une chanson normale",
-          "Imagine-toi enlever toutes les basses - ca sonne comment? (leger, creux)",
-          "Imagine-toi enlever tous les mediums - ca sonne comment? (bizarre, pas de melodie)",
-          "Imagine-toi enlever tous les aigus - ca sonne comment? (lourd, sans energie)",
-          "Maintenant ecoute la chanson complete - tu entends mieux chaque partie",
-          "Repete avec 3 chansons differentes",
+          "Lance un morceau sur un deck. Écoute-le normalement 15 secondes.",
+          "Tourne le potard **Low** à fond à gauche (coupe les basses) : tu entends ? Le morceau perd toute sa puissance, il « flotte ».",
+          "Remets le Low au centre. Maintenant coupe les **Mid** : bizarre, non ? La mélodie et les voix disparaissent.",
+          "Remets le Mid. Coupe les **High** : le morceau sonne étouffé, sans éclat.",
+          "Remets tout au centre et réécoute : tu entends maintenant chaque couche séparément. Bienvenue dans l'oreille d'un DJ !",
+          "Recommence avec 2 autres morceaux de styles différents — chaque genre a un équilibre différent.",
         ],
         estimatedTime: "5 minutes",
       },
       tips: [
-        "Les basses c'est ce que tu SENS",
-        "Les mediums c'est ce que tu ENTENDS",
-        "Les aigus c'est ce qui cree de la CLARTE",
+        "Les basses, c'est ce qui fait danser — c'est la bande la plus importante à gérer en transition.",
+        "Les médiums, c'est là où se joue l'identité du morceau : voix, mélodie, ambiance.",
+        "Les aigus donnent de l'énergie et de l'air — un mix sans aigus sonne plat et triste.",
       ],
     },
     {
       slideNumber: 2,
-      title: "Comment Utiliser l'EQ pour Mixer",
-      subtitle: "La technique de base pour des transitions fluides",
+      title: "La technique EQ pour des transitions fluides",
+      subtitle: "La méthode que tous les DJs pros utilisent (et que tu vas adorer)",
       videoUrl: "https://www.youtube.com/embed/pV-NJndPFtw",
       videoDescription:
-        "Vois comment un DJ utilise l'EQ pour melanger deux chansons sans saturation.",
-      content: `Le Probleme:
-Tu as deux chansons avec beaucoup de basses. Si tu les mixes directement:
-- Trop de basses = saturation
-- Ca sonne lourd et desagrable
-- La foule n'aime pas
+        "Regarde comment un DJ utilise l'EQ pour mélanger deux morceaux sans saturation — observe bien les mains sur les potards !",
+      content: `**OK, maintenant on passe à la pratique !** Tu sais ce que sont les 3 bandes. Voilà comment les utiliser pour des transitions de ouf.
 
-La Solution: L'EQ
+**Le problème :**
+Tu as deux morceaux House avec des grosses basses. Si tu montes les deux volumes en même temps : BOOM, saturation ! Ça sonne lourd, brouillon, désagréable. Le public grimace.
 
-Technique de Base (La Regle d'Or):
+**La solution : la technique du « swap de basses »**
+C'est LA technique fondamentale. Tous les DJs pros l'utilisent, et c'est beaucoup plus simple que ça en a l'air :
 
-1. Avant le Mix (30 secondes avant)
-   - Baisse les BASSES de la chanson qui arrive
-   - Augmente les AIGUS pour creer de la tension
-   - Resultat: la chanson qui arrive sonne legere et claire
+**1. Avant le mix (30 secondes avant)**
+- Coupe les **basses** du morceau qui arrive (Low à fond à gauche)
+- Les aigus et médiums passent, mais sans la grosse caisse — le morceau sonne léger, aérien
+- C'est comme si tu entrouvrais une porte sans encore entrer dans la pièce
 
-2. Pendant le Mix (5-10 secondes)
-   - Augmente le volume de la chanson qui arrive
-   - Diminue le volume de la chanson actuelle
-   - Les deux jouent ensemble
-   - Resultat: un melange fluide
+**2. Pendant le mix (5-10 secondes)**
+- Monte doucement le volume du morceau qui arrive
+- Les deux morceaux jouent ensemble, mais sans conflit de basses
+- Le public sent que quelque chose change, sans savoir exactement quoi — c'est ça la magie !
 
-3. Apres le Mix (1-2 secondes)
-   - Coupe la chanson actuelle
-   - Augmente progressivement les basses de la nouvelle chanson
-   - Resultat: la nouvelle chanson prend le controle avec toute son energie
+**3. La bascule (1-2 secondes)**
+- D'un geste : remonte les basses du nouveau morceau ET coupe celles de l'ancien
+- C'est le « swap » — les basses passent d'un morceau à l'autre
+- Le public sent le changement d'énergie, la nouvelle grosse caisse prend le contrôle
 
-Pourquoi Ca Marche:
-- Les basses de deux chansons ensemble = saturation
-- En baissant les basses de l'une, tu crees de l'espace
-- Ca rend la transition fluide et professionnelle
+**4. Nettoyage**
+- Baisse le volume de l'ancien morceau, puis coupe-le
+- Remets les EQ au centre sur la voie libre
+- C'est propre, c'est pro !
 
-Important:
-- C'est une technique, pas une regle stricte
-- Les meilleurs DJs l'adaptent a chaque situation
-- Ca demande de la pratique pour bien sentir`,
+**L'idée clé :** on ne veut **jamais** deux grosses caisses en même temps à plein volume. C'est ça le secret d'une transition fluide.`,
       keyTakeaway:
-        "Baisse les basses de la chanson qui arrive, augmente les aigus. Ca cree une transition fluide.",
+        "Coupe les basses du morceau qui arrive, mixe, puis swappe les basses. C'est LA technique de base — et tu viens de l'apprendre. Les pros font exactement ça !",
       exercise: {
-        title: "Pratique l'EQ mentalement",
-        description: "Visualise comment l'EQ change le son",
+        title: "Fais ton premier swap de basses",
+        description:
+          "Allez, on le fait pour de vrai sur ta table — tu vas kiffer !",
         steps: [
-          "Choisis deux chansons que tu aimes",
-          "Ecoute la premiere jusqu'a 30 secondes avant la fin",
-          "Imagine que tu mets la deuxieme dans l'autre platine",
-          "Imagine que tu baisses les basses de la deuxieme (elle sonne legere)",
-          "Imagine que tu augmentes les aigus (elle sonne claire)",
-          "Imagine que tu les mixes (les deux jouent ensemble)",
-          "Imagine que tu augmentes les basses de la deuxieme (elle reprend son energie)",
-          "Repete jusqu'a ce que ca te semble naturel",
+          "Charge deux morceaux au même BPM sur tes decks A et B.",
+          "Lance A à volume normal, EQ au centre.",
+          "Sur le deck B : coupe les basses (Low à fond à gauche). Lance B.",
+          "Monte doucement le fader de B : tu entends les aigus et médiums de B se glisser dans le mix ? Ça sonne propre !",
+          "Quand tu es prêt : d'un geste, remonte le Low de B au centre ET coupe le Low de A.",
+          "Baisse le fader de A. B joue seul avec toutes ses basses. Transition faite !",
+          "Recommence 3 fois — à chaque fois, ça sera plus fluide et plus naturel.",
         ],
-        estimatedTime: "7 minutes",
+        estimatedTime: "8 minutes",
       },
       tips: [
-        "L'EQ c'est pas pour detruire le son, c'est pour l'ameliorer",
-        "Les changements subtils sont plus professionnels que les changements extremes",
-        "Ecoute des DJs professionnels pour comprendre le timing",
+        "La subtilité fait tout : des petits mouvements d'EQ sont plus pros que des gestes brusques.",
+        "Écoute des sets de DJs pro sur YouTube et regarde leurs mains sur les EQ — tu vas repérer le swap de basses à chaque transition !",
+        "Si ça sature pendant le mix, c'est que les deux basses jouent ensemble — coupe plus fort le Low de l'un des deux.",
       ],
     },
     {
       slideNumber: 3,
-      title: "L'EQ en Action: Cas Reels",
-      subtitle: "Comment les DJs professionnels utilisent l'EQ",
+      title: "L'EQ en situation réelle : 3 scénarios",
+      subtitle: "Adapte ta technique au contexte — comme un vrai pro",
       videoUrl: "https://www.youtube.com/embed/Lk0a6U6m2Zg",
       videoDescription:
-        "Regarde comment les meilleurs DJs utilisent l'EQ pour creer des transitions parfaites.",
-      content: `Cas Reel 1: Deux Chansons House Lourdes
+        "Observe comment les DJs adaptent leur EQ selon les morceaux — chaque transition est différente !",
+      content: `**Maintenant que tu maîtrises le swap de basses, voyons comment l'adapter selon la situation.** Parce qu'en vrai, chaque transition est unique !
 
-Situation:
-- Chanson A: House lourde avec beaucoup de basses (120 BPM)
-- Chanson B: House lourde avec beaucoup de basses (120 BPM)
-- Probleme: Si tu les mixes directement, c'est une saturation totale
+**Scénario 1 : Deux morceaux House bien lourds**
+Les deux ont des grosses basses bien présentes. C'est le cas classique.
+→ **Swap de basses net** : tu coupes les basses de B, tu mixes, puis tu fais le swap d'un coup. Propre et efficace. Pas besoin de compliquer.
 
-Solution du DJ Pro:
-1. Baisse les basses de la Chanson B a 0%
-2. Augmente les aigus de la Chanson B a 100%
-3. Melange les deux (la Chanson B sonne legere et claire)
-4. Augmente progressivement les basses de la Chanson B
-5. Resultat: une transition fluide et professionnelle
+**Scénario 2 : D'un morceau lourd vers un morceau léger**
+Genre passer d'une House bien grasse à une Deep House aérienne.
+→ **Transition douce** : tu n'as pas besoin de couper les basses de B autant, parce qu'elles sont déjà légères. Par contre, baisse les aigus de A progressivement pour « éteindre » le morceau en douceur. Laisse les deux cohabiter un peu plus longtemps.
 
-Cas Reel 2: Transition d'une Chanson Lourde a une Chanson Legere
+**Scénario 3 : Créer un moment de tension**
+Tu veux que le public sente que quelque chose de gros arrive.
+→ **Le build-up EQ** :
+1. Baisse progressivement les basses du morceau en cours sur 16 ou 32 temps
+2. Le groove disparaît peu à peu, la tension monte
+3. Le public sent que ça va exploser
+4. Tu lâches le nouveau morceau avec toutes ses basses d'un coup
+5. BOOM — le dancefloor repart de plus belle !
 
-Situation:
-- Chanson A: House lourde (beaucoup de basses)
-- Chanson B: Deep House legere (peu de basses)
-- Probleme: Contraste trop grand
+**La leçon importante :**
+L'EQ, c'est pas une formule rigide. C'est un outil **créatif** — comme un pinceau. La technique de base (swap de basses) reste la même, mais tu l'adaptes à chaque moment. Avec la pratique, ça devient instinctif.
 
-Solution du DJ Pro:
-1. Augmente les basses de la Chanson B legerement
-2. Baisse les aigus de la Chanson A
-3. Melange les deux (elles se rencontrent au milieu)
-4. Resultat: une transition progressive et naturelle
-
-Cas Reel 3: Creer de la Tension
-
-Situation:
-- Tu veux creer un moment de tension avant un pic
-- Tu veux que la foule sente que quelque chose arrive
-
-Solution du DJ Pro:
-1. Baisse progressivement les basses de la chanson actuelle
-2. Augmente progressivement les aigus
-3. La foule sent la tension (pas de basses = pas de groove)
-4. Puis tu laches une nouvelle chanson avec beaucoup de basses
-5. La foule explose!
-
-Lecon Importante:
-- L'EQ c'est pas une technique rigide
-- C'est un outil pour creer des emotions
-- Les meilleurs DJs l'utilisent intuitivement
-- Ca demande de la pratique et de l'ecoute`,
+Tu commences à penser comme un DJ. Et ça, c'est énorme !`,
       keyTakeaway:
-        "L'EQ c'est un outil pour creer des transitions fluides et des moments de tension. Utilise-le intuitivement.",
+        "Le swap de basses s'adapte à chaque situation : net pour les morceaux lourds, doux pour les légers, dramatique pour la tension. Tu as maintenant un vrai outil créatif entre les mains !",
       exercise: {
-        title: "Analyse des transitions de DJs professionnels",
-        description: "Apprends en regardant comment les pros font",
+        title: "Teste les 3 scénarios sur ta table",
+        description:
+          "3 transitions, 3 ambiances différentes — le meilleur entraînement possible !",
         steps: [
-          "Regarde 3 videos de DJs en club",
-          "Observe comment ils utilisent l'EQ",
-          "Note les moments ou ils baissent les basses",
-          "Note les moments ou ils augmentent les aigus",
-          "Essaie de predire ce qu'ils vont faire",
-          "Regarde si tu avais raison",
-          "Repete jusqu'a ce que tu reconnaisses les patterns",
+          "Prépare 4 morceaux : 2 avec des grosses basses et 2 plus légers/aériens.",
+          "**Scénario 1** : mixe les 2 morceaux lourds avec un swap de basses net. Simple et efficace.",
+          "**Scénario 2** : passe d'un morceau lourd à un léger. Baisse les aigus de A doucement et laisse B entrer en douceur.",
+          "**Scénario 3** : sur un morceau lourd, baisse les basses progressivement sur 16 temps. Puis lâche le nouveau morceau avec les basses à fond. Tu sens la tension et le release ?",
+          "Enregistre-toi et réécoute : quelle transition sonne le mieux ? C'est super instructif !",
         ],
-        estimatedTime: "10 minutes",
+        estimatedTime: "12 minutes",
       },
       tips: [
-        "L'EQ c'est l'outil le plus puissant d'un DJ",
-        "Les meilleurs DJs sont subtils avec l'EQ",
-        "Moins c'est plus",
+        "L'EQ, c'est l'outil le plus puissant de ton mixer — même plus que les effets. Maîtrise-le, et tout le reste suivra.",
+        "Les meilleurs DJs sont subtils : de petits mouvements de potard font souvent plus d'effet que des gestes dramatiques.",
+        "La règle d'or : moins c'est plus. Un mix propre vaut mieux qu'un mix « impressionnant » qui sature.",
       ],
     },
   ],
@@ -1541,231 +1560,195 @@ Lecon Importante:
  */
 export const level3Module: CourseModule = {
   level: 3,
-  title: "Les Transitions Basiques: Passer d'une Chanson a l'Autre",
-  description: "Comment passer d'une chanson a l'autre sans que ca soit bizarre",
+  title: "Les transitions : l'art de passer d'un morceau à l'autre",
+  description:
+    "Tu sais caler et utiliser l'EQ — maintenant on assemble tout pour faire des transitions qui claquent. C'est ici que tu deviens vraiment DJ !",
   userLevels: ["beginner"],
   totalSlides: 3,
   estimatedDuration: "15 minutes",
   slides: [
     {
       slideNumber: 1,
-      title: "Les 3 Phases d'une Transition",
-      subtitle: "Comprends la structure d'une bonne transition",
+      title: "Les 3 phases d'une transition réussie",
+      subtitle: "Chaque bonne transition suit ce schéma — même chez les pros",
       videoUrl: "https://www.youtube.com/embed/vdbcvsUKY2s",
       videoDescription:
-        "Decouvre les 3 phases que tu dois maitriser pour une transition parfaite.",
-      content: `Une Bonne Transition c'est Invisible
+        "Découvre les 3 phases qui font la différence entre une transition amateur et une transition pro.",
+      content: `**Tu sais quoi ? Une bonne transition, c'est invisible.** Les gens dansent, s'amusent, et ne réalisent même pas que tu as changé de morceau. C'est ça, le vrai talent d'un DJ.
 
-Les gens ne realisent meme pas que tu as change de chanson. C'est ca, l'art du DJing.
+**Les 3 phases de toute bonne transition :**
 
-Les 3 Phases:
+**Phase 1 — La préparation (10-15 secondes avant)**
+C'est ta phase « en coulisses ». Le public ne sait pas encore ce qui se prépare.
+- Tu charges le prochain morceau, tu cales le tempo
+- Tu coupes les basses du morceau qui arrive (ce qu'on a vu au niveau 2 !)
+- Tu écoutes au casque pour vérifier que tout est calé
+- Le public sent inconsciemment que quelque chose se prépare — la tension monte
 
-Phase 1: La Preparation (10-15 secondes avant)
-- Objectif: Preparer la foule pour le changement
-- Actions:
-  - Baisse les basses de la chanson actuelle
-  - Augmente les aigus (cree de la tension)
-  - La foule sent que quelque chose arrive
-- Ressenti: Tension, attente, suspense
+**Phase 2 — Le mix (5-10 secondes)**
+C'est le moment où les deux morceaux cohabitent.
+- Tu montes le volume du nouveau morceau
+- Les deux jouent ensemble — grâce à l'EQ, ça ne sature pas
+- Tu baisses progressivement l'ancien morceau
+- Le public entend une progression naturelle, fluide
 
-Phase 2: Le Mix (5-10 secondes)
-- Objectif: Melanger les deux chansons
-- Actions:
-  - Augmente le volume de la nouvelle chanson
-  - Diminue le volume de l'ancienne
-  - Les deux jouent ensemble brievement
-  - Utilise l'EQ pour eviter la saturation
-- Ressenti: Transition fluide, progression naturelle
+**Phase 3 — La bascule (1-2 secondes)**
+Le grand moment ! Le nouveau morceau prend le contrôle.
+- Tu fais le swap de basses (ou tu coupes l'ancien morceau)
+- Le nouveau morceau joue seul avec toute son énergie
+- Le public sent un renouveau, un boost — et continue à danser !
 
-Phase 3: Le Coup (1-2 secondes)
-- Objectif: Prendre le controle avec la nouvelle chanson
-- Actions:
-  - Coupe completement l'ancienne chanson
-  - La nouvelle chanson prend le controle
-  - Augmente les basses progressivement
-- Ressenti: Liberation, energie nouvelle, excitation
-
-Pourquoi C'est Important:
-- C'est ce qui rend un DJ professionnel
-- Ca maintient l'energie sur la piste
-- Ca cree de la tension et du plaisir
-- C'est la difference entre un DJ et un jukebox`,
+**Le truc à retenir :**
+Préparation → Mix → Bascule. C'est la structure de base de TOUTE transition. Même les DJs qui jouent à Tomorrowland suivent ce schéma — ils le font juste de façon plus créative avec le temps. Et toi aussi tu y arriveras !`,
       keyTakeaway:
-        "Une transition a 3 phases: Preparation (tension), Mix (transition), Coup (liberation).",
+        "Préparation, Mix, Bascule — trois phases, c'est tout. Chaque grande transition suit ce schéma. Tu as maintenant la structure, il ne reste plus qu'à pratiquer !",
       exercise: {
-        title: "Identifie les 3 phases en ecoutant",
-        description: "Apprends a reconnaitre les phases dans une transition reelle",
+        title: "Fais une transition complète en 3 phases",
+        description:
+          "On assemble tout ce qu'on a appris — BPM, pitch, EQ — en une seule transition !",
         steps: [
-          "Regarde une video d'un DJ en club",
-          "Ecoute attentivement une transition",
-          "Essaie d'identifier la Phase 1 (preparation)",
-          "Essaie d'identifier la Phase 2 (mix)",
-          "Essaie d'identifier la Phase 3 (coup)",
-          "Repete avec 3 transitions differentes",
-          "Note les durees approximatives de chaque phase",
+          "Charge deux morceaux au même BPM (ou très proche) sur tes decks A et B.",
+          "Lance A à volume normal. Prépare B : aligne le tempo, coupe les basses.",
+          "**Phase 1** : écoute B au casque, vérifie que les beats sont calés. Donne un petit coup de jog si besoin.",
+          "**Phase 2** : monte le fader de B doucement. Les deux morceaux jouent ensemble — ça sonne bien ?",
+          "**Phase 3** : swappe les basses (remonte celles de B, coupe celles de A), puis baisse le fader de A.",
+          "B joue seul. T'as fait une transition propre ! Recommence 3 fois.",
+          "Chronomètre-toi : essaie de faire toute la transition en 20-30 secondes.",
         ],
-        estimatedTime: "5 minutes",
+        estimatedTime: "10 minutes",
       },
       tips: [
-        "Les phases ne sont pas rigides - adapte-toi a la chanson",
-        "Parfois la preparation dure 5 secondes, parfois 20 secondes",
-        "Lis la foule pour savoir quand faire le coup",
+        "Les phases ne sont pas rigides : parfois la préparation dure 5 secondes, parfois 20. Adapte-toi au morceau !",
+        "Si ça décale pendant le mix, un petit coup de jog suffit pour recaler — personne ne le remarquera.",
+        "Le secret : entraîne-toi jusqu'à ce que les gestes deviennent automatiques. Après, tu pourras te concentrer sur la créativité.",
       ],
     },
     {
       slideNumber: 2,
-      title: "Les Variations de Transitions",
-      subtitle: "Il existe plusieurs facons de faire une transition",
+      title: "4 styles de transitions à tester",
+      subtitle: "Chaque situation appelle un style différent — voilà ta boîte à outils",
       videoUrl: "https://www.youtube.com/embed/dYRZ7821G90",
       videoDescription:
-        "Decouvre les variations de transitions que les DJs utilisent.",
-      content: `Il N'y A Pas Une Seule Facon de Faire une Transition
+        "Découvre les différents styles de transitions que les DJs utilisent — tu vas trouver celui qui te correspond !",
+      content: `**Tu maîtrises la transition de base ? Parfait.** Maintenant, on va explorer les variantes. Parce qu'un bon DJ adapte toujours sa technique au moment.
 
-Les meilleurs DJs adaptent leur transition a la situation.
+**Style 1 : Le coup sec (5-10 secondes)**
+→ Quand utiliser : pour créer un moment de surprise, un changement radical d'énergie.
+- Préparation ultra courte (2-3 secondes)
+- Mix express (1-2 secondes)
+- Bascule franche et immédiate
+- Effet : le public fait « oh ! » — énergie max
 
-Variation 1: La Transition Rapide (Coup Sec)
-- Duree totale: 5-10 secondes
-- Utilisation: Quand tu veux creer un moment de surprise
-- Technique:
-  - Preparation tres courte (2-3 secondes)
-  - Mix tres rapide (1-2 secondes)
-  - Coup immediat
-- Ressenti: Choc, energie, surprise
+**Style 2 : La transition douce (30-45 secondes)**
+→ Quand utiliser : en début de soirée, pour construire une ambiance progressivement.
+- Préparation longue (15-20 secondes)
+- Mix étendu (15-20 secondes) — les deux morceaux cohabitent longtemps
+- Bascule progressive, presque imperceptible
+- Effet : le public ne se rend compte de rien — super élégant
 
-Variation 2: La Transition Lente (Progression Douce)
-- Duree totale: 30-45 secondes
-- Utilisation: Quand tu veux creer une progression progressive
-- Technique:
-  - Preparation longue (15-20 secondes)
-  - Mix long (15-20 secondes)
-  - Coup progressif
-- Ressenti: Progression, construction, climax
+**Style 3 : La transition harmonique**
+→ Quand utiliser : quand les deux morceaux sont dans des tonalités compatibles (on verra les clés plus en détail plus tard).
+- Tu laisses les médiums des deux morceaux se superposer plus longtemps
+- Les mélodies se complètent au lieu de se battre
+- Effet : sophistication, musicalité — le public averti adore
 
-Variation 3: La Transition Harmonique
-- Utilisation: Quand les deux chansons sont en cles differentes
-- Technique:
-  - Utilise l'EQ pour creer une harmonie
-  - Melange les deux chansons plus longtemps
-  - Laisse les musiciens apprecier la progression
-- Ressenti: Sophistication, musicalite
+**Style 4 : La transition créative (avec effets)**
+→ Quand utiliser : pour marquer un moment fort, montrer ta patte.
+- Tu utilises un loop (une boucle) sur la fin du morceau sortant
+- Tu ajoutes un effet (reverb, delay, echo…)
+- Tu crées un moment unique que personne d'autre ne ferait
+- Effet : « waouh, c'était quoi ça ? » — ta signature de DJ
 
-Variation 4: La Transition Creative (Avec Effets)
-- Utilisation: Quand tu veux montrer ta creativite
-- Technique:
-  - Utilise des boucles (repete une section)
-  - Ajoute des effets (reverb, delay)
-  - Cree un moment unique
-- Ressenti: Creativite, originalite, wow
+**Comment choisir ?**
+- Pic de la soirée ? → Coup sec
+- Début de set / ambiance chill ? → Transition douce
+- Public de connaisseurs ? → Harmonique
+- Tu veux te faire plaisir ? → Créative
 
-Quand Utiliser Quelle Variation:
-- Pic de la soiree? -> Transition rapide (coup sec)
-- Debut de soiree? -> Transition lente (progression)
-- Foule musicale? -> Transition harmonique
-- Moment creatif? -> Transition avec effets`,
+Le plus important : il n'y a pas de mauvais choix. L'essentiel c'est que le dancefloor continue à bouger !`,
       keyTakeaway:
-        "Il existe plusieurs facons de faire une transition. Adapte-toi a la situation et a la foule.",
+        "4 styles dans ta boîte à outils : coup sec, douce, harmonique, créative. Le bon DJ sait quand utiliser chacun. Et toi, tu les connais maintenant tous les quatre !",
       exercise: {
-        title: "Analyse differents styles de transitions",
-        description: "Ecoute et compare differentes transitions",
+        title: "Teste 2 styles de transitions",
+        description:
+          "Mêmes morceaux, deux approches différentes — tu vas sentir la différence !",
         steps: [
-          "Trouve 4 videos de DJs differents",
-          "Regarde une transition rapide",
-          "Regarde une transition lente",
-          "Regarde une transition harmonique",
-          "Regarde une transition creative",
-          "Note les differences que tu observes",
-          "Essaie de predire quel style tu preferes",
+          "Charge deux morceaux au même BPM sur tes decks.",
+          "**Style 1 — Coup sec** : prépare tout, puis fais la transition en moins de 5 secondes. Swap de basses franc, volume d'un coup. Ça envoie !",
+          "Recharge les mêmes morceaux.",
+          "**Style 2 — Douce** : cette fois, prends 30 secondes. Monte le volume de B très lentement, laisse les deux morceaux cohabiter longtemps, puis bascule en douceur.",
+          "Réécoute les deux (enregistre-toi si possible). Laquelle sonne le mieux ? Laquelle te plaît le plus ?",
+          "Essaie maintenant avec deux morceaux différents — le style idéal change selon les tracks !",
         ],
         estimatedTime: "10 minutes",
       },
       tips: [
-        "Les meilleurs DJs melangent les styles",
-        "Lis la foule pour savoir quel style utiliser",
-        "Pratique d'abord les transitions simples, puis explore les variations",
+        "Les meilleurs DJs mélangent les styles au cours d'un set — c'est ça qui crée une vraie dynamique.",
+        "Commence par maîtriser le coup sec et la douce — ce sont les plus fréquents.",
+        "Ne force jamais un style de transition : si ça ne colle pas avec les morceaux, change d'approche.",
       ],
     },
     {
       slideNumber: 3,
-      title: "Transitions en Situation Reelle",
-      subtitle: "Mets tout ensemble et fais ta premiere transition",
+      title: "Mise en situation : ta première mini-session",
+      subtitle: "On assemble tout — 3 morceaux, 2 transitions, un vrai mini-set !",
       videoUrl: "https://www.youtube.com/embed/Xzvid-d1c9E",
       videoDescription:
-        "Regarde comment un DJ professionnel fait une transition parfaite en direct.",
-      content: `Mise en Situation Complete:
+        "Regarde un DJ enchaîner des transitions en direct — c'est exactement ce que tu vas faire dans l'exercice !",
+      content: `**C'est le moment de tout assembler !** Tout ce que tu as appris aux niveaux 1, 2 et 3 va se combiner ici. Tu vas faire un vrai mini-set de DJ.
 
-Tu es en train de mixer. C'est 22h, la foule commence a danser. Voici ce qui se passe:
+**Imagine la scène :**
+Il est 22h, tu es aux platines. Ta playlist est prête. Let's go !
 
-Etape 1: Preparation (15 secondes avant)
-- La Chanson A joue (120 BPM, House)
-- Tu veux passer a la Chanson B (120 BPM, House)
-- Tu mets la Chanson B dans l'autre platine
-- Tu ajustes le Pitch a 120 BPM
-- Tu baisses les basses de la Chanson B a 0%
-- Tu augmentes les aigus de la Chanson B a 100%
-- La foule sent la tension (pas de basses = pas de groove)
+**Transition 1 : Morceau A → Morceau B**
+1. A joue, le public danse (124 BPM, House)
+2. Tu charges B (126 BPM) → tu cales le pitch à 124
+3. Tu coupes les basses de B, tu le lances
+4. Tu écoutes au casque : les beats sont calés
+5. Tu montes le fader de B progressivement
+6. Swap de basses : tu remontes les basses de B, tu coupes celles de A
+7. Tu baisses le fader de A → B joue seul
+8. Transition propre ! Le public n'a rien vu.
 
-Etape 2: Ecoute (5 secondes)
-- Tu ecoutes les deux chansons ensemble dans tes ecouteurs
-- Tu verifies que les rythmes correspondent
-- Tu verifies que l'EQ sonne bien
-- Si c'est parfait, tu passes a l'etape 3
+**Transition 2 : Morceau B → Morceau C**
+Cette fois, tu essaies un style différent :
+1. B joue (124 BPM)
+2. Tu charges C (124 BPM aussi — plus simple !)
+3. Tu veux faire un coup sec cette fois
+4. Tu prépares tout au casque
+5. Au bon moment : tu montes C d'un coup et tu coupes B
+6. BOOM — changement d'énergie ! Le public réagit.
 
-Etape 3: Le Mix (8 secondes)
-- Tu augmentes le volume de la Chanson B (de 0% a 50%)
-- Tu diminues le volume de la Chanson A (de 100% a 50%)
-- Les deux jouent ensemble
-- La foule entend une progression naturelle
-- Tu augmentes progressivement les basses de la Chanson B (de 0% a 100%)
+**Deux transitions, deux styles, un mini-set.** C'est exactement ce que font les pros, en boucle, pendant 1h, 2h, toute la nuit.
 
-Etape 4: Le Coup (2 secondes)
-- Tu coupes completement la Chanson A
-- La Chanson B prend le controle a 100%
-- La foule explose!
+**Ce que tu as accompli en 3 niveaux :**
+- Tu sais préparer tes morceaux et brancher ton setup
+- Tu comprends le BPM et le pitch
+- Tu maîtrises les bases de l'EQ
+- Tu sais faire des transitions de plusieurs styles
 
-Duree Totale: 30 secondes
-
-Ce Qui S'est Passe:
-- 15 secondes: Preparation (tension)
-- 5 secondes: Ecoute (verification)
-- 8 secondes: Mix (transition)
-- 2 secondes: Coup (liberation)
-
-La Realite:
-- Ca parait complique sur le papier
-- En pratique, ca devient naturel apres quelques essais
-- Les meilleurs DJs le font sans y penser
-- C'est comme apprendre a conduire: au debut c'est complique, puis ca devient automatique
-
-Conseils Pratiques:
-1. Pratique d'abord mentalement (visualisation)
-2. Puis pratique avec du materiel (si tu en as)
-3. Enregistre-toi et ecoute
-4. Demande des retours a d'autres DJs
-5. Repete, repete, repete`,
+**Sois fier de toi.** T'es plus un débutant complet — tu es un DJ en formation, et la suite va être encore plus passionnante !`,
       keyTakeaway:
-        "Une transition complete: Preparation -> Ecoute -> Mix -> Coup. 30 secondes pour changer de chanson.",
+        "3 morceaux, 2 transitions, un mini-set complet — tu viens de le faire ! Les bases sont solides, la suite c'est de la pratique et de la créativité. Tu es sur la bonne voie !",
       exercise: {
-        title: "Fais ta premiere transition (mentalement)",
-        description: "Visualise une transition complete du debut a la fin",
+        title: "Ton premier mini-set de 3 morceaux",
+        description:
+          "L'exercice ultime du niveau 3 — enchaîne 3 morceaux avec 2 transitions. Tu peux le faire !",
         steps: [
-          "Choisis deux chansons au meme BPM",
-          "Ecoute la premiere jusqu'a 30 secondes avant la fin",
-          "Imagine que tu mets la deuxieme dans l'autre platine",
-          "Imagine que tu ajustes le Pitch",
-          "Imagine que tu baisses les basses de la deuxieme",
-          "Imagine que tu augmentes les aigus",
-          "Imagine que tu ecoutes les deux ensemble",
-          "Imagine que tu les mixes (volumes qui changent)",
-          "Imagine que tu augmentes les basses de la deuxieme",
-          "Imagine que tu coupes la premiere",
-          "Repete jusqu'a ce que ca te semble naturel",
+          "Prépare 3 morceaux au BPM proche dans une playlist dédiée.",
+          "Lance le morceau A. Laisse-le jouer 1 minute pour t'installer dans le groove.",
+          "Fais ta **transition 1** (A → B) en style doux : swap de basses, 20-30 secondes.",
+          "Laisse B jouer un peu. Profite !",
+          "Fais ta **transition 2** (B → C) en style coup sec : rapide, efficace, punchy.",
+          "C joue seul. Ton mini-set est terminé !",
+          "**BONUS** : enregistre-toi avec Rekordbox (ou ton téléphone) et réécoute. Note ce qui sonne bien et ce que tu voudrais améliorer.",
         ],
-        estimatedTime: "10 minutes",
+        estimatedTime: "12 minutes",
       },
       tips: [
-        "La premiere transition est la plus difficile",
-        "Apres ca, ca devient de plus en plus facile",
-        "Les meilleurs DJs font des transitions sans y penser",
+        "Ta première mini-session sera pas parfaite — et c'est le but ! Chaque essai te rapproche du mix propre.",
+        "Enregistrer et réécouter, c'est le secret n°1 de la progression. Tous les grands DJs font ça.",
+        "Tu as maintenant les fondations. À partir du niveau 4, on entre dans les techniques créatives — ça va être incroyable !",
       ],
     },
   ],
@@ -1779,7 +1762,7 @@ const courseModulesFromLevel2: CourseModule[] = [
   {
     level: 6,
     title: "Techniques Avancées: Loops, FX et Contrôle d'Énergie",
-    description: "Passer des transitions propres à des transitions créatives sans perdre le groove.",
+    description: "Tes transitions sont propres — maintenant on va les rendre créatives, sans jamais perdre le groove.",
     userLevels: ["beginner", "intermediate", "advanced"],
     totalSlides: 3,
     estimatedDuration: "35 minutes",
@@ -1789,27 +1772,27 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Loops utiles vs loops décoratives",
         subtitle: "Prolonger une phrase musicale sans fatiguer le dancefloor",
         videoUrl: "https://www.youtube.com/embed/Es95BK3pluQ",
-        videoDescription: "Utiliser les loops comme outil musical, pas comme cache-misère.",
+        videoDescription: "On t'apprend à utiliser les loops comme un outil musical précis, pas comme un cache-misère.",
         content:
-          "Un loop sert à sécuriser une entrée, corriger un timing de phrase ou construire une montée. S'il dure trop longtemps, il retire l'émotion. Objectif pro: loop court, intention claire, sortie propre.",
+          "Un loop, c'est un outil puissant — mais attention, c'est pas un bouton magique. Tu l'utilises pour sécuriser une entrée, corriger un timing de phrase ou construire une montée. Par contre, si tu le laisses tourner trop longtemps, il vide le morceau de son émotion. La règle : loop court, intention claire, et sortie propre. Dès que le loop a rempli son rôle, tu le relâches. C'est ça, le geste pro.",
         keyTakeaway:
-          "Le loop doit résoudre un problème précis de phrase, puis disparaître avant la lassitude.",
+          "Un bon loop résout un problème précis, puis disparaît. Si tu le sens traîner, c'est qu'il est déjà trop long.",
         exercise: {
           title: "Loop 4/8 temps en situation réelle",
-          description: "Comparer la sensation d'un loop court vs un loop trop long.",
+          description: "Ressens la différence entre un loop utile et un loop qui fatigue.",
           steps: [
             "Choisis deux morceaux au BPM proche avec des intros différentes.",
             "Sur la piste A, active un loop 4 temps en fin de phrase.",
-            "Lance B, aligne au casque, puis fais entrer B progressivement.",
-            "Relâche le loop au début de la phrase suivante.",
-            "Refais l'exercice avec loop 8 temps, compare l'impact.",
+            "Lance B, aligne au casque, fais entrer B progressivement.",
+            "Relâche le loop pile au début de la phrase suivante — sens le timing.",
+            "Refais avec un loop 8 temps et compare : lequel sonne mieux ?",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Prépare ta sortie de loop avant même d'activer le loop.",
-          "Ne masque pas un mauvais beatmatch avec un loop.",
-          "Filme-toi: un loop trop long se voit dans ta gestuelle et s'entend vite.",
+          "Prépare ta sortie de loop avant même de l'activer — anticipe toujours.",
+          "Un loop ne remplace jamais un bon beatmatch, ne triche pas avec.",
+          "Filme-toi : un loop trop long, ça se voit dans ta gestuelle et ça s'entend vite.",
         ],
       },
       {
@@ -1817,26 +1800,26 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "FX: créer de la tension sans brouiller le mix",
         subtitle: "Filter, echo, reverb avec logique de timing",
         videoUrl: "https://www.youtube.com/embed/j9Ky8zpsqvY",
-        videoDescription: "Comment utiliser les effets pour servir la narration du set.",
+        videoDescription: "Découvre comment placer tes effets pour servir la narration de ton set, pas pour frimer.",
         content:
-          "Un bon FX prépare un moment puis laisse la musique respirer. Les erreurs classiques: trop de wet, effets empilés, et déclenchement hors phrase. En club, la clarté gagne toujours contre la démonstration.",
+          "Les effets, c'est comme les épices en cuisine : un soupçon au bon moment, ça sublime tout. Trop, et tu gâches le plat. Un bon FX prépare un moment, crée une tension, puis laisse la musique respirer. Les erreurs classiques ? Trop de wet, des effets empilés les uns sur les autres, et des déclenchements hors phrase. En club, retiens ça : la clarté gagne toujours contre la démonstration technique.",
         keyTakeaway:
-          "Un seul effet bien timé vaut mieux que trois effets mal calibrés.",
+          "Un seul effet bien placé au bon moment vaut mieux que trois effets mal calibrés. La simplicité, c'est la classe.",
         exercise: {
-          title: "Routine '1 effet max'",
-          description: "Construire un réflexe propre avant d'ajouter de la complexité.",
+          title: "Routine « 1 effet max »",
+          description: "Construis un réflexe propre avant d'ajouter de la complexité.",
           steps: [
-            "Fais une transition complète sans effet.",
-            "Refais la même transition avec un filtre léger uniquement.",
-            "Troisième passage: ajoute un echo court en sortie de piste A.",
-            "Écoute les trois versions et choisis la plus lisible.",
+            "Fais une transition complète sans aucun effet — concentre-toi sur la propreté.",
+            "Refais la même transition avec juste un filtre léger.",
+            "Troisième passage : ajoute un echo court en sortie de piste A.",
+            "Réécoute les trois versions et choisis la plus lisible — c'est souvent la plus simple.",
           ],
           estimatedTime: "10 minutes",
         },
         tips: [
-          "Si tu entends l'effet plus fort que la musicalité, baisse le wet.",
-          "Déclenche l'effet sur des repères de phrase (8/16/32).",
-          "Garde un 'dry reset' mental: revenir à zéro est une compétence pro.",
+          "Si tu entends l'effet plus que la musique, baisse le wet immédiatement.",
+          "Déclenche tes effets sur des repères de phrase (8, 16, 32 temps) — jamais au hasard.",
+          "Garde toujours le réflexe du « dry reset » : savoir revenir à zéro, c'est une compétence pro.",
         ],
       },
       {
@@ -1844,26 +1827,26 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Transition créative complète",
         subtitle: "Loop + EQ + FX + sortie propre",
         videoUrl: "https://www.youtube.com/embed/TStRW1KpBe4",
-        videoDescription: "Assembler les outils avancés dans une transition maîtrisée.",
+        videoDescription: "On assemble tous les outils avancés dans une transition maîtrisée de A à Z.",
         content:
-          "La vraie compétence avancée, c'est l'enchaînement: préparer, tensionner, relâcher. Tu dois pouvoir exécuter ce pattern sans paniquer, même quand une piste réagit différemment en cabine.",
+          "Voilà où ça devient vraiment excitant : combiner tous tes outils dans une seule transition. Le pattern, c'est préparer → tensionner → relâcher. Loop, EQ, FX — tout s'enchaîne avec intention. Et la vraie compétence, c'est d'exécuter ça proprement même quand une piste réagit différemment de ce que t'avais prévu. Pas de panique, juste du contrôle et de l'adaptation.",
         keyTakeaway:
-          "Créativité = contrôle + intention + capacité à revenir au simple instantanément.",
+          "Créativité = contrôle + intention + capacité à revenir au simple instantanément. C'est ça, le vrai niveau avancé.",
         exercise: {
-          title: "Scenario cabine: 2 transitions d'affilée",
-          description: "Simuler la pression d'un enchaînement en public.",
+          title: "Scénario cabine : 2 transitions d'affilée",
+          description: "Simule la pression d'un enchaînement en public — c'est là que tu grandis.",
           steps: [
-            "Transition 1: loop court + swap de basses + sortie nette.",
-            "Transition 2: filtre + echo de sortie sans loop.",
-            "Enregistre les deux transitions d'un seul tenant.",
-            "Note où tu perds la maîtrise, puis simplifie cette étape.",
+            "Transition 1 : loop court + swap de basses + sortie nette.",
+            "Transition 2 : filtre + echo de sortie, sans loop cette fois.",
+            "Enregistre les deux transitions d'un seul tenant, sans pause.",
+            "Réécoute et note où tu perds la maîtrise — puis simplifie cette étape.",
           ],
           estimatedTime: "13 minutes",
         },
         tips: [
-          "Le public retient l'énergie, pas la complexité technique.",
-          "Prévois toujours une version simplifiée de ta transition.",
-          "Un bon DJ sait annuler un effet au bon moment.",
+          "Le public retient l'énergie que tu crées, pas la complexité technique derrière.",
+          "Prévois toujours une version simplifiée de ta transition — c'est ton filet de sécurité.",
+          "Un bon DJ sait annuler un effet au bon moment, c'est aussi important que de le lancer.",
         ],
       },
     ],
@@ -1871,7 +1854,7 @@ const courseModulesFromLevel2: CourseModule[] = [
   {
     level: 7,
     title: "Lire la Foule",
-    description: "Prendre des décisions rapides selon l'état réel de la piste.",
+    description: "Apprends à sentir l'énergie de la piste et à prendre les bonnes décisions au bon moment.",
     userLevels: ["beginner", "intermediate", "advanced"],
     totalSlides: 3,
     estimatedDuration: "30 minutes",
@@ -1881,25 +1864,25 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Signaux faibles de la foule",
         subtitle: "Observer avant que la baisse d'énergie devienne visible",
         videoUrl: "https://www.youtube.com/embed/ycC2sHErdis",
-        videoDescription: "Identifier les indicateurs de fatigue, de pic et de relance.",
+        videoDescription: "Apprends à repérer les signes de fatigue, de pic et de relance avant qu'il ne soit trop tard.",
         content:
-          "Un DJ pro anticipe: micro-décrochages, zones qui se vident, énergie qui plafonne. Tu ne réagis pas à la catastrophe, tu ajustes avant.",
+          "Un DJ pro ne réagit pas aux problèmes — il les voit venir. Les micro-décrochages, les zones qui se vident doucement, l'énergie qui plafonne… tout ça, ce sont des signaux faibles que tu apprends à lire avant que ça devienne visible. Ton job, c'est d'ajuster le tir en amont, pas d'éteindre des incendies.",
         keyTakeaway:
-          "Lire la foule, c'est diagnostiquer tôt puis corriger en 1 à 2 morceaux max.",
+          "Lire la foule, c'est anticiper. Si tu corriges en 1 à 2 morceaux, personne ne remarque le creux — et ça, c'est du niveau pro.",
         exercise: {
           title: "Scan foule toutes les 60 secondes",
-          description: "Créer une boucle d'observation active pendant ton set.",
+          description: "Crée-toi une boucle d'observation active pendant que tu mixes.",
           steps: [
-            "Observe 3 indicateurs: densité de piste, réactions drops, mouvement bar/piste.",
-            "Évalue l'énergie: monte, stable, baisse.",
-            "Choisis l'intention du prochain morceau (relancer, stabiliser, respirer).",
+            "Observe 3 trucs : combien de gens sur la piste, les réactions aux drops, le flux bar/piste.",
+            "Évalue en un mot : l'énergie monte, stagne ou baisse ?",
+            "Décide l'intention de ton prochain morceau : relancer, stabiliser ou faire respirer.",
           ],
           estimatedTime: "8 minutes",
         },
         tips: [
-          "Ne confonds pas foule bruyante et foule engagée.",
-          "Une relance ratée vaut moins cher qu'une inertie prolongée.",
-          "Prépare des pistes de secours dans 2 directions d'énergie.",
+          "Une foule bruyante n'est pas forcément une foule engagée — observe les corps, pas le bruit.",
+          "Tenter une relance même imparfaite vaut mieux que de laisser l'inertie s'installer.",
+          "Aie toujours 2-3 morceaux de secours prêts dans des directions d'énergie différentes.",
         ],
       },
       {
@@ -1907,25 +1890,25 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Décision rapide sous pression",
         subtitle: "Choisir le bon prochain morceau en moins de 10 secondes",
         videoUrl: "https://www.youtube.com/embed/nQKuZyD0Y2s",
-        videoDescription: "Cadre décisionnel simple pour les moments tendus.",
+        videoDescription: "On te donne un cadre décisionnel simple pour les moments où ça chauffe en cabine.",
         content:
-          "Quand la cabine chauffe, tu as besoin d'un cadre: garder, pousser, ou pivoter. L'erreur n'est pas de changer, l'erreur est d'hésiter trop longtemps.",
+          "Quand ça chauffe en cabine et que tu dois choisir ton prochain morceau en quelques secondes, tu as besoin d'un cadre simple : est-ce que je garde le cap, je pousse l'énergie, ou je pivote vers autre chose ? L'erreur, c'est jamais de changer de direction — c'est d'hésiter trop longtemps. Mieux vaut une décision imparfaite que pas de décision du tout.",
         keyTakeaway:
-          "Un framework de décision simple réduit le stress et améliore la constance.",
+          "Garder, pousser ou pivoter — quand tu as un cadre simple en tête, le stress baisse et ta constance monte.",
         exercise: {
           title: "Jeu des 3 options",
-          description: "Prendre une décision rapide sur des contextes différents.",
+          description: "Entraîne-toi à décider vite dans des contextes variés.",
           steps: [
-            "Prépare 3 contextes: foule froide, foule stable, foule en pic.",
-            "Pour chaque contexte, choisis en 10 secondes: garder/pousser/pivoter.",
-            "Explique en une phrase ton choix puis exécute un enchaînement.",
+            "Prépare 3 scénarios : foule froide, foule stable, foule en pic.",
+            "Pour chaque scénario, décide en 10 secondes : garder, pousser ou pivoter.",
+            "Explique ton choix en une phrase, puis exécute l'enchaînement sur ta table.",
           ],
           estimatedTime: "10 minutes",
         },
         tips: [
-          "La mauvaise décision rapide vaut souvent mieux qu'aucune décision.",
-          "Aie des 'morceaux outils' pour chaque scénario.",
-          "Si tu doutes, stabilise avant de tenter un move risqué.",
+          "Une mauvaise décision rapide vaut presque toujours mieux qu'aucune décision.",
+          "Identifie tes « morceaux outils » — ceux qui marchent à coup sûr dans chaque scénario.",
+          "Quand tu doutes, stabilise d'abord — puis tente un move plus risqué quand tu te sens ancré.",
         ],
       },
       {
@@ -1933,25 +1916,25 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Gestion d'erreur en live",
         subtitle: "Rattraper sans panique et garder la piste",
         videoUrl: "https://www.youtube.com/embed/7Wtbc-1y1zc",
-        videoDescription: "Techniques de recovery lorsque la transition n'est pas parfaite.",
+        videoDescription: "Comment récupérer proprement quand une transition ne se passe pas comme prévu.",
         content:
-          "Même les pros ratent des transitions. La différence, c'est la récupération immédiate: simplifier, recentrer le groove, puis relancer.",
+          "Soyons honnêtes : même les meilleurs DJs au monde ratent des transitions. Ça arrive. Ce qui fait la différence entre un pro et un amateur, c'est la récupération. Simplifier immédiatement, recentrer le groove, relancer proprement. Personne ne te juge sur l'erreur — on te juge sur ta capacité à rebondir.",
         keyTakeaway:
-          "Tu n'es pas jugé sur l'erreur, mais sur la vitesse et la qualité de récupération.",
+          "L'erreur fait partie du jeu. Ce qui compte, c'est la vitesse et l'élégance de ta récupération — c'est ça qui impressionne.",
         exercise: {
           title: "Recovery drill",
-          description: "Transformer une transition ratée en relance propre.",
+          description: "Apprends à transformer une transition ratée en relance propre.",
           steps: [
-            "Simule volontairement un décalage léger.",
-            "Coupe la complexité: reviens à EQ simple et timing clair.",
-            "Relance avec un morceau sûr en moins de 20 secondes.",
+            "Simule volontairement un décalage léger entre tes deux pistes.",
+            "Coupe la complexité : reviens à un EQ simple et un timing clair.",
+            "Relance avec un morceau sûr en moins de 20 secondes — chronomètre-toi.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Respiration courte avant action: 2 secondes gagnent un set.",
-          "Ton morceau de secours doit être prêt et repéré.",
-          "Simplifier n'est pas reculer: c'est performer.",
+          "2 secondes de respiration avant d'agir peuvent sauver tout un set — prends ce temps.",
+          "Ton morceau de secours doit être prêt et repéré avant même que le problème arrive.",
+          "Simplifier n'est pas reculer — c'est performer intelligemment.",
         ],
       },
     ],
@@ -1959,7 +1942,7 @@ const courseModulesFromLevel2: CourseModule[] = [
   {
     level: 8,
     title: "Construction de Set",
-    description: "Designer un set de 45-60 minutes qui tient du début à la fin.",
+    description: "Apprends à construire un set de 45-60 minutes qui tient de la première à la dernière note.",
     userLevels: ["beginner", "intermediate", "advanced"],
     totalSlides: 3,
     estimatedDuration: "35 minutes",
@@ -1969,24 +1952,24 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Architecture macro du set",
         subtitle: "Intro, montée, pic, respiration, sortie",
         videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
-        videoDescription: "Construire une trajectoire d'énergie lisible pour la foule.",
+        videoDescription: "On t'apprend à construire une trajectoire d'énergie que ta foule va ressentir du début à la fin.",
         content:
-          "Un bon set raconte une progression. Tu dois savoir où tu es à chaque instant: installation, montée, climax, respiration, fermeture.",
-        keyTakeaway: "Un set réussi suit une trajectoire émotionnelle lisible.",
+          "Un bon set, c'est pas une playlist. C'est une histoire avec un début, un milieu et une fin. Tu dois savoir exactement où tu en es à chaque instant : est-ce que j'installe l'ambiance ? Je monte ? Je suis au sommet ? Je fais respirer ? Je conclus ? Quand tu penses ton set comme un arc narratif, tout change.",
+        keyTakeaway: "Un set réussi, c'est une trajectoire émotionnelle que la foule ressent sans même y penser. Pense en arc narratif.",
         exercise: {
           title: "Blueprint 45 minutes",
-          description: "Écrire une structure complète avant de mixer.",
+          description: "Écris ta structure complète avant de toucher aux platines.",
           steps: [
-            "Définis 5 blocs d'énergie avec durée cible.",
-            "Attribue 2-3 morceaux clés par bloc.",
-            "Prépare une alternative par bloc si la foule change.",
+            "Définis 5 blocs d'énergie avec une durée cible pour chacun.",
+            "Attribue 2 à 3 morceaux clés par bloc — tes piliers.",
+            "Pour chaque bloc, prépare une alternative au cas où la foule réagit différemment.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Écris ton plan, puis accepte de le modifier en live.",
-          "Les transitions entre blocs valent plus que les blocs eux-mêmes.",
-          "Prévois un atterrissage propre en fin de set.",
+          "Écris ton plan, puis accepte de le modifier en live — la flexibilité, c'est la force.",
+          "Les transitions entre tes blocs d'énergie valent plus que les blocs eux-mêmes.",
+          "Prévois toujours un atterrissage propre — la fin du set, ça compte autant que le pic.",
         ],
       },
       {
@@ -1994,25 +1977,25 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Micro-structure: phrases et points de bascule",
         subtitle: "Sécuriser les passages critiques entre morceaux",
         videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
-        videoDescription: "Passer d'un plan global aux décisions de transition concrètes.",
+        videoDescription: "On passe du plan global aux décisions de transition concrètes — là où tout se joue.",
         content:
-          "Chaque bloc dépend de transitions charnières. Identifie les 4 transitions les plus critiques de ton set et prépare-les comme des scènes.",
+          "Dans ton set, y'a 4 ou 5 transitions qui font ou défont toute l'expérience. Ce sont tes moments charnières — les passages où l'énergie bascule. Identifie-les à l'avance et prépare-les comme des scènes de film. Point d'entrée, action EQ/FX, point de sortie. Quand ces transitions-là sont solides, tout le reste coule.",
         keyTakeaway:
-          "Un set solide n'est pas une playlist: c'est une suite de transitions-clés maîtrisées.",
+          "Un set solide, c'est pas une playlist qui défile — c'est une suite de transitions-clés que tu maîtrises sur le bout des doigts.",
         exercise: {
           title: "4 transitions charnières",
-          description: "Préparer les passages qui déterminent la qualité du set.",
+          description: "Prépare les passages qui vont déterminer la qualité de ton set.",
           steps: [
-            "Choisis 4 transitions à fort enjeu énergétique.",
-            "Pour chaque transition: note point d'entrée, action EQ/FX, point de sortie.",
-            "Répète ces 4 transitions en boucle.",
+            "Choisis les 4 transitions à plus fort enjeu énergétique dans ton set.",
+            "Pour chacune : note le point d'entrée, l'action EQ/FX, et le point de sortie.",
+            "Répète ces 4 transitions en boucle jusqu'à ce qu'elles soient solides.",
           ],
           estimatedTime: "11 minutes",
         },
         tips: [
-          "Une transition charnière doit exister en version simple et version créative.",
-          "Évite de changer trop de paramètres à la fois.",
-          "La constance prime sur l'originalité forcée.",
+          "Chaque transition charnière doit exister en version simple ET en version créative — choisis selon le moment.",
+          "Évite de changer trop de paramètres à la fois — la clarté avant la complexité.",
+          "La constance prime toujours sur l'originalité forcée.",
         ],
       },
       {
@@ -2020,25 +2003,25 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Préparer un set exportable cabine",
         subtitle: "Passer de l'entraînement maison au contexte club",
         videoUrl: "https://www.youtube.com/embed/a3m8l4q3Pq8",
-        videoDescription: "Organisation pratique de playlists, clés USB et plans de secours.",
+        videoDescription: "Organisation pratique de tes playlists, clés USB et plans de secours pour le jour J.",
         content:
-          "En club, tu dois être prêt techniquement: exports, backups, versions radio/extended, et plan B en cas de matériel différent.",
+          "Le jour J arrive : tu joues en club. Et là, c'est plus le moment de bricoler. Tes fichiers doivent être prêts, tes clés USB vérifiées, tes backups en place. Versions radio, versions extended, un plan B si le matos est différent de ce que t'attendais. Le professionnalisme, il se voit avant même que tu lances ton premier morceau.",
         keyTakeaway:
-          "Le professionnalisme se voit avant le premier morceau: préparation technique irréprochable.",
+          "Le professionnalisme se voit avant le premier morceau. Une préparation technique irréprochable, c'est ce qui te met en confiance.",
         exercise: {
           title: "Checklist pré-cabine",
-          description: "Valider ton set comme si tu jouais demain soir.",
+          description: "Valide ton set comme si tu jouais demain soir — pour de vrai.",
           steps: [
-            "Prépare une clé principale et une clé backup.",
-            "Vérifie l'analyse BPM/grille des morceaux critiques.",
-            "Crée un dossier 'urgence' de 10 morceaux sûrs.",
+            "Prépare une clé USB principale et une clé backup identique.",
+            "Vérifie l'analyse BPM et les grilles de tes morceaux critiques.",
+            "Crée un dossier « urgence » avec 10 morceaux sûrs qui marchent à coup sûr.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Teste ta clé sur un autre poste quand possible.",
-          "Nomme clairement tes playlists par énergie.",
-          "Préparer le pire te permet de performer au mieux.",
+          "Teste ta clé USB sur un autre poste dès que possible — les mauvaises surprises arrivent vite.",
+          "Nomme clairement tes playlists par niveau d'énergie — tu te remercieras en cabine.",
+          "Préparer le pire, c'est ce qui te permet de performer au mieux.",
         ],
       },
     ],
@@ -2046,7 +2029,7 @@ const courseModulesFromLevel2: CourseModule[] = [
   {
     level: 9,
     title: "Performance Club",
-    description: "Exécuter un set fiable sous pression réelle de cabine.",
+    description: "Le moment de vérité — apprends à exécuter un set fiable sous la pression réelle de la cabine.",
     userLevels: ["beginner", "intermediate", "advanced"],
     totalSlides: 3,
     estimatedDuration: "35 minutes",
@@ -2056,25 +2039,25 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Routine mentale pré-live",
         subtitle: "Rester stable quand l'adrénaline monte",
         videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
-        videoDescription: "Habitudes de préparation pour exécuter proprement en public.",
+        videoDescription: "Découvre les habitudes de préparation qui te permettent d'exécuter proprement devant du public.",
         content:
-          "Le stress n'est pas un bug: c'est un signal. Tu dois ritualiser ton entrée en set pour conserver lucidité, écoute et timing.",
+          "Le stress avant de jouer, c'est normal — et c'est même un bon signe. Ça veut dire que ça compte pour toi. Mais tu dois apprendre à canaliser cette énergie. Crée-toi un rituel d'entrée en set : quelques respirations, un check technique rapide, une visualisation de tes premières transitions. Quand tu ritualises ta préparation, tu gardes ta lucidité, ton écoute et ton timing.",
         keyTakeaway:
-          "Une routine mentale courte évite les décisions impulsives en cabine.",
+          "Un petit rituel de 5 minutes avant de jouer, c'est ce qui évite les décisions impulsives en cabine. Le calme, ça se prépare.",
         exercise: {
           title: "Routine 5 minutes",
-          description: "Installer ton état de performance avant d'appuyer sur Play.",
+          description: "Installe ton état de performance avant d'appuyer sur Play.",
           steps: [
-            "Respiration contrôlée 60 secondes.",
-            "Check technique: gains, casque, monitor, piste d'ouverture.",
-            "Visualise tes 2 premières transitions.",
+            "Respiration contrôlée pendant 60 secondes — calme le corps, calme l'esprit.",
+            "Check technique rapide : gains, casque, monitor, piste d'ouverture prête.",
+            "Visualise tes 2 premières transitions dans ta tête — tu les connais, ça va bien se passer.",
           ],
           estimatedTime: "6 minutes",
         },
         tips: [
-          "Ton intro doit être la transition la plus sûre de ton set.",
-          "Prépare un script mental en cas d'imprévu.",
-          "Confort = performance: position, écoute, ergonomie.",
+          "Ton intro doit être la transition la plus sûre de tout ton set — pas d'expérimentation au démarrage.",
+          "Prépare un script mental en cas d'imprévu — savoir quoi faire quand ça déraille te libère l'esprit.",
+          "Confort = performance : vérifie ta position, ton écoute, ton ergonomie avant de commencer.",
         ],
       },
       {
@@ -2082,51 +2065,51 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Gestion du système son",
         subtitle: "Adapter ton mix selon la salle et le retour cabine",
         videoUrl: "https://www.youtube.com/embed/8IF_HGw7IFk",
-        videoDescription: "Ajuster son comportement selon acoustique et monitoring.",
+        videoDescription: "Apprends à ajuster ton mix selon l'acoustique réelle de la salle et le monitoring cabine.",
         content:
-          "La même transition sonne différemment selon la salle. Tu dois calibrer tes décisions avec le retour cabine, pas seulement avec le casque.",
+          "Petit secret que personne ne te dit : la même transition sonne complètement différemment selon la salle. Ce qui marchait parfaitement chez toi peut sonner bizarre sur un gros système. C'est pour ça que tu dois apprendre à mixer avec le retour cabine, pas seulement avec ton casque. Écoute la salle, calibre tes basses, ajuste tes gains. S'adapter au système, c'est ça le niveau club.",
         keyTakeaway:
-          "Le DJ pro adapte son mix au système réel, pas à sa seule habitude studio.",
+          "Le DJ pro adapte son mix au système réel de la salle, pas à ses habitudes studio. C'est ça qui fait la différence le jour J.",
         exercise: {
           title: "Calibration en 3 morceaux",
-          description: "Ajuster ton style selon la réponse du système.",
+          description: "Ajuste ton style selon la réponse réelle du système son.",
           steps: [
-            "Morceau 1: observer basses et clarté globale.",
-            "Morceau 2: tester une transition simple et écouter la façade.",
-            "Morceau 3: corriger EQ/gain en fonction du rendu réel.",
+            "Morceau 1 : observe comment les basses et la clarté globale sonnent dans la salle.",
+            "Morceau 2 : teste une transition simple et écoute le rendu sur la façade, pas que dans ton casque.",
+            "Morceau 3 : corrige tes EQ et tes gains en fonction de ce que tu entends vraiment.",
           ],
           estimatedTime: "9 minutes",
         },
         tips: [
-          "Si la salle est boomy, simplifie d'abord les basses.",
-          "Garde de la marge de headroom.",
-          "N'augmente jamais le volume pour corriger un problème de clarté.",
+          "Si la salle sonne « boomy », simplifie d'abord les basses — c'est presque toujours le problème.",
+          "Garde de la marge de headroom — ne pousse jamais les gains dans le rouge.",
+          "N'augmente jamais le volume pour corriger un problème de clarté — ça empire les choses.",
         ],
       },
       {
         slideNumber: 3,
         title: "Gestion d'incidents",
-        subtitle: "Quand un morceau plante, un cable bouge, ou la foule décroche",
+        subtitle: "Quand un morceau plante, un câble bouge, ou la foule décroche",
         videoUrl: "https://www.youtube.com/embed/kHll7t87xik",
-        videoDescription: "Réagir vite sans casser l'expérience de la piste.",
+        videoDescription: "Apprends à réagir vite aux imprévus sans casser l'expérience de la piste.",
         content:
-          "Le niveau club, c'est la continuité. Tu dois garder le set vivant même si une piste rate, un export bug, ou une décision tarde.",
+          "En club, des imprévus, il y en aura. Une piste qui plante, un export foireux, un câble qui bouge, une décision qui tarde… Le vrai niveau club, c'est la continuité. Quoi qu'il arrive, tu gardes le set vivant. La musique ne s'arrête pas. La foule ne doit jamais sentir que tu paniques. Calme, solution, relance.",
         keyTakeaway:
-          "La robustesse opérationnelle distingue un DJ performant d'un DJ fragile.",
+          "Ce qui distingue un DJ solide d'un DJ fragile, c'est sa robustesse face aux imprévus. Le calme est ta meilleure arme.",
         exercise: {
           title: "Drill incident",
-          description: "Simuler 3 imprévus et garder la piste active.",
+          description: "Simule 3 imprévus et entraîne-toi à garder la piste active.",
           steps: [
-            "Incident 1: piste mal analysée -> correction express.",
-            "Incident 2: transition ratée -> morceau secours immédiat.",
-            "Incident 3: énergie qui chute -> relance en 2 titres max.",
+            "Incident 1 : piste mal analysée → correction express sans couper la musique.",
+            "Incident 2 : transition ratée → morceau secours immédiat, pas de panique.",
+            "Incident 3 : énergie qui chute → relance en 2 titres max, retrouve le groove.",
           ],
           estimatedTime: "12 minutes",
         },
         tips: [
-          "Aie toujours un dossier de titres anti-panique.",
-          "Raccourcis le raisonnement: diagnostiquer -> agir -> stabiliser.",
-          "Le calme est audible dans ton mix.",
+          "Aie toujours un dossier « anti-panique » avec des titres qui marchent à tous les coups.",
+          "Raccourcis ton raisonnement : diagnostiquer → agir → stabiliser. Pas de temps pour philosopher.",
+          "Ton calme est audible dans ton mix — la foule le sent quand tu es serein.",
         ],
       },
     ],
@@ -2134,7 +2117,7 @@ const courseModulesFromLevel2: CourseModule[] = [
   {
     level: 10,
     title: "Maîtrise Complète",
-    description: "Passer de bon DJ à DJ identifiable, fiable et bookable.",
+    description: "Tu sais mixer proprement — maintenant, deviens un DJ identifiable, fiable et bookable.",
     userLevels: ["beginner", "intermediate", "advanced"],
     totalSlides: 3,
     estimatedDuration: "40 minutes",
@@ -2144,25 +2127,25 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Construire une identité artistique",
         subtitle: "Ton son, ton énergie, ton positionnement",
         videoUrl: "https://www.youtube.com/embed/u_ny-pIfNe8",
-        videoDescription: "Transformer les compétences techniques en identité reconnaissable.",
+        videoDescription: "On t'aide à transformer tes compétences techniques en une identité reconnaissable.",
         content:
-          "À ce stade, ton objectif n'est plus seulement de mixer propre. Tu dois être reconnaissable: sélection, transitions, gestion d'énergie et posture.",
+          "Tu sais mixer propre. Tu sais lire une foule. Tu sais structurer un set. Maintenant, la question c'est : qui es-tu en tant que DJ ? Ton objectif à ce stade, c'est d'être reconnaissable. Ta sélection musicale, ton style de transitions, ta gestion d'énergie, ta posture derrière les platines — tout ça, c'est ton identité artistique. C'est ce qui fait que les gens reviennent pour TOI, pas juste pour la musique.",
         keyTakeaway:
-          "La maîtrise, c'est la cohérence répétée: tu peux livrer ton niveau chaque semaine.",
+          "La maîtrise, c'est la cohérence répétée. Quand tu peux livrer ton niveau chaque semaine, tu deviens un DJ sur lequel on peut compter.",
         exercise: {
           title: "Set signature 20 minutes",
-          description: "Créer un mini-format qui raconte qui tu es.",
+          description: "Crée un mini-format qui raconte qui tu es en tant que DJ.",
           steps: [
-            "Choisis 6 à 8 morceaux reflétant ton univers.",
-            "Écris l'intention de chaque transition en une ligne.",
-            "Enregistre le set et note 3 éléments distinctifs.",
+            "Choisis 6 à 8 morceaux qui reflètent vraiment ton univers musical.",
+            "Écris l'intention de chaque transition en une ligne — pourquoi ce morceau après celui-là ?",
+            "Enregistre le set et note 3 éléments qui te rendent distinctif.",
           ],
           estimatedTime: "15 minutes",
         },
         tips: [
-          "Ta sélection musicale parle avant tes effets.",
-          "Évite de copier un set entier d'un autre DJ.",
-          "Constance de qualité > démonstration ponctuelle.",
+          "Ta sélection musicale parle plus fort que n'importe quel effet — soigne-la.",
+          "Inspire-toi des autres, mais ne copie jamais un set entier — c'est ta voix qui compte.",
+          "La constance de qualité impressionne plus qu'une démonstration ponctuelle de génie.",
         ],
       },
       {
@@ -2170,26 +2153,26 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Capstone: set club 45 minutes",
         subtitle: "Validation finale du parcours Mixy",
         videoUrl: "https://www.youtube.com/embed/-CblGWcr87k",
-        videoDescription: "Mettre en pratique toutes les compétences dans un set complet.",
+        videoDescription: "C'est le moment de mettre en pratique tout ce que tu as appris dans un set complet.",
         content:
-          "Ton capstone valide la progression complète: structure, transitions, lecture de foule simulée, gestion d'imprévus et maîtrise technique.",
+          "C'est le moment de vérité. Ton set final valide tout ce que tu as appris : la structure, les transitions, la lecture de foule, la gestion d'imprévus et la maîtrise technique. Si tu arrives à jouer un set de 45 minutes propre, cohérent et engageant, tu as un niveau opérationnel solide. Tu es prêt à jouer devant des gens. Pour de vrai.",
         keyTakeaway:
-          "Si tu peux exécuter ce set proprement, tu as un niveau opérationnel solide.",
+          "Si tu peux exécuter ce set proprement du début à la fin, bravo — tu as un niveau solide et tu es prêt pour la vraie scène.",
         exercise: {
           title: "Projet final Mixy",
-          description: "Concevoir, jouer et évaluer un set complet.",
+          description: "Conçois, joue et évalue un set complet — c'est ton examen final.",
           steps: [
-            "Prépare un set 45 min avec plan A + plan B.",
-            "Exécute le set en une prise, sans pause.",
-            "Auto-évalue: transitions, énergie, erreurs et recovery.",
-            "Rejoue le set en corrigeant les 3 faiblesses majeures.",
+            "Prépare un set de 45 min avec un plan A et un plan B.",
+            "Joue le set en une seule prise, sans pause — comme en club.",
+            "Auto-évalue honnêtement : transitions, énergie, erreurs et récupérations.",
+            "Rejoue le set en corrigeant tes 3 plus grosses faiblesses.",
           ],
           estimatedTime: "20 minutes",
         },
         tips: [
-          "Le but n'est pas zéro erreur, mais zéro panique.",
-          "Ton set doit rester lisible de bout en bout.",
-          "Archive tes enregistrements pour mesurer ta progression réelle.",
+          "Le but n'est pas zéro erreur — c'est zéro panique. Les erreurs, tu sais les rattraper maintenant.",
+          "Ton set doit rester lisible et cohérent de bout en bout.",
+          "Archive tous tes enregistrements — c'est comme ça que tu mesures ta vraie progression.",
         ],
       },
       {
@@ -2197,25 +2180,25 @@ const courseModulesFromLevel2: CourseModule[] = [
         title: "Après les 10 niveaux: roadmap pro",
         subtitle: "Continuer à progresser sans plateau",
         videoUrl: "https://www.youtube.com/embed/PRPwKxnBmc8",
-        videoDescription: "Plan d'entraînement sur 8 semaines pour consolider le niveau pro.",
+        videoDescription: "On te donne un plan d'entraînement sur 8 semaines pour consolider ton niveau pro.",
         content:
-          "Finir le niveau 10 n'est pas la fin. Tu passes en cycle d'amélioration continue: sets réguliers, analyse d'enregistrements, objectifs mensuels, exposition en public.",
+          "Félicitations — tu as terminé les 10 niveaux. Mais soyons honnêtes : c'est pas la fin, c'est le début. À partir de maintenant, tu passes en mode amélioration continue. Des sets réguliers, l'analyse de tes enregistrements, des objectifs mensuels clairs, et surtout — jouer devant des gens dès que tu peux. Un DJ pro, c'est quelqu'un qui continue à s'entraîner avec méthode, même après la formation.",
         keyTakeaway:
-          "Un DJ pro continue à s'entraîner avec méthode bien après la formation.",
+          "Tu as les compétences. Maintenant, c'est la discipline et la régularité qui feront la différence. Continue à t'entraîner, continue à jouer, continue à progresser.",
         exercise: {
           title: "Plan 8 semaines",
-          description: "Construire une routine durable de progression.",
+          description: "Construis une routine durable pour continuer à progresser après la formation.",
           steps: [
-            "Fixe 2 sessions techniques + 1 session set complet par semaine.",
-            "Définis un KPI: transitions propres, stabilité BPM, quality score.",
-            "Publie 1 extrait/semaine et collecte des retours ciblés.",
+            "Fixe 2 sessions techniques + 1 session set complet par semaine — c'est ton minimum.",
+            "Définis un objectif mesurable : transitions propres, stabilité BPM, cohérence du set.",
+            "Publie 1 extrait par semaine et collecte des retours honnêtes de gens qui s'y connaissent.",
           ],
           estimatedTime: "15 minutes",
         },
         tips: [
-          "Mesure ce que tu veux améliorer, sinon tu stagnes.",
-          "Crée un rituel de review après chaque set.",
-          "La progression long terme se joue sur la discipline.",
+          "Si tu ne mesures pas ce que tu veux améliorer, tu vas stagner — sois précis.",
+          "Crée-toi un rituel de review après chaque set — c'est là que tu progresses le plus.",
+          "La progression long terme se joue sur la discipline, pas sur l'inspiration du moment.",
         ],
       },
     ],
@@ -2283,7 +2266,7 @@ export function getAllModules(
     return localizeModules([level1, ...courseModulesFromLevel2], language);
   }
   const accelTier = skillTier === "advanced" ? "advanced" : "intermediate";
-  const accelerated = buildAcceleratedLevels123(track, accelTier);
+  const accelerated = buildAcceleratedLevels123(track, accelTier, language);
   return withStageProgression(localizeModules([...accelerated, ...tailFromLevel4], language));
 }
 

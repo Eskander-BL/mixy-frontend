@@ -110,7 +110,7 @@ export default function CoursePage() {
             <div>
               <h1 className="text-xl md:text-2xl font-bold text-gray-900">{module.title}</h1>
               <p className="text-sm text-gray-600">
-                {isFr ? "Slide" : "Slide"} {currentSlide} {isFr ? "sur" : "of"} {module.totalSlides}
+                {isFr ? "Étape" : "Slide"} {currentSlide} {isFr ? "sur" : "of"} {module.totalSlides}
               </p>
             </div>
             <Button
@@ -149,7 +149,7 @@ export default function CoursePage() {
                 </p>
                 <p className="text-sm text-gray-800 mt-3">
                   <strong>{isFr ? "Progression" : "Progress"}:</strong> {currentSlide} /{" "}
-                  {module.totalSlides} {isFr ? "slides" : "slides"}
+                  {module.totalSlides} {isFr ? "étapes" : "slides"}
                 </p>
               </Card>
 
@@ -318,7 +318,7 @@ export default function CoursePage() {
               className="flex items-center gap-2"
             >
               <ChevronLeft size={18} />
-              {isFr ? "Slide Précédente" : "Previous slide"}
+              {isFr ? "Étape précédente" : "Previous slide"}
             </Button>
 
             {isLastSlide ? (
@@ -334,7 +334,7 @@ export default function CoursePage() {
                 onClick={handleNextSlide}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 flex items-center gap-2"
               >
-                {isFr ? "Slide Suivante" : "Next slide"}
+                {isFr ? "Étape suivante" : "Next slide"}
                 <ChevronRight size={18} />
               </Button>
             )}

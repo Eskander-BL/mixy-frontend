@@ -24,9 +24,15 @@ export function getCourseTrackFromProfile(profile: MixyLearningProfile | null): 
   return "flx4";
 }
 
-export function courseTrackLabelFr(track: CourseTrackId): string {
+export function courseTrackLabel(track: CourseTrackId, language: "fr" | "en" = "fr"): string {
+  if (language === "en") {
+    return track === "flx4" ? "Level 1 — DDJ-FLX4" : "Level 1 — DDJ-FLX3 & XDJ-RX";
+  }
   return track === "flx4" ? "Niveau 1 — DDJ-FLX4" : "Niveau 1 — DDJ-FLX3 & XDJ-RX";
 }
+
+/** @deprecated Use `courseTrackLabel` with a language parameter instead. */
+export const courseTrackLabelFr = (track: CourseTrackId) => courseTrackLabel(track, "fr");
 
 const STORAGE_KEY = "mixyLearningProfile";
 
@@ -94,7 +100,23 @@ export function coerceMixyLearningProfileFromRemote(data: unknown): MixyLearning
   };
 }
 
-export function targetDeckLabelFr(deck: TargetDeck | null): string {
+export function targetDeckLabel(deck: TargetDeck | null, language: "fr" | "en" = "fr"): string {
+  if (language === "en") {
+    switch (deck) {
+      case "flx4":
+        return "DDJ-FLX4";
+      case "flx3":
+        return "DDJ-FLX3";
+      case "xdj_rx":
+        return "XDJ-RX (all-in-one)";
+      case "other":
+        return "Other gear";
+      case "undecided":
+        return "Not decided yet";
+      default:
+        return "—";
+    }
+  }
   switch (deck) {
     case "flx4":
       return "DDJ-FLX4";
@@ -110,6 +132,9 @@ export function targetDeckLabelFr(deck: TargetDeck | null): string {
       return "—";
   }
 }
+
+/** @deprecated Use `targetDeckLabel` with a language parameter instead. */
+export const targetDeckLabelFr = (deck: TargetDeck | null) => targetDeckLabel(deck, "fr");
 
 /** Indicatif France / Europe — toujours vérifier prix promo / occasion chez un revendeur. */
 export const GEAR_PRICE_RANGE_FR: Record<"flx4" | "flx3" | "xdj_rx", string> = {
