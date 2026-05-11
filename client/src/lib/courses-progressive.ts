@@ -873,17 +873,17 @@ function localizeModules(modules: CourseModule[], language: Language): CourseMod
  */
 export const level1ModuleFlx4: CourseModule = {
   level: 1,
-  title: "Les Bases du DJing — parcours DDJ-FLX4",
+  title: "Les fondamentaux du DJ",
   description:
-    "Ta FLX4 a moins de boutons visibles qu’une FLX3 : beaucoup se fait avec Shift et calques. Rekordbox + branchements + BPM avec des exemples calibrés FLX4.",
+    "Prépare ton logiciel, ton contrôleur et tes morceaux pour que tes prochains mix soient beaucoup plus fluides.",
   userLevels: ["beginner"],
   totalSlides: 5,
   estimatedDuration: "40 minutes",
   slides: [
     {
       slideNumber: 1,
-      title: "Rekordbox + DDJ-FLX4 : la bonne base",
-      subtitle: "Modes du logiciel, analyse des morceaux — et l’idée des « boutons cachés » (Shift)",
+      title: "Premiers pas sur Rekordbox",
+      subtitle: "Ton logiciel DJ, ton contrôleur et tes premiers réflexes",
       videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
       videoDescription:
         "Parcours Performance (et repères visuels) dans Rekordbox — idéal avant de brancher la table. Active les sous-titres YouTube si besoin.",
@@ -895,33 +895,27 @@ export const level1ModuleFlx4: CourseModule = {
             "FLX4 : jogs, faders, mixer au centre, pads en dessous. Garde en tête que **Shift** + pad ou bouton ouvre souvent la « 2e couche » (voir le manuel Layer).",
         },
       ],
-      content: `**Ce niveau 1 est le parcours FLX4** — c’est la table que la majorité des abonnés Mixy utilisent : surface **plus simple en apparence**, mais **tout autant puissante** une fois qu’on connaît les **calques (Shift)** et les raccordements Rekordbox.
-
-Même logique générale que sur d’autres contrôleurs Pioneer : **2 decks**, **mixer au centre**, **pads** sous les jogs. La différence avec une FLX3 ou un XDJ-RX, c’est surtout **où** se trouvent les réglages (souvent derrière **Shift** ou dans un sous-menu sur FLX4).
-
-**Deux grands modes dans Rekordbox**
-- **Export** : tu prépares la musique (playlists, grilles de BPM, mémoire de points cue), tu peux exporter vers une clé USB pour des lecteurs CDJ/XDJ en boîte.
-- **Performance** : c'est le **mode DJ** avec la table branchée — deux pistes visibles, waveforms, platines A/B.
-
-**Avant de mixer**
-- Importe tes morceaux dans la **Collection**, crée une **playlist d'entraînement** avec des titres au BPM proche (ex. 124–128).
-- Lance **l'analyse** (BPM / grille) pour que Rekordbox affiche le tempo et les repères sur la waveform.
-- Vérifie que la **grid** (lignes sur les temps forts) suit bien le kick ; corrige si une piste a été mal analysée.
-
-**Côté matériel (vue d'ensemble)**
-- **Decks gauche / droite** : chargent chacun une piste, **jog** pour nudge ou scratch léger selon tes réglages.
-- **Section mixer** : volumes par canal (**channel faders**), **crossfader**, **EQ 3 bandes**, **Merge FX** (ou effets selon firmware) — au début, utilise **un** effet ou filtre à la fois pour entendre clairement.
-- **Pads** : **Hot Cues** pour marquer intros, drops, ponts ; tu gagneras un temps énorme sur les transitions.
-
-**Ressources utiles (manuel officiel & visuels)**
-- DDJ-FLX4 (son, branchements, panneau arrière) : https://www.pioneerdj.com/fr-fr/product/controller/archive/ddj-flx4/black/overview/
-- DDJ-FLX3 : https://www.pioneerdj.com/fr-fr/product/controller/archive/ddj-flx3/black/overview/
-- Télécharge le **mode d'emploi PDF** depuis la fiche « Support » du modèle : repère la page « Connections » et « Part names » pour mémoriser boutons + voyants.
-
-**Théorie + pratique**
-- Théorie courte ici + **vidéo ci-dessus** pour l'écran ; en pratique répète : importer → analyser → charger deck A/B → lire la grille au casque.`,
+      content: `**Bienvenue dans ta première leçon DJ !** Tu vas apprendre à utiliser Rekordbox et découvrir les bases du contrôleur DDJ-FLX4, un des meilleurs setups pour débuter.
+      
+      L’objectif ici : comprendre l’écran, les boutons et les réflexes essentiels pour être à l’aise rapidement. Pas besoin de tout retenir d’un coup : avance tranquillement slide par slide et amuse-toi avec les exercices.
+      
+      **Rekordbox, c’est quoi ?**
+      C’est le logiciel qui fait le lien entre ton ordinateur et ta table. Il affiche tes morceaux, le tempo (BPM), et les formes d’onde pour que tu puisses voir ta musique en plus de l’entendre.
+      
+      **Deux modes à connaître**
+      - **Export** : tu prépares ta musique (playlists, tempo, repères) — c’est ta boîte à outils avant le mix.
+      - **Performance** : c’est le mode DJ, celui où tu branches ta table et tu mixes en direct.
+      
+      **Ta DDJ-FLX4 en bref**
+      Deux platines, un mixer au centre, des pads en dessous. Beaucoup de fonctions passent par la touche **Shift** (une sorte de « 2e couche ») — on les découvrira au fur et à mesure, pas de stress.
+      
+      **Tes premiers réflexes**
+      1. Importe quelques morceaux dans Rekordbox
+      2. Crée une petite playlist d’entraînement (5 titres au tempo proche, ex. 124–128 BPM)
+      3. Lance l’analyse pour que le logiciel détecte le tempo automatiquement
+      4. Charge un morceau sur chaque platine et écoute au casque`,
       keyTakeaway:
-        "Export pour préparer, Performance pour jouer. Analyse toujours tes morceaux et vérifie la grille avant de te fier au tempo à l'écran.",
+        "Export pour préparer, Performance pour mixer. Importe, analyse, écoute au casque — c'est la routine de base de tout DJ.",
       exercise: {
         title: "Préparer 5 morceaux propres dans Rekordbox",
         description: "Même sans table branchée, c'est l'exercice n°1 des DJs Rekordbox",
@@ -1178,17 +1172,17 @@ La Realite:
  */
 export const level1ModuleFlx3Xdj: CourseModule = {
   level: 1,
-  title: "Les Bases du DJing — DDJ-FLX3 & XDJ-RX",
+  title: "Les fondamentaux du DJ",
   description:
-    "Niveau 1 distinct du parcours FLX4 : la FLX3 déploie plus de boutons (Smart CFX, sections pad) ; l’XDJ-RX se pilote comme un tout-en-un USB (Export Rekordbox). Ensuite, la méthode pédagogique est partagée, avec une progression de difficulté et des exercices adaptés au setup.",
+    "Prépare ton logiciel, ton contrôleur et tes morceaux pour que tes prochains mix soient beaucoup plus fluides.",
   userLevels: ["beginner"],
   totalSlides: 5,
   estimatedDuration: "40 minutes",
   slides: [
     {
       slideNumber: 1,
-      title: "Rekordbox + FLX3 / XDJ-RX : la bonne base « club »",
-      subtitle: "Plus de boutons sous les doigts, ou tout-en-un sans PC au plateau",
+      title: "Premiers pas sur Rekordbox",
+      subtitle: "Ton logiciel DJ, ton contrôleur et tes premiers réflexes",
       videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
       videoDescription:
         "Modes Export & Performance dans Rekordbox — indispensable avant de brancher une FLX3, et pour préparer les clés USB d’un XDJ-RX.",
@@ -1200,33 +1194,28 @@ export const level1ModuleFlx3Xdj: CourseModule = {
             "Sur FLX3, beaucoup de fonctions ont un bouton dédié (ex. Smart CFX). Sur XDJ-RX, l’équivalent se règle souvent à l’écran + molettes, comme sur des CDJ.",
         },
       ],
-      content: `**Ce parcours niveau 1 est calibré FLX3 et XDJ-RX** — pas pour la FLX4. L’idée : tu apprends avec **la même disposition « pro »** que sur beaucoup de setups club (plus de contrôles **visibles** qu’une FLX4, moins besoin de tout passer par des couches Shift).
-
-**DDJ-FLX3 (contrôleur + ordinateur)**
-- Beaucoup de **boutons et pads** sont accessibles directement : **Smart CFX**, **Beat FX**, **Hot Cues** — on ira **doucement** sur les effets au début pour entendre chaque mouvement.
-- **Performance** avec Rekordbox : table branchée en USB, deux decks à l’écran comme d’habitude.
-
-**XDJ-RX (tout-en-un)**
-- Tu peux mixer **sans ouvrir le PC sur le plateau** : playlists préparées en **Export** sur une clé USB, chargées sur les lecteurs.
-- L’écran par deck remplace une bonne partie de l’UI « laptop » : BPM, vagues, points cue — pense **CDJ + mixer intégré**.
-
-**Deux grands modes dans Rekordbox (les deux matériels)**
-- **Export** : organisation des morceaux, **grid**, **Hot Cues**, playlists pour clé USB (surtout vitale pour l’XDJ-RX).
-- **Performance** : mode DJ avec **FLX3** branchée — ou préparation mentale des morceaux si tu bosses pour du stand-alone XDJ.
-
-**Avant de mixer**
-- Importe tes morceaux, crée une playlist d'entraînement BPM proches (ex. 124–128).
-- Lance l'**analyse** BPM / grille ; vérifie que le kick suit les lignes de grille.
-
-**Ressources utiles**
-- DDJ-FLX3 : https://www.pioneerdj.com/fr-fr/product/controller/archive/ddj-flx3/black/overview/
-- Gamme XDJ-RX : https://www.pioneerdj.com/fr-fr/product/all-in-one-system/
-- PDF Support : télécharge le manuel et repère « Connections » + « Part names ».
-
-**Théorie + pratique**
-- Même discipline que sur FLX4 : importer → analyser → charger deck A/B → écouter la grille au casque. Seule la **surface** change.`,
+      content: `**Bienvenue dans ta première leçon DJ !** Tu vas apprendre à utiliser Rekordbox et découvrir les bases de ton setup (DDJ-FLX3 ou XDJ-RX), des contrôleurs utilisés par beaucoup de DJs en club.
+      
+      L’objectif ici : comprendre l’écran, les boutons et les réflexes essentiels pour être à l’aise rapidement. Pas besoin de tout retenir d’un coup : avance tranquillement slide par slide et amuse-toi avec les exercices.
+      
+      **Rekordbox, c’est quoi ?**
+      C’est le logiciel qui fait le lien entre ton ordinateur et ta table. Il affiche tes morceaux, le tempo (BPM), et les formes d’onde pour que tu puisses voir ta musique en plus de l’entendre.
+      
+      **Deux modes à connaître**
+      - **Export** : tu prépares ta musique (playlists, tempo, repères). Indispensable si tu utilises un XDJ-RX avec clé USB.
+      - **Performance** : c’est le mode DJ en direct, celui où tu branches ta FLX3 et tu mixes.
+      
+      **Ton setup en bref**
+      - **DDJ-FLX3** : plus de boutons visibles que sur une FLX4, accès direct aux effets (Smart CFX, Beat FX) — on les découvrira progressivement.
+      - **XDJ-RX** : tu peux mixer sans ordinateur grâce aux clés USB. L’écran intégré remplace le laptop.
+      
+      **Tes premiers réflexes**
+      1. Importe quelques morceaux dans Rekordbox
+      2. Crée une petite playlist d’entraînement (5 titres au tempo proche, ex. 124–128 BPM)
+      3. Lance l’analyse pour que le logiciel détecte le tempo automatiquement
+      4. Charge un morceau sur chaque platine et écoute au casque`,
       keyTakeaway:
-        "FLX3 = beaucoup de contrôles visibles avec le laptop. XDJ-RX = prépare en Export, joue depuis la machine. Rekordbox reste le hub.",
+        "Export pour préparer, Performance pour mixer. Que ce soit FLX3 ou XDJ-RX, la méthode reste la même : importe, analyse, écoute au casque.",
       exercise: {
         title: "Préparer 5 morceaux + 1 scénario Export",
         description: "Base commune aux deux machines",
