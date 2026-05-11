@@ -6,10 +6,7 @@ import { trpc } from "@/lib/trpc";
 import { brand } from "@/assets/brand-assets";
 import {
   getModuleByLevel,
-  getPrimaryVideoForLevel,
   getPreviousLevelRecap,
-
-  resolveSlideVideoUrlForLanguage,
   getSlideFromModule,
 } from "@/lib/courses-progressive";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
@@ -84,9 +81,9 @@ export default function CoursePage() {
   const previousRecap =
     currentSlide === 1 ? getPreviousLevelRecap(level, courseTrack, skillLevel, language) : null;
 
-  const localizedSlideVideoUrl = resolveSlideVideoUrlForLanguage(slide.videoUrl, language);
-  const primaryVideo = getPrimaryVideoForLevel(level, language);
-  const finalVideoUrl = localizedSlideVideoUrl ?? primaryVideo?.url ?? null;
+  const finalVideoUrl = slide.videoUrl
+    ? slide.videoUrl.replace("youtube.com/watch?v=", "youtube.com/embed/")
+    : null;
 
   const handleNextSlide = () => {
     if (!isLastSlide) {
@@ -185,7 +182,7 @@ export default function CoursePage() {
                   <iframe
                     width="100%"
                     height="100%"
-                    src={finalVideoUrl.replace("/watch?v=", "/embed/")}
+                    src={`${finalVideoUrl.replace("/watch?v=", "/embed/")}${isFr ? "?cc_load_policy=1&cc_lang_pref=fr" : ""}`}
                     title={slide.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -208,6 +205,11 @@ export default function CoursePage() {
               </div>
               <div className="p-6 bg-white">
                 <p className="text-sm text-gray-600">{slide.videoDescription}</p>
+                {isFr && (
+                  <p className="text-xs text-gray-400 mt-1">
+                    Vidéo en anglais — active les sous-titres auto si besoin.
+                  </p>
+                )}
               </div>
             </Card>
 

@@ -30,7 +30,7 @@ export function buildAcceleratedLevels123(
           slideNumber: 1,
           title: "Performance vs Export — hygiène de bibliothèque",
           subtitle: "Ce qui change quand tu vises une vraie exécution (pas une démo TikTok)",
-          videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+          videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
           videoDescription:
             "Vue d’ensemble Rekordbox : collection, analyse, playlists de secours avant de charger la table.",
           content: `**Tu n’es plus en « découverte matériel »** : tu veux fiabiliser la préparation avant chaque session.
@@ -71,7 +71,7 @@ export function buildAcceleratedLevels123(
           slideNumber: 2,
           title: "Monitoring, trim et premier plan de niveaux",
           subtitle: "Entendre clairement ce que le public aura — avant d’attaquer une transition sérieuse",
-          videoUrl: "https://www.youtube.com/embed/EIUd_xdBYGs",
+          videoUrl: "https://www.youtube.com/embed/kZKBeztMbZY",
           videoDescription:
             "Pré-cue vs master, trims et éviter la saturation quand deux pistes chauffent.",
           content: `**Monitoring**
@@ -119,7 +119,7 @@ export function buildAcceleratedLevels123(
           slideNumber: 1,
           title: "Graves médiums et hi-hats : qui porte l’énergie ?",
           subtitle: "Passer de la théorie à la gestion d’énergie sur le dancefloor",
-          videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
+          videoUrl: "https://www.youtube.com/embed/Fd9jEpFG6II",
           videoDescription:
             "Écoute active : repérer ce qui occupe le bas, le milieu et le brillant.",
           content: `**Bas**
@@ -154,7 +154,7 @@ export function buildAcceleratedLevels123(
           slideNumber: 2,
           title: "Boucles courtes et filtres : discipline > démo",
           subtitle: "Quand augmenter la tension sans détruire le groove",
-          videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+          videoUrl: "https://www.youtube.com/embed/pV-NJndPFtw",
           videoDescription:
             "Utiliser filtres ou loops comme phrases musicales, pas comme camouflage BPM.",
           content: `**Loops**
@@ -197,7 +197,7 @@ export function buildAcceleratedLevels123(
           slideNumber: 1,
           title: "Phrases musicales 8 / 16 / 32 temps",
           subtitle: "Toujours savoir où est le premier temps — sans micromanager",
-          videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+          videoUrl: "https://www.youtube.com/embed/vdbcvsUKY2s",
           videoDescription:
             "Analyser où tombe ton drop avant de déclencher la jauge EQ.",
           content: `**Repères**
@@ -230,7 +230,7 @@ export function buildAcceleratedLevels123(
           slideNumber: 2,
           title: "Narration express & feedback live",
           subtitle: "Même en stream : donne une direction énergétique claire",
-          videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
+          videoUrl: "https://www.youtube.com/embed/Xzvid-d1c9E",
           videoDescription:
             "Structurer un mini-arc de 3 morceaux pour voir la progression.",
           content: `**Triptyque**

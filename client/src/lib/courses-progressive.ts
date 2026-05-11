@@ -884,7 +884,7 @@ export const level1ModuleFlx4: CourseModule = {
       slideNumber: 1,
       title: "Premiers pas sur Rekordbox",
       subtitle: "Ton logiciel DJ, ton contrôleur et tes premiers réflexes",
-      videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
       videoDescription:
         "Parcours Performance (et repères visuels) dans Rekordbox — idéal avant de brancher la table. Active les sous-titres YouTube si besoin.",
       illustrations: [
@@ -939,7 +939,7 @@ export const level1ModuleFlx4: CourseModule = {
       slideNumber: 2,
       title: "Brancher la FLX4 : USB, Master, casque",
       subtitle: "Enceintes actives, gain propre, écoute DJ — ports USB parfois doubles",
-      videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+      videoUrl: "https://www.youtube.com/embed/kZKBeztMbZY",
       videoDescription:
         "Tour complet débutant sur la DDJ-FLX4 : vue matérielle, faders, branchements — en anglais mais très visuel ; active les sous-titres auto.",
       content: `**Chaîne audio simple (répète ce schéma mentalement)**
@@ -988,7 +988,7 @@ Ordinateur → **USB** → contrôleur → **MASTER OUT (RCA ou XLR selon modèl
       slideNumber: 3,
       title: "Le BPM: Le Coeur du Rythme",
       subtitle: "Pourquoi deux chansons ne sonnent pas toujours bien ensemble",
-      videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+      videoUrl: "https://www.youtube.com/embed/3Gn8p0taPUg",
       videoDescription:
         "Tu vois le tempo affiché dans Rekordbox et la grille sur la waveform — utile pour relier oreille et écran.",
       content: `Imagine deux metronomes:
@@ -1040,7 +1040,7 @@ Tu n'as pas besoin de comprendre la theorie musicale. Tu as juste besoin de comp
       slideNumber: 4,
       title: "Le Pitch: Ajuster la Vitesse",
       subtitle: "Comment changer le BPM d'une chanson sans la deformer",
-      videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+      videoUrl: "https://www.youtube.com/embed/EQeEyyipaDE",
       videoDescription:
         "Exemple sur DDJ-FLX4 : tempo / beatmatch — relie ce que tu fais au doigt avec le BPM affiché.",
       content: `Le Probleme:
@@ -1103,7 +1103,7 @@ Tu ne peux pas changer le BPM de plus de +/- 10% sans que ca sonne bizarre.
       slideNumber: 5,
       title: "La Synchronisation en Action",
       subtitle: "Mets deux chansons ensemble pour la premiere fois",
-      videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
+      videoUrl: "https://www.youtube.com/embed/SR1xPdJs1k4",
       videoDescription:
         "Transition type « drop mix » sur FLX4 : inspiration pour enchaîner proprement une fois le tempo aligné.",
       content: `Mise en Situation Reelle:
@@ -1183,7 +1183,7 @@ export const level1ModuleFlx3Xdj: CourseModule = {
       slideNumber: 1,
       title: "Premiers pas sur Rekordbox",
       subtitle: "Ton logiciel DJ, ton contrôleur et tes premiers réflexes",
-      videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+      videoUrl: "https://www.youtube.com/embed/EIUd_xdBYGs",
       videoDescription:
         "Modes Export & Performance dans Rekordbox — indispensable avant de brancher une FLX3, et pour préparer les clés USB d’un XDJ-RX.",
       illustrations: [
@@ -1238,7 +1238,7 @@ export const level1ModuleFlx3Xdj: CourseModule = {
       slideNumber: 2,
       title: "Brancher la FLX3 ou l’XDJ-RX",
       subtitle: "FLX3 : USB + casque + master — XDJ : clés USB + enceintes + casque",
-      videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+      videoUrl: "https://www.youtube.com/embed/jHaANgaTClU",
       videoDescription:
         "Vidéo exemple contrôleur FLX (visuel ports) — pour XDJ-RX, ajoute l’étape « playlists sur clé USB » avant d’allumer.",
       content: `**DDJ-FLX3 (avec ordinateur)**
@@ -1341,7 +1341,7 @@ export const level2Module: CourseModule = {
       slideNumber: 1,
       title: "Les 3 Bandes de Frequences",
       subtitle: "Comprends ce que tu entends vraiment",
-      videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
+      videoUrl: "https://www.youtube.com/embed/Fd9jEpFG6II",
       videoDescription:
         "Decouvre les trois parties d'une chanson que tu peux controler avec l'EQ.",
       content: `**EQ sur ta FLX / Rekordbox**
@@ -1398,7 +1398,7 @@ Pourquoi C'est Important:
       slideNumber: 2,
       title: "Comment Utiliser l'EQ pour Mixer",
       subtitle: "La technique de base pour des transitions fluides",
-      videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+      videoUrl: "https://www.youtube.com/embed/pV-NJndPFtw",
       videoDescription:
         "Vois comment un DJ utilise l'EQ pour melanger deux chansons sans saturation.",
       content: `Le Probleme:
@@ -1463,7 +1463,7 @@ Important:
       slideNumber: 3,
       title: "L'EQ en Action: Cas Reels",
       subtitle: "Comment les DJs professionnels utilisent l'EQ",
-      videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
+      videoUrl: "https://www.youtube.com/embed/Lk0a6U6m2Zg",
       videoDescription:
         "Regarde comment les meilleurs DJs utilisent l'EQ pour creer des transitions parfaites.",
       content: `Cas Reel 1: Deux Chansons House Lourdes
@@ -1551,7 +1551,7 @@ export const level3Module: CourseModule = {
       slideNumber: 1,
       title: "Les 3 Phases d'une Transition",
       subtitle: "Comprends la structure d'une bonne transition",
-      videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+      videoUrl: "https://www.youtube.com/embed/vdbcvsUKY2s",
       videoDescription:
         "Decouvre les 3 phases que tu dois maitriser pour une transition parfaite.",
       content: `Une Bonne Transition c'est Invisible
@@ -1616,7 +1616,7 @@ Pourquoi C'est Important:
       slideNumber: 2,
       title: "Les Variations de Transitions",
       subtitle: "Il existe plusieurs facons de faire une transition",
-      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoUrl: "https://www.youtube.com/embed/dYRZ7821G90",
       videoDescription:
         "Decouvre les variations de transitions que les DJs utilisent.",
       content: `Il N'y A Pas Une Seule Facon de Faire une Transition
@@ -1688,7 +1688,7 @@ Quand Utiliser Quelle Variation:
       slideNumber: 3,
       title: "Transitions en Situation Reelle",
       subtitle: "Mets tout ensemble et fais ta premiere transition",
-      videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+      videoUrl: "https://www.youtube.com/embed/Xzvid-d1c9E",
       videoDescription:
         "Regarde comment un DJ professionnel fait une transition parfaite en direct.",
       content: `Mise en Situation Complete:
@@ -1788,7 +1788,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Loops utiles vs loops décoratives",
         subtitle: "Prolonger une phrase musicale sans fatiguer le dancefloor",
-        videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
+        videoUrl: "https://www.youtube.com/embed/Es95BK3pluQ",
         videoDescription: "Utiliser les loops comme outil musical, pas comme cache-misère.",
         content:
           "Un loop sert à sécuriser une entrée, corriger un timing de phrase ou construire une montée. S'il dure trop longtemps, il retire l'émotion. Objectif pro: loop court, intention claire, sortie propre.",
@@ -1816,7 +1816,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 2,
         title: "FX: créer de la tension sans brouiller le mix",
         subtitle: "Filter, echo, reverb avec logique de timing",
-        videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+        videoUrl: "https://www.youtube.com/embed/j9Ky8zpsqvY",
         videoDescription: "Comment utiliser les effets pour servir la narration du set.",
         content:
           "Un bon FX prépare un moment puis laisse la musique respirer. Les erreurs classiques: trop de wet, effets empilés, et déclenchement hors phrase. En club, la clarté gagne toujours contre la démonstration.",
@@ -1843,7 +1843,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 3,
         title: "Transition créative complète",
         subtitle: "Loop + EQ + FX + sortie propre",
-        videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+        videoUrl: "https://www.youtube.com/embed/TStRW1KpBe4",
         videoDescription: "Assembler les outils avancés dans une transition maîtrisée.",
         content:
           "La vraie compétence avancée, c'est l'enchaînement: préparer, tensionner, relâcher. Tu dois pouvoir exécuter ce pattern sans paniquer, même quand une piste réagit différemment en cabine.",
@@ -1880,7 +1880,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Signaux faibles de la foule",
         subtitle: "Observer avant que la baisse d'énergie devienne visible",
-        videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+        videoUrl: "https://www.youtube.com/embed/ycC2sHErdis",
         videoDescription: "Identifier les indicateurs de fatigue, de pic et de relance.",
         content:
           "Un DJ pro anticipe: micro-décrochages, zones qui se vident, énergie qui plafonne. Tu ne réagis pas à la catastrophe, tu ajustes avant.",
@@ -1906,7 +1906,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 2,
         title: "Décision rapide sous pression",
         subtitle: "Choisir le bon prochain morceau en moins de 10 secondes",
-        videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
+        videoUrl: "https://www.youtube.com/embed/nQKuZyD0Y2s",
         videoDescription: "Cadre décisionnel simple pour les moments tendus.",
         content:
           "Quand la cabine chauffe, tu as besoin d'un cadre: garder, pousser, ou pivoter. L'erreur n'est pas de changer, l'erreur est d'hésiter trop longtemps.",
@@ -1932,7 +1932,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 3,
         title: "Gestion d'erreur en live",
         subtitle: "Rattraper sans panique et garder la piste",
-        videoUrl: "https://www.youtube.com/embed/EIUd_xdBYGs",
+        videoUrl: "https://www.youtube.com/embed/7Wtbc-1y1zc",
         videoDescription: "Techniques de recovery lorsque la transition n'est pas parfaite.",
         content:
           "Même les pros ratent des transitions. La différence, c'est la récupération immédiate: simplifier, recentrer le groove, puis relancer.",
@@ -1968,7 +1968,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Architecture macro du set",
         subtitle: "Intro, montée, pic, respiration, sortie",
-        videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+        videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
         videoDescription: "Construire une trajectoire d'énergie lisible pour la foule.",
         content:
           "Un bon set raconte une progression. Tu dois savoir où tu es à chaque instant: installation, montée, climax, respiration, fermeture.",
@@ -1993,7 +1993,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 2,
         title: "Micro-structure: phrases et points de bascule",
         subtitle: "Sécuriser les passages critiques entre morceaux",
-        videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+        videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
         videoDescription: "Passer d'un plan global aux décisions de transition concrètes.",
         content:
           "Chaque bloc dépend de transitions charnières. Identifie les 4 transitions les plus critiques de ton set et prépare-les comme des scènes.",
@@ -2019,7 +2019,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 3,
         title: "Préparer un set exportable cabine",
         subtitle: "Passer de l'entraînement maison au contexte club",
-        videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
+        videoUrl: "https://www.youtube.com/embed/a3m8l4q3Pq8",
         videoDescription: "Organisation pratique de playlists, clés USB et plans de secours.",
         content:
           "En club, tu dois être prêt techniquement: exports, backups, versions radio/extended, et plan B en cas de matériel différent.",
@@ -2081,7 +2081,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 2,
         title: "Gestion du système son",
         subtitle: "Adapter ton mix selon la salle et le retour cabine",
-        videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+        videoUrl: "https://www.youtube.com/embed/8IF_HGw7IFk",
         videoDescription: "Ajuster son comportement selon acoustique et monitoring.",
         content:
           "La même transition sonne différemment selon la salle. Tu dois calibrer tes décisions avec le retour cabine, pas seulement avec le casque.",
@@ -2107,7 +2107,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 3,
         title: "Gestion d'incidents",
         subtitle: "Quand un morceau plante, un cable bouge, ou la foule décroche",
-        videoUrl: "https://www.youtube.com/embed/EIUd_xdBYGs",
+        videoUrl: "https://www.youtube.com/embed/kHll7t87xik",
         videoDescription: "Réagir vite sans casser l'expérience de la piste.",
         content:
           "Le niveau club, c'est la continuité. Tu dois garder le set vivant même si une piste rate, un export bug, ou une décision tarde.",
@@ -2143,7 +2143,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 1,
         title: "Construire une identité artistique",
         subtitle: "Ton son, ton énergie, ton positionnement",
-        videoUrl: "https://www.youtube.com/embed/H31hjTx3bXY",
+        videoUrl: "https://www.youtube.com/embed/u_ny-pIfNe8",
         videoDescription: "Transformer les compétences techniques en identité reconnaissable.",
         content:
           "À ce stade, ton objectif n'est plus seulement de mixer propre. Tu dois être reconnaissable: sélection, transitions, gestion d'énergie et posture.",
@@ -2169,7 +2169,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 2,
         title: "Capstone: set club 45 minutes",
         subtitle: "Validation finale du parcours Mixy",
-        videoUrl: "https://www.youtube.com/embed/IVMFK0iNqQE",
+        videoUrl: "https://www.youtube.com/embed/-CblGWcr87k",
         videoDescription: "Mettre en pratique toutes les compétences dans un set complet.",
         content:
           "Ton capstone valide la progression complète: structure, transitions, lecture de foule simulée, gestion d'imprévus et maîtrise technique.",
@@ -2196,7 +2196,7 @@ const courseModulesFromLevel2: CourseModule[] = [
         slideNumber: 3,
         title: "Après les 10 niveaux: roadmap pro",
         subtitle: "Continuer à progresser sans plateau",
-        videoUrl: "https://www.youtube.com/embed/25JAaIdJwnM",
+        videoUrl: "https://www.youtube.com/embed/PRPwKxnBmc8",
         videoDescription: "Plan d'entraînement sur 8 semaines pour consolider le niveau pro.",
         content:
           "Finir le niveau 10 n'est pas la fin. Tu passes en cycle d'amélioration continue: sets réguliers, analyse d'enregistrements, objectifs mensuels, exposition en public.",
@@ -2328,13 +2328,41 @@ function extractYouTubeId(url: string): string | null {
 }
 
 const VIDEO_LANGUAGE_BY_ID: Record<string, Language> = {
-  // Validated from oEmbed metadata (English titles/channels)
   H31hjTx3bXY: "en",
   "25JAaIdJwnM": "en",
   IVMFK0iNqQE: "en",
   EIUd_xdBYGs: "en",
   fa3sLTn0Wek: "en",
-  // Validated from oEmbed metadata (French titles/channels)
+  kZKBeztMbZY: "en",
+  "3Gn8p0taPUg": "en",
+  EQeEyyipaDE: "en",
+  SR1xPdJs1k4: "en",
+  PRPwKxnBmc8: "en",
+  jHaANgaTClU: "en",
+  Fd9jEpFG6II: "en",
+  "pV-NJndPFtw": "en",
+  Lk0a6U6m2Zg: "en",
+  vdbcvsUKY2s: "en",
+  dYRZ7821G90: "en",
+  "Xzvid-d1c9E": "en",
+  AxkIQi81JP0: "en",
+  gxq36qom2LI: "en",
+  YgL1tn6zOEw: "en",
+  "1sC-sZhSxU8": "en",
+  "hjkTkb-_7mQ": "en",
+  "7JAoRPqQZYw": "en",
+  "-DOYZcBwS08": "en",
+  Es95BK3pluQ: "en",
+  j9Ky8zpsqvY: "en",
+  TStRW1KpBe4: "en",
+  ycC2sHErdis: "en",
+  nQKuZyD0Y2s: "en",
+  "7Wtbc-1y1zc": "en",
+  a3m8l4q3Pq8: "en",
+  "8IF_HGw7IFk": "en",
+  "u_ny-pIfNe8": "en",
+  "-CblGWcr87k": "en",
+  kHll7t87xik: "en",
   Ubm9R3VKEqg: "fr",
   FlDeqQMj9II: "fr",
 };
