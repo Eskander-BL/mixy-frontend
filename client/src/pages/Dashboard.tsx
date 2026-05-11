@@ -55,6 +55,7 @@ export default function Dashboard() {
   );
   const [contactMessage, setContactMessage] = useState("");
   const [returnFromPayment, setReturnFromPayment] = useState(false);
+  const [showPathDialog, setShowPathDialog] = useState(false);
 
   const userProfileQuery = trpc.dj.getUserProfile.useQuery(
     { userId: parseInt(localStorage.getItem("userId") || "0") },
@@ -290,33 +291,13 @@ export default function Dashboard() {
           </p>
 
           {learningProfile && (
-            <div className="mt-5 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-amber-50/60 px-4 py-3 text-sm text-gray-800 space-y-2">
-              <p className="font-semibold text-gray-900">
-                {isFr ? "Ton parcours personnalisé" : "Your personalized path"}
-              </p>
-              {learningProfile.equipment === "controller" && learningProfile.targetDeck && (
-                <p className="text-gray-700">
-                  {isFr
-                    ? `Si tu utilises un contrôleur comme le ${targetDeckLabelFr(learningProfile.targetDeck)}, les conseils et exercices seront adaptés à ton setup pour que ce soit plus simple à suivre.`
-                    : `If you use a controller like the ${targetDeckLabelFr(learningProfile.targetDeck)}, tips and exercises will be adapted to your setup so it’s easier to follow.`}
-                </p>
-              )}
-              <p className="text-xs text-gray-600 border-t border-primary/10 pt-2">
-                {isFr
-                  ? "Les premiers niveaux changent selon ton expérience, puis tout le monde rejoint les mêmes chapitres pour apprendre à créer de vrais sets, mixer proprement et développer son style."
-                  : "The first levels adapt to your experience, then everyone follows the same chapters to learn how to create real sets, mix properly, and develop your own style."}
-              </p>
-              <p className="text-xs text-gray-600">
-                {isFr
-                  ? "Tu changes de matériel plus tard ? Pas de souci : relance simplement l’onboarding pour mettre à jour ton parcours."
-                  : "Changing gear later? No worries: just relaunch the onboarding to update your path."}
-              </p>
-              <p className="text-xs text-gray-600">
-                {isFr
-                  ? "💬 Besoin d’aide pendant ton apprentissage ? Mixy est disponible en bas à droite de l’écran pour répondre à tes questions à tout moment."
-                  : "💬 Need help while learning? Mixy is available at the bottom right of the screen to answer your questions anytime."}
-              </p>
-            </div>
+            <button
+              type="button"
+              onClick={() => setShowPathDialog(true)}
+              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors underline underline-offset-4"
+            >
+              {isFr ? "Comment fonctionne mon parcours ?" : "How does my path work?"}
+            </button>
           )}
 
           <div className="mt-6">
@@ -356,8 +337,8 @@ export default function Dashboard() {
           <h2 className="text-lg md:text-xl font-bold text-gray-900">{isFr ? "Tes niveaux" : "Your levels"}</h2>
           <p className="text-sm text-gray-600 mt-1">
             {isFr
-              ? "Termine une leçon et valide le quiz pour débloquer la suivante."
-              : "Complete a lesson and pass the quiz to unlock the next one."}
+              ? "Obtiens au moins 50 % au quiz pour débloquer le niveau suivant. Descends pour voir ta progression."
+              : "Score at least 50% on the quiz to unlock the next level. Scroll down to see your full progress."}
           </p>
         </div>
 
@@ -570,6 +551,45 @@ export default function Dashboard() {
             >
               {contactMutation.isPending ? (isFr ? "Envoi..." : "Sending...") : isFr ? "Envoyer" : "Send"}
             </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showPathDialog} onOpenChange={setShowPathDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{isFr ? "Ton parcours Mixy" : "Your Mixy path"}</DialogTitle>
+            <DialogDescription>
+              {isFr
+                ? "Tout ce que tu dois savoir sur ta progression."
+                : "Everything you need to know about your progress."}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 text-sm text-gray-700">
+            <p>
+              {isFr
+                ? "Chaque niveau est fait pour te faire progresser selon ton exp\u00e9rience et ton mat\u00e9riel. Plus tu avances, plus tu apprends \u00e0 mixer proprement et \u00e0 d\u00e9velopper ton propre style."
+                : "Each level is designed to help you progress based on your experience and gear. The further you go, the more you learn to mix properly and develop your own style."}
+            </p>
+            {learningProfile?.equipment === "controller" && learningProfile?.targetDeck && (
+              <p>
+                {isFr
+                  ? `Les exercices et conseils sont adapt\u00e9s \u00e0 ton ${targetDeckLabelFr(learningProfile.targetDeck)} pour que ce soit plus simple \u00e0 suivre.`
+                  : `Exercises and tips are adapted to your ${targetDeckLabelFr(learningProfile.targetDeck)} so it\u2019s easier to follow.`}
+              </p>
+            )}
+            <p>
+              {isFr
+                ? "Tu changes de mat\u00e9riel plus tard ? Pas de souci : relance simplement l\u2019onboarding pour mettre \u00e0 jour ton parcours."
+                : "Changing gear later? No worries: just relaunch the onboarding to update your path."}
+            </p>
+            <div className="border-t border-gray-200 pt-3 space-y-2">
+              <p>
+                {isFr
+                  ? "\uD83D\uDCAC Une question ? Tu peux nous \u00e9crire via le bouton mail en haut, ou demander directement \u00e0 Mixy en bas \u00e0 droite \u2014 il conna\u00eet ton niveau et ton setup, donc ses r\u00e9ponses sont adapt\u00e9es \u00e0 toi."
+                  : "\uD83D\uDCAC Got a question? You can write to us via the mail button at the top, or ask Mixy directly at the bottom right \u2014 he knows your level and setup, so his answers are tailored to you."}
+              </p>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
