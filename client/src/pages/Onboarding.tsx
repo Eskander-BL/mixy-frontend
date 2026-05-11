@@ -58,7 +58,11 @@ export default function Onboarding() {
   const [quizAnswers, setQuizAnswers] = useState<number[]>([]);
   const [quizScore, setQuizScore] = useState<number | null>(null);
   const [quizResultLevel, setQuizResultLevel] = useState<"beginner" | "intermediate" | "advanced" | null>(null);
-  const isFr = formData.language === "fr";
+  const isFr = ctxLanguage === "fr";
+
+  useEffect(() => {
+    setFormData((prev) => ({ ...prev, language: ctxLanguage as "en" | "fr" }));
+  }, [ctxLanguage]);
 
   const initGuestMutation = trpc.dj.initGuest.useMutation();
   const updateLanguageMutation = trpc.dj.updateLanguage.useMutation();
@@ -94,8 +98,10 @@ export default function Onboarding() {
             localStorage.setItem("guestId", result.guestId);
             localStorage.setItem("userId", String(validUserId));
             const lang = result.language;
-            if (lang === "en" || lang === "fr") {
+            const userAlreadyChose = localStorage.getItem("language");
+            if ((lang === "en" || lang === "fr") && !userAlreadyChose) {
               setFormData((prev) => ({ ...prev, language: lang }));
+              setCtxLanguage(lang);
             }
           }
         },
