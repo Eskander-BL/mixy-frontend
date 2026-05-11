@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+﻿import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import logo from "@/assets/logo.webp";
 import { brand } from "@/assets/brand-assets";
 import { useProgress } from "@/contexts/ProgressContext";
@@ -285,105 +285,36 @@ export default function Dashboard() {
           </h1>
           <p className="text-sm md:text-base text-gray-600">
             {isFr
-              ? "Les niveaux sont maintenant dans la barre à gauche. Tu peux lancer directement ton exercice ici."
-              : "Levels are in the left sidebar. You can launch your current exercise directly here."}
+              ? "Ton apprentissage s'adapte à toi pour te faire progresser plus facilement. Tu peux retrouver tous tes niveaux dans la barre à gauche et lancer ton exercice directement ici."
+              : "Your learning adapts to you so you can progress more easily. You can find all your levels in the left sidebar and launch your exercise directly here."}
           </p>
 
           {learningProfile && (
-            <div className="mt-5 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-amber-50/60 px-4 py-3 text-sm text-gray-800">
-              <p className="font-semibold text-gray-900 mb-1">
+            <div className="mt-5 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/10 to-amber-50/60 px-4 py-3 text-sm text-gray-800 space-y-2">
+              <p className="font-semibold text-gray-900">
                 {isFr ? "Ton parcours personnalisé" : "Your personalized path"}
               </p>
-              <p className="text-gray-700">
-                {learningProfile.equipment === "none" && (
-                  <>
-                    {isFr ? (
-                      <>
-                        Tu progresses <strong>sans table</strong> pour l’instant
-                      </>
-                    ) : (
-                      <>
-                        You are progressing <strong>without gear</strong> for now
-                      </>
-                    )}
-                    {learningProfile.targetDeck != null ? (
-                      <>
-                        {" "}
-                        {isFr ? "— on te parle surtout de" : "— we focus mainly on"}{" "}
-                        <strong>{targetDeckLabelFr(learningProfile.targetDeck)}</strong>{" "}
-                        {isFr ? "+ Rekordbox dans les cours." : "+ Rekordbox in the lessons."}
-                      </>
-                    ) : null}
-                  </>
-                )}
-                {learningProfile.equipment === "controller" && (
-                  <>
-                    {isFr ? (
-                      <>
-                        Tu as un <strong>contrôleur</strong>
-                      </>
-                    ) : (
-                      <>
-                        You have a <strong>controller</strong>
-                      </>
-                    )}
-                    {learningProfile.targetDeck != null ? (
-                      <>
-                        {" "}
-                        ({targetDeckLabelFr(learningProfile.targetDeck)}){" "}
-                        {isFr
-                          ? "— on adapte les conseils pratiques (boutons, réglages, workflow Rekordbox) à ton matériel."
-                          : "— we adapt practical advice (buttons, settings, Rekordbox workflow) to your setup."}
-                      </>
-                    ) : null}
-                  </>
-                )}
-                {learningProfile.equipment === "turntables" &&
-                  (isFr
-                    ? "Parcours vinyle : les bases BPM / EQ restent les mêmes."
-                    : "Turntable path: BPM / EQ fundamentals stay the same.")}
-                {learningProfile.equipment === "other" &&
-                  (isFr
-                    ? "Setup « autre » : les fondamentaux s’appliquent à tout DJ logiciel."
-                    : "Other setup: core fundamentals apply to any software DJ workflow.")}
-              </p>
-              <p className="text-xs text-gray-600 mt-1 border-t border-primary/10 pt-2">
-                <strong>{courseTrackLabelFr(courseTrack)}</strong>
-                {" — "}
-                {skillLevel === "beginner" && (
-                  <>
-                    niveaux <strong>1 à 3</strong> : parcours <strong>débutant</strong> (bases matériel + EQ +
-                    transitions).
-                  </>
-                )}
-                {skillLevel === "intermediate" && (
-                  <>
-                    niveaux <strong>1 à 3</strong> : parcours <strong>accéléré intermédiaire</strong> (contenu
-                    différent des fondations débutant).
-                  </>
-                )}
-                {skillLevel === "advanced" && (
-                  <>
-                    niveaux <strong>1 à 3</strong> : parcours <strong>accéléré confirmé</strong> (même trame que
-                    l&apos;intermédiaire, ton orienté niveau DJ avancé).
-                  </>
-                )}{" "}
-                {isFr ? (
-                  <>
-                    À partir du <strong>niveau 4</strong>, tout le monde suit les mêmes chapitres (mix harmonique,
-                    set…).
-                  </>
-                ) : (
-                  <>
-                    From <strong>level 4</strong>, everyone follows the same chapters (harmonic mixing, set
-                    structure...).
-                  </>
-                )}
-              </p>
-              <p className="text-xs text-gray-600 mt-1">
+              {learningProfile.equipment === "controller" && learningProfile.targetDeck && (
+                <p className="text-gray-700">
+                  {isFr
+                    ? `Si tu utilises un contrôleur comme le ${targetDeckLabelFr(learningProfile.targetDeck)}, les conseils et exercices seront adaptés à ton setup pour que ce soit plus simple à suivre.`
+                    : `If you use a controller like the ${targetDeckLabelFr(learningProfile.targetDeck)}, tips and exercises will be adapted to your setup so it’s easier to follow.`}
+                </p>
+              )}
+              <p className="text-xs text-gray-600 border-t border-primary/10 pt-2">
                 {isFr
-                  ? "Tu changes de setup ? Relance l’onboarding : on mettra à jour les recommandations de cours et d’exercices."
-                  : "Changing setup? Relaunch onboarding and we will update your course and exercise recommendations."}
+                  ? "Les premiers niveaux changent selon ton expérience, puis tout le monde rejoint les mêmes chapitres pour apprendre à créer de vrais sets, mixer proprement et développer son style."
+                  : "The first levels adapt to your experience, then everyone follows the same chapters to learn how to create real sets, mix properly, and develop your own style."}
+              </p>
+              <p className="text-xs text-gray-600">
+                {isFr
+                  ? "Tu changes de matériel plus tard ? Pas de souci : relance simplement l’onboarding pour mettre à jour ton parcours."
+                  : "Changing gear later? No worries: just relaunch the onboarding to update your path."}
+              </p>
+              <p className="text-xs text-gray-600">
+                {isFr
+                  ? "💬 Besoin d’aide pendant ton apprentissage ? Mixy est disponible en bas à droite de l’écran pour répondre à tes questions à tout moment."
+                  : "💬 Need help while learning? Mixy is available at the bottom right of the screen to answer your questions anytime."}
               </p>
             </div>
           )}
@@ -424,17 +355,9 @@ export default function Dashboard() {
         <div className="mb-3 md:mb-4">
           <h2 className="text-lg md:text-xl font-bold text-gray-900">{isFr ? "Tes niveaux" : "Your levels"}</h2>
           <p className="text-sm text-gray-600 mt-1">
-            {isFr ? (
-              <>
-                Les <strong>validés</strong> et le <strong>niveau actif</strong> s&apos;affichent les uns sous les
-                autres. S&apos;il y en a beaucoup, fais défiler <strong>verticalement</strong> dans la zone.
-              </>
-            ) : (
-              <>
-                <strong>Completed</strong> and <strong>active level</strong> cards are shown one under another. If
-                there are many, scroll <strong>vertically</strong> in this area.
-              </>
-            )}
+            {isFr
+              ? "Termine une leçon et valide le quiz pour débloquer la suivante."
+              : "Complete a lesson and pass the quiz to unlock the next one."}
           </p>
         </div>
 

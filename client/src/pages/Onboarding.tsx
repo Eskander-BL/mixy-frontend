@@ -9,6 +9,7 @@ import { brand } from "@/assets/brand-assets";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import type { TargetDeck } from "@/lib/learning-profile";
 import { GEAR_PRICE_RANGE_FR, persistMixyLearningProfile } from "@/lib/learning-profile";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 type OnboardingStep =
   | "language"
@@ -36,6 +37,7 @@ const TARGET_DECK_CHOICES = ["flx4", "flx3", "xdj_rx", "other", "undecided"] as 
 export default function Onboarding() {
   useDocumentTitle("Onboarding");
   const [, navigate] = useLocation();
+  const { language: ctxLanguage, setLanguage: setCtxLanguage } = useLanguageContext();
   const [step, setStep] = useState<OnboardingStep>("name");
   const [guestId, setGuestId] = useState<string>("");
   const [userId, setUserId] = useState<number | null>(null);
@@ -43,7 +45,7 @@ export default function Onboarding() {
 
   const [formData, setFormData] = useState({
     name: "",
-    language: "en" as "en" | "fr",
+    language: ctxLanguage as "en" | "fr",
     level: "beginner" as "beginner" | "intermediate" | "advanced",
     goal: "fun" as "fun" | "party" | "club" | "pro",
     equipment: "none" as "none" | "controller" | "turntables" | "other",
@@ -339,8 +341,8 @@ export default function Onboarding() {
               <Button
                 onClick={() => {
                   setFormData(prev => ({ ...prev, language: "en" }));
+                  setCtxLanguage("en");
                   updateLanguageMutation.mutate({ userId: userId!, language: "en" });
-                  localStorage.setItem("language", "en");
                   setStep("name");
                 }}
                 className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
@@ -350,8 +352,8 @@ export default function Onboarding() {
               <Button
                 onClick={() => {
                   setFormData(prev => ({ ...prev, language: "fr" }));
+                  setCtxLanguage("fr");
                   updateLanguageMutation.mutate({ userId: userId!, language: "fr" });
-                  localStorage.setItem("language", "fr");
                   setStep("name");
                 }}
                 className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"

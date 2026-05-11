@@ -27,7 +27,7 @@ function PageFallback() {
   return (
     <div className="flex items-center justify-center min-h-[40vh] text-gray-500">
       <Loader2 className="w-6 h-6 animate-spin" aria-hidden />
-      <span className="sr-only">Chargement…</span>
+      <span className="sr-only">Loading…</span>
     </div>
   );
 }
@@ -44,7 +44,7 @@ function AppContent() {
           type="button"
           className="fixed inset-0 bg-black/40 z-30 md:hidden"
           onClick={() => setMobileSidebarOpen(false)}
-          aria-label="Fermer le menu"
+          aria-label={userLanguage === "fr" ? "Fermer le menu" : "Close menu"}
         />
       )}
       <Sidebar
@@ -65,7 +65,7 @@ function AppContent() {
         <div className="md:hidden sticky top-0 z-20 bg-white border-b px-3 py-2">
           <Button variant="outline" size="sm" onClick={() => setMobileSidebarOpen(true)}>
             <Menu size={16} className="mr-2" />
-            Niveaux
+            {userLanguage === "fr" ? "Niveaux" : "Levels"}
           </Button>
         </div>
         <Suspense fallback={<PageFallback />}>

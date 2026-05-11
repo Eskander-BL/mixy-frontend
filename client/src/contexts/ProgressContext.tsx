@@ -9,6 +9,7 @@ import {
   type MixyLearningProfile,
   type CourseTrackId,
 } from "@/lib/learning-profile";
+import { useLanguageContext } from "@/contexts/LanguageContext";
 
 const TOTAL_LEVELS = allModules.length;
 
@@ -89,6 +90,7 @@ function normalizeSkillLevel(raw: unknown): UserLevel {
 }
 
 export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { language: ctxLang } = useLanguageContext();
   const [currentLevel, setCurrentLevel] = useState<number>(() =>
     getActiveLevelFromCompleted(initialLocalCompleted, TOTAL_LEVELS)
   );
@@ -97,7 +99,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [learningProfile, setLearningProfile] = useState(() =>
     typeof window !== "undefined" ? readMixyLearningProfile() : null
   );
-  const [userLanguage, setUserLanguage] = useState<"en" | "fr">("en");
+  const userLanguage: "en" | "fr" = ctxLang === "fr" ? "fr" : "en";
 
   const getProgressQuery = trpc.dj.getProgress.useQuery(
     { userId: parseInt(localStorage.getItem("userId") || "0", 10) },
@@ -180,15 +182,6 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     setLearningProfile(parsed);
   }, [getProgressQuery.data?.learningProfile]);
 
-  // TODO: Fetch user language from backend
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem("language");
-    if (storedLanguage === "fr") {
-      setUserLanguage("fr");
-    } else {
-      setUserLanguage("en");
-    }
-  }, []);
 
   return (
     <ProgressContext.Provider
