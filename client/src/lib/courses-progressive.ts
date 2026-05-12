@@ -2334,6 +2334,412 @@ const courseModulesFromLevel2: CourseModule[] = [
 ];
 
 /* ---------------------------------------------------------------------------
+ * Equipment-specific content paragraphs — appended to each slide's `content`
+ * based on the user's actual controller (TargetDeck).
+ * Maps equipment → level → slideNumber → { fr, en }.
+ * --------------------------------------------------------------------------- */
+const EQUIPMENT_CONTENT: Partial<
+  Record<TargetDeck, Record<number, Record<number, { fr: string; en: string }>>>
+> = {
+  flx4: {
+    2: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nLes 3 potards EQ (High/Mid/Low) sont juste au-dessus de chaque fader de volume. Le Trim est le premier potard tout en haut de la voie. Sur un contrôleur compact comme la FLX4, l'espace est serré — prends l'habitude de poser tes doigts sur les potards sans regarder. Astuce : commence par le Low (le plus bas), puis remonte vers le Mid et le High. Avec un peu de pratique, tes mains trouveront leur place toutes seules.",
+        en: "\n\n**On your DDJ-FLX4**\nThe 3 EQ knobs (High/Mid/Low) sit right above each volume fader. The Trim is the top knob on each channel. On a compact controller like the FLX4, space is tight — practice finding the knobs without looking down. Start from the Low (bottom knob), then work your way up to Mid and High. With a bit of practice your hands will land in the right spot every time.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour le swap de basses, tu vas utiliser les deux mains : une main sur le Low du deck A, l'autre sur le Low du deck B. Vu que la FLX4 est compacte, tes mains sont proches — c'est un avantage ! Entraîne-toi à tourner les deux potards Low en même temps, en sens inverse : un vers la gauche, l'autre vers la droite. Fais-le lentement d'abord, puis accélère. Le Merge FX (le gros bouton au centre) peut aussi t'aider à lisser le passage si tu hésites sur le timing.",
+        en: "\n\n**On your DDJ-FLX4**\nFor the bass swap, use both hands: one on deck A's Low knob, the other on deck B's Low. Since the FLX4 is compact, your hands are close together — that's actually an advantage! Practice turning both Low knobs simultaneously in opposite directions: one left, the other right. Start slowly, then speed up. The Merge FX button (the big one in the center) can also help smooth the handover if you're unsure about timing.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour les 3 scénarios, profite de la taille compacte de ta FLX4 : tu peux atteindre les EQ, les faders et le Merge FX sans bouger les bras. Pour le scénario 3 (build-up), essaie le Merge FX : un seul geste crée un effet de montée automatique pendant que tu baisses les basses progressivement. C'est un raccourci puissant que seuls les contrôleurs Pioneer récents proposent — utilise-le !",
+        en: "\n\n**On your DDJ-FLX4**\nFor all 3 scenarios, take advantage of the FLX4's compact layout: you can reach the EQ knobs, faders, and Merge FX without moving your arms. For scenario 3 (the build-up), try the Merge FX: a single gesture creates an automatic build-up effect while you gradually reduce the bass. It's a powerful shortcut that only recent Pioneer controllers offer — use it!",
+      },
+    },
+    3: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nRepère bien la disposition de ta FLX4 pour les 3 phases : les jog wheels pour caler, les faders de volume pour le mix, et les potards EQ juste au-dessus pour le swap. Sur un contrôleur compact, tout est à portée de doigts — c'est plus facile de rester concentré. Utilise les pads de performance (les 8 petits boutons carrés sous chaque jog) pour placer des hot cues aux points d'entrée de tes morceaux. Un appui = tu retrouves le point exact. Ça te fait gagner un temps fou en préparation.",
+        en: "\n\n**On your DDJ-FLX4**\nGet familiar with the FLX4 layout for all 3 phases: jog wheels for beatmatching, volume faders for the blend, and EQ knobs right above for the swap. On a compact controller, everything is within finger reach — that makes it easier to stay focused. Use the performance pads (the 8 small square buttons below each jog) to set hot cues at your entry points. One tap = you're back to the exact spot. It saves you tons of time during preparation.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour tester les 4 styles de transitions sur ta FLX4 : le coup sec est facile grâce aux faders courts — un geste rapide suffit. Pour la transition douce, surveille tes mouvements de fader : la course est courte, donc vas-y millimètre par millimètre. Pour les transitions créatives, utilise le Beat FX (bouton FX au centre) : un delay ou un echo sur la fin du morceau sortant peut créer un effet de suspension magique. N'hésite pas à combiner ça avec le Merge FX pour un résultat encore plus pro.",
+        en: "\n\n**On your DDJ-FLX4**\nFor testing the 4 transition styles on your FLX4: the quick cut is easy thanks to the short faders — one swift move does it. For smooth transitions, be precise with your fader movements: the travel is short, so go millimeter by millimeter. For creative transitions, use the Beat FX (FX button in the center): a delay or echo on the outgoing track's tail creates a magical suspension effect. Feel free to combine it with Merge FX for an even more polished result.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour ton mini-set sur la FLX4, pose-toi dans un endroit calme et branche ton casque. Avantage de la FLX4 : elle est légère et tu peux t'installer n'importe où. Avant de commencer, place des hot cues (pads de performance) sur les points d'intro de tes 3 morceaux — ça te permettra de lancer chaque titre pile au bon moment. Enregistre-toi directement dans Rekordbox (bouton REC en haut) pour réécouter et progresser à chaque session.",
+        en: "\n\n**On your DDJ-FLX4**\nFor your mini-set on the FLX4, find a quiet spot and plug in your headphones. The FLX4's advantage: it's lightweight and you can set up anywhere. Before you start, drop hot cues (performance pads) on the intro points of your 3 tracks — that way you can launch each one at exactly the right moment. Record yourself directly in Rekordbox (REC button at the top) so you can listen back and improve with every session.",
+      },
+    },
+    4: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nTa FLX4 ne possède pas d'écran intégré — c'est Rekordbox sur ton laptop qui affiche la clé de chaque morceau. Va dans Préférences > Vue > Colonnes et active « Key » pour la voir apparaître à côté du BPM. Astuce : trie ta bibliothèque par clé Camelot d'un clic sur la colonne et repère instantanément les morceaux compatibles avec celui qui tourne.",
+        en: "\n\n**On your DDJ-FLX4**\nYour FLX4 has no built-in screen — Rekordbox on your laptop displays each track's key. Go to Preferences > View > Columns and enable \"Key\" so it shows right next to BPM. Pro tip: click the Key column header to sort by Camelot key and instantly spot compatible tracks with whatever is playing.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nDans Rekordbox, active l'affichage « Notation Camelot » (Préférences > Analyse > Key) pour voir directement les numéros/lettres du Camelot Wheel au lieu des tonalités classiques. Quand tu navigues ta bibliothèque sur le laptop pendant que la FLX4 joue, tu peux filtrer par clé compatible en un clic — c'est le workflow le plus rapide pour ta config compacte.",
+        en: "\n\n**On your DDJ-FLX4**\nIn Rekordbox, enable \"Camelot Notation\" (Preferences > Analysis > Key) to see Camelot numbers/letters instead of classical key names. While your FLX4 plays a track, browse your library on the laptop and filter by compatible key with one click — it's the fastest workflow for your compact setup.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPendant ta transition harmonique, utilise les petits jog wheels de la FLX4 pour de micro-corrections de phase. La taille compacte te permet de garder un œil sur l'écran Rekordbox (où tu vois les formes d'onde en couleur par clé) tout en manipulant le crossfader et les EQ d'une main. Pense à utiliser le mode « Related Tracks » de Rekordbox qui te suggère des morceaux en clé compatible.",
+        en: "\n\n**On your DDJ-FLX4**\nDuring your harmonic transition, use the FLX4's compact jog wheels for micro phase corrections. The small form factor lets you keep an eye on Rekordbox's screen (where waveforms are color-coded by key) while working the crossfader and EQ with one hand. Try Rekordbox's \"Related Tracks\" feature — it suggests key-compatible tracks automatically.",
+      },
+      4: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nQuand tu veux casser les règles du Camelot, le Merge FX de ta FLX4 est ton meilleur allié. Active-le pendant la zone de tension entre deux clés incompatibles — il crée un « pont sonore » qui masque la dissonance. Tu peux aussi utiliser Shift + les pads pour déclencher un filtre ou un echo qui brouille harmoniquement le passage.",
+        en: "\n\n**On your DDJ-FLX4**\nWhen you want to break Camelot rules, your FLX4's Merge FX is your best ally. Activate it during the tension zone between two incompatible keys — it creates a \"sonic bridge\" that masks dissonance. You can also use Shift + pads to trigger a filter or echo that harmonically blurs the transition.",
+      },
+    },
+    5: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour structurer ton set sur la FLX4, prépare tes playlists dans Rekordbox par phase d'énergie : « Intro », « Montée », « Pic », « Descente ». Pendant que tu joues, navigue entre ces playlists sur ton laptop. La FLX4 en USB-C te laisse un setup très propre — un câble, et tu as accès à toute ta bibliothèque organisée par énergie.",
+        en: "\n\n**On your DDJ-FLX4**\nTo structure your set on the FLX4, prepare Rekordbox playlists by energy phase: \"Intro,\" \"Build,\" \"Peak,\" \"Cooldown.\" While playing, navigate between them on your laptop. The FLX4's USB-C connection keeps your setup clean — one cable and you've got your entire library organized by energy level.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour naviguer vite pendant ton set, utilise les raccourcis Rekordbox : la barre de recherche avec filtres par BPM et clé te permet de trouver le prochain morceau en 5 secondes. Sur ta FLX4, tu peux aussi assigner un pad en mode Hot Cue sur les intros de tes morceaux pour vérifier rapidement si ça matche avec ce qui joue — écoute au casque, décision instantanée.",
+        en: "\n\n**On your DDJ-FLX4**\nTo navigate quickly during your set, use Rekordbox shortcuts: the search bar with BPM and key filters lets you find the next track in 5 seconds. On your FLX4, you can also assign pads in Hot Cue mode to track intros for quick preview — listen in your headphones, instant decision.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour gérer l'énergie en temps réel sur ta FLX4, le Merge FX est parfait pour les moments de transition entre phases. Un seul geste transforme une montée en respiration ou un plateau en relance. Combine ça avec les filtres sur les potards (bouton Shift + EQ) pour des variations rapides d'énergie sans casser le groove.",
+        en: "\n\n**On your DDJ-FLX4**\nTo manage energy in real time on your FLX4, Merge FX is perfect for transitions between set phases. One gesture transforms a build into a breather or a plateau into a relaunch. Combine it with filter sweeps (Shift + EQ knobs) for quick energy shifts without breaking the groove.",
+      },
+    },
+    6: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nSur ta FLX4, les loops s'activent via les pads en mode Loop. Appuie sur le pad correspondant pour un loop 4, 8 ou 16 temps. Pour un loop plus court (1 ou 2 temps), utilise Shift + pad — c'est la couche secondaire qui donne accès aux longueurs plus fines. Le truc pro : prépare ton loop en avance, et relâche avec un timing de phrase impeccable.",
+        en: "\n\n**On your DDJ-FLX4**\nOn your FLX4, loops activate via the pads in Loop mode. Press the corresponding pad for a 4, 8, or 16-beat loop. For shorter loops (1 or 2 beats), use Shift + pad — that's the secondary layer giving access to finer lengths. Pro move: set your loop in advance, and release it with impeccable phrase timing.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nTa FLX4 n'a pas de section Beat FX dédiée comme les contrôleurs plus grands, mais Rekordbox te donne accès à tous les effets via l'écran. Concentre-toi sur 2 effets max (filtre + echo) et assigne-les aux boutons FX de la FLX4. Le Merge FX intégré est ton atout unique : un seul bouton pour une transition FX complète avec filtre, echo et backspin combinés.",
+        en: "\n\n**On your DDJ-FLX4**\nYour FLX4 doesn't have a dedicated Beat FX section like larger controllers, but Rekordbox gives you full FX access on screen. Focus on 2 effects max (filter + echo) and assign them to the FLX4's FX buttons. The built-in Merge FX is your unique advantage: one button for a complete FX transition combining filter, echo, and backspin.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour ta transition créative complète sur la FLX4 : active le loop (pad), sculpte l'EQ (potards centraux, bien serrés — tu les connais maintenant), puis déclenche le Merge FX pour le passage final. Le secret, c'est la séquence : loop → EQ → Merge FX → release. Pratique cette chorégraphie jusqu'à ce que tes doigts la connaissent par cœur.",
+        en: "\n\n**On your DDJ-FLX4**\nFor your full creative transition on the FLX4: activate the loop (pad), sculpt the EQ (center knobs, tightly spaced — you know them by now), then trigger Merge FX for the final switch. The secret is the sequence: loop → EQ → Merge FX → release. Practice this choreography until your fingers know it by heart.",
+      },
+    },
+    7: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nL'avantage de ta FLX4 compacte pour la lecture de foule : tu n'as pas un mur de matos entre toi et le public. Tes yeux sont libres. Développe le réflexe « scan 60 secondes » : un regard sur la piste toutes les minutes, puis retour aux platines. Les pads de la FLX4 te permettent de préparer tes morceaux de secours en Hot Cue — un seul geste pour pivoter si l'énergie chute.",
+        en: "\n\n**On your DDJ-FLX4**\nYour compact FLX4's advantage for crowd reading: there's no wall of gear between you and the audience. Your eyes are free. Build the \"60-second scan\" reflex: one look at the floor every minute, then back to the decks. The FLX4's pads let you prepare rescue tracks in Hot Cue mode — one tap to pivot if energy drops.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nQuand tu dois changer de direction musicale en urgence sur ta FLX4, voilà le workflow express : (1) cherche dans Rekordbox avec le filtre BPM/clé, (2) charge sur le deck libre, (3) lance depuis un Hot Cue préparé, (4) utilise Merge FX pour un cut propre. En moins de 10 secondes, tu as pivoté. C'est la force de la config laptop + contrôleur compact.",
+        en: "\n\n**On your DDJ-FLX4**\nWhen you need to change musical direction urgently on your FLX4, here's the express workflow: (1) search in Rekordbox with BPM/key filter, (2) load on the free deck, (3) launch from a prepared Hot Cue, (4) use Merge FX for a clean cut. In under 10 seconds, you've pivoted. That's the power of the laptop + compact controller setup.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour les transitions d'urgence sur ta FLX4, prépare 4 Hot Cues stratégiques sur tes morceaux de secours : un sur l'intro, un sur le drop, un sur un breakdown et un sur l'outro. En situation de stress, tu n'as qu'à charger le morceau et appuyer sur le bon pad — pas besoin de chercher le bon point de départ, il est déjà marqué.",
+        en: "\n\n**On your DDJ-FLX4**\nFor emergency transitions on your FLX4, set up 4 strategic Hot Cues on your rescue tracks: one on the intro, one on the drop, one on a breakdown, and one on the outro. Under pressure, just load the track and hit the right pad — no need to find the right start point, it's already marked.",
+      },
+    },
+    8: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour préparer ton set cabine depuis ta FLX4, exporte toujours une clé USB en parallèle de ton setup Rekordbox principal. Dans Rekordbox, utilise « Exporter vers appareil » et sélectionne tes playlists d'énergie. Même si tu joues habituellement en laptop + FLX4, cette clé USB peut te sauver si ton laptop plante — branche-la dans un CDJ de backup en club.",
+        en: "\n\n**On your DDJ-FLX4**\nTo prep your club set from your FLX4, always export a USB stick alongside your main Rekordbox setup. In Rekordbox, use \"Export to Device\" and select your energy playlists. Even if you usually play laptop + FLX4, that USB stick can save you if your laptop crashes — plug it into a backup CDJ at the venue.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nDans Rekordbox, crée une structure de playlists claire pour ta FLX4 : un dossier par genre, puis des sous-playlists par niveau d'énergie (Low / Mid / High / Peak). Ajoute une playlist « Urgence » avec 10 morceaux sûrs toutes énergies. Pendant le set, cette organisation te permet de naviguer en 2-3 clics max — vital quand la foule attend.",
+        en: "\n\n**On your DDJ-FLX4**\nIn Rekordbox, create a clear playlist structure for your FLX4: one folder per genre, then sub-playlists by energy level (Low / Mid / High / Peak). Add an \"Emergency\" playlist with 10 safe tracks across all energies. During the set, this structure lets you navigate in 2-3 clicks max — vital when the crowd is waiting.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nTa FLX4 est compacte et portable — c'est un avantage en backup. Prépare un kit « plan B » : ta FLX4 + câble USB-C + laptop chargé + clé USB exportée. Si le matos du club pose problème, tu peux brancher ta FLX4 sur n'importe quelle sortie et reprendre ton set en 30 secondes. C'est le filet de sécurité ultime du DJ laptop.",
+        en: "\n\n**On your DDJ-FLX4**\nYour FLX4 is compact and portable — that's a backup advantage. Prepare a \"Plan B\" kit: FLX4 + USB-C cable + charged laptop + exported USB stick. If the club gear fails, you can plug your FLX4 into any output and resume your set in 30 seconds. It's the ultimate safety net for a laptop DJ.",
+      },
+    },
+    9: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nAvant de monter en cabine avec ta FLX4 : branche le USB-C, ouvre Rekordbox, vérifie que le contrôleur est détecté (voyant allumé). Fais un check rapide des gains (potards à midi), teste tes sorties casque et Master. Charge ton morceau d'intro et lance-le à volume zéro pour vérifier que le signal passe. Ce rituel de 2 minutes te met en confiance avant même le premier beat.",
+        en: "\n\n**On your DDJ-FLX4**\nBefore stepping into the booth with your FLX4: plug in USB-C, open Rekordbox, verify the controller is detected (light on). Quick-check gains (knobs at noon), test headphone and Master outputs. Load your intro track and play at zero volume to confirm signal flows. This 2-minute ritual builds confidence before the first beat drops.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nLe monitoring sur ta FLX4 se gère via la molette CUE/MASTER du casque. En cabine, commence par écouter le retour cabine (enceintes booth), puis bascule au casque pour le cue du prochain morceau. Attention : en club, le son de la salle arrive avec un léger délai — fie-toi à ton casque et au retour booth, PAS au son de la façade. C'est un piège classique pour les DJs laptop.",
+        en: "\n\n**On your DDJ-FLX4**\nMonitoring on your FLX4 is managed via the CUE/MASTER headphone knob. In the booth, start by listening to booth monitors, then switch to headphones for cueing the next track. Warning: in a club, the main PA sound reaches you with a slight delay — trust your headphones and booth monitors, NOT the front-of-house. This is a classic trap for laptop DJs.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour connecter ta FLX4 au système du club : sortie Master (RCA ou jack selon ton câble) vers la table de mixage du club ou directement vers un ampli. Demande toujours au sonorisateur où brancher AVANT d'arriver en cabine. Prévois un adaptateur RCA → jack 6.35mm et un câble jack → XLR au cas où. La FLX4 sort en niveau ligne — pas besoin de préamp, mais vérifie le gain d'entrée sur leur table.",
+        en: "\n\n**On your DDJ-FLX4**\nTo connect your FLX4 to the club system: Master output (RCA or jack depending on your cable) into the club mixer or directly to an amp. Always ask the sound engineer where to plug in BEFORE stepping into the booth. Bring an RCA → 1/4\" jack adapter and a jack → XLR cable just in case. The FLX4 outputs line level — no preamp needed, but check the input gain on their mixer.",
+      },
+    },
+    10: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nLes fonctions avancées qui rendent ta FLX4 unique : le Merge FX (transition complète en un geste), les couches Shift sur les pads (8 Hot Cues + 8 fonctions secondaires par deck), et la compatibilité Rekordbox Cloud pour synchroniser ta bibliothèque entre appareils. Explore aussi le mode « Pad FX » — chaque pad déclenche un effet rythmique synchronisé au BPM.",
+        en: "\n\n**On your DDJ-FLX4**\nAdvanced features that make your FLX4 unique: Merge FX (complete transition in one gesture), Shift layers on pads (8 Hot Cues + 8 secondary functions per deck), and Rekordbox Cloud compatibility for syncing your library across devices. Also explore \"Pad FX\" mode — each pad triggers a rhythmic effect synced to BPM.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nPour développer ton workflow signature sur la FLX4 : identifie 3 gestes qui te sont propres. Par exemple : Merge FX en entrée de drop, Hot Cue pad-juggling sur les breakdowns, filtre progressif sur la montée. Répète ces gestes jusqu'à ce qu'ils deviennent ta « marque de fabrique ». Quand les gens te reconnaissent à ta façon de mixer, c'est gagné.",
+        en: "\n\n**On your DDJ-FLX4**\nTo develop your signature workflow on the FLX4: identify 3 gestures that are uniquely yours. For example: Merge FX into the drop, Hot Cue pad-juggling on breakdowns, progressive filter on the build. Repeat these moves until they become your \"trademark.\" When people recognize your mixing style, you've made it.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX4**\nRoutine d'entraînement long terme pour ta FLX4 : (1) 15 min de transitions propres sans FX — la base. (2) 15 min de créativité — Merge FX, loops, Hot Cues expérimentaux. (3) 15 min de simulation live — un set sans pause, pression du chrono, interdiction de revenir en arrière. Fais ça 3 fois par semaine et ta progression sera visible mois après mois.",
+        en: "\n\n**On your DDJ-FLX4**\nLong-term practice routine for your FLX4: (1) 15 min of clean transitions without FX — the foundation. (2) 15 min of creativity — Merge FX, loops, experimental Hot Cues. (3) 15 min of live simulation — a non-stop set, timer pressure, no going back. Do this 3 times a week and your progress will be visible month after month.",
+      },
+    },
+  },
+  flx3: {
+    2: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nTa FLX3 offre un layout plus spacieux que la FLX4 : les 3 potards EQ (High/Mid/Low) et le Trim sont bien espacés, tu as de la place pour chaque doigt. En bonus, tu as le potard **Smart CFX** dédié sur chaque voie — c'est un outil de sculpting sonore supplémentaire. Pendant que tu explores les 3 bandes d'EQ, essaie aussi de tourner le Smart CFX : tu verras qu'il peut filtrer, ajouter du grain ou de la résonance. C'est un couteau suisse sonore que les autres contrôleurs n'ont pas.",
+        en: "\n\n**On your DDJ-FLX3**\nYour FLX3 offers a more spacious layout than the FLX4: the 3 EQ knobs (High/Mid/Low) and Trim are well-spaced, giving each finger room to breathe. As a bonus, you have a dedicated **Smart CFX** knob on each channel — it's an extra sound-sculpting tool. While exploring the 3 EQ bands, also try turning the Smart CFX: you'll find it can filter, add grit, or add resonance. It's a sonic Swiss Army knife that other controllers don't have.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nLe swap de basses est confortable sur la FLX3 grâce à l'espacement des voies. Tes deux mains ont de la place pour atteindre les potards Low simultanément. En complément du swap de basses classique, essaie d'utiliser le **Smart CFX** pendant la transition : tourne-le légèrement sur le morceau sortant pour ajouter un filtre qui « efface » progressivement le son, pendant que le nouveau morceau prend le relais avec ses basses. Ça donne un effet plus cinématique qu'un simple swap sec.",
+        en: "\n\n**On your DDJ-FLX3**\nThe bass swap feels comfortable on the FLX3 thanks to the wider channel spacing. Both hands have room to reach the Low knobs simultaneously. On top of the classic bass swap, try using the **Smart CFX** during the transition: turn it slightly on the outgoing track to add a filter that gradually 'erases' the sound while the new track takes over with its bass. It creates a more cinematic effect than a dry swap.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour les 3 scénarios, ta FLX3 te donne des options supplémentaires. Tu as la section **Beat FX** dédiée (echo, reverb, flanger…) en plus du Smart CFX. Pour le scénario 3 (build-up), combine les deux : baisse les basses progressivement avec l'EQ, ajoute un peu de Beat FX (un delay léger) et tourne le Smart CFX vers la fin pour créer une montée de tension unique. Quand tu lâches le nouveau morceau, coupe tous les effets d'un coup — l'impact est maximal.",
+        en: "\n\n**On your DDJ-FLX3**\nFor all 3 scenarios, your FLX3 gives you extra options. You have a dedicated **Beat FX** section (echo, reverb, flanger…) on top of Smart CFX. For scenario 3 (the build-up), combine both: gradually reduce the bass with EQ, add a touch of Beat FX (a light delay), and turn the Smart CFX toward the end to create a unique tension build. When you drop the new track, kill all effects at once — maximum impact.",
+      },
+    },
+    3: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nTa FLX3 a des pads de performance bien visibles sous chaque jog wheel. Utilise-les pour poser des **hot cues** aux points clés de tes morceaux : début de couplet, drop, point d'intro idéal pour le mix. Pendant la phase de préparation, un appui sur le pad te ramène au point exact — plus besoin de chercher dans la waveform. Les jog wheels sont plus grandes que sur la FLX4, ce qui rend le calage manuel plus précis et plus agréable.",
+        en: "\n\n**On your DDJ-FLX3**\nYour FLX3 has clearly visible performance pads below each jog wheel. Use them to set **hot cues** at key points in your tracks: verse start, drop, ideal intro point for mixing. During the preparation phase, one pad tap takes you back to the exact spot — no need to hunt through the waveform. The jog wheels are larger than on the FLX4, making manual beatmatching more precise and more satisfying.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour les 4 styles de transitions, ta FLX3 brille sur les transitions créatives grâce à sa section **Beat FX** dédiée. Pendant la transition, active un delay ou un echo sur le morceau sortant : ça crée un « voile » sonore qui habille la bascule. Tu peux aussi combiner le **Smart CFX** (filtre) avec le Beat FX pour un résultat encore plus riche. Pour le coup sec, les faders de la FLX3 ont une course confortable — tu peux être rapide et précis à la fois.",
+        en: "\n\n**On your DDJ-FLX3**\nFor the 4 transition styles, your FLX3 shines on creative transitions thanks to its dedicated **Beat FX** section. During the transition, activate a delay or echo on the outgoing track: it creates a sonic 'veil' that dresses up the handover. You can also combine **Smart CFX** (filter) with Beat FX for an even richer result. For quick cuts, the FLX3's faders have a comfortable travel — you can be both fast and precise.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour ton premier mini-set, la FLX3 t'offre un espace de travail confortable. Prépare tes hot cues sur les 3 morceaux avant de commencer. Astuce FLX3 : utilise le **Smart CFX** comme outil de transition entre les morceaux — un léger filtre pendant le swap donne un côté professionnel à ton enchaînement. Enregistre ta session dans Rekordbox et réécoute en notant ce qui sonne bien. Bonus : essaie un petit Beat FX (echo court) sur la dernière mesure du morceau sortant.",
+        en: "\n\n**On your DDJ-FLX3**\nFor your first mini-set, the FLX3 gives you a comfortable workspace. Set up hot cues on all 3 tracks before you begin. FLX3 tip: use **Smart CFX** as a transition tool between tracks — a light filter during the swap adds a professional touch to your blend. Record your session in Rekordbox and listen back, noting what sounds good. Bonus: try a short Beat FX (brief echo) on the last bar of the outgoing track.",
+      },
+    },
+    4: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nTa FLX3 affiche les informations de clé sur son propre écran — un vrai avantage. Tu peux voir la tonalité du morceau chargé directement sur le contrôleur sans regarder l'écran du laptop. En parallèle, Rekordbox te donne une vue globale de ta bibliothèque triée par clé Camelot. Ce double affichage (contrôleur + laptop) te donne une vision complète en un coup d'œil.",
+        en: "\n\n**On your DDJ-FLX3**\nYour FLX3 displays key information on its own screen — a real advantage. You can see the loaded track's key directly on the controller without looking at the laptop. Meanwhile, Rekordbox gives you a full view of your library sorted by Camelot key. This dual display (controller + laptop) gives you complete visibility at a glance.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nAvec ta FLX3 et Rekordbox en notation Camelot, tu as un workflow harmonique très fluide : l'écran du contrôleur te montre la clé du morceau qui joue, et Rekordbox te permet de filtrer les morceaux compatibles. La section Beat FX de ta FLX3 te permet aussi de placer un delay ou reverb pendant une transition pour adoucir un léger frottement entre deux clés proches.",
+        en: "\n\n**On your DDJ-FLX3**\nWith your FLX3 and Rekordbox in Camelot notation, you have a smooth harmonic workflow: the controller screen shows the playing track's key, and Rekordbox lets you filter compatible tracks. Your FLX3's Beat FX section also lets you place a delay or reverb during a transition to soften slight friction between two close keys.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPendant ta transition harmonique, profite des jog wheels plus grandes de ta FLX3 — elles offrent une inertie agréable pour des corrections de phase ultra-précises. La FLX3 te donne aussi un accès direct au Smart CFX : un seul potard pour ajouter une texture pendant le blend entre deux morceaux en clés compatibles. C'est subtil, mais ça rend la transition encore plus « musicale ».",
+        en: "\n\n**On your DDJ-FLX3**\nDuring your harmonic transition, take advantage of your FLX3's larger jog wheels — they offer nice inertia for ultra-precise phase corrections. The FLX3 also gives you direct Smart CFX access: one knob to add texture during the blend between two key-compatible tracks. It's subtle, but it makes the transition sound even more \"musical.\"",
+      },
+      4: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour casser les règles du Camelot sur ta FLX3, combine le Smart CFX et la section Beat FX. Le Smart CFX crée un voile sonore qui masque la dissonance, et le Beat FX (echo ou reverb) allonge les queues harmoniques pour flouter le passage. C'est comme peindre un dégradé entre deux couleurs qui ne matchent pas — le résultat est plus artistique qu'un cut brut.",
+        en: "\n\n**On your DDJ-FLX3**\nTo break Camelot rules on your FLX3, combine Smart CFX with the Beat FX section. Smart CFX creates a sonic veil that masks dissonance, and Beat FX (echo or reverb) stretches harmonic tails to blur the passage. It's like painting a gradient between two clashing colors — the result is more artistic than a raw cut.",
+      },
+    },
+    5: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour structurer ton set, la FLX3 te donne plus d'espace de travail que la FLX4 — profites-en. Organise tes playlists Rekordbox par phase, et utilise la section Beat FX dédiée pour marquer les transitions entre phases (un delay en sortie d'intro, un reverb avant le pic). L'écran intégré te permet de vérifier le BPM et la clé sans quitter le contrôleur des yeux.",
+        en: "\n\n**On your DDJ-FLX3**\nTo structure your set, the FLX3 gives you more workspace than the FLX4 — use it. Organize Rekordbox playlists by phase, and use the dedicated Beat FX section to mark transitions between phases (a delay at the intro exit, reverb before the peak). The built-in screen lets you check BPM and key without taking your eyes off the controller.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour naviguer vite dans tes morceaux sur la FLX3 : utilise l'écran du contrôleur pour browser tes playlists directement, sans passer par le laptop. Le rotary browser te permet de scroller rapidement et de charger en un clic. Combine ça avec des playlists bien nommées par énergie — tu trouveras le bon morceau en quelques secondes même sous pression.",
+        en: "\n\n**On your DDJ-FLX3**\nTo navigate tracks quickly on the FLX3: use the controller's screen to browse playlists directly, without reaching for the laptop. The rotary browser lets you scroll fast and load with one press. Combine this with well-named energy-level playlists — you'll find the right track in seconds even under pressure.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour gérer l'énergie en live, ta FLX3 a un avantage décisif : le Smart CFX. Ce potard unique te permet de transformer l'ambiance d'un seul geste — un filtre progressif qui monte l'énergie, ou un « wash » qui calme le jeu. Combine-le avec la section Beat FX pour des montées de tension (echo crescendo) ou des respirations (reverb douce en sortie de pic).",
+        en: "\n\n**On your DDJ-FLX3**\nTo manage energy live, your FLX3 has a decisive advantage: Smart CFX. This single knob transforms the vibe in one gesture — a progressive filter that builds energy, or a \"wash\" that calms things down. Combine it with Beat FX for tension builds (crescendo echo) or breathers (soft reverb after a peak).",
+      },
+    },
+    6: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nSur ta FLX3, les loops sont accessibles via les pads de performance — mais tu as aussi la possibilité de contrôler la longueur du loop directement depuis l'écran. Active un loop 4 temps d'un tap, puis divise ou double avec les boutons dédiés. La taille plus généreuse du contrôleur fait que tes gestes sont plus précis — moins de risque d'appuyer sur le mauvais pad en live.",
+        en: "\n\n**On your DDJ-FLX3**\nOn your FLX3, loops are accessible via performance pads — but you can also control loop length directly from the screen. Activate a 4-beat loop with one tap, then halve or double with the dedicated buttons. The controller's larger size means more precise gestures — less risk of hitting the wrong pad during a live set.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nC'est ici que ta FLX3 brille vraiment : la section Beat FX dédiée + le Smart CFX. Le Beat FX te donne accès à l'echo, le reverb, le flanger, le delay — avec un potard wet/dry et un sélecteur de timing. Le Smart CFX ajoute une texture unique par-dessus. La combinaison des deux, c'est ta palette d'artiste : Beat FX pour la tension, Smart CFX pour la couleur.",
+        en: "\n\n**On your DDJ-FLX3**\nThis is where your FLX3 truly shines: the dedicated Beat FX section + Smart CFX. Beat FX gives you echo, reverb, flanger, delay — with a wet/dry knob and timing selector. Smart CFX adds a unique texture on top. The combination is your artist's palette: Beat FX for tension, Smart CFX for color.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour ta transition créative complète sur la FLX3 : loop (pads) → swap de basses (EQ) → Beat FX pour la tension → Smart CFX pour la texture → release. Tu as l'espace pour faire tout ça sans te mélanger les pinceaux. L'ergonomie de la FLX3 te permet d'avoir chaque outil sous un doigt différent — c'est cette fluidité qui rend tes transitions créatives possibles en live.",
+        en: "\n\n**On your DDJ-FLX3**\nFor your full creative transition on the FLX3: loop (pads) → bass swap (EQ) → Beat FX for tension → Smart CFX for texture → release. You have the space to do all this without getting tangled. The FLX3's ergonomics let you reach each tool with a different finger — that fluidity is what makes creative transitions possible live.",
+      },
+    },
+    7: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nTa FLX3 est un peu plus grande que la FLX4, mais tu restes dans un setup compact qui te permet de lever les yeux facilement. Le Smart CFX est ton outil de réaction rapide par excellence : si tu sens la foule décrocher, un tour de potard et tu changes l'ambiance instantanément — sans chercher un nouveau morceau. Ça te donne 10-15 secondes de répit pour prendre ta décision.",
+        en: "\n\n**On your DDJ-FLX3**\nYour FLX3 is slightly larger than the FLX4, but you're still in a compact setup that lets you look up easily. Smart CFX is your ultimate quick-reaction tool: if you sense the crowd dropping off, one knob turn and you shift the vibe instantly — without searching for a new track. It buys you 10-15 seconds to make your decision.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour changer de direction musicale rapidement sur ta FLX3 : (1) Smart CFX pour « voiler » le morceau en cours, (2) browse ta playlist d'urgence à l'écran du contrôleur, (3) charge et lance depuis un Hot Cue, (4) Beat FX (echo court) pour le pont, (5) swap. Tout est accessible sans toucher le laptop — c'est ça la force de la FLX3 en situation de stress.",
+        en: "\n\n**On your DDJ-FLX3**\nTo change musical direction quickly on your FLX3: (1) Smart CFX to \"veil\" the current track, (2) browse your emergency playlist on the controller screen, (3) load and launch from a Hot Cue, (4) Beat FX (short echo) for the bridge, (5) swap. Everything is accessible without touching the laptop — that's the FLX3's strength under pressure.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour les transitions d'urgence, tes pads Hot Cue de la FLX3 sont tes meilleurs amis. Place des Hot Cues stratégiques sur tes morceaux de secours (intro, drop, breakdown, outro). En cas de panique, le geste est simple : charge → pad → play. Pas de recherche, pas d'hésitation. Et si tu as besoin de temps, le Smart CFX te donne un « voile sonore » pour masquer le passage.",
+        en: "\n\n**On your DDJ-FLX3**\nFor emergency transitions, your FLX3's Hot Cue pads are your best friends. Place strategic Hot Cues on rescue tracks (intro, drop, breakdown, outro). In a panic, the gesture is simple: load → pad → play. No searching, no hesitation. And if you need time, Smart CFX gives you a \"sonic veil\" to mask the transition.",
+      },
+    },
+    8: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour préparer ton set cabine depuis ta FLX3, prépare une clé USB exportée depuis Rekordbox en plus de ton setup laptop. Ta FLX3 peut lire cette clé directement — c'est un vrai filet de sécurité. Exporte tes playlists organisées par énergie et vérifie que les analyses BPM/clé sont propres avant d'exporter. Teste la clé sur le contrôleur avant le jour J.",
+        en: "\n\n**On your DDJ-FLX3**\nTo prep your club set from your FLX3, prepare a Rekordbox-exported USB stick alongside your laptop setup. Your FLX3 can read it directly — a real safety net. Export your energy-organized playlists and verify BPM/key analyses are clean before exporting. Test the stick on the controller before the big day.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nDans Rekordbox, organise tes playlists pour la FLX3 avec une logique claire : dossier par genre → sous-playlists par énergie → playlist « SOS » avec des morceaux passe-partout. Sur le contrôleur, tu peux naviguer ces dossiers directement à l'écran avec le rotary browser — c'est rapide et tu ne perds jamais le fil de ton set pendant que tu cherches.",
+        en: "\n\n**On your DDJ-FLX3**\nIn Rekordbox, organize playlists for your FLX3 with clear logic: folder per genre → sub-playlists by energy → \"SOS\" playlist with versatile tracks. On the controller, you can browse these folders directly on screen with the rotary browser — it's fast and you never lose track of your set while searching.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nTon plan de backup avec la FLX3 : (1) clé USB principale exportée proprement, (2) clé USB de secours identique, (3) laptop avec Rekordbox prêt si les clés USB posent problème. Stocke aussi une version « light » de tes playlists essentielles sur ton téléphone (via Rekordbox mobile) — en dernier recours, tu peux diffuser depuis ton phone. La redondance, c'est la sérénité.",
+        en: "\n\n**On your DDJ-FLX3**\nYour backup plan with the FLX3: (1) clean main USB stick export, (2) identical backup USB stick, (3) laptop with Rekordbox ready if USB sticks fail. Also store a \"light\" version of your essential playlists on your phone (via Rekordbox mobile) — as a last resort, you can stream from your phone. Redundancy equals peace of mind.",
+      },
+    },
+    9: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nAvant de monter en cabine avec ta FLX3 : branche-la, vérifie la détection dans Rekordbox, teste les sorties casque et Master. Check les gains (tous à midi), charge ton morceau d'intro et fais un test de signal à volume zéro. Avec ta FLX3, profite de l'écran intégré pour vérifier que tes morceaux sont bien analysés — grilles, clés, BPM — tout doit être vert avant de jouer.",
+        en: "\n\n**On your DDJ-FLX3**\nBefore stepping into the booth with your FLX3: plug in, verify detection in Rekordbox, test headphone and Master outputs. Check gains (all at noon), load your intro track and do a zero-volume signal test. With your FLX3, use the built-in screen to verify your tracks are properly analyzed — grids, keys, BPM — everything must be green before playing.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nLe monitoring sur ta FLX3 est confortable grâce à l'espacement des contrôles. Utilise la molette CUE/MASTER pour doser ce que tu entends : en début de set, favorise le retour booth (enceintes cabine) pour caler le volume global, puis bascule sur le casque pour cuer. La FLX3 gère bien la séparation des signaux — profite de cette clarté pour des transitions ultra-propres même dans une salle bruyante.",
+        en: "\n\n**On your DDJ-FLX3**\nMonitoring on your FLX3 is comfortable thanks to well-spaced controls. Use the CUE/MASTER knob to balance what you hear: at the start of the set, favor booth monitors to set overall volume, then switch to headphones for cueing. The FLX3 handles signal separation well — use that clarity for ultra-clean transitions even in a noisy room.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour connecter ta FLX3 au système PA : sortie Master (RCA ou balanced selon le modèle) vers la console du club. Communique avec le sonorisateur avant de brancher. Prévois des adaptateurs RCA → XLR et jack → XLR. Ta FLX3 sort un signal propre en niveau ligne — pas besoin de pousser les gains sur leur table. Si le son est trop fort ou distordu, baisse TA sortie Master plutôt que de demander au son de baisser.",
+        en: "\n\n**On your DDJ-FLX3**\nTo connect your FLX3 to the PA system: Master output (RCA or balanced depending on model) into the club console. Communicate with the sound engineer before plugging in. Bring RCA → XLR and jack → XLR adapters. Your FLX3 outputs a clean line-level signal — no need to push gains on their mixer. If it's too loud or distorted, lower YOUR Master output rather than asking them to turn down.",
+      },
+    },
+    10: {
+      1: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nLes fonctions avancées uniques à ta FLX3 : le Smart CFX (un potard = une palette de textures sonores impossible à reproduire sur d'autres contrôleurs), la section Beat FX avec sélecteur de timing, et les jog wheels grande taille pour un contrôle de vinyl feel. Explore chaque preset du Smart CFX — certains sont des perles cachées qui peuvent devenir ta signature sonore.",
+        en: "\n\n**On your DDJ-FLX3**\nAdvanced features unique to your FLX3: Smart CFX (one knob = a palette of sonic textures impossible to replicate on other controllers), the Beat FX section with timing selector, and large-size jog wheels for vinyl-feel control. Explore every Smart CFX preset — some are hidden gems that can become your sonic signature.",
+      },
+      2: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nPour développer ton workflow signature sur la FLX3, identifie ta « trilogie créative » — 3 gestes qui te définissent. Exemple : Smart CFX progressif en montée, Beat FX echo en sortie de phrase, bass swap rapide avec les EQ. Répète cette trilogie sur 20 transitions différentes jusqu'à ce que ce soit automatique. Quand ton style est reconnaissable à l'oreille, tu as trouvé ton identité.",
+        en: "\n\n**On your DDJ-FLX3**\nTo develop your signature workflow on the FLX3, identify your \"creative trilogy\" — 3 gestures that define you. Example: progressive Smart CFX on the build, Beat FX echo on phrase exits, quick bass swap with EQ. Repeat this trilogy across 20 different transitions until it's automatic. When your style is recognizable by ear, you've found your identity.",
+      },
+      3: {
+        fr: "\n\n**Sur ta DDJ-FLX3**\nRoutine d'entraînement long terme pour ta FLX3 : (1) 15 min « propre » — transitions sans FX, focus timing et EQ. (2) 15 min « créatif » — Smart CFX, Beat FX, loops expérimentaux, pousse tes limites. (3) 15 min « live » — set chronométré sans pause ni retour arrière. Ajoute une session mensuelle « exploration » où tu testes un nouveau preset Smart CFX en situation de mix réel.",
+        en: "\n\n**On your DDJ-FLX3**\nLong-term practice routine for your FLX3: (1) 15 min \"clean\" — transitions without FX, focus on timing and EQ. (2) 15 min \"creative\" — Smart CFX, Beat FX, experimental loops, push your limits. (3) 15 min \"live\" — timed set with no pauses or going back. Add a monthly \"exploration\" session where you test a new Smart CFX preset in a real mix situation.",
+      },
+    },
+  },
+  xdj_rx: {
+    2: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nLes potards EQ de ton XDJ-RX sont espacés exactement comme sur une table de mixage de club (DJM). Le Trim est en haut, puis High, Mid, Low — dans cet ordre. Tu n'as pas besoin d'ordi : tout se fait directement sur l'appareil avec ta clé USB. Les VU-mètres à l'écran te montrent en temps réel le niveau de chaque bande quand tu tournes un potard. Entraîne-toi à lire ces VU-mètres du coin de l'œil — en club, c'est ta référence visuelle pour éviter la saturation.",
+        en: "\n\n**On your XDJ-RX**\nYour XDJ-RX's EQ knobs are spaced exactly like a club mixer (DJM). Trim is at the top, then High, Mid, Low — in that order. You don't need a laptop: everything runs directly on the unit with your USB stick. The on-screen VU meters show you each band's level in real time as you turn a knob. Practice reading those VU meters out of the corner of your eye — in a club, they're your visual reference for avoiding distortion.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nLe swap de basses sur le XDJ-RX se fait exactement comme en club : les potards Low sont bien séparés entre les deux voies, comme sur un DJM. Tu peux voir l'impact de ton swap directement sur les **VU-mètres à l'écran** — quand tu coupes le Low d'une voie, la barre verte descend instantanément. Utilise ce repère visuel pour confirmer que ton swap est propre. En standalone (sans ordi), tu développes les réflexes qui te serviront directement en cabine DJ.",
+        en: "\n\n**On your XDJ-RX**\nThe bass swap on the XDJ-RX works exactly like in a club: the Low knobs are well-separated between the two channels, just like on a DJM. You can see the impact of your swap directly on the **on-screen VU meters** — when you cut a channel's Low, the green bar drops instantly. Use this visual cue to confirm your swap is clean. In standalone mode (no laptop), you're building the exact reflexes you'll use in a real DJ booth.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour les 3 scénarios, ton XDJ-RX te met dans des conditions club. L'écran intégré affiche les waveforms des deux morceaux — tu vois visuellement les drops et les breaks arriver, ce qui t'aide à timer ton swap parfaitement. Pour le scénario 3 (build-up), observe la waveform : les sections où elle s'affine indiquent un break. Commence à baisser les basses à ce moment-là pour amplifier la tension naturelle du morceau. Tu n'as pas besoin d'ordi pour ça — tout est sur ton écran.",
+        en: "\n\n**On your XDJ-RX**\nFor all 3 scenarios, your XDJ-RX puts you in club conditions. The built-in screen shows both tracks' waveforms — you can visually see drops and breaks coming, helping you time your swap perfectly. For scenario 3 (the build-up), watch the waveform: sections where it thins out indicate a break. Start reducing the bass at that point to amplify the track's natural tension. You don't need a laptop for any of this — it's all on your screen.",
+      },
+    },
+    3: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nTon XDJ-RX affiche les **hot cues** directement à l'écran, avec des couleurs différentes pour chaque point. Place tes hot cues aux points d'entrée de tes morceaux depuis Rekordbox avant d'exporter ta clé USB — ils apparaîtront automatiquement sur l'appareil. Tu peux aussi les créer directement sur le XDJ-RX. Pendant la phase de préparation, l'écran te montre les deux waveforms superposées, tu vois si les beats sont alignés visuellement. C'est comme avoir un copilote — sans ordi.",
+        en: "\n\n**On your XDJ-RX**\nYour XDJ-RX displays **hot cues** directly on screen, with different colors for each point. Set your hot cues at track entry points in Rekordbox before exporting your USB stick — they'll appear automatically on the unit. You can also create them directly on the XDJ-RX. During the preparation phase, the screen shows both waveforms overlaid, so you can visually check if the beats are aligned. It's like having a co-pilot — no laptop needed.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour tester les 4 styles de transitions, ton XDJ-RX a un avantage unique : tu vois les **deux waveforms** à l'écran sans ordi. Pour le coup sec, repère visuellement le début d'une phrase (le moment où la waveform s'épaissit après un break), et fais ta bascule pile à ce moment. Pour les transitions créatives, utilise la section FX intégrée — les effets sont les mêmes que sur les DJM de club. Tu t'entraînes sur du matériel pro, les gestes que tu apprends ici sont transférables directement en cabine.",
+        en: "\n\n**On your XDJ-RX**\nFor testing the 4 transition styles, your XDJ-RX has a unique advantage: you can see **both waveforms** on screen without a laptop. For quick cuts, visually spot where a phrase starts (where the waveform thickens after a break), and make your switch right at that moment. For creative transitions, use the built-in FX section — the effects are the same as on club DJM mixers. You're training on pro gear, and every move you learn here transfers directly to a real booth.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour ton mini-set, ton XDJ-RX te met en conditions réelles de club. Prépare ta clé USB avec tes 3 morceaux dans une playlist Rekordbox, exporte et branche — pas d'ordi nécessaire. Navigue dans tes morceaux directement à l'écran. L'avantage : sans laptop entre toi et la musique, tu développes une connexion directe avec le son. C'est exactement ce qui t'attend en cabine pro. Enregistre ta session via la sortie REC de l'appareil pour réécouter et t'améliorer.",
+        en: "\n\n**On your XDJ-RX**\nFor your mini-set, the XDJ-RX puts you in real club conditions. Prep your USB stick with your 3 tracks in a Rekordbox playlist, export and plug in — no laptop needed. Browse your tracks directly on screen. The advantage: with no laptop between you and the music, you develop a direct connection with the sound. This is exactly what awaits you in a pro booth. Record your session via the unit's REC output to listen back and improve.",
+      },
+    },
+    4: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nTon XDJ-RX affiche la clé musicale directement sur ses écrans intégrés — pas besoin de laptop. Quand tu charges un morceau depuis ta clé USB, la clé Camelot apparaît à côté du BPM sur l'écran du deck. Tu peux même trier ta bibliothèque par clé directement sur l'appareil : utilise le bouton Sort et sélectionne « Key ». C'est le workflow le plus rapide et le plus pro.",
+        en: "\n\n**On your XDJ-RX**\nYour XDJ-RX displays the musical key directly on its built-in screens — no laptop needed. When you load a track from your USB stick, the Camelot key appears next to the BPM on the deck screen. You can even sort your library by key directly on the unit: use the Sort button and select \"Key.\" It's the fastest, most professional workflow.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nSur ton XDJ-RX, le Camelot Wheel prend tout son sens : tu vois la clé du morceau qui joue sur l'écran gauche, et tu peux trier la bibliothèque par clé sur l'écran central pour trouver les morceaux compatibles. Pas de laptop entre toi et la musique — juste toi, tes clés USB bien préparées, et les écrans. C'est exactement le workflow des DJs de club.",
+        en: "\n\n**On your XDJ-RX**\nOn your XDJ-RX, the Camelot Wheel makes perfect sense: you see the playing track's key on the left screen, and you can sort the library by key on the central screen to find compatible tracks. No laptop between you and the music — just you, your well-prepared USB sticks, and the screens. This is exactly the club DJ workflow.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPendant ta transition harmonique sur le XDJ-RX, tes grandes jog wheels te donnent un contrôle de phase digne des CDJ de club. L'inertie est agréable, les corrections sont douces. Les écrans intégrés te montrent les formes d'onde des deux morceaux en parallèle — tu VOIS le blend en temps réel. Utilise la fonction « Related Tracks » à l'écran pour découvrir des morceaux compatibles que tu n'avais pas envisagés.",
+        en: "\n\n**On your XDJ-RX**\nDuring your harmonic transition on the XDJ-RX, the large jog wheels give you CDJ-level phase control. The inertia feels great, corrections are smooth. The built-in screens show both tracks' waveforms in parallel — you SEE the blend in real time. Use the on-screen \"Related Tracks\" feature to discover compatible tracks you hadn't considered.",
+      },
+      4: {
+        fr: "\n\n**Sur ton XDJ-RX**\nQuand tu veux casser les règles du Camelot sur ton XDJ-RX, utilise la section FX intégrée (reverb, echo, delay) pour créer le pont entre deux clés incompatibles. L'avantage du XDJ-RX : les potards FX sont accessibles directement, pas dans un menu. Un coup de reverb généreux pendant la zone de dissonance, puis tu coupes net — la foule ne sent qu'une « vague » avant que le nouveau morceau prenne le relais.",
+        en: "\n\n**On your XDJ-RX**\nWhen you want to break Camelot rules on your XDJ-RX, use the built-in FX section (reverb, echo, delay) to bridge two incompatible keys. The XDJ-RX advantage: FX knobs are directly accessible, not buried in menus. A generous reverb hit during the dissonance zone, then cut clean — the crowd only feels a \"wave\" before the new track takes over.",
+      },
+    },
+    5: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour structurer ton set sur le XDJ-RX, tout passe par ta clé USB. Dans Rekordbox, crée des dossiers par phase d'énergie (Intro / Montée / Pic / Descente) et exporte-les sur ta clé. Sur l'appareil, tu navigues ces dossiers directement à l'écran — c'est fluide, rapide, et tu n'as besoin d'aucun laptop. C'est le workflow que tu retrouveras dans TOUS les clubs.",
+        en: "\n\n**On your XDJ-RX**\nTo structure your set on the XDJ-RX, everything goes through your USB stick. In Rekordbox, create folders by energy phase (Intro / Build / Peak / Cooldown) and export them to USB. On the unit, you browse these folders directly on screen — it's fluid, fast, and laptop-free. This is the workflow you'll find in EVERY club.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour naviguer rapidement sur ton XDJ-RX en live : utilise le rotary selector pour scroller tes playlists à l'écran, et le bouton « Back » pour remonter dans l'arborescence. Prépare tes dossiers avec des noms courts et clairs (« 01_LOW », « 02_MID », « 03_HIGH »). Tu peux aussi utiliser la recherche par filtre directement sur l'écran — BPM range, clé compatible, tout est à portée de main.",
+        en: "\n\n**On your XDJ-RX**\nTo navigate quickly on your XDJ-RX during a live set: use the rotary selector to scroll playlists on screen, and the \"Back\" button to move up the folder tree. Prepare folders with short, clear names (\"01_LOW,\" \"02_MID,\" \"03_HIGH\"). You can also use on-screen filter search — BPM range, compatible key — everything is at your fingertips.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour gérer l'énergie en live sur ton XDJ-RX, les outils sont intégrés : section FX pour les montées de tension (echo crescendo, filter sweep), et le mixer avec EQ 3 bandes bien espacé pour des transitions douces. L'avantage du XDJ-RX : pas de latence logicielle, tout est natif. Tes gestes d'énergie — monter les basses, couper les aigus, lancer un FX — sont instantanés et tactiles.",
+        en: "\n\n**On your XDJ-RX**\nTo manage energy live on your XDJ-RX, the tools are built in: FX section for tension builds (crescendo echo, filter sweep), and the mixer with well-spaced 3-band EQ for smooth transitions. The XDJ-RX advantage: no software latency, everything is native. Your energy moves — boost bass, cut highs, launch FX — are instant and tactile.",
+      },
+    },
+    6: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nSur ton XDJ-RX, les loops se contrôlent de deux façons : les boutons loop dédiés (In/Out + taille) ET les performance pads à l'écran. Active un loop 4 temps avec le bouton dédié, puis utilise les boutons de taille pour halver ou doubler. Tu peux aussi déclencher des loops prédéfinis depuis les pads — le même workflow que sur les CDJ-3000 en club. Tes grandes jog wheels rendent la sortie de loop ultra-précise.",
+        en: "\n\n**On your XDJ-RX**\nOn your XDJ-RX, loops are controlled two ways: dedicated loop buttons (In/Out + size) AND on-screen performance pads. Activate a 4-beat loop with the dedicated button, then use size buttons to halve or double. You can also trigger preset loops from the pads — the same workflow as CDJ-3000s in clubs. Your large jog wheels make loop exits ultra-precise.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nLa section FX de ton XDJ-RX est celle que tu retrouveras en club sur les DJM. Echo, reverb, flanger, delay — tout est là avec un potard wet/dry, un sélecteur de timing (1/4, 1/2, 1, 2 temps) et un bouton ON/OFF dédié. Tu peux aussi utiliser les performance pads à l'écran pour déclencher des FX rythmiques. L'avantage : zéro latence, contrôle direct, sensation pro.",
+        en: "\n\n**On your XDJ-RX**\nYour XDJ-RX's FX section is the same one you'll find in clubs on DJM mixers. Echo, reverb, flanger, delay — all there with a wet/dry knob, timing selector (1/4, 1/2, 1, 2 beats), and dedicated ON/OFF button. You can also use on-screen performance pads for rhythmic FX triggers. The advantage: zero latency, direct control, pro feel.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour ta transition créative complète sur le XDJ-RX : loop dédié (bouton) → EQ 3 bandes (bien espacé, geste confortable) → FX section pour la tension → release. Le XDJ-RX te donne le même espace et la même ergonomie qu'un setup CDJ + DJM de club. Chaque outil a son espace dédié — tes mains ne se croisent jamais. C'est cette ergonomie qui rend les transitions créatives fluides et sans stress.",
+        en: "\n\n**On your XDJ-RX**\nFor your full creative transition on the XDJ-RX: dedicated loop (button) → 3-band EQ (well-spaced, comfortable gesture) → FX section for tension → release. The XDJ-RX gives you the same space and ergonomics as a club CDJ + DJM setup. Each tool has its dedicated area — your hands never cross. It's this ergonomics that makes creative transitions fluid and stress-free.",
+      },
+    },
+    7: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nL'avantage massif de ton XDJ-RX pour la lecture de foule : PAS de laptop entre toi et le public. Rien ne bloque ta vue. Tu lèves les yeux et tu vois la piste directement. Les écrans intégrés te donnent toutes les infos nécessaires d'un coup d'œil rapide vers le bas — BPM, clé, temps restant. Le reste du temps, tes yeux sont sur la foule. C'est LE workflow de lecture de piste des pros.",
+        en: "\n\n**On your XDJ-RX**\nYour XDJ-RX's massive advantage for crowd reading: NO laptop between you and the audience. Nothing blocks your view. Look up and you see the floor directly. The built-in screens give you all the info you need with a quick downward glance — BPM, key, remaining time. The rest of the time, your eyes are on the crowd. This IS the pro crowd-reading workflow.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour changer de direction musicale rapidement sur ton XDJ-RX : (1) tourne le rotary selector pour trouver un morceau dans ton dossier d'énergie alternative, (2) charge-le sur le deck libre, (3) lance depuis un Hot Cue marqué en amont, (4) utilise la section FX (echo court) pour le pont, (5) switch. L'avantage : tout se fait sur l'appareil, sans bouger de ta position. Tes mains restent sur les platines.",
+        en: "\n\n**On your XDJ-RX**\nTo change musical direction quickly on your XDJ-RX: (1) turn the rotary selector to find a track in your alternative energy folder, (2) load on the free deck, (3) launch from a pre-set Hot Cue, (4) use the FX section (short echo) for the bridge, (5) switch. The advantage: everything happens on the unit, without shifting position. Your hands stay on the decks.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour les transitions d'urgence sur ton XDJ-RX, tes Hot Cues sont sauvegardés directement sur la clé USB — ils se rechargent à chaque fois que tu insères la clé. Place 4 Hot Cues stratégiques sur chaque morceau de secours. En situation de stress, charge le morceau → l'écran affiche tes cues → un pad → c'est parti. Pas de laptop à chercher, pas de souris à cliquer — tout est physique et immédiat.",
+        en: "\n\n**On your XDJ-RX**\nFor emergency transitions on your XDJ-RX, your Hot Cues are saved directly on the USB stick — they reload every time you insert it. Place 4 strategic Hot Cues on each rescue track. Under pressure, load the track → screen shows your cues → one pad → go. No laptop to fumble with, no mouse to click — everything is physical and immediate.",
+      },
+    },
+    8: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nLa préparation USB est CRUCIALE pour ton XDJ-RX — c'est ta seule source de morceaux (pas de laptop). Dans Rekordbox : (1) analyse TOUT à fond (BPM, clé, grilles, hot cues), (2) organise en dossiers par énergie, (3) exporte via « Exporter vers appareil ». Utilise une clé USB rapide (USB 3.0+), formatée en FAT32 ou exFAT. Teste-la sur le XDJ-RX AVANT le gig — un export raté = un set sans morceaux.",
+        en: "\n\n**On your XDJ-RX**\nUSB preparation is CRUCIAL for your XDJ-RX — it's your only track source (no laptop). In Rekordbox: (1) fully analyze EVERYTHING (BPM, key, grids, hot cues), (2) organize into energy folders, (3) export via \"Export to Device.\" Use a fast USB stick (USB 3.0+), formatted FAT32 or exFAT. Test it on the XDJ-RX BEFORE the gig — a failed export = a set with no tracks.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nTon workflow Rekordbox pour le XDJ-RX doit être impeccable. Structure tes playlists comme ceci : « 01_Warm_Up » → « 02_Build » → « 03_Peak » → « 04_Cooldown » → « 05_SOS ». Dans chaque playlist, trie par BPM croissant. Ajoute des « My Tags » dans Rekordbox (Energy: Low/Mid/High) — ces tags sont lisibles directement sur l'écran du XDJ-RX après export.",
+        en: "\n\n**On your XDJ-RX**\nYour Rekordbox workflow for the XDJ-RX must be impeccable. Structure playlists like this: \"01_Warm_Up\" → \"02_Build\" → \"03_Peak\" → \"04_Cooldown\" → \"05_SOS.\" Within each playlist, sort by ascending BPM. Add \"My Tags\" in Rekordbox (Energy: Low/Mid/High) — these tags are readable directly on the XDJ-RX screen after export.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPlan de backup pour ton XDJ-RX : (1) clé USB principale (toujours testée la veille), (2) clé USB identique de secours (dans une poche différente), (3) une troisième clé avec un set minimal de 20 morceaux « all-purpose ». Si l'appareil ne lit pas une clé, essaie l'autre port USB. Le XDJ-RX a deux ports — utilise-les comme redondance, pas comme confort. La fiabilité avant tout.",
+        en: "\n\n**On your XDJ-RX**\nBackup plan for your XDJ-RX: (1) main USB stick (always tested the day before), (2) identical backup stick (in a different pocket), (3) a third stick with a minimal 20-track \"all-purpose\" set. If the unit won't read one stick, try the other USB port. The XDJ-RX has two ports — use them for redundancy, not convenience. Reliability above all.",
+      },
+    },
+    9: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nAvant de jouer sur ton XDJ-RX : insère ta clé USB, attends le chargement complet de la bibliothèque à l'écran. Vérifie que tes playlists sont là, que les morceaux se chargent et que les Hot Cues apparaissent. Teste les gains (à midi), les sorties casque et Booth/Master. Charge ton premier morceau et joue 2 secondes à volume zéro — signal OK ? Tu es prêt. Ce rituel de 3 minutes, c'est ton filet de sécurité.",
+        en: "\n\n**On your XDJ-RX**\nBefore playing on your XDJ-RX: insert your USB stick, wait for the library to fully load on screen. Verify playlists are there, tracks load properly, and Hot Cues appear. Test gains (at noon), headphone and Booth/Master outputs. Load your first track and play 2 seconds at zero volume — signal OK? You're ready. This 3-minute ritual is your safety net.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nLe monitoring sur ton XDJ-RX fonctionne exactement comme en club : sortie Booth séparée de la sortie Master, CUE/MASTER au casque pour doser. En cabine, écoute le retour Booth (pas la façade — elle a du délai). Le XDJ-RX te donne aussi un VU-mètre par canal — garde tes niveaux dans le vert/orange, jamais dans le rouge. Si tu t'entraînes chez toi avec des enceintes de monitoring, place-les derrière toi comme en cabine.",
+        en: "\n\n**On your XDJ-RX**\nMonitoring on your XDJ-RX works exactly like in a club: Booth output separate from Master, CUE/MASTER headphone blend for balance. In the booth, listen to the Booth monitors (not the PA — it has delay). The XDJ-RX also gives you per-channel VU meters — keep levels in green/orange, never red. If you practice at home with monitor speakers, place them behind you like in a real booth.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nTon XDJ-RX se connecte au PA comme un setup CDJ/DJM de club : sorties Master en XLR (balanced) ou RCA. En situation pro, utilise les XLR — meilleur signal, moins de bruit. Parle au sonorisateur avant de brancher. L'avantage massif : si tu joues sur ton propre XDJ-RX, tu connais TON matériel. Pas de mauvaise surprise de gain, pas de latence inconnue. Et si tu joues sur le setup du club (CDJ + DJM), l'ergonomie est la même — tu es déjà chez toi.",
+        en: "\n\n**On your XDJ-RX**\nYour XDJ-RX connects to the PA like a club CDJ/DJM setup: Master outputs in XLR (balanced) or RCA. In a pro situation, use XLR — better signal, less noise. Talk to the sound engineer before plugging in. The massive advantage: if you play on your own XDJ-RX, you know YOUR gear. No gain surprises, no unknown latency. And if you play on the club setup (CDJ + DJM), the ergonomics are the same — you're already at home.",
+      },
+    },
+    10: {
+      1: {
+        fr: "\n\n**Sur ton XDJ-RX**\nLes fonctions avancées uniques à ton XDJ-RX : les écrans intégrés qui affichent formes d'onde, BPM, clé, hot cues et playlists sans laptop. Le workflow USB pur qui te force à préparer impeccablement. La section FX identique aux DJM de club. Les grandes jog wheels avec sensation CDJ. Et les deux ports USB pour la redondance. Tout cela te prépare directement au workflow club pro — aucune transition d'apprentissage quand tu montes en cabine sur du Pioneer.",
+        en: "\n\n**On your XDJ-RX**\nAdvanced features unique to your XDJ-RX: built-in screens displaying waveforms, BPM, key, hot cues and playlists without a laptop. The pure USB workflow that forces impeccable preparation. The FX section identical to club DJM mixers. Large jog wheels with CDJ feel. And two USB ports for redundancy. All of this directly prepares you for the pro club workflow — zero learning curve when you step into a booth with Pioneer gear.",
+      },
+      2: {
+        fr: "\n\n**Sur ton XDJ-RX**\nPour développer ton workflow signature sur le XDJ-RX, pense comme un DJ de club : ta préparation USB EST ton workflow. La façon dont tu nommes tes dossiers, places tes Hot Cues, structures tes playlists, et utilises la section FX — c'est tout ça ta « signature ». Identifie 3 habitudes qui te rendent efficace et unique : peut-être ta structure de dossiers, ta façon d'utiliser les Hot Cues, ou ta séquence FX favorite.",
+        en: "\n\n**On your XDJ-RX**\nTo develop your signature workflow on the XDJ-RX, think like a club DJ: your USB preparation IS your workflow. The way you name folders, place Hot Cues, structure playlists, and use the FX section — all of that is your \"signature.\" Identify 3 habits that make you efficient and unique: maybe your folder structure, your Hot Cue approach, or your favorite FX sequence.",
+      },
+      3: {
+        fr: "\n\n**Sur ton XDJ-RX**\nRoutine d'entraînement long terme pour ton XDJ-RX : (1) 15 min « transitions pures » — pas de FX, juste EQ + jog wheels, le core du DJing club. (2) 15 min « FX et créativité » — explore chaque effet, teste des timings inhabituels. (3) 15 min « live USB-only » — joue un set complet uniquement depuis ta clé, sans filet laptop. Bonus mensuel : refais ta clé USB depuis zéro — ça t'oblige à recurer ta bibliothèque et rester frais.",
+        en: "\n\n**On your XDJ-RX**\nLong-term practice routine for your XDJ-RX: (1) 15 min \"pure transitions\" — no FX, just EQ + jog wheels, the core of club DJing. (2) 15 min \"FX and creativity\" — explore every effect, test unusual timings. (3) 15 min \"live USB-only\" — play a full set from your stick alone, no laptop safety net. Monthly bonus: rebuild your USB stick from scratch — it forces you to re-curate your library and stay fresh.",
+      },
+    },
+  },
+};
+
+/* ---------------------------------------------------------------------------
  * Equipment-specific tips — injected into shared modules (levels 2-10)
  * based on the user's actual controller (TargetDeck).
  * Each entry holds 1-2 tips per language, appended to the last slide's tips.
@@ -2563,27 +2969,42 @@ const EQUIPMENT_TIPS: Partial<Record<TargetDeck, Record<number, { fr: string[]; 
   },
 };
 
-function injectEquipmentTips(
+function injectEquipmentPersonalization(
   modules: CourseModule[],
   targetDeck: TargetDeck | null | undefined,
   language: Language,
 ): CourseModule[] {
   if (!targetDeck) return modules;
   const deckTips = EQUIPMENT_TIPS[targetDeck];
-  if (!deckTips) return modules;
+  const deckContent = EQUIPMENT_CONTENT[targetDeck];
+
+  if (!deckTips && !deckContent) return modules;
 
   return modules.map((module) => {
-    const entry = deckTips[module.level];
-    if (!entry) return module;
-    const tips = language === "en" ? entry.en : entry.fr;
-    if (!tips.length) return module;
+    const tipEntry = deckTips?.[module.level];
+    const contentEntries = deckContent?.[module.level];
+    if (!tipEntry && !contentEntries) return module;
 
     const lastIdx = module.slides.length - 1;
     if (lastIdx < 0) return module;
 
     const slides = module.slides.map((slide, idx) => {
-      if (idx !== lastIdx) return slide;
-      return { ...slide, tips: [...slide.tips, ...tips] };
+      let patched = slide;
+
+      const contentBlock = contentEntries?.[slide.slideNumber];
+      if (contentBlock) {
+        const extra = language === "en" ? contentBlock.en : contentBlock.fr;
+        patched = { ...patched, content: patched.content + extra };
+      }
+
+      if (idx === lastIdx && tipEntry) {
+        const tips = language === "en" ? tipEntry.en : tipEntry.fr;
+        if (tips.length) {
+          patched = { ...patched, tips: [...patched.tips, ...tips] };
+        }
+      }
+
+      return patched;
     });
     return { ...module, slides };
   });
@@ -2648,11 +3069,11 @@ export function getAllModules(
 
   if (skillTier === "beginner") {
     const level1 = track === "flx4" ? level1ModuleFlx4 : level1ModuleFlx3Xdj;
-    return injectEquipmentTips(localizeModules([level1, ...courseModulesFromLevel2], language), targetDeck, language);
+    return injectEquipmentPersonalization(localizeModules([level1, ...courseModulesFromLevel2], language), targetDeck, language);
   }
   const accelTier = skillTier === "advanced" ? "advanced" : "intermediate";
   const accelerated = buildAcceleratedLevels123(track, accelTier, language);
-  return injectEquipmentTips(withStageProgression(localizeModules([...accelerated, ...tailFromLevel4], language)), targetDeck, language);
+  return injectEquipmentPersonalization(withStageProgression(localizeModules([...accelerated, ...tailFromLevel4], language)), targetDeck, language);
 }
 
 /** Défaut = parcours majoritaire FLX4 (communauté Instagram), utilisateur débutant. */
