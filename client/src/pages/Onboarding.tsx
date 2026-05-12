@@ -38,7 +38,7 @@ export default function Onboarding() {
   useDocumentTitle("Onboarding");
   const [, navigate] = useLocation();
   const { language: ctxLanguage, setLanguage: setCtxLanguage } = useLanguageContext();
-  const [step, setStep] = useState<OnboardingStep>("name");
+  const [step, setStep] = useState<OnboardingStep>("language");
   const [guestId, setGuestId] = useState<string>("");
   const [userId, setUserId] = useState<number | null>(null);
   const [userIdStr, setUserIdStr] = useState<string | null>(null);
@@ -912,6 +912,16 @@ export default function Onboarding() {
                   </>
                 )}
               </p>
+
+              {(formData.targetDeck === null || formData.targetDeck === "other") && (
+                <div className="bg-amber-50 border border-amber-300 rounded-lg p-3 mt-2">
+                  <p className="text-xs text-amber-900 text-center leading-relaxed">
+                    {isFr
+                      ? "Le contenu est basé sur les contrôleurs Pioneer (DDJ-FLX4/FLX3/XDJ-RX), mais les concepts de mix s'appliquent à tout matériel. Les techniques de beatmatch, EQ, harmonie et lecture de foule sont universelles."
+                      : "Course content references Pioneer controllers (DDJ-FLX4/FLX3/XDJ-RX), but mixing concepts apply to all gear. Beatmatching, EQ, harmony, and crowd reading are universal skills."}
+                  </p>
+                </div>
+              )}
 
             </div>
 

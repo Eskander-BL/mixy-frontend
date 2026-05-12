@@ -177,6 +177,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     persistMixyLearningProfile({
       equipment: parsed.equipment,
       targetDeck: parsed.targetDeck,
+      goal: parsed.goal,
       updatedAt: parsed.updatedAt,
     });
     setLearningProfile(parsed);

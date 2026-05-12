@@ -175,11 +175,8 @@ export default function Dashboard() {
    * Cartes : chaque niveau **validé** + le **niveau actif** (prochain à finir), toujours visibles côte à côte.
    */
   const levelStrip = useMemo(() => {
-    const s = new Set([...completedLevels, activeLevel]);
-    return [...s]
-      .filter((l) => l >= 1 && l <= totalLevels)
-      .sort((a, b) => a - b);
-  }, [completedLevels, activeLevel, totalLevels]);
+    return Array.from({ length: totalLevels }, (_, i) => i + 1);
+  }, [totalLevels]);
 
   const levelStripKey = levelStrip.join(",");
   const completedKey = useMemo(
@@ -531,12 +528,19 @@ export default function Dashboard() {
               <Card
                 className="p-4 border border-dashed border-gray-300 bg-gray-50/80 rounded-[5px] w-full"
               >
-                <p className="text-xs font-medium text-gray-500 mb-0.5">{isFr ? "Niveau" : "Level"} {lvl}</p>
-                <p className="text-xs text-gray-600">
-                  {isFr
-                    ? "Termine d'abord les niveaux précédents pour débloquer celui-ci."
-                    : "Complete previous levels first to unlock this one."}
-                </p>
+                <div className="flex items-start gap-2 mb-0.5">
+                  <Lock className="h-3.5 w-3.5 text-gray-400 shrink-0 mt-0.5" aria-hidden />
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium text-gray-500">
+                      {isFr ? "Niveau" : "Level"} {lvl}{mod ? ` — ${mod.title}` : ""}
+                    </p>
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      {isFr
+                        ? "Valide le quiz précédent pour débloquer ce niveau."
+                        : "Pass the previous quiz to unlock this level."}
+                    </p>
+                  </div>
+                </div>
               </Card>
               </div>
             );

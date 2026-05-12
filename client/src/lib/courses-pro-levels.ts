@@ -8,7 +8,43 @@ type LocalizedModule = {
   slides: LocalizedSlide[];
 };
 
-const PLACEHOLDER_VIDEO = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+const PRO_VIDEO_URLS: Record<number, string[]> = {
+  4: [
+    "https://www.youtube.com/embed/INREjXczI1k",
+    "https://www.youtube.com/embed/9IhXVBktMqY",
+    "https://www.youtube.com/embed/_y3MqMyzqHI",
+  ],
+  5: [
+    "https://www.youtube.com/embed/B5JBK_8avJk",
+    "https://www.youtube.com/embed/u17CILIYGEg",
+    "https://www.youtube.com/embed/KxlSL2Q_KwU",
+  ],
+  6: [
+    "https://www.youtube.com/embed/p8q9TU0iPuE",
+    "https://www.youtube.com/embed/i1jCnz45FpQ",
+    "https://www.youtube.com/embed/GnJxMVkYHjQ",
+  ],
+  7: [
+    "https://www.youtube.com/embed/uXpNp1gGxz4",
+    "https://www.youtube.com/embed/zHx5C_9spZU",
+    "https://www.youtube.com/embed/CP-rrJgsLoQ",
+  ],
+  8: [
+    "https://www.youtube.com/embed/HBMJtvMOgW8",
+    "https://www.youtube.com/embed/1gef9IDX3YM",
+    "https://www.youtube.com/embed/kR_hBYBMpbc",
+  ],
+  9: [
+    "https://www.youtube.com/embed/Hc7f_mvKeA8",
+    "https://www.youtube.com/embed/u-AP0eee-Mg",
+    "https://www.youtube.com/embed/c3Q_zhTHhJM",
+  ],
+  10: [
+    "https://www.youtube.com/embed/u_ny-pIfNe8",
+    "https://www.youtube.com/embed/d5YMpKPmDlY",
+    "https://www.youtube.com/embed/Kr8AutiCp-8",
+  ],
+};
 
 function buildFrModules(): LocalizedModule[] {
   return [
@@ -1908,7 +1944,7 @@ export function buildProLevels4to10(language: Language = "fr"): CourseModule[] {
         slideNumber: sIdx + 1,
         title: slide.title,
         subtitle: slide.subtitle,
-        videoUrl: PLACEHOLDER_VIDEO,
+        videoUrl: PRO_VIDEO_URLS[level]?.[sIdx] ?? "",
         videoDescription: slide.videoDescription,
         content: slide.content,
         keyTakeaway: slide.keyTakeaway,

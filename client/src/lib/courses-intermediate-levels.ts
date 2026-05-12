@@ -1,8 +1,6 @@
 import type { CourseModule } from "@/lib/courses-progressive";
 import type { Language } from "@/lib/i18n";
 
-const PLACEHOLDER_VIDEO = "https://www.youtube.com/embed/dQw4w9WgXcQ";
-
 /**
  * Intermediate-specific content for levels 4–10.
  * Builds on intermediate L1-3 (workflow, EQ mastery, phrasing).
@@ -34,7 +32,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "The wheel is a map, not a cage"
             : "La roue est une carte, pas une cage",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/AxkIQi81JP0",
           videoDescription: en
             ? "Deep dive into energy keys, mood arcs through key changes, and tension/resolution techniques in harmonic mixing."
             : "Plongée dans les clés d'énergie, les arcs d'ambiance par changement de tonalité, et les techniques de tension/résolution en mix harmonique.",
@@ -112,7 +110,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "The +7 semitone trick and other weapons in your harmonic arsenal"
             : "Le truc des +7 demi-tons et les autres armes de ton arsenal harmonique",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/gxq36qom2LI",
           videoDescription: en
             ? "Practical key modulation: +7 semitone jumps, minor-to-major mood shifts, and building emotional journeys through pitch."
             : "Modulation tonale pratique : sauts de +7 demi-tons, changements d'humeur mineur-vers-majeur, et construction de voyages émotionnels par le pitch.",
@@ -198,7 +196,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "When the floor is on fire and you have 30 seconds to decide"
             : "Quand le dancefloor est en feu et que tu as 30 secondes pour décider",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/1sC-sZhSxU8",
           videoDescription: en
             ? "Quick key decisions in live sets, dealing with mixed-key libraries, and knowing when to creatively break harmonic rules."
             : "Décisions rapides de tonalité en live, gestion de bibliothèques multi-clés, et savoir quand casser les règles harmoniques créativement.",
@@ -300,7 +298,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "A flat energy curve is a dead dancefloor"
             : "Une courbe d'énergie plate, c'est un dancefloor mort",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/hjkTkb-_7mQ",
           videoDescription: en
             ? "Advanced energy architecture: micro-waves within phases, breathing points, and tension-release cycles for dynamic sets."
             : "Architecture énergétique avancée : micro-vagues dans les phases, points de respiration, et cycles tension-relâchement pour des sets dynamiques.",
@@ -380,7 +378,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "How to move between worlds without losing anyone"
             : "Comment naviguer entre les mondes sans perdre personne",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/YgL1tn6zOEw",
           videoDescription: en
             ? "Smooth genre transitions, sub-genre navigation, and creating narrative through deliberate track selection."
             : "Transitions de genre fluides, navigation entre sous-genres, et création de narration par la sélection délibérée de morceaux.",
@@ -460,7 +458,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "Your plan is a compass, not a GPS — learn when to improvise"
             : "Ton plan est une boussole, pas un GPS — apprends quand improviser",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/NsXOw75GY7M",
           videoDescription: en
             ? "Reading energy levels in real time, managing push vs pull decisions, and planning the arc of a 2-hour set."
             : "Lire les niveaux d'énergie en temps réel, gérer les décisions pousser vs relâcher, et planifier l'arc d'un set de 2 heures.",
@@ -560,7 +558,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "FX should add to the story, not distract from it"
             : "Les FX doivent enrichir l'histoire, pas en distraire",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/T2KILGrvvyc",
           videoDescription: en
             ? "Using reverb, delay, and echo as deliberate musical tools: building tension, creating space, and enhancing transitions."
             : "Utiliser reverb, delay et écho comme outils musicaux délibérés : construire la tension, créer de l'espace et améliorer les transitions.",
@@ -644,7 +642,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "Loops are instruments, not crutches"
             : "Les loops sont des instruments, pas des béquilles",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/H4lBcGFGEHM",
           videoDescription: en
             ? "Advanced looping: building rhythm layers, using loops from different tracks simultaneously, and loop-based transition techniques."
             : "Looping avancé : construction de couches rythmiques, utilisation de loops de différents morceaux simultanément, et techniques de transition par boucles.",
@@ -728,7 +726,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "The filter is the most powerful tool you're probably underusing"
             : "Le filtre est l'outil le plus puissant que tu sous-utilises probablement",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/R4qXiKLxe9E",
           videoDescription: en
             ? "Filter sweeps as transition tools, resonance control techniques, and combining FX chains for complex sonic manipulation."
             : "Sweeps de filtre comme outils de transition, techniques de contrôle de résonance, et combinaison de chaînes FX pour manipulation sonore complexe.",
@@ -830,7 +828,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "Your eyes are as important as your ears"
             : "Tes yeux sont aussi importants que tes oreilles",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/-DOYZcBwS08",
           videoDescription: en
             ? "Reading crowd body language, identifying energy pockets, and using micro-signals to guide your track selection in real time."
             : "Lire le langage corporel de la foule, identifier les poches d'énergie, et utiliser les micro-signaux pour guider ta sélection en temps réel.",
@@ -916,7 +914,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "Know your next 3 moves before you need them"
             : "Connais tes 3 prochains moves avant d'en avoir besoin",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/7JAoRPqQZYw",
           videoDescription: en
             ? "Building a track selection decision framework, maintaining emergency playlists, and genre-pivot strategies for live situations."
             : "Construire un cadre de décision de sélection, maintenir des playlists d'urgence, et stratégies de pivot de genre en situation live.",
@@ -1008,7 +1006,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "Every slot has different rules — learn them all"
             : "Chaque créneau a ses propres règles — apprends-les toutes",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/dvBLvEgIOik",
           videoDescription: en
             ? "Adapting your approach for warm-up sets, peak-time slots, late-night afterhours, and private events."
             : "Adapter ton approche pour les sets de warm-up, les créneaux peak-time, les afterhours de nuit, et les événements privés.",
@@ -1116,7 +1114,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "1000+ tracks and growing? Here's how to stay in control"
             : "1000+ morceaux et ça grandit ? Voici comment garder le contrôle",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/mEz5RaLz37E",
           videoDescription: en
             ? "Building a scalable library system: tag taxonomies, star ratings, smart playlists, and organizing 1000+ tracks efficiently."
             : "Construire un système de bibliothèque scalable : taxonomies de tags, notes étoilées, playlists intelligentes, et organiser 1000+ morceaux efficacement.",
@@ -1206,7 +1204,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "The same library, configured for 5 different nights"
             : "La même bibliothèque, configurée pour 5 soirées différentes",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/qWBmbW83V9U",
           videoDescription: en
             ? "Creating venue-specific crates, adapting your library for different gig types, and building a flexible preparation system."
             : "Créer des crates spécifiques aux venues, adapter ta bibliothèque pour différents types de gigs, et construire un système de préparation flexible.",
@@ -1298,7 +1296,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "The boring stuff that saves your career"
             : "Les trucs ennuyeux qui sauvent ta carrière",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/YKbQWYetrrw",
           videoDescription: en
             ? "USB export strategies, backup systems, analyzing your Rekordbox history, and building a pre-gig technical routine."
             : "Stratégies d'export USB, systèmes de sauvegarde, analyser ton historique Rekordbox, et construire une routine technique pré-gig.",
@@ -1416,7 +1414,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "Your energy shapes the room's energy"
             : "Ton énergie façonne l'énergie de la salle",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/mgWEwUdDHcg",
           videoDescription: en
             ? "Mental routines for confidence, dealing with pre-gig nerves, stage presence techniques, and the psychology of performing."
             : "Routines mentales pour la confiance, gérer le trac pré-gig, techniques de présence scénique, et la psychologie de la performance.",
@@ -1506,7 +1504,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "Your bedroom sounds nothing like a club — here's how to adapt"
             : "Ta chambre ne sonne rien comme un club — voici comment t'adapter",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/Avaa4_702eM",
           videoDescription: en
             ? "Understanding PA systems, calibrating your mix to different rooms, booth monitoring vs FOH, and working with sound engineers."
             : "Comprendre les systèmes PA, calibrer ton mix à différentes salles, monitoring cabine vs FOH, et travailler avec les ingénieurs son.",
@@ -1594,7 +1592,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "It's not about avoiding problems — it's about how fast you recover"
             : "Ce n'est pas éviter les problèmes — c'est la vitesse de récupération",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/4gGt2N0wqic",
           videoDescription: en
             ? "CDJ freezes, track failures, power issues, USB problems — practical recovery techniques for every common live scenario."
             : "CDJ freezes, pannes de morceaux, problèmes d'alimentation, soucis USB — techniques de récupération pratiques pour chaque scénario live courant.",
@@ -1706,7 +1704,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "Everyone can mix — not everyone has a voice"
             : "Tout le monde peut mixer — tout le monde n'a pas une voix",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/s8OqGnGiJYI",
           videoDescription: en
             ? "Discovering your DJ identity: signature transitions, track selection philosophy, and developing a recognizable style."
             : "Découvrir ton identité DJ : transitions signature, philosophie de sélection, et développer un style reconnaissable.",
@@ -1790,7 +1788,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "You can't improve what you don't measure"
             : "Tu ne peux pas améliorer ce que tu ne mesures pas",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/O_-04p7a-c0",
           videoDescription: en
             ? "Recording techniques, critical listening frameworks, identifying patterns in your mixing, and using recordings to accelerate growth."
             : "Techniques d'enregistrement, cadres d'écoute critique, identifier les patterns dans ton mix, et utiliser les enregistrements pour accélérer ta croissance.",
@@ -1882,7 +1880,7 @@ export function buildIntermediateLevels4to10(
           subtitle: en
             ? "You've built the skills — now build the career"
             : "Tu as construit les compétences — maintenant construis la carrière",
-          videoUrl: PLACEHOLDER_VIDEO,
+          videoUrl: "https://www.youtube.com/embed/nQKuZyD0Y2s",
           videoDescription: en
             ? "Creating a demo mix, getting your first gigs, networking in the DJ community, and building a continuous improvement plan."
             : "Créer un mix démo, obtenir tes premiers gigs, réseauter dans la communauté DJ, et construire un plan d'amélioration continue.",
