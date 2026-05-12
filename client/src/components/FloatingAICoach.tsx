@@ -31,8 +31,8 @@ export default function FloatingAICoach() {
     return Number.parseInt(match[1], 10) || 1;
   }, [location]);
 
-  const module = getModuleByLevel(level, courseTrack, skillLevel, language, learningProfile?.targetDeck);
-  const slide = getSlideFromModule(level, 1, courseTrack, skillLevel, language, learningProfile?.targetDeck);
+  const module = getModuleByLevel(level, courseTrack, skillLevel, language, learningProfile?.targetDeck, learningProfile?.goal);
+  const slide = getSlideFromModule(level, 1, courseTrack, skillLevel, language, learningProfile?.targetDeck, learningProfile?.goal);
   const userId = Number.parseInt(localStorage.getItem("userId") || "0", 10);
   const quizInsightsQuery = trpc.dj.getQuizInsights.useQuery(
     { userId },

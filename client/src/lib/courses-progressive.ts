@@ -7,7 +7,7 @@ import { level4Module, level5Module } from "./courses-progressive-extended";
 import { buildAcceleratedLevels123 } from "./courses-accelerated-first-levels";
 import { buildIntermediateLevels4to10 } from "./courses-intermediate-levels";
 import { buildProLevels4to10 } from "./courses-pro-levels";
-import type { CourseTrackId, TargetDeck } from "./learning-profile";
+import type { CourseTrackId, TargetDeck, UserGoal } from "./learning-profile";
 import type { Language } from "./i18n";
 
 export type UserLevel = "beginner" | "intermediate" | "advanced";
@@ -2971,6 +2971,181 @@ const EQUIPMENT_TIPS: Partial<Record<TargetDeck, Record<number, { fr: string[]; 
   },
 };
 
+/* ---------------------------------------------------------------------------
+ * GOAL_CONTENT — motivational context prepended to the FIRST slide of each
+ * level, adapted to the user's declared goal (fun / party / club / pro).
+ * --------------------------------------------------------------------------- */
+const GOAL_CONTENT: Record<UserGoal, Record<number, { fr: string; en: string }>> = {
+  fun: {
+    1: {
+      fr: "**Pourquoi apprendre les bases du DJ ?** Même si tu mixes juste pour le plaisir, comprendre les fondamentaux va transformer ton écoute musicale. Tu vas découvrir des morceaux sous un angle totalement nouveau — et c'est addictif !",
+      en: "**Why learn DJ basics?** Even if you're mixing just for fun, understanding the fundamentals will transform the way you listen to music. You'll discover tracks from a completely new angle — and it's addictive!",
+    },
+    2: {
+      fr: "**Pourquoi l'EQ compte pour toi ?** Même en mixant chez toi pour le plaisir, l'EQ rend tes transitions 10x plus propres. Tes potes vont entendre la différence sans savoir pourquoi !",
+      en: "**Why does EQ matter for you?** Even mixing at home for fun, EQ makes your transitions 10x cleaner. Your friends will hear the difference without knowing why!",
+    },
+    3: {
+      fr: "**Pourquoi les transitions comptent ?** Une transition réussie, c'est le moment magique où tu te dis « wow, j'ai fait ça ». Même chez toi, ce feeling est incroyable.",
+      en: "**Why do transitions matter?** A smooth transition is that magic moment where you think 'wow, I did that.' Even at home, that feeling is incredible.",
+    },
+    4: {
+      fr: "**Le mix harmonique, même pour le fun ?** Absolument ! Quand deux morceaux sonnent parfaitement ensemble, tu ressens un frisson. C'est ce qui rend tes sessions perso vraiment kiffantes.",
+      en: "**Harmonic mixing, even just for fun?** Absolutely! When two tracks sound perfect together, you get chills. That's what makes your personal sessions truly amazing.",
+    },
+    5: {
+      fr: "**Structurer un set pour toi ?** Même en freestyle chez toi, comprendre la structure d'un set te permet de créer des voyages musicaux qui te donnent la chair de poule.",
+      en: "**Set structure, just for yourself?** Even freestyling at home, understanding set structure lets you build musical journeys that give you goosebumps.",
+    },
+    6: {
+      fr: "**Les FX, c'est ton terrain de jeu !** Tu mixes pour le fun, alors amuse-toi ! Les effets créatifs transforment tes sessions en terrain d'expérimentation sans pression.",
+      en: "**FX are your playground!** You're mixing for fun, so have a blast! Creative effects turn your sessions into a pressure-free experimentation zone.",
+    },
+    7: {
+      fr: "**Lire l'ambiance même seul ?** Apprendre à sentir l'énergie musicale te rend meilleur même en session solo — tu sauras instinctivement quel morceau passer ensuite.",
+      en: "**Reading the vibe, even solo?** Learning to feel musical energy makes you better even in solo sessions — you'll instinctively know which track to play next.",
+    },
+    8: {
+      fr: "**Préparer ses sessions ?** Quand tu prépares un peu tes playlists, tes sessions passent de « sympa » à « incroyable ». C'est plus de plaisir avec moins de stress.",
+      en: "**Preparing your sessions?** When you prep your playlists a bit, your sessions go from 'nice' to 'incredible.' More fun, less stress.",
+    },
+    9: {
+      fr: "**Les techniques live, même chez soi ?** Maîtriser le live rend chaque session plus immersive. Tu te sentiras comme un vrai DJ, même dans ton salon.",
+      en: "**Live techniques, even at home?** Mastering live skills makes every session more immersive. You'll feel like a real DJ, even in your living room.",
+    },
+    10: {
+      fr: "**La maîtrise, c'est quoi pour toi ?** C'est le moment où mixer devient naturel, où tu n'y réfléchis plus — tu kiffes, tout simplement. Tu es devenu un DJ, même si c'est juste pour toi.",
+      en: "**What does mastery mean for you?** It's the moment where mixing becomes natural, where you stop thinking about it — you just enjoy. You've become a DJ, even if it's just for yourself.",
+    },
+  },
+  party: {
+    1: {
+      fr: "**Prêt à enflammer ta prochaine soirée ?** Apprendre les bases du mix, c'est passer de « celui qui branche son téléphone » à « celui qui met l'ambiance ». Tes amis vont halluciner.",
+      en: "**Ready to light up your next party?** Learning DJ basics takes you from 'the one who plugs in their phone' to 'the one who sets the vibe.' Your friends will be amazed.",
+    },
+    2: {
+      fr: "**Pourquoi l'EQ compte pour ta prochaine soirée ?** Quand tu mixes devant tes amis, une transition brouillonne se remarque tout de suite. L'EQ, c'est ce qui fait la différence entre « il passe des morceaux » et « wow, il sait mixer ! »",
+      en: "**Why does EQ matter for your next party?** When you're mixing in front of friends, a messy transition stands out immediately. EQ is what separates 'playing songs' from 'wow, they can actually mix!'",
+    },
+    3: {
+      fr: "**Les transitions, ton arme secrète en soirée.** Rien ne tue plus l'ambiance qu'un blanc entre deux morceaux. Des transitions fluides gardent la piste de danse vivante du début à la fin.",
+      en: "**Transitions: your secret weapon at parties.** Nothing kills the vibe faster than dead air between tracks. Smooth transitions keep the dance floor alive from start to finish.",
+    },
+    4: {
+      fr: "**Le mix harmonique en soirée ?** Quand les morceaux s'enchaînent parfaitement en tonalité, l'ambiance monte naturellement. Tes invités ne sauront pas pourquoi, mais ils ne voudront pas quitter la piste.",
+      en: "**Harmonic mixing at parties?** When tracks flow together in key, the vibe builds naturally. Your guests won't know why, but they won't want to leave the dance floor.",
+    },
+    5: {
+      fr: "**Structurer ton set de soirée.** Une bonne soirée a un arc narratif : accueil, montée, pic, redescente. Savoir structurer un set, c'est tenir tes invités en haleine pendant des heures.",
+      en: "**Structuring your party set.** A great party has a narrative arc: warm-up, build-up, peak, cool-down. Knowing how to structure a set means keeping your guests hooked for hours.",
+    },
+    6: {
+      fr: "**Les FX en soirée, c'est l'effet wow !** Un bon build-up avec un filtre ou un écho bien placé peut faire exploser la piste. C'est ton moment « DJ star » de la soirée.",
+      en: "**FX at parties: the wow factor!** A great build-up with a well-placed filter or echo can make the floor explode. It's your 'DJ star' moment of the night.",
+    },
+    7: {
+      fr: "**Lire le crowd en soirée.** C'est LA compétence qui fait la différence. Savoir quand passer du chill au dancefloor, quand les gens veulent un classique — c'est ça, le vrai DJ de soirée.",
+      en: "**Reading the crowd at a party.** This is THE skill that makes the difference. Knowing when to shift from chill to dancefloor, when people want a classic — that's what being a real party DJ is about.",
+    },
+    8: {
+      fr: "**Préparer ta soirée comme un pro.** Les meilleurs DJs de soirée arrivent préparés : playlists triées, crates prêtes, morceaux testés. Moins de stress le jour J, plus de plaisir.",
+      en: "**Prepping your party like a pro.** The best party DJs come prepared: playlists sorted, crates ready, tracks tested. Less stress on the day, more fun.",
+    },
+    9: {
+      fr: "**Le live en soirée.** Gérer les imprévus (quelqu'un renverse un verre, la sono sature, on te demande un morceau) — c'est ça le vrai test. Ce niveau te prépare à tout.",
+      en: "**Going live at a party.** Handling the unexpected (someone spills a drink, speakers clip, someone requests a track) — that's the real test. This level prepares you for anything.",
+    },
+    10: {
+      fr: "**Tu es devenu LE DJ de ta bande.** Tes amis pensent à toi en premier pour chaque soirée, chaque anniversaire, chaque barbecue. C'est ça, la maîtrise pour toi.",
+      en: "**You've become THE DJ of your crew.** Your friends think of you first for every party, every birthday, every BBQ. That's what mastery means for you.",
+    },
+  },
+  club: {
+    1: {
+      fr: "**Les bases, version club.** En club, pas de droit à l'erreur devant un public exigeant. Les fondamentaux solides sont ta fondation pour tout ce qui suit.",
+      en: "**The basics, club edition.** In a club, there's no room for mistakes in front of a demanding crowd. Solid fundamentals are your foundation for everything that follows.",
+    },
+    2: {
+      fr: "**Pourquoi l'EQ est crucial en club ?** Sur un sound system de club, la moindre saturation de basses s'entend 10x plus. L'EQ c'est ta première arme pour des transitions club-ready.",
+      en: "**Why is EQ crucial in a club?** On a club sound system, the slightest bass clash is 10x louder. EQ is your first weapon for club-ready transitions.",
+    },
+    3: {
+      fr: "**Les transitions en club : zéro droit à l'erreur.** Le public danse sans interruption. Une mauvaise transition et tu perds la piste en 10 secondes. Ici, tu apprends à garder le flow.",
+      en: "**Club transitions: zero margin for error.** The crowd dances non-stop. One bad transition and you lose the floor in 10 seconds. Here, you learn to keep the flow.",
+    },
+    4: {
+      fr: "**Le mix harmonique en club.** Les meilleurs DJs de club mixent en tonalité sans même y penser. C'est ce qui donne cette impression de voyage musical continu sur le dancefloor.",
+      en: "**Harmonic mixing in a club.** The best club DJs mix in key without even thinking. That's what creates that feeling of a continuous musical journey on the dancefloor.",
+    },
+    5: {
+      fr: "**Structurer un set de club.** Un set de club a un arc : warm-up pour les premiers arrivés, montée progressive, peak-time explosif, closing mémorable. C'est un art à part entière.",
+      en: "**Structuring a club set.** A club set has an arc: warm-up for early arrivals, progressive build, explosive peak-time, memorable closing. It's an art form in itself.",
+    },
+    6: {
+      fr: "**Les FX en club : puissance et retenue.** Sur un gros son, un effet mal dosé peut agresser les oreilles de 500 personnes. Tu vas apprendre à utiliser les FX avec impact ET élégance.",
+      en: "**Club FX: power and restraint.** On a big system, a poorly dosed effect can assault 500 people's ears. You'll learn to use FX with impact AND elegance.",
+    },
+    7: {
+      fr: "**Lire le dancefloor.** En club, tu dois sentir l'énergie de la salle : est-ce qu'elle monte ? Est-ce qu'elle retombe ? Faut-il relancer ou laisser respirer ? C'est la compétence numéro 1 d'un DJ club.",
+      en: "**Reading the dancefloor.** In a club, you need to feel the room's energy: is it rising? Dropping? Should you push or let it breathe? This is the #1 skill of a club DJ.",
+    },
+    8: {
+      fr: "**Préparer un set de club.** Analyser le créneau horaire, la salle, le public attendu, préparer ses crates en conséquence — c'est ce qui sépare les amateurs des résidents.",
+      en: "**Preparing a club set.** Analyzing the time slot, the venue, the expected crowd, preparing your crates accordingly — that's what separates amateurs from residents.",
+    },
+    9: {
+      fr: "**Le live en club.** Gérer le stress de la cabine, s'adapter en temps réel, enchaîner 2h sans fausse note — c'est ici que tu passes de « DJ qui joue en club » à « DJ de club ».",
+      en: "**Going live in a club.** Managing booth pressure, adapting in real-time, delivering a flawless 2-hour set — this is where you go from 'DJ who plays at a club' to 'club DJ.'",
+    },
+    10: {
+      fr: "**La maîtrise club.** Tu es prêt à postuler pour une résidence, à envoyer tes mixes aux promoters, à tenir une soirée complète. Le dancefloor n'a plus de secret pour toi.",
+      en: "**Club mastery.** You're ready to apply for a residency, send your mixes to promoters, hold down a full night. The dancefloor has no more secrets for you.",
+    },
+  },
+  pro: {
+    1: {
+      fr: "**Les fondations d'une carrière DJ.** Chaque grand DJ a commencé par les bases. La différence, c'est la rigueur avec laquelle tu les maîtrises. Ton parcours pro commence ici.",
+      en: "**The foundations of a DJ career.** Every great DJ started with the basics. The difference is how rigorously you master them. Your pro journey starts here.",
+    },
+    2: {
+      fr: "**Pourquoi l'EQ est non-négociable en pro ?** Sur un système pro, le public et l'ingé son entendent tout. Un mauvais swap de basses peut ruiner ta réputation en une soirée.",
+      en: "**Why is EQ non-negotiable as a pro?** On a pro system, the crowd and the sound engineer hear everything. A bad bass swap can ruin your reputation in one night.",
+    },
+    3: {
+      fr: "**Les transitions pro.** En pro, chaque transition est jugée. Les promoters, les autres DJs, le public — tout le monde écoute. Des transitions impeccables sont ta carte de visite.",
+      en: "**Pro transitions.** As a pro, every transition is judged. Promoters, other DJs, the crowd — everyone is listening. Flawless transitions are your business card.",
+    },
+    4: {
+      fr: "**Le mix harmonique, arme secrète des pros.** Les DJs qui remplissent des salles mixent en tonalité. C'est subtil, mais c'est ce qui donne cette sensation de set « magique » que le public ne peut pas expliquer.",
+      en: "**Harmonic mixing: the pros' secret weapon.** DJs who fill rooms mix in key. It's subtle, but it's what creates that 'magical set' feeling the crowd can't explain.",
+    },
+    5: {
+      fr: "**La structure de set pro.** Un set pro raconte une histoire. Chaque morceau a sa place, chaque transition a un but. C'est ce qui te fait rebooker encore et encore.",
+      en: "**Pro set structure.** A pro set tells a story. Every track has its place, every transition has a purpose. That's what gets you rebooked again and again.",
+    },
+    6: {
+      fr: "**Les FX en contexte pro.** Les pros utilisent les effets avec parcimonie et précision. Un seul build-up parfaitement exécuté vaut mieux que 50 filtres aléatoires.",
+      en: "**FX in a pro context.** Pros use effects with precision and restraint. One perfectly executed build-up is worth more than 50 random filters.",
+    },
+    7: {
+      fr: "**Lire le crowd comme un pro.** Les meilleurs DJs lisent une salle en 30 secondes. Énergie, démographie, heure — tout informe tes choix. C'est LA compétence qui fait les carrières.",
+      en: "**Reading the crowd like a pro.** The best DJs read a room in 30 seconds. Energy, demographics, time — everything informs your choices. This is THE skill that builds careers.",
+    },
+    8: {
+      fr: "**La préparation pro.** Analyser le line-up, le DJ avant et après toi, le type de salle, préparer des plans A/B/C — c'est le travail invisible qui fait les grands DJs.",
+      en: "**Pro preparation.** Analyzing the lineup, the DJ before and after you, the venue type, preparing plan A/B/C — it's the invisible work that makes great DJs.",
+    },
+    9: {
+      fr: "**Le live pro.** Gérer la technique, le stress, les imprévus ET garder le sourire. Jouer 3h devant 2000 personnes sans flancher. C'est ici que le professionnel se révèle.",
+      en: "**Pro live performance.** Managing technique, stress, surprises AND keeping your cool. Playing 3 hours in front of 2000 people without flinching. This is where the professional emerges.",
+    },
+    10: {
+      fr: "**Tu es prêt pour la scène pro.** Booker des dates, négocier tes cachets, construire ta marque, fidéliser un public. Tu as toutes les compétences — il ne reste qu'à les vivre.",
+      en: "**You're ready for the pro stage.** Booking gigs, negotiating fees, building your brand, growing a fanbase. You have all the skills — now it's time to live them.",
+    },
+  },
+};
+
 function injectEquipmentPersonalization(
   modules: CourseModule[],
   targetDeck: TargetDeck | null | undefined,
@@ -3012,11 +3187,32 @@ function injectEquipmentPersonalization(
   });
 }
 
+function injectGoalPersonalization(
+  modules: CourseModule[],
+  goal: UserGoal | null | undefined,
+  language: Language,
+): CourseModule[] {
+  if (!goal) return modules;
+  const goalEntries = GOAL_CONTENT[goal];
+  if (!goalEntries) return modules;
+
+  return modules.map((module) => {
+    const entry = goalEntries[module.level];
+    if (!entry) return module;
+    const paragraph = language === "en" ? entry.en : entry.fr;
+    const firstSlide = module.slides[0];
+    if (!firstSlide) return module;
+    const patched = { ...firstSlide, content: paragraph + "\n\n" + firstSlide.content };
+    return { ...module, slides: [patched, ...module.slides.slice(1)] };
+  });
+}
+
 export function getAllModules(
   track: CourseTrackId,
   skillTier: UserLevel = "beginner",
   language: Language = "fr",
   targetDeck?: TargetDeck | null,
+  goal?: UserGoal | null,
 ): CourseModule[] {
   const tailFromLevel4 = courseModulesFromLevel2.slice(2);
   const withStageProgression = (modules: CourseModule[]): CourseModule[] => {
@@ -3069,16 +3265,23 @@ export function getAllModules(
     });
   };
 
+  const personalize = (modules: CourseModule[]) =>
+    injectGoalPersonalization(
+      injectEquipmentPersonalization(modules, targetDeck, language),
+      goal,
+      language,
+    );
+
   if (skillTier === "beginner") {
     const level1 = track === "flx4" ? level1ModuleFlx4 : level1ModuleFlx3Xdj;
-    return injectEquipmentPersonalization(localizeModules([level1, ...courseModulesFromLevel2], language), targetDeck, language);
+    return personalize(localizeModules([level1, ...courseModulesFromLevel2], language));
   }
   const accelTier = skillTier === "advanced" ? "advanced" : "intermediate";
   const accelerated = buildAcceleratedLevels123(track, accelTier, language);
   const tail4to10 = skillTier === "advanced"
     ? buildProLevels4to10(language)
     : buildIntermediateLevels4to10(language);
-  return injectEquipmentPersonalization([...accelerated, ...tail4to10], targetDeck, language);
+  return personalize([...accelerated, ...tail4to10]);
 }
 
 /** Défaut = parcours majoritaire FLX4 (communauté Instagram), utilisateur débutant. */
@@ -3090,8 +3293,9 @@ export function getModuleByLevel(
   skillTier: UserLevel = "beginner",
   language: Language = "fr",
   targetDeck?: TargetDeck | null,
+  goal?: UserGoal | null,
 ): CourseModule | null {
-  return getAllModules(track, skillTier, language, targetDeck).find((m) => m.level === level) ?? null;
+  return getAllModules(track, skillTier, language, targetDeck, goal).find((m) => m.level === level) ?? null;
 }
 
 export function getSlideFromModule(
@@ -3101,8 +3305,9 @@ export function getSlideFromModule(
   skillTier: UserLevel = "beginner",
   language: Language = "fr",
   targetDeck?: TargetDeck | null,
+  goal?: UserGoal | null,
 ): Slide | null {
-  const module = getModuleByLevel(level, track, skillTier, language, targetDeck);
+  const module = getModuleByLevel(level, track, skillTier, language, targetDeck, goal);
   if (!module) return null;
   return module.slides.find((s) => s.slideNumber === slideNumber) ?? null;
 }

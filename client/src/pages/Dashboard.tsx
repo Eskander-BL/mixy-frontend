@@ -161,8 +161,8 @@ export default function Dashboard() {
 
   const languagePref = language;
   const modulesForUser = useMemo(
-    () => getAllModules(courseTrack, skillLevel, languagePref, learningProfile?.targetDeck),
-    [courseTrack, skillLevel, languagePref, learningProfile?.targetDeck]
+    () => getAllModules(courseTrack, skillLevel, languagePref, learningProfile?.targetDeck, learningProfile?.goal),
+    [courseTrack, skillLevel, languagePref, learningProfile?.targetDeck, learningProfile?.goal]
   );
   const userIdNum = useMemo(
     () => Number.parseInt(typeof window !== "undefined" ? localStorage.getItem("userId") || "0" : "0", 10),

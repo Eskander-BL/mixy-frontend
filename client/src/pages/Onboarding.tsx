@@ -182,6 +182,7 @@ export default function Onboarding() {
           persistMixyLearningProfile({
             equipment: formData.equipment,
             targetDeck,
+            goal: formData.goal,
           });
           if (userId) {
             pushLearningProfileToServer(userId, formData.equipment, targetDeck);
@@ -199,6 +200,7 @@ export default function Onboarding() {
           persistMixyLearningProfile({
             equipment: formData.equipment,
             targetDeck,
+            goal: formData.goal,
           });
           if (userId) {
             pushLearningProfileToServer(userId, formData.equipment, targetDeck);

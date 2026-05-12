@@ -10,10 +10,13 @@ export type CourseTrackId = "flx4" | "flx3_xdj";
 
 export type EquipmentKind = "none" | "controller" | "turntables" | "other";
 
+export type UserGoal = "fun" | "party" | "club" | "pro";
+
 export interface MixyLearningProfile {
   equipment: EquipmentKind;
   /** Présent surtout si equipment = none | controller */
   targetDeck: TargetDeck | null;
+  goal?: UserGoal | null;
   updatedAt: number;
 }
 
@@ -42,9 +45,15 @@ export function readMixyLearningProfile(): MixyLearningProfile | null {
     if (!raw) return null;
     const p = JSON.parse(raw) as Partial<MixyLearningProfile>;
     if (!p.equipment || typeof p.equipment !== "string") return null;
+    const goal = p.goal;
+    const validGoal =
+      goal === "fun" || goal === "party" || goal === "club" || goal === "pro"
+        ? goal
+        : null;
     return {
       equipment: p.equipment as EquipmentKind,
       targetDeck: (p.targetDeck as TargetDeck) ?? null,
+      goal: validGoal,
       updatedAt: typeof p.updatedAt === "number" ? p.updatedAt : Date.now(),
     };
   } catch {
@@ -58,6 +67,7 @@ export function persistMixyLearningProfile(
   const payload: MixyLearningProfile = {
     equipment: profile.equipment,
     targetDeck: profile.targetDeck ?? null,
+    goal: profile.goal ?? null,
     updatedAt: profile.updatedAt ?? Date.now(),
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
@@ -93,9 +103,13 @@ export function coerceMixyLearningProfileFromRemote(data: unknown): MixyLearning
   } else {
     return null;
   }
+  const g = o.goal;
+  const goal: UserGoal | null =
+    g === "fun" || g === "party" || g === "club" || g === "pro" ? g : null;
   return {
     equipment,
     targetDeck,
+    goal,
     updatedAt: typeof o.updatedAt === "number" ? o.updatedAt : Date.now(),
   };
 }

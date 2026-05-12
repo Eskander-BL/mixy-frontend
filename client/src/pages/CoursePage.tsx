@@ -27,8 +27,8 @@ export default function CoursePage() {
   const [currentSlide, setCurrentSlide] = useState(1);
 
   const level = params?.level ? parseInt(params.level) : 1;
-  const module = getModuleByLevel(level, courseTrack, skillLevel, language, learningProfile?.targetDeck);
-  const slide = getSlideFromModule(level, currentSlide, courseTrack, skillLevel, language, learningProfile?.targetDeck);
+  const module = getModuleByLevel(level, courseTrack, skillLevel, language, learningProfile?.targetDeck, learningProfile?.goal);
+  const slide = getSlideFromModule(level, currentSlide, courseTrack, skillLevel, language, learningProfile?.targetDeck, learningProfile?.goal);
   useDocumentTitle(
     module?.title
       ? `${isFr ? "Cours" : "Course"}: ${module.title}`
