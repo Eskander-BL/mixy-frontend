@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Check, Loader2 } from "lucide-react";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { trpc } from "@/lib/trpc";
+import { toast } from "sonner";
 
 export default function PaywallPageStripe() {
   const [, params] = useRoute("/paywall/:level");
@@ -59,6 +60,9 @@ export default function PaywallPageStripe() {
       }
     } catch (error) {
       console.error("Failed to create checkout session:", error);
+      toast.error(isFr
+        ? "Le paiement n'a pas pu être lancé. Vérifie ta connexion et réessaie."
+        : "Payment could not be initiated. Check your connection and try again.");
       setLoading(false);
     }
   };

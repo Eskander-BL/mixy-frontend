@@ -8,6 +8,7 @@ import { brand } from "@/assets/brand-assets";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { scrollAppMainToTop } from "@/lib/utils";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
+import { toast } from "sonner";
 
 export default function PaywallPage() {
   const [, params] = useRoute("/paywall/:level");
@@ -57,6 +58,9 @@ export default function PaywallPage() {
       }
     } catch (error) {
       console.error("Error creating Stripe checkout session:", error);
+      toast.error(isFr
+        ? "Le paiement n'a pas pu être lancé. Vérifie ta connexion et réessaie."
+        : "Payment could not be initiated. Check your connection and try again.");
       setLoading(false);
     }
   };

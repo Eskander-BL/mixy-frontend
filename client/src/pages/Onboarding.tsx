@@ -10,6 +10,7 @@ import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import type { TargetDeck } from "@/lib/learning-profile";
 import { persistMixyLearningProfile } from "@/lib/learning-profile";
 import { useLanguageContext } from "@/contexts/LanguageContext";
+import { toast } from "sonner";
 
 type OnboardingStep =
   | "language"
@@ -104,6 +105,11 @@ export default function Onboarding() {
               setCtxLanguage(lang);
             }
           }
+        },
+        onError: () => {
+          toast.error(ctxLanguage === "fr"
+            ? "Impossible de se connecter au serveur. Vérifie ta connexion et rafraîchis la page."
+            : "Unable to connect to the server. Check your connection and refresh the page.");
         },
       });
     }
