@@ -20,7 +20,7 @@ export default function PaywallPageStripe() {
 
   // Get subscription status
   const { data: subscriptionStatus, isLoading: isLoadingSubscription } =
-    trpc.stripe.getSubscriptionStatus.useQuery({ userId });
+    trpc.stripe.getSubscriptionStatus.useQuery({ userId }, { enabled: userId > 0 });
 
   // Create checkout session mutation
   const createCheckoutMutation = trpc.stripe.createCheckoutSession.useMutation();

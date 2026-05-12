@@ -353,7 +353,7 @@ export default function Onboarding() {
                 onClick={() => {
                   setFormData(prev => ({ ...prev, language: "en" }));
                   setCtxLanguage("en");
-                  updateLanguageMutation.mutate({ userId: userId!, language: "en" });
+                  if (userId) updateLanguageMutation.mutate({ userId, language: "en" });
                   setStep("name");
                 }}
                 className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"
@@ -364,7 +364,7 @@ export default function Onboarding() {
                 onClick={() => {
                   setFormData(prev => ({ ...prev, language: "fr" }));
                   setCtxLanguage("fr");
-                  updateLanguageMutation.mutate({ userId: userId!, language: "fr" });
+                  if (userId) updateLanguageMutation.mutate({ userId, language: "fr" });
                   setStep("name");
                 }}
                 className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/5 transition text-left font-medium text-gray-900"

@@ -36,18 +36,22 @@ import { useLanguageContext } from "@/contexts/LanguageContext";
 function useStreak() {
   const [streak, setStreak] = useState(1);
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
-    const stored = JSON.parse(localStorage.getItem("mixyStreak") || '{"count":1,"lastDate":""}');
-    const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+    try {
+      const today = new Date().toISOString().split("T")[0];
+      const stored = JSON.parse(localStorage.getItem("mixyStreak") || '{"count":1,"lastDate":""}');
+      const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
 
-    if (stored.lastDate === today) {
-      setStreak(stored.count);
-    } else if (stored.lastDate === yesterday) {
-      const newCount = stored.count + 1;
-      localStorage.setItem("mixyStreak", JSON.stringify({ count: newCount, lastDate: today }));
-      setStreak(newCount);
-    } else {
-      localStorage.setItem("mixyStreak", JSON.stringify({ count: 1, lastDate: today }));
+      if (stored.lastDate === today) {
+        setStreak(stored.count);
+      } else if (stored.lastDate === yesterday) {
+        const newCount = stored.count + 1;
+        localStorage.setItem("mixyStreak", JSON.stringify({ count: newCount, lastDate: today }));
+        setStreak(newCount);
+      } else {
+        localStorage.setItem("mixyStreak", JSON.stringify({ count: 1, lastDate: today }));
+        setStreak(1);
+      }
+    } catch {
       setStreak(1);
     }
   }, []);
@@ -139,7 +143,7 @@ export default function Dashboard() {
       );
       void utils.dj.getProgress.invalidate({ userId: uid });
       refreshProgress();
-      window.location.reload();
+      window.location.href = "/dashboard";
     } catch {
       setUpgrading(false);
     }

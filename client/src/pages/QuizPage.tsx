@@ -3640,6 +3640,7 @@ export default function QuizPage() {
   };
 
   const handleFinish = async () => {
+    if (savingProgress) return;
     if (score < 50) {
       return;
     }
@@ -3674,15 +3675,20 @@ export default function QuizPage() {
     }
     setSavingProgress(false);
 
-    const progress = JSON.parse(
-      localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}',
-    );
+    let progress: { currentLevel: number; completedLevels: number[]; scores: Record<number, number> };
+    try {
+      progress = JSON.parse(
+        localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}',
+      );
+    } catch {
+      progress = { currentLevel: 1, completedLevels: [], scores: {} };
+    }
 
     if (!progress.completedLevels.includes(level)) {
       progress.completedLevels.push(level);
     }
     progress.scores[level] = score;
-    localStorage.setItem("userProgress", JSON.stringify(progress));
+    try { localStorage.setItem("userProgress", JSON.stringify(progress)); } catch { /* storage full */ }
     refreshProgress();
 
     if (hasActiveSubscription) {
@@ -3738,11 +3744,13 @@ export default function QuizPage() {
   const handleBackToCourse = () => {
     const userId = localStorage.getItem("userId");
     if (userId) {
-      const progress = JSON.parse(
-        localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}'
-      );
-      progress.scores[level] = score;
-      localStorage.setItem("userProgress", JSON.stringify(progress));
+      try {
+        const progress = JSON.parse(
+          localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}'
+        );
+        progress.scores[level] = score;
+        localStorage.setItem("userProgress", JSON.stringify(progress));
+      } catch { /* corrupted storage — ignore */ }
     }
     navigate(`/course/${level}`);
   };
