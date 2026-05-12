@@ -899,6 +899,289 @@ const EN_LEVEL_6_TO_10_OVERRIDES: Record<number, LocalizedModuleOverride> = {
   },
 };
 
+const EN_LEVEL_1_FLX3_XDJ: LocalizedModuleOverride = {
+  title: "Your First Steps as a DJ",
+  description:
+    "We're laying the foundations together: your software, your controller, your first reflexes. After this, you'll already be able to launch your tracks and understand how everything works. Let's go!",
+  slides: {
+    1: {
+      title: "Welcome to the world of DJing!",
+      subtitle: "Rekordbox, your FLX3 / XDJ-RX setup, and your very first reflexes",
+      videoDescription:
+        "Export & Performance modes in Rekordbox — essential before plugging in your FLX3, and for preparing USB sticks for an XDJ-RX.",
+      content: `**Hey, welcome! You're officially on your way to becoming a DJ.**
+
+No stress — we're going through everything together. Today we discover Rekordbox and your setup (DDJ-FLX3 or XDJ-RX) — gear you'll find in tons of clubs and gigs.
+
+**Rekordbox — what's the deal?**
+It's the software that bridges your laptop and your deck. It shows your tracks, the tempo (BPM), and the waveforms so you can **see** your music as well as hear it.
+
+**Two modes to remember**
+- **Export**: your workshop. You prep your music at home (playlists, tempo, cue points). **Essential if you're using an XDJ-RX with USB sticks.**
+- **Performance**: the stage! Plug in your FLX3 and mix live.
+
+**Your setup at a glance**
+- **DDJ-FLX3**: more visible buttons than an FLX4, direct access to effects (Smart CFX, Beat FX) — we'll explore those step by step.
+- **XDJ-RX**: you can mix **without a laptop** using USB sticks. The built-in screen replaces the computer — real club vibes!
+
+**Your very first DJ reflexes**
+1. Import a few tracks into Rekordbox
+2. Create a small practice playlist (5 tracks with close tempos, say 124–128 BPM)
+3. Run the analysis so the software detects the tempo automatically
+4. Load a track on each deck and listen through your headphones
+
+It's totally normal if everything doesn't click right away. The important thing is to get hands-on and explore — that's how you learn!`,
+      keyTakeaway:
+        "Export to prepare, Performance to mix. Whether it's FLX3 or XDJ-RX, the method stays the same: import, analyze, listen on headphones. You just laid your first brick!",
+      exercise: {
+        title: "Prep your first 5 tracks + Export test",
+        description:
+          "The common starting point for both machines — everything begins here!",
+        steps: [
+          "Create a playlist called 'Mixy FLX3/XDJ' with 5 tracks in a style you love.",
+          "Analyze them (BPM / grid) and fix a grid if the kick doesn't land right on the lines.",
+          "Set 4 Hot Cues per track: intro, bridge, drop, outro.",
+          "If you're aiming for an **XDJ-RX**: export the playlist to a USB stick (Export mode) and check it shows up correctly.",
+          "If you're aiming for a **FLX3**: load a track on A and B in Performance mode and verify the beat through your headphones.",
+        ],
+        estimatedTime: "18 minutes",
+      },
+      tips: [
+        "On FLX3, note the pad names in the manual — they change depending on the active layer.",
+        "On XDJ-RX, keep a backup USB stick — your USBs are your 'stage hard drive'.",
+        "Don't crank the master until the trims are calibrated. Patience!",
+      ],
+    },
+    2: {
+      title: "Let's plug everything in: FLX3 or XDJ-RX",
+      subtitle: "FLX3: USB + headphones + master — XDJ: USB sticks + speakers + headphones",
+      videoDescription:
+        "Example FLX controller video (port visuals) — for XDJ-RX, add the 'playlists on USB stick' step before powering on.",
+      content: `**Alright, let's get everything hooked up!** It's not the most exciting part, but clean connections = clean sound. And that changes everything.
+
+**DDJ-FLX3 (with laptop)**
+Laptop → **USB** → controller → **MASTER OUT** → active speakers (LINE input). **Headphones** on **PHONES**. Check **your** manual for any extra MIC or AUX inputs.
+
+**XDJ-RX (no PC while mixing)**
+- Connect **speakers** to the **Master** output (RCA/XLR depending on model).
+- **Headphones** into the DJ / booth jack.
+- Insert one or two **USB sticks** with your exported playlists; browse tracks from the **screens**.
+- The PC is only for prep at home — during a mix, the XDJ is fully standalone!
+
+**Common ground (both machines)**
+- Faders and master at **zero** before powering on the speakers. Always!
+- Set the **trims**: signal in the green/orange zone, never sitting in the red.
+- No big speakers? Small active monitors work perfectly fine for practice.
+
+**Support & manuals**
+- Manuals, firmware, drivers: https://www.pioneerdj.com/en/support/`,
+      keyTakeaway:
+        "FLX3 = laptop–controller–speakers chain. XDJ-RX = USB stick + speakers + headphones, the PC is just for prep. Either way, the reflex is: faders to zero, bring it up gradually!",
+      exercise: {
+        title: "Connection checklist for your machine",
+        description:
+          "A routine to run before every session — done in 5 minutes flat!",
+        steps: [
+          "Write down: 'FLX3 + PC' or 'XDJ standalone'.",
+          "FLX3: data USB cable OK? XDJ: stick recognized on the player?",
+          "Speakers on LINE input (not phono!); master brought up gradually.",
+          "Headphones: preview one deck in your headphones without clipping the master.",
+          "If everything's clean, play a track and enjoy — you've got a working setup!",
+        ],
+        estimatedTime: "10 minutes",
+      },
+      tips: [
+        "XDJ: format your USB sticks as FAT32 if the manual recommends it — avoids nasty surprises.",
+        "FLX3: update Rekordbox and the firmware on the same day to dodge compatibility issues.",
+        "Always keep a clean power strip and a spare cable in your DJ bag.",
+      ],
+    },
+    3: {
+      title: "BPM: The heartbeat of your music",
+      subtitle: "Understanding the fundamental rhythm that drives every mix",
+      videoDescription:
+        "You can see the tempo displayed in Rekordbox and the grid on the waveform — super helpful for connecting your ear to the screen, whether you're on FLX3 or XDJ-RX.",
+      content: `**OK, now we're getting into the real stuff.** BPM is THE fundamental concept of DJing. But don't worry — it's way simpler than it sounds.
+
+**BPM (Beats Per Minute) — what is it?**
+It's simply the number of beats per minute. It's the pulse of your music, its heartbeat.
+
+**Picture two metronomes:**
+- Metronome 1: 120 clicks per minute
+- Metronome 2: 140 clicks per minute
+- Result: total chaos! Beats clashing all over the place.
+
+**BPM by genre (to help you navigate):**
+- House: 120–130 BPM (steady groove, perfect for beginners)
+- Techno: 125–140 BPM (a bit faster, more energy)
+- Hip-Hop: 85–115 BPM (slower, more groovy)
+- Drum & Bass: 160–180 BPM (now we're flying!)
+
+**The secret of DJing is this:**
+Two tracks at the **same BPM** = they sound great together. Two different BPMs = chaos. It's that simple.
+
+**On your DDJ-FLX3**
+- The tempo is displayed per deck in Rekordbox (e.g. 124.0). After analysis, that number should match what you hear.
+- The **tempo fader** sits right on the front panel — you can fine-tune it easily. The **Smart CFX** zone lets you color the sound, but we'll cover that later; for now, focus on BPM.
+- The **Sync** button is there to help you at the start — and it's totally OK to use it! But also practice **feeling** the drift in your headphones.
+
+**On your XDJ-RX**
+- The BPM shows directly on the player's **screen**, no computer needed. That's the club way!
+- You adjust the tempo with the **pitch fader** or via the **jog wheels** depending on the model. The on-screen readout confirms the BPM in real time.
+- Practice **feeling** the drift in your headphones — when you're mixing without a laptop, that instinct is what'll save you.
+
+**Just remember this for now:**
+BPM is the rhythm. Two identical rhythms = harmony. Two different rhythms = train wreck. Simple, effective, fundamental.`,
+      keyTakeaway:
+        "BPM is the pulse of your music. Two tracks at the same BPM = magic. On FLX3 you see it in Rekordbox, on XDJ-RX it's right on the screen — same reflex, same principle!",
+      exercise: {
+        title: "Feel the BPM with your body",
+        description:
+          "Before you even touch your FLX3 or XDJ-RX, learn to feel the rhythm — it's your best tool!",
+        steps: [
+          "Pick a track you love and hit play.",
+          "Tap your foot or nod your head on every beat: 1-2-3-4, 1-2-3-4…",
+          "Count the beats for 15 seconds.",
+          "Multiply by 4 → you've got the approximate BPM!",
+          "Check with Rekordbox (FLX3) or directly on the screen (XDJ-RX): were you close?",
+          "Repeat with 4 more tracks in different genres — you'll notice your ear sharpens quickly.",
+        ],
+        estimatedTime: "5 minutes",
+      },
+      tips: [
+        "On FLX3, locate the tempo fader for each deck — that's the one you'll be using next lesson to align BPMs.",
+        "On XDJ-RX, the screen gives you the BPM without a computer: get used to reading the display rather than the laptop.",
+        "Tracks in the same genre usually have similar BPMs — that's why DJs start by mixing within one genre.",
+      ],
+    },
+    4: {
+      title: "Pitch: your tempo alignment tool",
+      subtitle: "Master the fader that makes beatmatching possible",
+      videoDescription:
+        "Tempo / beatmatch example — the logic is the same on FLX3 and XDJ-RX, only the fader placement differs.",
+      content: `**Now that we understand BPM, let's move on to the tool that lets you line everything up: the Pitch.**
+
+**The problem:**
+You've got two tracks you love, but they're not at the same BPM.
+- Track A: 120 BPM
+- Track B: 128 BPM
+- Result: they don't fit together
+
+**The solution: the Pitch fader**
+This slider speeds up or slows down a track.
+- Push the pitch down → the track speeds up
+- Pull the pitch up → the track slows down
+(Careful — it's sometimes reversed depending on the model — check yours!)
+
+**Concrete example:**
+- Track A: 120 BPM (leave it as is)
+- Track B: 128 BPM (slow it down to 120 with the pitch)
+- Result: both are running at 120 BPM = aligned, clean!
+
+**Good to know:**
+- Pitch also slightly changes the key. That's normal — it's part of the game.
+- Beyond ±8–10%, things start sounding weird. Stay within a reasonable range.
+
+**On your DDJ-FLX3**
+- The **pitch** fader is on the front panel per deck; **Tempo Range** widens or narrows the usable range. **Smart CFX** colors the sound — one knob at a time when you're starting out!
+
+**On your XDJ-RX**
+- The tempo is controlled via the **screen** / the deck **jog wheel**: the displayed BPM should match what you hear. **Key Lock / Master Tempo** in the menu keeps vocals from warping.
+
+**Rekordbox (for both)**
+- Enable **Key Lock / Master Tempo** if you want to change the tempo without affecting the pitch too much — test it in your headphones.
+
+This is where it gets really fun: you're starting to **control** your music!`,
+      keyTakeaway:
+        "Same pitch logic everywhere: FLX3 = visible faders; XDJ-RX = on-screen control. You now hold the key tool for beatmatching!",
+      exercise: {
+        title: "Pitch alignment drill",
+        description:
+          "Time to put theory into practice — align two tracks by ear and by sight!",
+        steps: [
+          "Load two tracks with a 3–5 BPM difference onto decks A and B.",
+          "Use the pitch fader to bring Track B's BPM in line with Track A.",
+          "Hit play on both and listen in your headphones — are the kicks landing together?",
+          "If they drift apart, nudge the jog wheel to push them back in sync.",
+          "Try it 3 times with different pairs — you'll feel the improvement each round.",
+        ],
+        estimatedTime: "8 minutes",
+      },
+      tips: [
+        "On FLX3, the pitch fader is clearly accessible — practice nudging it in tiny increments rather than big jumps.",
+        "On XDJ-RX, use the on-screen BPM readout as a guide, but always confirm with your ears.",
+        "Enable Key Lock if the vocals start sounding chipmunk-y — it preserves the original key while you change tempo.",
+      ],
+    },
+    5: {
+      title: "Your very first transition!",
+      subtitle: "Prepare, listen, blend, switch — you've got this",
+      videoDescription:
+        "A 'drop mix' style transition: inspiration for a clean handover once the tempo is aligned. Apply this on your FLX3 or XDJ-RX!",
+      content: `**This is the moment you've been waiting for: your very first transition!** Everything we've covered before was building up to this. You're ready.
+
+**Here's how it goes, step by step:**
+
+**Step 1 — Preparation (30 seconds before)**
+- Track A is playing on deck A (e.g. 124 BPM)
+- Load Track B on deck B
+- Adjust the pitch so B is also at 124 BPM
+- Preview B in your headphones with the **Cue** button
+
+**Step 2 — Listen and align (10 seconds)**
+- Listen to A and B together in your headphones
+- Check that the kicks land at the same time
+- If it drifts a bit, give the jog wheel a little nudge to realign
+- When it's locked in → on to the next step!
+
+**Step 3 — The blend (5–10 seconds)**
+- Slowly bring up the channel fader for B
+- Gradually bring down the one for A
+- Both tracks are playing together — and it sounds good!
+- The crowd doesn't even notice you're switching tracks
+
+**Step 4 — The handover (1–2 seconds)**
+- Cut A completely
+- B takes over
+- That's it! Your first transition!
+
+**Bonus tips for your machine:**
+- **FLX3**: you have access to **Smart CFX** to add a filter or echo during the transition — makes the handover even smoother. Try it once the basic transition is clean.
+- **XDJ-RX**: browse your tracks directly on the screen and select the next one from the USB stick. The advantage? No laptop to manage — you stay 100% focused on the mix.
+
+**The truth:**
+- It looks complicated written out like this, but in reality it becomes natural super fast
+- Your first transition might not be perfect — and that's **totally normal**
+- Even the biggest DJs struggled at the beginning
+- The key is to practice, have fun, and do it again
+
+**You just hit a huge milestone.** You now know how to prepare your tracks, hook up your gear, understand BPM, adjust the pitch, and make a transition. That's the foundation of ALL DJing. The rest is practice and creativity!`,
+      keyTakeaway:
+        "Prepare, listen, blend, switch — that's all there is to it! Whether on FLX3 or XDJ-RX, the method is identical. Be proud of yourself — you're officially a DJ!",
+      exercise: {
+        title: "Do your first real transition on FLX3 or XDJ-RX",
+        description:
+          "This is the big moment — go for it, you've got this!",
+        steps: [
+          "Load two tracks with close BPMs (3 BPM apart max) onto decks A and B.",
+          "Align B's tempo to A's using the pitch fader.",
+          "Launch B and preview it in your headphones with the Cue button. Tap your foot to check the beats lock in.",
+          "When you feel it's locked, slowly bring up B's channel fader.",
+          "Gradually bring down A's fader over 8 beats (count in your head: 1-2-3-4-5-6-7-8).",
+          "Cut A. B is playing solo. Congratulations — you just nailed your first transition!",
+          "Repeat 3 times with different tracks — each time, it gets easier.",
+        ],
+        estimatedTime: "10 minutes",
+      },
+      tips: [
+        "On FLX3, Smart CFX can smooth a transition: try a low-pass filter as you bring up B's fader.",
+        "On XDJ-RX, prep your USB stick with tracks in order — it saves you a ton of time during a mix.",
+        "Record your sessions! Listening back is the single best way to improve.",
+      ],
+    },
+  },
+};
+
 function localizeModules(modules: CourseModule[], language: Language): CourseModule[] {
   if (language !== "en") return modules;
   return modules.map((module) => {
@@ -3273,8 +3556,25 @@ export function getAllModules(
     );
 
   if (skillTier === "beginner") {
-    const level1 = track === "flx4" ? level1ModuleFlx4 : level1ModuleFlx3Xdj;
-    return personalize(localizeModules([level1, ...courseModulesFromLevel2], language));
+    const level1Raw = track === "flx4" ? level1ModuleFlx4 : level1ModuleFlx3Xdj;
+    const localizedL2Plus = localizeModules(courseModulesFromLevel2, language);
+    let level1Final: CourseModule;
+    if (track !== "flx4" && language === "en") {
+      const ov = EN_LEVEL_1_FLX3_XDJ;
+      level1Final = {
+        ...level1Raw,
+        title: ov.title,
+        description: ov.description,
+        slides: level1Raw.slides.map((slide) => {
+          const os = ov.slides[slide.slideNumber];
+          if (!os) return slide;
+          return { ...slide, title: os.title, subtitle: os.subtitle, videoDescription: os.videoDescription, content: os.content, keyTakeaway: os.keyTakeaway, exercise: os.exercise, tips: os.tips };
+        }),
+      };
+    } else {
+      level1Final = localizeModules([level1Raw], language)[0];
+    }
+    return personalize([level1Final, ...localizedL2Plus]);
   }
   const accelTier = skillTier === "advanced" ? "advanced" : "intermediate";
   const accelerated = buildAcceleratedLevels123(track, accelTier, language);
