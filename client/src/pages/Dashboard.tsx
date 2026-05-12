@@ -534,10 +534,13 @@ export default function Dashboard() {
                     <p className="text-xs font-medium text-gray-500">
                       {isFr ? "Niveau" : "Level"} {lvl}{mod ? ` — ${mod.title}` : ""}
                     </p>
-                    <p className="text-xs text-gray-400 mt-0.5">
+                    {mod?.description && (
+                      <p className="text-xs text-gray-400 mt-0.5 line-clamp-1">{mod.description}</p>
+                    )}
+                    <p className="text-[10px] text-gray-300 mt-0.5">
                       {isFr
-                        ? "Valide le quiz précédent pour débloquer ce niveau."
-                        : "Pass the previous quiz to unlock this level."}
+                        ? "Valide le quiz précédent pour débloquer."
+                        : "Pass the previous quiz to unlock."}
                     </p>
                   </div>
                 </div>

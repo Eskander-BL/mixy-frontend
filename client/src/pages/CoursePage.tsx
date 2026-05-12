@@ -232,23 +232,32 @@ export default function CoursePage() {
               <div className="prose prose-sm max-w-none text-gray-700">
                 {slide.content.split("\n").map((line: string, idx: number) => {
                   if (line.trim() === "") return null;
+
+                  const renderInline = (text: string) => {
+                    const parts = text.split(/\*\*(.*?)\*\*/g);
+                    if (parts.length === 1) return text;
+                    return parts.map((part, i) =>
+                      i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+                    );
+                  };
+
                   if (line.startsWith("**")) {
                     return (
                       <p key={idx} className="font-semibold mt-4 mb-2">
-                        {line.replace(/\*\*/g, "")}
+                        {renderInline(line)}
                       </p>
                     );
                   }
                   if (line.startsWith("-")) {
                     return (
                       <li key={idx} className="ml-6 mb-1">
-                        {line.substring(1).trim()}
+                        {renderInline(line.substring(1).trim())}
                       </li>
                     );
                   }
                   return (
                     <p key={idx} className="mb-3 leading-relaxed">
-                      {line.trim()}
+                      {renderInline(line.trim())}
                     </p>
                   );
                 })}

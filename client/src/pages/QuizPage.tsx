@@ -3850,6 +3850,44 @@ export default function QuizPage() {
   const isLastQuestion = currentQuestion === questions.length - 1;
   const isAnswered = selectedAnswers[currentQuestion] !== undefined;
 
+  const recapPoints = quizModule?.slides
+    ?.map((s: { keyTakeaway?: string }) => s.keyTakeaway)
+    .filter(Boolean) as string[] | undefined;
+
+  const [showRecap, setShowRecap] = useState(true);
+
+  if (showRecap && recapPoints?.length) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white flex items-center justify-center p-4">
+        <Card className="max-w-2xl w-full p-8 border-0 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900 mb-1">
+            {isFr ? "Petit recap avant le quiz" : "Quick recap before the quiz"}
+          </h2>
+          <p className="text-sm text-gray-500 mb-5">
+            {isFr
+              ? "Les points clés du cours — rafraîchis ta mémoire !"
+              : "Key points from the course — refresh your memory!"}
+          </p>
+          <ul className="space-y-3 mb-6">
+            {recapPoints.map((point, idx) => (
+              <li key={idx} className="flex gap-3 text-sm text-gray-700">
+                <span className="text-primary font-bold shrink-0">💡</span>
+                <span className="leading-relaxed">{point}</span>
+              </li>
+            ))}
+          </ul>
+          <Button
+            onClick={() => setShowRecap(false)}
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-5 text-base flex items-center justify-center gap-2"
+          >
+            {isFr ? "C'est parti !" : "Let's go!"}
+            <ChevronRight size={18} />
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white flex items-center justify-center p-4">
       <Card className="max-w-2xl w-full p-8 border-0 shadow-sm">
