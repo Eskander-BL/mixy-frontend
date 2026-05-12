@@ -290,6 +290,34 @@ export default function CoursePage() {
                 </div>
               )}
 
+              {/* Exercise */}
+              {slide.exercise && (
+                <div className="mt-8 p-5 bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 rounded-xl">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-lg">🎧</span>
+                    <h4 className="font-bold text-gray-900">{slide.exercise.title}</h4>
+                    {slide.exercise.estimatedTime && (
+                      <span className="ml-auto text-xs font-medium text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded-full">
+                        ⏱ {slide.exercise.estimatedTime}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-700 mb-3">{slide.exercise.description}</p>
+                  {slide.exercise.steps?.length > 0 && (
+                    <ol className="space-y-2">
+                      {slide.exercise.steps.map((step: string, i: number) => (
+                        <li key={i} className="flex gap-3 text-sm text-gray-700">
+                          <span className="shrink-0 w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">
+                            {i + 1}
+                          </span>
+                          <span className="leading-relaxed pt-0.5">{step}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </div>
+              )}
+
               {/* Key Takeaway */}
               <div className="mt-8 p-4 bg-primary/5 border-l-4 border-primary rounded">
                 <p className="text-sm font-semibold text-foreground">

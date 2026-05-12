@@ -42,7 +42,7 @@ export function buildAcceleratedLevels123(
             ? `You already know the basics — let's lock down organization, grids and routing (${deck}).`
             : `Tu connais déjà les bases : on verrouille l'organisation, les grilles et le routage (${deck}).`),
       userLevels: ["intermediate", "advanced"],
-      totalSlides: 2,
+      totalSlides: 3,
       estimatedDuration: en ? "22 minutes" : "22 minutes",
       slides: isAdvanced
         ? [
@@ -216,6 +216,78 @@ export function buildAcceleratedLevels123(
                     "Si la salle a des CDJ-3000, tu peux utiliser Rekordbox Cloud Link — mais garde toujours l'USB en backup.",
                   ],
             },
+            {
+              slideNumber: 3,
+              title: en
+                ? "Pro Challenge: Context Switch"
+                : "Défi Pratique : Context Switch",
+              subtitle: en
+                ? "3 events, 3 USB sticks, 30 minutes — prove your system works under pressure"
+                : "3 événements, 3 clés USB, 30 minutes — prouve que ton système tient sous pression",
+              videoUrl: "https://www.youtube.com/embed/SJCsGA9Jrbk",
+              videoDescription: en
+                ? "Watch how a touring DJ preps multiple USB sticks for different venue types in a single session."
+                : "Regarde comment un DJ en tournée prépare plusieurs clés USB pour différents types de venues en une seule session.",
+              content: en
+                ? `**This is where your system gets stress-tested.** You've built smart playlists, you've organized your library by context — now let's see if it actually works when the clock is ticking.
+
+**The Scenario**
+You just got confirmed for three gigs this weekend: a rooftop lounge on Friday, a peak-time club slot on Saturday, and a Sunday afterhours. You have 30 minutes to prepare all three USB sticks. If your prep system is solid, this should feel focused, not frantic.
+
+**Why This Matters**
+Most DJs treat preparation like homework — something you rush through before the fun part. But the DJs who get rebooked are the ones who show up with material that fits the room perfectly. A lounge set full of bangers is just as bad as an afterhours set full of vocal house. Context is everything.
+
+**Your Advantage**
+If you've done the work in slides 1 and 2, your tag system and smart playlists should make this fast. If it takes you longer than 30 minutes, that's valuable feedback — your system has gaps. Find them now, not at 11 PM on Friday.`
+                : `**C'est ici que ton système est mis à l'épreuve.** Tu as construit des playlists intelligentes, organisé ta bibliothèque par contexte — maintenant on vérifie si ça tient vraiment quand le chrono tourne.
+
+**Le scénario**
+Tu viens d'être confirmé pour trois gigs ce week-end : un rooftop lounge vendredi, un créneau peak-time en club samedi, et un afterhours dimanche. Tu as 30 minutes pour préparer les trois clés USB. Si ton système de prépa est solide, ça doit être concentré, pas paniqué.
+
+**Pourquoi c'est important**
+La plupart des DJs traitent la préparation comme des devoirs — un truc qu'on bâcle avant la partie fun. Mais les DJs qui sont rebookés sont ceux qui arrivent avec un matériel parfaitement adapté à la salle. Un set lounge plein de bangers est aussi mauvais qu'un afterhours plein de vocal house. Le contexte est tout.
+
+**Ton avantage**
+Si tu as fait le travail des slides 1 et 2, ton système de tags et tes playlists intelligentes devraient rendre ça rapide. Si ça te prend plus de 30 minutes, c'est un feedback précieux — ton système a des failles. Trouve-les maintenant, pas vendredi à 23 h.`,
+              keyTakeaway: en
+                ? "If your library system can't produce 3 context-specific sets in 30 minutes, it's not a system yet — it's a wish."
+                : "Si ton système de bibliothèque ne peut pas produire 3 sets contextuels en 30 minutes, ce n'est pas encore un système — c'est un souhait.",
+              exercise: {
+                title: en
+                  ? "The 30-Minute Context Switch"
+                  : "Le Context Switch en 30 minutes",
+                description: en
+                  ? "Prepare 3 USB sticks for 3 radically different events — against the clock."
+                  : "Prépare 3 clés USB pour 3 événements radicalement différents — contre la montre.",
+                steps: en
+                  ? [
+                      "Set a 30-minute timer. No cheating.",
+                      "USB 1 — Lounge (Friday): pull 10 tracks, BPM 110–122, mellow energy, verify grids and hot cues.",
+                      "USB 2 — Peak-time (Saturday): pull 10 tracks, BPM 126–132, high energy, no long intros.",
+                      "USB 3 — Afterhours (Sunday): pull 10 tracks, BPM 120–128, hypnotic/minimal, repetitive grooves.",
+                      "Export all three to separate USB sticks. Note which step took the longest — that's your bottleneck.",
+                    ]
+                  : [
+                      "Lance un chrono de 30 minutes. Pas de triche.",
+                      "USB 1 — Lounge (vendredi) : tire 10 morceaux, BPM 110–122, énergie douce, vérifie grilles et hot cues.",
+                      "USB 2 — Peak-time (samedi) : tire 10 morceaux, BPM 126–132, haute énergie, pas d'intros longues.",
+                      "USB 3 — Afterhours (dimanche) : tire 10 morceaux, BPM 120–128, hypnotique/minimal, grooves répétitifs.",
+                      "Exporte les trois sur des clés séparées. Note quelle étape a pris le plus de temps — c'est ton goulot.",
+                    ],
+                estimatedTime: "30 minutes",
+              },
+              tips: en
+                ? [
+                    "If you can't fill a crate in 5 minutes, your tagging system needs work — go back and tag 50 tracks this week.",
+                    "Label each USB with a sticky note: event type + date + BPM range. Future you will be grateful at 2 AM.",
+                    "The overlap tracks (ones that work in 2+ contexts) are your most valuable assets — keep a dedicated playlist for them.",
+                  ]
+                : [
+                    "Si tu ne peux pas remplir un crate en 5 minutes, ton système de tags a besoin de travail — retourne tagger 50 morceaux cette semaine.",
+                    "Étiquette chaque USB avec un post-it : type d'event + date + plage BPM. Le toi du futur te remerciera à 2 h du mat'.",
+                    "Les morceaux de chevauchement (ceux qui marchent dans 2+ contextes) sont tes atouts les plus précieux — garde une playlist dédiée pour eux.",
+                  ],
+            },
           ]
         : [
             {
@@ -364,6 +436,76 @@ export function buildAcceleratedLevels123(
                   : "Inter : note combien tu peux corriger BPM sans artefacts sur ta table.",
               ],
             },
+            {
+              slideNumber: 3,
+              title: en
+                ? "Pro Challenge: Speed Prep"
+                : "Défi Pratique : Speed Prep",
+              subtitle: en
+                ? "10 tracks, 15 minutes, zero excuses — your prep game under pressure"
+                : "10 morceaux, 15 minutes, zéro excuse — ta prépa sous pression",
+              videoUrl: "https://www.youtube.com/embed/YAnNBcGYsDk",
+              videoDescription: en
+                ? "Speed preparation workflow: grids, hot cues, and energy labels in record time."
+                : "Workflow de préparation rapide : grilles, hot cues et labels d'énergie en temps record.",
+              content: en
+                ? `**Here's the truth nobody tells you:** the DJs who look effortless on stage spent hours being obsessive in Rekordbox. But obsessive doesn't mean slow — it means systematic. This challenge tests whether your workflow is actually efficient or just familiar.
+
+**The Rules**
+You get 15 minutes to fully prepare 10 tracks. That's 90 seconds per track. Sounds tight? It is. But if your routine is dialed in — analyze, verify grid, set 4 hot cues, tag energy — you'll make it with time to spare. If you can't, your workflow has fat to trim.
+
+**What "Fully Prepared" Means**
+Each track needs: a verified beatgrid (kick by kick on the first 8 bars), 4 named hot cues (intro, buildup, drop, safe out), an energy label (1–5), and one note about a known "safe pair" transition. That's the minimum standard for a track you'd play at a real gig.
+
+**Why Speed Matters**
+Because one day you'll get a last-minute booking. Or you'll discover 5 new tracks the morning of a gig. The DJs who can prep fast without cutting corners are the ones who stay ready for anything.`
+                : `**Voici la vérité que personne ne te dit :** les DJs qui ont l'air détendus sur scène ont passé des heures à être obsessionnels dans Rekordbox. Mais obsessionnel ne veut pas dire lent — ça veut dire systématique. Ce challenge teste si ton workflow est vraiment efficace ou juste habituel.
+
+**Les règles**
+Tu as 15 minutes pour préparer complètement 10 morceaux. Ça fait 90 secondes par morceau. Ça semble serré ? Ça l'est. Mais si ta routine est rodée — analyse, vérifie la grille, pose 4 hot cues, tag l'énergie — tu finiras avec du temps en rab. Si tu n'y arrives pas, ton workflow a du gras à couper.
+
+**Ce que "complètement préparé" veut dire**
+Chaque morceau doit avoir : une beatgrid vérifiée (kick par kick sur les 8 premières mesures), 4 hot cues nommés (intro, buildup, drop, safe out), un label d'énergie (1–5), et une note sur une paire de transition « sûre » connue. C'est le standard minimum pour un morceau que tu jouerais en vrai gig.
+
+**Pourquoi la vitesse compte**
+Parce qu'un jour tu auras un booking de dernière minute. Ou tu découvriras 5 nouveaux morceaux le matin d'un gig. Les DJs qui préparent vite sans couper les coins sont ceux qui restent prêts pour tout.`,
+              keyTakeaway: en
+                ? "Speed prep isn't about rushing — it's about having a system so solid that thoroughness becomes automatic."
+                : "La prépa rapide, ce n'est pas bâcler — c'est avoir un système tellement solide que la rigueur devient automatique.",
+              exercise: {
+                title: en
+                  ? "The 15-Minute Speed Prep"
+                  : "Le Speed Prep en 15 minutes",
+                description: en
+                  ? "Prepare a 10-track mini-set from scratch with perfect grids, hot cues, and energy labels."
+                  : "Prépare un mini-set de 10 morceaux from scratch avec grilles parfaites, hot cues et labels d'énergie.",
+                steps: en
+                  ? [
+                      "Pick 10 tracks you haven't fully prepped yet — no easy picks from your comfort zone.",
+                      "Set a 15-minute timer. For each track: analyze → verify grid (first 8 bars) → set 4 hot cues → tag energy (1–5).",
+                      "For each track, write one sentence: 'This pairs well with [track name] because [reason].'",
+                      "When the timer rings, count how many tracks are 100 % done. Your target: 8 out of 10 minimum.",
+                    ]
+                  : [
+                      "Choisis 10 morceaux que tu n'as pas encore complètement préparés — pas de choix faciles dans ta zone de confort.",
+                      "Lance un chrono de 15 minutes. Pour chaque morceau : analyse → vérifie grille (8 premières mesures) → pose 4 hot cues → tag énergie (1–5).",
+                      "Pour chaque morceau, écris une phrase : 'Ce morceau se marie bien avec [nom] parce que [raison].'",
+                      "Quand le chrono sonne, compte combien de morceaux sont 100 % prêts. Ton objectif : 8 sur 10 minimum.",
+                    ],
+                estimatedTime: "15 minutes",
+              },
+              tips: en
+                ? [
+                    "If you're consistently slow on gridding, batch-analyze first and only manually fix the ones Rekordbox got wrong.",
+                    "Create a hot cue color code and stick to it: e.g., green = intro, blue = buildup, red = drop, yellow = safe out.",
+                    "After the challenge, note which step ate the most time — that's where you need to build a faster habit.",
+                  ]
+                : [
+                    "Si le gridding te ralentit systématiquement, lance l'analyse en batch d'abord et ne corrige manuellement que ceux que Rekordbox a ratés.",
+                    "Crée un code couleur de hot cues et respecte-le : ex. vert = intro, bleu = buildup, rouge = drop, jaune = safe out.",
+                    "Après le challenge, note quelle étape a mangé le plus de temps — c'est là que tu dois construire une habitude plus rapide.",
+                  ],
+            },
           ],
     },
 
@@ -385,7 +527,7 @@ export function buildAcceleratedLevels123(
             ? "Less 'EQ sandwich' theory, more energy moves and spectral de-cluttering."
             : "Moins de théorie 'sandwich', plus de mouvements d'énergie et de désengorgement spectral."),
       userLevels: ["intermediate", "advanced"],
-      totalSlides: 2,
+      totalSlides: 3,
       estimatedDuration: "20 minutes",
       slides: isAdvanced
         ? [
@@ -557,6 +699,78 @@ export function buildAcceleratedLevels123(
                     "Si tu joues un jour sur un mixeur rotatif, tout change — le blend est la transition, pas le cut EQ.",
                   ],
             },
+            {
+              slideNumber: 3,
+              title: en
+                ? "Pro Challenge: Headphone vs. Monitors"
+                : "Défi Pratique : Casque vs. Moniteurs",
+              subtitle: en
+                ? "Train your ears to translate between what you hear and what the room hears"
+                : "Entraîne tes oreilles à traduire entre ce que tu entends et ce que la salle entend",
+              videoUrl: "https://www.youtube.com/embed/Lf9FQg2Bvs4",
+              videoDescription: en
+                ? "Understanding the gap between headphone mixing and real-world monitor/PA output."
+                : "Comprendre l'écart entre le mix au casque et la sortie moniteur/PA en situation réelle.",
+              content: en
+                ? `**Here's the uncomfortable truth:** your headphone mix is a lie. Not a deliberate one, but a consistent one. The closed-back cans that block out the club noise also block out reality — what sounds balanced at 85 dB in your ears can be a muddy disaster at 105 dB on a PA.
+
+**The Translation Problem**
+Every DJ faces this gap. Your headphones exaggerate proximity effect (boosted bass), compress the stereo image, and mask sub-bass collisions that only become obvious on a subwoofer. The solution isn't better headphones — it's training your brain to compensate automatically.
+
+**The Drill Concept**
+This exercise forces you to mix the same transition twice: once entirely on headphones, once on your monitors (or the best speaker setup you have). Then you compare. The differences you hear are your personal "translation errors" — and once you know them, you can pre-correct in real time during a gig.
+
+**Why This Separates Club DJs from Bedroom DJs**
+A bedroom DJ mixes for headphones. A club DJ mixes for a room they can barely hear over the booth monitor. The pros have internalized their translation table — they know that what sounds like "enough bass" in cans means "too much bass" on the floor. This drill builds that instinct.`
+                : `**Voici la vérité inconfortable :** ton mix au casque est un mensonge. Pas volontaire, mais constant. Les casques fermés qui bloquent le bruit du club bloquent aussi la réalité — ce qui sonne équilibré à 85 dB dans tes oreilles peut être une catastrophe boueuse à 105 dB sur un PA.
+
+**Le problème de traduction**
+Chaque DJ fait face à cet écart. Ton casque exagère l'effet de proximité (basses boostées), compresse l'image stéréo, et masque les collisions de sub-basses qui ne deviennent évidentes que sur un subwoofer. La solution n'est pas un meilleur casque — c'est entraîner ton cerveau à compenser automatiquement.
+
+**Le concept du drill**
+Cet exercice te force à mixer la même transition deux fois : une fois entièrement au casque, une fois sur tes moniteurs (ou la meilleure config d'enceintes que tu as). Puis tu compares. Les différences que tu entends sont tes « erreurs de traduction » personnelles — et une fois que tu les connais, tu peux pré-corriger en temps réel pendant un gig.
+
+**Pourquoi ça sépare les DJs club des DJs chambre**
+Un DJ chambre mixe pour le casque. Un DJ club mixe pour une salle qu'il entend à peine par-dessus le moniteur cabine. Les pros ont internalisé leur table de traduction — ils savent que ce qui sonne « assez de basses » au casque signifie « trop de basses » sur le floor. Ce drill construit cet instinct.`,
+              keyTakeaway: en
+                ? "Your headphones don't tell the truth about the room — train the gap, and your live EQ decisions get 10x faster."
+                : "Ton casque ne dit pas la vérité sur la salle — entraîne l'écart, et tes décisions EQ live deviennent 10x plus rapides.",
+              exercise: {
+                title: en
+                  ? "The Headphone vs. Monitor Drill"
+                  : "Le Drill Casque vs. Moniteurs",
+                description: en
+                  ? "Mix the same transition on headphones, then on monitors — map your personal translation errors."
+                  : "Mixe la même transition au casque, puis sur moniteurs — cartographie tes erreurs de traduction personnelles.",
+                steps: en
+                  ? [
+                      "Pick 2 tracks you know well at compatible BPMs. Do a full EQ transition on headphones only — record it.",
+                      "Reset. Do the exact same transition on your monitor speakers — record it.",
+                      "Listen back to both recordings on a neutral playback system. Note every difference: bass balance, hi-hat harshness, mid-range mud.",
+                      "Write your personal 'translation cheat sheet': e.g., 'My headphones add +3 dB in the low-mids — cut more aggressively on cans.'",
+                      "Repeat with 2 more transition pairs to confirm your patterns are consistent, not one-offs.",
+                    ]
+                  : [
+                      "Choisis 2 morceaux que tu connais bien à BPM compatibles. Fais une transition EQ complète au casque uniquement — enregistre.",
+                      "Reset. Fais exactement la même transition sur tes enceintes moniteur — enregistre.",
+                      "Réécoute les deux enregistrements sur un système neutre. Note chaque différence : équilibre des basses, agressivité des hi-hats, boue mid-range.",
+                      "Écris ta 'fiche de traduction' personnelle : ex. 'Mon casque ajoute +3 dB dans les low-mids — couper plus agressivement au casque.'",
+                      "Répète avec 2 autres paires de transitions pour confirmer que tes patterns sont constants, pas ponctuels.",
+                    ],
+                estimatedTime: "25 minutes",
+              },
+              tips: en
+                ? [
+                    "If you only have headphones and no monitors, use a Bluetooth speaker at moderate volume as a rough PA simulation — it's better than nothing.",
+                    "Pro trick: at a gig, do your first transition with one ear on the booth monitor and one in the headphones — that's your real-time translation happening.",
+                    "Keep your translation cheat sheet in your phone — review it 5 minutes before every gig.",
+                  ]
+                : [
+                    "Si tu n'as qu'un casque et pas de moniteurs, utilise une enceinte Bluetooth à volume modéré comme simulation PA approximative — c'est mieux que rien.",
+                    "Astuce pro : en gig, fais ta première transition avec une oreille sur le moniteur cabine et une dans le casque — c'est ta traduction en temps réel.",
+                    "Garde ta fiche de traduction dans ton téléphone — relis-la 5 minutes avant chaque gig.",
+                  ],
+            },
           ]
         : [
             {
@@ -683,6 +897,78 @@ export function buildAcceleratedLevels123(
                   : "Teste tes transitions en mono sur une enceinte : les clashes mid ressortent mieux.",
               ],
             },
+            {
+              slideNumber: 3,
+              title: en
+                ? "Pro Challenge: EQ Surgery"
+                : "Défi Pratique : Chirurgie EQ",
+              subtitle: en
+                ? "3 transitions, EQ only, no volume fader — how clean can you really mix?"
+                : "3 transitions, EQ seulement, pas de fader volume — à quel point tu mixes proprement ?",
+              videoUrl: "https://www.youtube.com/embed/VjGSMUep6_4",
+              videoDescription: en
+                ? "EQ-only mixing technique: smooth transitions without touching the volume fader."
+                : "Technique de mix EQ-only : transitions fluides sans toucher au fader de volume.",
+              content: en
+                ? `**Time to take off the training wheels.** The volume fader is comfortable — it's intuitive, it's forgiving, it fixes a lot of sins. But relying on it means your EQ skills stay shallow. This challenge strips it away and forces you to transition using nothing but the 3 EQ knobs.
+
+**Why EQ-Only Matters**
+When you take away the fader, you discover exactly where your frequency awareness lives — and where it doesn't. You'll hear masking you never noticed, feel gaps you usually papered over with volume, and develop surgical precision that makes every future transition cleaner.
+
+**The Self-Judgment Framework**
+After each transition, rate yourself on three criteria: Was there a moment of mud (two basses fighting)? Was there a gap (an empty frequency hole between tracks)? Was the handoff smooth or did the crowd hear a "seam"? Be brutally honest — nobody's watching, and honesty now means confidence later.
+
+**The Real Payoff**
+DJs who can mix on EQ alone can mix on anything. When you add the fader back in, it becomes a creative choice, not a crutch. That's the difference between a DJ who knows EQ and a DJ who depends on volume.`
+                : `**C'est le moment d'enlever les roulettes.** Le fader de volume est confortable — c'est intuitif, c'est tolérant, ça corrige beaucoup de péchés. Mais s'en remettre à lui signifie que tes compétences EQ restent superficielles. Ce challenge le retire et te force à transitionner avec rien d'autre que les 3 potards EQ.
+
+**Pourquoi l'EQ-only compte**
+Quand tu retires le fader, tu découvres exactement où vit ta conscience fréquentielle — et où elle ne vit pas. Tu entendras du masquage que tu n'avais jamais remarqué, tu sentiras des trous que tu comblais habituellement avec le volume, et tu développeras une précision chirurgicale qui rend chaque future transition plus propre.
+
+**Le cadre d'auto-évaluation**
+Après chaque transition, note-toi sur trois critères : Y a-t-il eu un moment de boue (deux basses qui se battent) ? Y a-t-il eu un trou (un vide fréquentiel entre les morceaux) ? Le passage était-il fluide ou le public aurait-il entendu une « couture » ? Sois brutalement honnête — personne ne regarde, et l'honnêteté maintenant c'est la confiance plus tard.
+
+**Le vrai gain**
+Les DJs qui savent mixer en EQ-only peuvent mixer sur n'importe quoi. Quand tu rajoutes le fader, ça devient un choix créatif, pas une béquille. C'est la différence entre un DJ qui connaît l'EQ et un DJ qui dépend du volume.`,
+              keyTakeaway: en
+                ? "If you can mix without the fader, every tool you add back becomes a creative choice — not a crutch."
+                : "Si tu sais mixer sans le fader, chaque outil que tu réajoutes devient un choix créatif — pas une béquille.",
+              exercise: {
+                title: en
+                  ? "The EQ Surgery Drill"
+                  : "Le Drill Chirurgie EQ",
+                description: en
+                  ? "Record 3 transitions using only EQ — no volume fader allowed. Judge yourself on smoothness."
+                  : "Enregistre 3 transitions en utilisant uniquement l'EQ — aucun fader de volume autorisé. Juge-toi sur la fluidité.",
+                steps: en
+                  ? [
+                      "Pick 4 tracks at close BPMs. Set both channel faders to max and leave them there — no touching.",
+                      "Transition 1: bring in track B by swapping the bass (cut bass on A, bring bass on B) while managing mids.",
+                      "Transition 2: use mid-removal on the outgoing track to let the new melody emerge, then swap bass.",
+                      "Transition 3: try a full high-to-low progressive EQ handoff — start with highs, then mids, then bass last.",
+                      "Listen back and rate each transition: mud (1–5), gaps (1–5), smoothness (1–5). Target: 4+ on smoothness.",
+                    ]
+                  : [
+                      "Choisis 4 morceaux à BPM proches. Mets les deux faders de channel au max et laisse-les là — interdit d'y toucher.",
+                      "Transition 1 : fais entrer le morceau B en swappant les basses (coupe les basses de A, monte celles de B) tout en gérant les mids.",
+                      "Transition 2 : retire les mids du morceau sortant pour laisser émerger la nouvelle mélodie, puis swappe les basses.",
+                      "Transition 3 : tente un handoff EQ progressif du haut vers le bas — commence par les aigus, puis mids, puis basses en dernier.",
+                      "Réécoute et note chaque transition : boue (1–5), trous (1–5), fluidité (1–5). Objectif : 4+ en fluidité.",
+                    ],
+                estimatedTime: "20 minutes",
+              },
+              tips: en
+                ? [
+                    "Start with tracks that have clean, simple arrangements — complex tracks with lots of mid-range content make EQ-only mixing much harder.",
+                    `On ${deck}, focus on the mid EQ during the swap — that's where most clashes hide when you can't use the fader.`,
+                    "Record yourself and listen on headphones the next day with fresh ears — you'll catch things you missed in the moment.",
+                  ]
+                : [
+                    "Commence avec des morceaux aux arrangements propres et simples — les morceaux complexes avec beaucoup de contenu mid-range rendent le mix EQ-only bien plus difficile.",
+                    `Sur ${deck}, concentre-toi sur l'EQ mid pendant le swap — c'est là que la plupart des clashes se cachent quand tu ne peux pas utiliser le fader.`,
+                    "Enregistre-toi et réécoute au casque le lendemain avec des oreilles fraîches — tu rattraperas des choses que tu as ratées sur le moment.",
+                  ],
+            },
           ],
     },
 
@@ -704,7 +990,7 @@ export function buildAcceleratedLevels123(
             ? "Building a transition like a mini-story even when you already know the technique."
             : "Construire une transition comme une mini-histoire même quand tu connais déjà la technique."),
       userLevels: ["intermediate", "advanced"],
-      totalSlides: 2,
+      totalSlides: 3,
       estimatedDuration: "20 minutes",
       slides: isAdvanced
         ? [
@@ -872,6 +1158,80 @@ export function buildAcceleratedLevels123(
                     "Après 10 gigs avec notes post-gig, relis-les toutes d'un coup — tu verras ton arc de progression clairement.",
                   ],
             },
+            {
+              slideNumber: 3,
+              title: en
+                ? "Pro Challenge: The 45-Minute Arc"
+                : "Défi Pratique : L'Arc de 45 Minutes",
+              subtitle: en
+                ? "Warm-up, 2 energy waves, peak, cool-down — record it, then tear it apart"
+                : "Warm-up, 2 vagues d'énergie, peak, cool-down — enregistre, puis décortique",
+              videoUrl: "https://www.youtube.com/embed/h8BHBwz8JxY",
+              videoDescription: en
+                ? "Building a complete DJ set arc: energy waves, peaks, and the art of the graceful exit."
+                : "Construire un arc de set DJ complet : vagues d'énergie, peaks et l'art de la sortie élégante.",
+              content: en
+                ? `**This is the final boss of set construction.** Anybody can play good tracks back-to-back. The real skill is shaping 45 minutes into an emotional journey that the listener feels without thinking about it. Warm-up, first wave, dip, second wave, peak, cool-down — each phase has a purpose.
+
+**The Architecture**
+- **Minutes 0–8 (Warm-up):** Set the tone. Low energy, groove-focused. The listener shouldn't feel "pushed" yet. BPM floor: your lowest comfortable range.
+- **Minutes 8–18 (First wave):** Gradual build. Introduce rhythmic complexity, bring in more percussive elements. The floor starts moving.
+- **Minutes 18–23 (Dip):** Pull back deliberately. This is the breath before the storm. Drop the energy 20 %, maybe change texture. The amateurs skip this — don't.
+- **Minutes 23–35 (Second wave + Peak):** This is your moment. Build to your strongest track, your best transition, your peak energy. Leave nothing on the table.
+- **Minutes 35–45 (Cool-down):** Graceful exit. Don't just stop — guide the energy back down. The last track should leave them wanting more, not relieved it's over.
+
+**The Self-Critique Protocol**
+Recording yourself is easy. Listening back honestly is hard. But it's the single fastest way to improve. Listen for: energy pacing, transition cleanliness, frequency balance, and — hardest of all — whether the set tells a story or just plays songs.`
+                : `**C'est le boss final de la construction de set.** N'importe qui peut enchaîner de bons morceaux. La vraie compétence, c'est de sculpter 45 minutes en un voyage émotionnel que l'auditeur ressent sans y penser. Warm-up, première vague, creux, deuxième vague, peak, cool-down — chaque phase a un objectif.
+
+**L'architecture**
+- **Minutes 0–8 (Warm-up) :** Pose le ton. Basse énergie, focus sur le groove. L'auditeur ne doit pas se sentir « poussé » encore. BPM plancher : ta plage la plus basse confortable.
+- **Minutes 8–18 (Première vague) :** Montée progressive. Introduis de la complexité rythmique, amène plus d'éléments percussifs. Le floor commence à bouger.
+- **Minutes 18–23 (Creux) :** Recule volontairement. C'est le souffle avant la tempête. Baisse l'énergie de 20 %, change peut-être de texture. Les amateurs sautent ça — pas toi.
+- **Minutes 23–35 (Deuxième vague + Peak) :** C'est ton moment. Monte vers ton morceau le plus fort, ta meilleure transition, ton énergie maximale. Ne laisse rien sur la table.
+- **Minutes 35–45 (Cool-down) :** Sortie élégante. N'arrête pas juste — guide l'énergie vers le bas. Le dernier morceau doit leur donner envie de plus, pas les soulager que ce soit fini.
+
+**Le protocole d'auto-critique**
+S'enregistrer c'est facile. Se réécouter honnêtement c'est dur. Mais c'est le moyen le plus rapide de progresser. Écoute pour : le rythme d'énergie, la propreté des transitions, l'équilibre fréquentiel, et — le plus dur de tout — si le set raconte une histoire ou se contente de passer des morceaux.`,
+              keyTakeaway: en
+                ? "A set without an arc is just a playlist on shuffle — the arc is what makes people remember your name."
+                : "Un set sans arc c'est juste une playlist en shuffle — l'arc est ce qui fait que les gens retiennent ton nom.",
+              exercise: {
+                title: en
+                  ? "Build & Record The 45-Minute Arc"
+                  : "Construis & Enregistre l'Arc de 45 Minutes",
+                description: en
+                  ? "Build a complete set with 5 phases, record it, and self-critique ruthlessly."
+                  : "Construis un set complet en 5 phases, enregistre-le, et auto-critique sans pitié.",
+                steps: en
+                  ? [
+                      "Plan your arc on paper first: assign 8–12 tracks across 5 phases (warm-up / wave 1 / dip / wave 2 + peak / cool-down).",
+                      "Record the full 45-minute set in one take. No restarts — mistakes are part of the data.",
+                      "Listen back the next day. For each phase, rate: energy pacing (1–5), transition quality (1–5), and emotional impact (1–5).",
+                      "Identify your weakest phase — that's your homework for the next two weeks.",
+                      "Share the recording with a trusted DJ friend and ask for one honest criticism you can't see yourself.",
+                    ]
+                  : [
+                      "Planifie ton arc sur papier d'abord : assigne 8–12 morceaux sur 5 phases (warm-up / vague 1 / creux / vague 2 + peak / cool-down).",
+                      "Enregistre le set complet de 45 minutes en une prise. Pas de recommencement — les erreurs font partie des données.",
+                      "Réécoute le lendemain. Pour chaque phase, note : rythme d'énergie (1–5), qualité des transitions (1–5), et impact émotionnel (1–5).",
+                      "Identifie ta phase la plus faible — c'est tes devoirs pour les deux prochaines semaines.",
+                      "Partage l'enregistrement avec un ami DJ de confiance et demande une critique honnête que tu ne peux pas voir toi-même.",
+                    ],
+                estimatedTime: "60 minutes",
+              },
+              tips: en
+                ? [
+                    "The 'dip' phase is the hardest to nail — most DJs either dip too much (kills the vibe) or not enough (no contrast for the peak).",
+                    "Your cool-down track matters more than you think: it's the last impression. Pick something with emotion, not just low energy.",
+                    "After 5 recorded sets, listen to all 5 cool-downs back-to-back — you'll discover your natural closing style.",
+                  ]
+                : [
+                    "La phase 'creux' est la plus dure à réussir — la plupart des DJs creux trop (tue l'ambiance) ou pas assez (pas de contraste pour le peak).",
+                    "Ton morceau de cool-down compte plus que tu ne crois : c'est la dernière impression. Choisis quelque chose avec de l'émotion, pas juste basse énergie.",
+                    "Après 5 sets enregistrés, réécoute les 5 cool-downs à la suite — tu découvriras ton style de closing naturel.",
+                  ],
+            },
           ]
         : [
             {
@@ -999,6 +1359,84 @@ export function buildAcceleratedLevels123(
                   ? "Keep three 'easy BPM' transitions at the top of your deck for when fatigue hits."
                   : "Garde trois transitions 'faciles BPM' tout en haut du deck pour tes moments fatigue.",
               ],
+            },
+            {
+              slideNumber: 3,
+              title: en
+                ? "Pro Challenge: Mini-Set Storytelling"
+                : "Défi Pratique : Mini-Set Storytelling",
+              subtitle: en
+                ? "15 minutes, one story arc — intro, build, peak, release"
+                : "15 minutes, un arc narratif — intro, montée, peak, relâche",
+              videoUrl: "https://www.youtube.com/embed/WAx7-fHR3QA",
+              videoDescription: en
+                ? "Building a short DJ set with a clear narrative arc using tension and release techniques."
+                : "Construire un set DJ court avec un arc narratif clair en utilisant les techniques de tension et relâche.",
+              content: en
+                ? `**Anyone can play tracks. A DJ tells a story.** Even in 15 minutes, you can create a journey that takes the listener somewhere. This challenge forces you to think beyond "what sounds good next" and into "what does the listener need to feel right now."
+
+**The 4-Act Structure**
+- **Act 1 — The Hook (tracks 1–2):** Invite the listener in. Set the mood, establish the groove. Don't blast off — seduce.
+- **Act 2 — The Build (transition into track 3):** Increase tension. Add rhythmic energy, maybe shift up 2–3 BPM. Use your EQ and filter skills from the previous slides to create anticipation.
+- **Act 3 — The Peak (track 3–4):** Maximum impact. Your best transition lands here. The listener should feel the energy shift in their body, not just their ears.
+- **Act 4 — The Release (end of track 4–5):** Bring it down gracefully. Don't just stop — resolve. The best sets end with a feeling, not a silence.
+
+**The Tension Toolbox**
+Use everything you've learned: phrasing to hit the right moments, EQ to create space and fullness, loops to extend builds, filters to create anticipation. The techniques are individual — the story is how you combine them.
+
+**Why 15 Minutes is Enough**
+If you can tell a story in 15 minutes, you can tell one in 60. If you can't tell one in 15, adding more tracks won't help — it'll just be longer mediocrity. Master the short form first.`
+                : `**N'importe qui peut passer des morceaux. Un DJ raconte une histoire.** Même en 15 minutes, tu peux créer un voyage qui emmène l'auditeur quelque part. Ce challenge te force à penser au-delà de « quel morceau sonne bien après » et vers « qu'est-ce que l'auditeur a besoin de ressentir maintenant. »
+
+**La structure en 4 actes**
+- **Acte 1 — L'accroche (morceaux 1–2) :** Invite l'auditeur. Pose l'ambiance, établis le groove. Ne décolle pas — séduis.
+- **Acte 2 — La montée (transition vers morceau 3) :** Augmente la tension. Ajoute de l'énergie rythmique, monte peut-être de 2–3 BPM. Utilise tes compétences EQ et filtre des slides précédents pour créer l'anticipation.
+- **Acte 3 — Le peak (morceaux 3–4) :** Impact maximum. Ta meilleure transition atterrit ici. L'auditeur doit sentir le shift d'énergie dans son corps, pas juste ses oreilles.
+- **Acte 4 — La relâche (fin morceaux 4–5) :** Redescends avec grâce. N'arrête pas juste — résous. Les meilleurs sets finissent avec un sentiment, pas un silence.
+
+**La boîte à outils de tension**
+Utilise tout ce que tu as appris : le phrasing pour toucher les bons moments, l'EQ pour créer de l'espace et de la plénitude, les loops pour étendre les montées, les filtres pour créer l'anticipation. Les techniques sont individuelles — l'histoire c'est comment tu les combines.
+
+**Pourquoi 15 minutes suffisent**
+Si tu sais raconter une histoire en 15 minutes, tu sais en raconter une en 60. Si tu n'y arrives pas en 15, ajouter des morceaux n'aidera pas — ce sera juste de la médiocrité plus longue. Maîtrise le format court d'abord.`,
+              keyTakeaway: en
+                ? "A DJ who can tell a story in 15 minutes can tell one in 2 hours — master the short arc first."
+                : "Un DJ qui sait raconter une histoire en 15 minutes sait en raconter une en 2 heures — maîtrise l'arc court d'abord.",
+              exercise: {
+                title: en
+                  ? "The 15-Minute Story Arc"
+                  : "L'Arc Narratif en 15 Minutes",
+                description: en
+                  ? "Build a mini-set with a clear intro/build/peak/release arc using the tension techniques you've learned."
+                  : "Construis un mini-set avec un arc clair intro/montée/peak/relâche en utilisant les techniques de tension que tu as apprises.",
+                steps: en
+                  ? [
+                      "Pick 4–5 tracks with rising energy potential. Write a one-word intention for each: 'invite,' 'tease,' 'explode,' 'resolve.'",
+                      "Plan your transitions: which tool (EQ swap, filter sweep, loop build) will you use for each handoff?",
+                      "Record the full 15-minute set. No restarts — commit to the story even if a transition isn't perfect.",
+                      "Listen back and ask: did the set have a shape? Could a listener feel the arc without knowing it was planned?",
+                      "Rate yourself: hook (1–5), build tension (1–5), peak impact (1–5), graceful resolution (1–5).",
+                    ]
+                  : [
+                      "Choisis 4–5 morceaux avec un potentiel d'énergie croissante. Écris un mot d'intention pour chacun : 'invite,' 'taquine,' 'explose,' 'résout.'",
+                      "Planifie tes transitions : quel outil (swap EQ, sweep filtre, build en loop) vas-tu utiliser pour chaque passage ?",
+                      "Enregistre le mini-set complet de 15 minutes. Pas de recommencement — engage-toi dans l'histoire même si une transition n'est pas parfaite.",
+                      "Réécoute et demande-toi : le set avait-il une forme ? Un auditeur pourrait-il sentir l'arc sans savoir qu'il était planifié ?",
+                      "Note-toi : accroche (1–5), montée de tension (1–5), impact du peak (1–5), résolution élégante (1–5).",
+                    ],
+                estimatedTime: "20 minutes",
+              },
+              tips: en
+                ? [
+                    "Your peak track doesn't have to be the fastest — it has to be the most impactful. Sometimes a perfectly-timed vocal drop hits harder than +10 BPM.",
+                    "If the release feels abrupt, try extending your last track with a 4-bar loop while gradually cutting the highs — it creates a natural fade-out feeling.",
+                    "After 3 mini-set recordings, listen to all three peaks back-to-back: are you always peaking the same way? Variety is growth.",
+                  ]
+                : [
+                    "Ton morceau peak ne doit pas être le plus rapide — il doit être le plus percutant. Parfois un drop vocal parfaitement timé frappe plus fort que +10 BPM.",
+                    "Si la relâche semble abrupte, essaie d'étendre ton dernier morceau avec une loop de 4 mesures en coupant graduellement les aigus — ça crée un sentiment de fade-out naturel.",
+                    "Après 3 enregistrements de mini-sets, réécoute les trois peaks à la suite : tu peakes toujours de la même façon ? La variété c'est la progression.",
+                  ],
             },
           ],
     },

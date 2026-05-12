@@ -3581,7 +3581,7 @@ export function getAllModules(
   const tail4to10 = skillTier === "advanced"
     ? buildProLevels4to10(language)
     : buildIntermediateLevels4to10(language);
-  return personalize([...accelerated, ...tail4to10]);
+  return personalize(withStageProgression([...accelerated, ...tail4to10]));
 }
 
 /** Défaut = parcours majoritaire FLX4 (communauté Instagram), utilisateur débutant. */

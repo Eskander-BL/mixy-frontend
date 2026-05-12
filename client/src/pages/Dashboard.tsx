@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, CreditCard, Flame, Lock, Mail, Play, Undo2 } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { Confetti } from "@/components/Confetti";
 import { trpc } from "@/lib/trpc";
 import { getAllModules } from "@/lib/courses-progressive";
 import {
@@ -453,18 +454,31 @@ export default function Dashboard() {
         )}
 
         {completedLevels.length >= totalLevels && skillLevel === "advanced" && (
-          <Card className="p-5 md:p-6 mb-6 border border-emerald-300 bg-gradient-to-r from-emerald-50 to-amber-50 shadow-sm rounded-[5px]">
-            <p className="text-base md:text-lg font-bold text-gray-900">
-              {isFr
-                ? "Bravo ! Tu as terminé tout le parcours Mixy AI !"
-                : "Congratulations! You've completed the entire Mixy AI path!"}
-            </p>
-            <p className="text-sm text-gray-600 mt-1">
-              {isFr
-                ? "Tu maîtrises les bases, les techniques intermédiaires et le niveau professionnel. Continue à pratiquer et développe ton propre style !"
-                : "You've mastered the fundamentals, intermediate techniques, and professional level. Keep practicing and develop your own style!"}
-            </p>
-          </Card>
+          <>
+            <Confetti intensity="high" />
+            <Card className="p-5 md:p-6 mb-6 border border-emerald-300 bg-gradient-to-r from-emerald-50 to-amber-50 shadow-sm rounded-[5px]">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <img
+                  src={brand.excellent}
+                  alt=""
+                  className="h-28 md:h-36 w-auto object-contain quiz-mascot-animate shrink-0"
+                  aria-hidden
+                />
+                <div>
+                  <p className="text-lg md:text-xl font-bold text-gray-900">
+                    {isFr
+                      ? "Légendaire ! Tu as terminé tout le parcours Mixy AI !"
+                      : "Legendary! You've completed the entire Mixy AI path!"}
+                  </p>
+                  <p className="text-sm text-gray-600 mt-2">
+                    {isFr
+                      ? "Des premiers BPM jusqu'au niveau professionnel — tu as tout maîtrisé. Continue à pratiquer, développe ton style unique et fais vibrer les dancefloors !"
+                      : "From your first BPM to professional level — you've mastered it all. Keep practicing, develop your unique style and make those dancefloors move!"}
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </>
         )}
 
         <div className="mb-3 md:mb-4">
