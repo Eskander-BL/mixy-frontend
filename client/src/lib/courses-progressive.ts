@@ -5,7 +5,7 @@
 
 import { level4Module, level5Module } from "./courses-progressive-extended";
 import { buildAcceleratedLevels123 } from "./courses-accelerated-first-levels";
-import type { CourseTrackId } from "./learning-profile";
+import type { CourseTrackId, TargetDeck } from "./learning-profile";
 import type { Language } from "./i18n";
 
 export type UserLevel = "beginner" | "intermediate" | "advanced";
@@ -2333,10 +2333,267 @@ const courseModulesFromLevel2: CourseModule[] = [
   },
 ];
 
+/* ---------------------------------------------------------------------------
+ * Equipment-specific tips — injected into shared modules (levels 2-10)
+ * based on the user's actual controller (TargetDeck).
+ * Each entry holds 1-2 tips per language, appended to the last slide's tips.
+ * --------------------------------------------------------------------------- */
+const EQUIPMENT_TIPS: Partial<Record<TargetDeck, Record<number, { fr: string[]; en: string[] }>>> = {
+  flx4: {
+    2: {
+      fr: [
+        "Sur ta FLX4, les potards EQ sont très proches les uns des autres — entraîne-toi à les manipuler sans regarder pour développer le geste réflexe.",
+      ],
+      en: [
+        "On your FLX4, the EQ knobs are close together — practice turning them without looking to build muscle memory.",
+      ],
+    },
+    3: {
+      fr: [
+        "Tes jog wheels sont compactes sur la FLX4 — travaille le toucher léger pour corriger le tempo sans à-coups.",
+      ],
+      en: [
+        "Your FLX4's jog wheels are compact — practice a light touch for smooth tempo corrections without jerks.",
+      ],
+    },
+    4: {
+      fr: [
+        "Sur ta FLX4, la clé Camelot s'affiche dans Rekordbox sur ton laptop — arrange tes colonnes pour voir BPM et clé d'un coup d'œil.",
+      ],
+      en: [
+        "On your FLX4, the Camelot key shows in Rekordbox on your laptop — arrange your columns to see BPM and key at a glance.",
+      ],
+    },
+    5: {
+      fr: [
+        "Avec ta FLX4 et Rekordbox, crée des playlists par niveau d'énergie — en live, tu navigueras beaucoup plus vite.",
+      ],
+      en: [
+        "With your FLX4 and Rekordbox, create playlists sorted by energy level — you'll navigate much faster during a live set.",
+      ],
+    },
+    6: {
+      fr: [
+        "Sur ta FLX4, utilise Shift + pad pour accéder aux loops en 2e couche — et découvre le Merge FX pour des transitions d'un seul geste.",
+      ],
+      en: [
+        "On your FLX4, use Shift + pad to access loops on the 2nd layer — and try Merge FX for one-touch transitions.",
+      ],
+    },
+    7: {
+      fr: [
+        "Avec ta FLX4 compacte, tu peux lever les yeux de la table plus facilement — profite de cette proximité pour scanner la foule en permanence.",
+      ],
+      en: [
+        "With your compact FLX4, it's easy to look up from the decks — use that proximity to constantly scan the crowd.",
+      ],
+    },
+    8: {
+      fr: [
+        "Connecte ta FLX4 en USB-C et prépare tes sets directement dans Rekordbox — exporte aussi une clé USB en backup, au cas où.",
+      ],
+      en: [
+        "Connect your FLX4 via USB-C and prep your sets in Rekordbox — also export a USB stick as backup, just in case.",
+      ],
+    },
+    9: {
+      fr: [
+        "Ta FLX4 est assez compacte pour l'emporter en backup — branche-la en USB-C et tu as ton environnement familier même sur un setup inconnu.",
+      ],
+      en: [
+        "Your FLX4 is compact enough to bring as a backup — plug it in via USB-C and you have your familiar setup anywhere.",
+      ],
+    },
+    10: {
+      fr: [
+        "Le Merge FX de ta FLX4 peut devenir ta signature — maîtrise-le à fond et intègre-le dans tes transitions pour un style reconnaissable.",
+      ],
+      en: [
+        "Your FLX4's Merge FX can become your signature — master it fully and weave it into your transitions for a recognizable style.",
+      ],
+    },
+  },
+  flx3: {
+    2: {
+      fr: [
+        "Sur ta FLX3, essaie le Smart CFX pendant que tu sculptes l'EQ — ça ajoute une texture unique à tes transitions.",
+      ],
+      en: [
+        "On your FLX3, try the Smart CFX while sculpting EQ — it adds a unique texture to your transitions.",
+      ],
+    },
+    3: {
+      fr: [
+        "La FLX3 a des jog wheels plus grandes que la FLX4 — profite de cette inertie pour des corrections de tempo plus fluides.",
+      ],
+      en: [
+        "The FLX3 has larger jog wheels than the FLX4 — use that inertia for smoother tempo corrections.",
+      ],
+    },
+    4: {
+      fr: [
+        "Ta FLX3 affiche les infos de clé directement sur le contrôleur — repère vite la tonalité avant de charger un morceau.",
+      ],
+      en: [
+        "Your FLX3 displays key info directly on the controller — spot the key quickly before loading a track.",
+      ],
+    },
+    5: {
+      fr: [
+        "Ta FLX3 offre plus d'espace de travail que la FLX4 — profite de la section Beat FX pour ponctuer les phases de ton set.",
+      ],
+      en: [
+        "Your FLX3 offers more workspace than the FLX4 — use the Beat FX section to punctuate each phase of your set.",
+      ],
+    },
+    6: {
+      fr: [
+        "Ta FLX3 a une section Beat FX dédiée + le Smart CFX — combine les deux pour des montées de tension uniques sans surcharger le mix.",
+      ],
+      en: [
+        "Your FLX3 has a dedicated Beat FX section + Smart CFX — combine both for unique tension builds without cluttering the mix.",
+      ],
+    },
+    7: {
+      fr: [
+        "Le Smart CFX de ta FLX3 te permet de réagir en un geste — un filtre instantané pour adapter l'énergie quand la foule te le demande.",
+      ],
+      en: [
+        "Your FLX3's Smart CFX lets you react in one move — an instant filter to shift energy when the crowd demands it.",
+      ],
+    },
+    8: {
+      fr: [
+        "Prépare tes playlists Rekordbox avec soin puis exporte sur clé USB — ta FLX3 lit aussi les clés exportées, un vrai filet de sécurité.",
+      ],
+      en: [
+        "Prep your Rekordbox playlists carefully, then export to USB — your FLX3 also reads exported sticks, a real safety net.",
+      ],
+    },
+    9: {
+      fr: [
+        "Avant de monter en cabine avec ta FLX3, fais un soundcheck rapide : gains, monitoring, retour cabine — la confiance commence par la technique.",
+      ],
+      en: [
+        "Before stepping up with your FLX3, do a quick soundcheck: gains, monitoring, booth return — confidence starts with technique.",
+      ],
+    },
+    10: {
+      fr: [
+        "Le Smart CFX de ta FLX3 est un outil créatif unique — explore chaque paramètre pour développer des textures que personne d'autre n'utilise.",
+      ],
+      en: [
+        "Your FLX3's Smart CFX is a unique creative tool — explore every parameter to develop textures no one else uses.",
+      ],
+    },
+  },
+  xdj_rx: {
+    2: {
+      fr: [
+        "Sur ton XDJ-RX, les potards EQ sont espacés comme en club — profite de cette ergonomie pour t'entraîner au geste pro.",
+      ],
+      en: [
+        "On your XDJ-RX, the EQ layout matches club gear — use this to train pro-level muscle memory.",
+      ],
+    },
+    3: {
+      fr: [
+        "Tes grandes jog wheels du XDJ-RX sont comme celles des CDJ en club — profites-en pour sentir le vinyle et corriger en douceur.",
+      ],
+      en: [
+        "Your XDJ-RX's large jog wheels feel like club CDJs — use that vinyl feel for buttery-smooth corrections.",
+      ],
+    },
+    4: {
+      fr: [
+        "Sur ton XDJ-RX, l'écran intégré affiche la clé de chaque morceau — trie par clé Camelot directement sur l'appareil, sans laptop.",
+      ],
+      en: [
+        "On your XDJ-RX, the built-in screen shows each track's key — sort by Camelot key right on the unit, no laptop needed.",
+      ],
+    },
+    5: {
+      fr: [
+        "Sur ton XDJ-RX, organise tes morceaux par dossiers d'énergie sur ta clé USB — tu pourras naviguer directement à l'écran sans laptop.",
+      ],
+      en: [
+        "On your XDJ-RX, organize tracks into energy-level folders on your USB stick — browse directly on screen, no laptop needed.",
+      ],
+    },
+    6: {
+      fr: [
+        "Sur ton XDJ-RX, les pads de performance sont accessibles à l'écran tactile — déclenche loops et FX sans quitter le mix des yeux.",
+      ],
+      en: [
+        "On your XDJ-RX, performance pads are accessible via the touchscreen — trigger loops and FX without taking your eyes off the mix.",
+      ],
+    },
+    7: {
+      fr: [
+        "Ton XDJ-RX te libère du laptop — sans écran d'ordi entre toi et la foule, tu lis la piste bien plus naturellement.",
+      ],
+      en: [
+        "Your XDJ-RX frees you from the laptop — with no computer screen between you and the crowd, reading the floor feels natural.",
+      ],
+    },
+    8: {
+      fr: [
+        "Sur ton XDJ-RX, teste ta clé USB exportée depuis Rekordbox directement sur l'appareil — vérifie l'ordre, les grilles et les cues à l'écran.",
+      ],
+      en: [
+        "On your XDJ-RX, test your Rekordbox-exported USB stick directly on the unit — check track order, grids, and cues on screen.",
+      ],
+    },
+    9: {
+      fr: [
+        "Ton XDJ-RX a le même layout que les CDJ de club — tu es déjà sur le bon matériel pour te sentir chez toi en cabine.",
+      ],
+      en: [
+        "Your XDJ-RX has the same layout as club CDJs — you're already training on the right gear to feel at home in the booth.",
+      ],
+    },
+    10: {
+      fr: [
+        "Ton XDJ-RX te prépare directement au workflow CDJ/DJM des clubs — toute l'expérience que tu accumules est transférable telle quelle en cabine pro.",
+      ],
+      en: [
+        "Your XDJ-RX prepares you directly for the CDJ/DJM club workflow — every skill you build transfers directly to a pro booth.",
+      ],
+    },
+  },
+};
+
+function injectEquipmentTips(
+  modules: CourseModule[],
+  targetDeck: TargetDeck | null | undefined,
+  language: Language,
+): CourseModule[] {
+  if (!targetDeck) return modules;
+  const deckTips = EQUIPMENT_TIPS[targetDeck];
+  if (!deckTips) return modules;
+
+  return modules.map((module) => {
+    const entry = deckTips[module.level];
+    if (!entry) return module;
+    const tips = language === "en" ? entry.en : entry.fr;
+    if (!tips.length) return module;
+
+    const lastIdx = module.slides.length - 1;
+    if (lastIdx < 0) return module;
+
+    const slides = module.slides.map((slide, idx) => {
+      if (idx !== lastIdx) return slide;
+      return { ...slide, tips: [...slide.tips, ...tips] };
+    });
+    return { ...module, slides };
+  });
+}
+
 export function getAllModules(
   track: CourseTrackId,
   skillTier: UserLevel = "beginner",
   language: Language = "fr",
+  targetDeck?: TargetDeck | null,
 ): CourseModule[] {
   const tailFromLevel4 = courseModulesFromLevel2.slice(2);
   const withStageProgression = (modules: CourseModule[]): CourseModule[] => {
@@ -2391,11 +2648,11 @@ export function getAllModules(
 
   if (skillTier === "beginner") {
     const level1 = track === "flx4" ? level1ModuleFlx4 : level1ModuleFlx3Xdj;
-    return localizeModules([level1, ...courseModulesFromLevel2], language);
+    return injectEquipmentTips(localizeModules([level1, ...courseModulesFromLevel2], language), targetDeck, language);
   }
   const accelTier = skillTier === "advanced" ? "advanced" : "intermediate";
   const accelerated = buildAcceleratedLevels123(track, accelTier, language);
-  return withStageProgression(localizeModules([...accelerated, ...tailFromLevel4], language));
+  return injectEquipmentTips(withStageProgression(localizeModules([...accelerated, ...tailFromLevel4], language)), targetDeck, language);
 }
 
 /** Défaut = parcours majoritaire FLX4 (communauté Instagram), utilisateur débutant. */
@@ -2406,8 +2663,9 @@ export function getModuleByLevel(
   track: CourseTrackId = "flx4",
   skillTier: UserLevel = "beginner",
   language: Language = "fr",
+  targetDeck?: TargetDeck | null,
 ): CourseModule | null {
-  return getAllModules(track, skillTier, language).find((m) => m.level === level) ?? null;
+  return getAllModules(track, skillTier, language, targetDeck).find((m) => m.level === level) ?? null;
 }
 
 export function getSlideFromModule(
@@ -2416,8 +2674,9 @@ export function getSlideFromModule(
   track: CourseTrackId = "flx4",
   skillTier: UserLevel = "beginner",
   language: Language = "fr",
+  targetDeck?: TargetDeck | null,
 ): Slide | null {
-  const module = getModuleByLevel(level, track, skillTier, language);
+  const module = getModuleByLevel(level, track, skillTier, language, targetDeck);
   if (!module) return null;
   return module.slides.find((s) => s.slideNumber === slideNumber) ?? null;
 }

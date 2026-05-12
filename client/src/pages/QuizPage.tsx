@@ -10,6 +10,7 @@ import { scrollAppMainToTop } from "@/lib/utils";
 import { getAllModules, getModuleByLevel } from "@/lib/courses-progressive";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useLanguageContext } from "@/contexts/LanguageContext";
+import { Confetti } from "@/components/Confetti";
 
 interface QuizQuestion {
   id: number;
@@ -1849,6 +1850,7 @@ export default function QuizPage() {
 
     return (
       <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white flex items-center justify-center p-4">
+        {score >= 50 && <Confetti intensity={score >= 70 ? "high" : "medium"} />}
         <Card className="max-w-2xl w-full p-8 border-0 shadow-sm">
           <div className="text-center">
             <div className="mb-4 flex justify-center quiz-mascot-animate">

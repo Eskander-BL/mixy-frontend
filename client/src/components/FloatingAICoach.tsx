@@ -10,7 +10,7 @@ import { useLanguageContext } from "@/contexts/LanguageContext";
 
 export default function FloatingAICoach() {
   const [location] = useLocation();
-  const { courseTrack, skillLevel, completedLevels } = useProgress();
+  const { courseTrack, skillLevel, completedLevels, learningProfile } = useProgress();
   const { language } = useLanguageContext();
   const isFr = language === "fr";
   const [open, setOpen] = useState(false);
@@ -31,8 +31,8 @@ export default function FloatingAICoach() {
     return Number.parseInt(match[1], 10) || 1;
   }, [location]);
 
-  const module = getModuleByLevel(level, courseTrack, skillLevel, language);
-  const slide = getSlideFromModule(level, 1, courseTrack, skillLevel, language);
+  const module = getModuleByLevel(level, courseTrack, skillLevel, language, learningProfile?.targetDeck);
+  const slide = getSlideFromModule(level, 1, courseTrack, skillLevel, language, learningProfile?.targetDeck);
   const userId = Number.parseInt(localStorage.getItem("userId") || "0", 10);
   const quizInsightsQuery = trpc.dj.getQuizInsights.useQuery(
     { userId },

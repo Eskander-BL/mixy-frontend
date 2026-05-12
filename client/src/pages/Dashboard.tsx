@@ -5,7 +5,7 @@ import { useProgress } from "@/contexts/ProgressContext";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, CreditCard, Lock, Mail, Play, Undo2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, CreditCard, Flame, Lock, Mail, Play, Undo2 } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { trpc } from "@/lib/trpc";
 import { getAllModules } from "@/lib/courses-progressive";
@@ -32,6 +32,56 @@ import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
 import { toast } from "sonner";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 
+function useStreak() {
+  const [streak, setStreak] = useState(1);
+  useEffect(() => {
+    const today = new Date().toISOString().split("T")[0];
+    const stored = JSON.parse(localStorage.getItem("mixyStreak") || '{"count":1,"lastDate":""}');
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+
+    if (stored.lastDate === today) {
+      setStreak(stored.count);
+    } else if (stored.lastDate === yesterday) {
+      const newCount = stored.count + 1;
+      localStorage.setItem("mixyStreak", JSON.stringify({ count: newCount, lastDate: today }));
+      setStreak(newCount);
+    } else {
+      localStorage.setItem("mixyStreak", JSON.stringify({ count: 1, lastDate: today }));
+      setStreak(1);
+    }
+  }, []);
+  return streak;
+}
+
+function LevelBadge({ score, isFr }: { score?: number; isFr: boolean }) {
+  if (!score || score < 50) return null;
+  const badge =
+    score >= 90
+      ? { color: "bg-yellow-400", symbol: "★", label: isFr ? "Or" : "Gold" }
+      : score >= 70
+        ? { color: "bg-gray-300", symbol: "✦", label: isFr ? "Argent" : "Silver" }
+        : { color: "bg-amber-600", symbol: "●", label: isFr ? "Bronze" : "Bronze" };
+  return (
+    <div
+      className={`absolute -top-1.5 -right-1.5 w-6 h-6 ${badge.color} rounded-full flex items-center justify-center shadow-sm`}
+      title={badge.label}
+    >
+      <span className="text-[10px] font-bold text-white leading-none">{badge.symbol}</span>
+    </div>
+  );
+}
+
+function getScoresFromStorage(): Record<string, number> {
+  try {
+    const raw = localStorage.getItem("userProgress");
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed.scores ?? {};
+  } catch {
+    return {};
+  }
+}
+
 export default function Dashboard() {
   const { language } = useLanguageContext();
   const isFr = language === "fr";
@@ -56,6 +106,8 @@ export default function Dashboard() {
   const [contactMessage, setContactMessage] = useState("");
   const [returnFromPayment, setReturnFromPayment] = useState(false);
   const [showPathDialog, setShowPathDialog] = useState(false);
+  const streak = useStreak();
+  const savedScores = useMemo(() => getScoresFromStorage(), []);
 
   const userProfileQuery = trpc.dj.getUserProfile.useQuery(
     { userId: parseInt(localStorage.getItem("userId") || "0") },
@@ -109,8 +161,8 @@ export default function Dashboard() {
 
   const languagePref = language;
   const modulesForUser = useMemo(
-    () => getAllModules(courseTrack, skillLevel, languagePref),
-    [courseTrack, skillLevel, languagePref]
+    () => getAllModules(courseTrack, skillLevel, languagePref, learningProfile?.targetDeck),
+    [courseTrack, skillLevel, languagePref, learningProfile?.targetDeck]
   );
   const userIdNum = useMemo(
     () => Number.parseInt(typeof window !== "undefined" ? localStorage.getItem("userId") || "0" : "0", 10),
@@ -300,20 +352,28 @@ export default function Dashboard() {
             </button>
           )}
 
-          <div className="mt-6">
-            <div className="flex justify-between items-center mb-2">
-              <p className="text-sm font-semibold text-gray-700">
-                {isFr ? "Progression générale" : "Overall progress"}
-              </p>
-              <p className="text-sm font-semibold text-primary">
-                {completedLevels.length} / {totalLevels} {isFr ? "niveaux complétés" : "levels completed"}
-              </p>
+          <div className="mt-6 flex flex-wrap items-end gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex justify-between items-center mb-2">
+                <p className="text-sm font-semibold text-gray-700">
+                  {isFr ? "Progression générale" : "Overall progress"}
+                </p>
+                <p className="text-sm font-semibold text-primary">
+                  {completedLevels.length} / {totalLevels} {isFr ? "niveaux complétés" : "levels completed"}
+                </p>
+              </div>
+              <div className="w-full bg-gray-200 rounded-[5px] h-2.5 overflow-hidden">
+                <div
+                  className="bg-primary h-2.5 rounded-[5px] transition-all"
+                  style={{ width: `${progressPercentage}%` }}
+                ></div>
+              </div>
             </div>
-            <div className="w-full bg-gray-200 rounded-[5px] h-2.5 overflow-hidden">
-              <div
-                className="bg-primary h-2.5 rounded-[5px] transition-all"
-                style={{ width: `${progressPercentage}%` }}
-              ></div>
+            <div className="flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1.5 shrink-0">
+              <Flame className="size-4 text-orange-500" />
+              <span className="text-sm font-semibold text-orange-700">
+                {streak} {isFr ? (streak === 1 ? "jour" : "jours") : (streak === 1 ? "day" : "days")}
+              </span>
             </div>
           </div>
 
@@ -423,8 +483,10 @@ export default function Dashboard() {
             }
 
             if (isValidated) {
+              const levelScore = savedScores[String(lvl)] as number | undefined;
               return (
-                <div key={lvl}>
+                <div key={lvl} className="relative">
+                <LevelBadge score={levelScore} isFr={isFr} />
                 <Card
                   className="p-4 md:p-5 border border-emerald-200/80 bg-gradient-to-b from-emerald-50/50 to-white shadow-sm rounded-[5px] w-full"
                 >
