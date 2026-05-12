@@ -100,8 +100,8 @@ export default function Dashboard() {
   const [showContactDialog, setShowContactDialog] = useState(false);
   const [showBillingDialog, setShowBillingDialog] = useState(false);
   const [contactEmail, setContactEmail] = useState("");
-  const [contactSubject, setContactSubject] = useState<"Paiement" | "Bug technique" | "Question DJ" | "Autre">(
-    "Bug technique",
+  const [contactSubject, setContactSubject] = useState<"payment" | "technical_bug" | "dj_question" | "other">(
+    "technical_bug",
   );
   const [contactMessage, setContactMessage] = useState("");
   const [returnFromPayment, setReturnFromPayment] = useState(false);
@@ -583,7 +583,7 @@ export default function Dashboard() {
             />
             <Select
               value={contactSubject}
-              onValueChange={(value: "Paiement" | "Bug technique" | "Question DJ" | "Autre") =>
+              onValueChange={(value: "payment" | "technical_bug" | "dj_question" | "other") =>
                 setContactSubject(value)
               }
             >
@@ -591,10 +591,10 @@ export default function Dashboard() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Paiement">{isFr ? "Paiement" : "Payment"}</SelectItem>
-                <SelectItem value="Bug technique">{isFr ? "Bug technique" : "Technical bug"}</SelectItem>
-                <SelectItem value="Question DJ">{isFr ? "Question DJ" : "DJ question"}</SelectItem>
-                <SelectItem value="Autre">{isFr ? "Autre" : "Other"}</SelectItem>
+                <SelectItem value="payment">{isFr ? "Paiement" : "Payment"}</SelectItem>
+                <SelectItem value="technical_bug">{isFr ? "Bug technique" : "Technical bug"}</SelectItem>
+                <SelectItem value="dj_question">{isFr ? "Question DJ" : "DJ question"}</SelectItem>
+                <SelectItem value="other">{isFr ? "Autre" : "Other"}</SelectItem>
               </SelectContent>
             </Select>
             <Textarea

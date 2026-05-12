@@ -404,23 +404,3 @@ export function getTranslations(language: Language) {
   return translations[language];
 }
 
-/**
- * Language context hook
- */
-import { useState } from 'react';
-
-export function useLanguage() {
-  const [language, setLanguage] = useState<Language>(() => {
-    if (typeof window !== "undefined") {
-      return (localStorage.getItem("language") as Language) || "en";
-    }
-    return "en";
-  });
-
-  const changeLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem("language", lang);
-  };
-
-  return { language, changeLanguage, t: (key: string) => t(key, language) };
-}

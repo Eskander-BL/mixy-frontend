@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
 import { useLocation } from "wouter";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
@@ -24,6 +24,18 @@ export default function FloatingAICoach() {
           : "Hey, I'm your Mixy coach. Ask me anything about DJing or your current course.",
     },
   ]);
+
+  useEffect(() => {
+    setMessages(prev => {
+      const newGreeting = language === "fr"
+        ? "Salut, je suis ton coach Mixy. Pose-moi une question sur le DJing ou ton cours."
+        : "Hey, I'm your Mixy coach. Ask me anything about DJing or your current course.";
+      if (prev.length >= 2 && prev[1].role === "assistant" && prev[1].content !== newGreeting) {
+        return [prev[0], { ...prev[1], content: newGreeting }, ...prev.slice(2)];
+      }
+      return prev;
+    });
+  }, [language]);
 
   const level = useMemo(() => {
     const match = location.match(/\/course\/(\d+)/);
