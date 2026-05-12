@@ -3571,6 +3571,7 @@ export default function QuizPage() {
   const [savingProgress, setSavingProgress] = useState(false);
   const [showTierComplete, setShowTierComplete] = useState(false);
   const [upgrading, setUpgrading] = useState(false);
+  const [showRecap, setShowRecap] = useState(true);
 
   const level = params?.level ? parseInt(params.level) : 1;
   const questions = pickQuizQuestions(level, skillLevel, language);
@@ -3951,8 +3952,6 @@ export default function QuizPage() {
   const recapPoints = quizModule?.slides
     ?.map((s: { keyTakeaway?: string }) => s.keyTakeaway)
     .filter(Boolean) as string[] | undefined;
-
-  const [showRecap, setShowRecap] = useState(true);
 
   if (showRecap && recapPoints?.length) {
     return (
