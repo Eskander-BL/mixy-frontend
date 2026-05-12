@@ -339,87 +339,103 @@ const EN_LEVEL_6_TO_10_OVERRIDES: Record<number, LocalizedModuleOverride> = {
   },
   4: {
     title: "Harmonic Mixing",
-    description: "Use key compatibility to improve musical flow.",
+    description: "Ready for the thing that separates good DJs from the ones who give you chills? Harmonic mixing is about choosing tracks whose musical keys work together — and when you get it right, your transitions go from 'that was smooth' to 'how did they do that?'",
     slides: {
       1: {
-        title: "Musical key basics",
-        subtitle: "Why some blends sound natural",
-        videoDescription: "Understand key compatibility in practical DJ terms.",
+        title: "Understanding musical keys",
+        subtitle: "Why some blends sound magical and others sound like a car crash",
+        videoDescription: "Your first deep dive into the world of musical keys — this is the secret ingredient that makes certain transitions feel effortless and emotional while others clash painfully.",
         content:
-          "Harmonic compatibility reduces harsh clashes and improves emotional continuity.",
+          "Alright, let's talk about something that's going to completely change the way you hear music: musical keys. Every track has a key — think of it like the track's emotional color. You've got C major, A minor, D major, G minor… there are 24 in total, and each one has a distinct feel. Here's the thing: when you mix two tracks together, if their keys are compatible, the transition sounds natural, musical, almost magical. The crowd won't know why, but they'll feel it in their gut — something just sounds right. But if you slam a track in C major against one in F-sharp major? Ouch. It clashes. It sounds off-key. And the dancefloor feels it immediately, even if they can't explain why. That's where harmonic mixing comes in. Instead of leaving it to chance, you deliberately choose tracks whose keys play well together. The result? Your transitions go from 'technically correct' to 'wow, this DJ is on another level.' And here's the best part: there's a beautifully simple tool called the Camelot Wheel that makes all of this easy — no music theory degree required. It's a circle that shows you at a glance which keys are compatible. We're going to dive deep into it in the next slide. Trust me on this one — once you start mixing harmonically, you'll never go back. This is where your mixes start having a real musical identity.",
         keyTakeaway:
-          "Key-aware transitions often sound cleaner and more musical.",
+          "When keys are compatible, your transition becomes musical and emotional — not just technical. This is the single biggest upgrade you can make to the way your mixes sound and feel.",
         exercise: {
-          title: "Key pairing drill",
-          description: "Find compatible pairs in your library.",
+          title: "Discover the keys in your library",
+          description: "Start seeing your music through a harmonic lens — this quick exercise will change how you think about track selection forever!",
           steps: [
-            "Select 6 tracks and note keys.",
-            "Build 3 compatible transition pairs.",
-            "Test each pair and rate smoothness.",
+            "Pick 5-6 tracks you love and play regularly. These are your go-to weapons — let's learn their harmonic DNA.",
+            "Use Rekordbox's key analysis, Mixed In Key, or even Shazam to identify each track's musical key. Write the key next to each track title.",
+            "Look for pairs that share the same key or keys that are close together (like A minor and C major). Try playing those pairs together and really listen — notice how they blend more naturally than random pairings.",
           ],
           estimatedTime: "10 minutes",
         },
-        tips: ["Use key as guide, not prison.", "Start with safe moves.", "Listen critically."],
+        tips: [
+          "Don't stress about memorizing all 24 keys right now — the Camelot Wheel (next slide) turns this into a simple number game that anyone can master.",
+          "Start paying attention to keys even when you're just listening to music casually. Over time, your ears will start recognizing compatible keys instinctively.",
+          "Key compatibility is a powerful guide, but it's not the only factor in a great transition. BPM, energy, and timing still matter — harmonic mixing is the cherry on top that makes everything sing.",
+        ],
       },
       2: {
-        title: "Camelot workflow",
-        subtitle: "Fast key decision making",
-        videoDescription: "Use Camelot logic under real set pressure.",
+        title: "The Camelot Wheel: your secret weapon",
+        subtitle: "The simplest system for finding keys that match — no music theory needed",
+        videoDescription: "Meet the tool that pro DJs keep open on every gig — the Camelot Wheel turns complex music theory into a dead-simple number game you can learn in five minutes.",
         content:
-          "Camelot gives quick compatibility decisions when you need speed.",
+          "OK, the Camelot Wheel — this is about to become your best friend. It's a circle with 12 positions, and each position represents a musical key using a simple code: a number (1-12) and a letter (A or B). So you'll see things like 8A, 5B, 11A. That's it. No sharps, no flats, no music theory headaches. And the rule is stupidly simple. If your current track is in 8A, your three safe options for the next track are: 8B (same number, other letter — always a safe move), 9A (one step up — gentle energy lift), and 7A (one step down — smooth descent). Three options, every single time. That's the whole system. You don't need to be a musician. You don't need to understand chord progressions. You just look at the number, stay close, and your transitions will sound harmonically beautiful. Here's a concrete example: your current track is in 8A (A minor). You can follow it with 8B (A major), 9A (E minor), or 7A (D minor). Anything else? Skip it for now until you've built your confidence. For finding the Camelot key of your tracks, you've got great tools: Rekordbox and Serato analyze keys automatically, Mixed In Key is incredibly accurate (paid but worth it), and even free tools like KeyFinder work well. Here's what blows most people's minds: the biggest DJs in the world — the ones playing sold-out festivals — use exactly this system. It's not cheating. It's professional preparation. And now you know the secret too.",
         keyTakeaway:
-          "Fast key logic improves transition confidence.",
+          "The Camelot Wheel gives you three guaranteed compatible options for every track. Use it consistently and your transitions will sound professional overnight — no music degree required.",
         exercise: {
-          title: "Quick key decision drill",
-          description: "Choose next track in under 10 seconds.",
+          title: "Your first harmonic transition",
+          description: "Put the Camelot Wheel into practice right now — you're about to hear the difference it makes, and it's going to blow your mind!",
           steps: [
-            "Pick current key.",
-            "Select one compatible option fast.",
-            "Run transition and evaluate result.",
+            "Pick a track and find its Camelot key (e.g., 8A). Now search your library for a track in 8B, 9A, or 7A — any of those three will work perfectly.",
+            "Load both tracks on your decks, match the BPM, and do your transition the way you normally would. But this time, really listen to how the two tracks interact harmonically during the overlap. Notice how they complement each other instead of clashing?",
+            "Repeat with at least 2 more compatible pairs to lock in the habit. The more you do this, the more automatic it becomes — and soon you won't even need to think about it.",
           ],
-          estimatedTime: "10 minutes",
+          estimatedTime: "15 minutes",
         },
-        tips: ["Train speed with constraints.", "Keep fallback options.", "Do not overthink."],
+        tips: [
+          "Print out the Camelot Wheel or set it as your phone wallpaper — you'll be checking it constantly at first, and that's totally normal. Within a few weeks, you'll have the positions memorized.",
+          "The Camelot system works across every genre — House, Techno, Hip-Hop, Drum & Bass, Pop, everything. Musical keys are universal, so this tool is universal too.",
+          "When preparing a set, try planning your key journey in advance. Moving around the wheel smoothly (8A → 9A → 10A) creates a subtle but powerful sense of musical progression that audiences love.",
+        ],
       },
       3: {
-        title: "Controlled rule-breaking",
-        subtitle: "Creative contrast without chaos",
-        videoDescription: "Break harmonic rules intentionally.",
+        title: "Breaking the rules on purpose",
+        subtitle: "When to ignore the Camelot Wheel — and why the pros do it",
+        videoDescription: "You've learned the rules — now learn when and how to break them like a seasoned pro. Controlled contrast is what creates truly unforgettable DJ moments.",
         content:
-          "Advanced creativity means controlled contrast, not random mismatch.",
+          "You've got the fundamentals locked down — now let's talk about when to throw the rulebook out the window. The Camelot Wheel is an incredible guide, but it's not a law. The best DJs in the world know exactly when to break harmonic rules to create something special. First scenario: creative tension. Sometimes a little dissonance is exactly what the moment needs. You intentionally mix two clashing keys, the crowd feels the tension building… and then you resolve it with a perfectly compatible track. Boom — the impact is ten times stronger than a safe transition. It's like a movie building suspense before the big reveal. Second scenario: genre context matters. In Hip-Hop, Trap, and certain styles of Techno, the rhythm and energy dominate so heavily that key compatibility takes a back seat. The beats and the vibe carry the mix more than the harmony. In these genres, trust your ears over the numbers. Third scenario: effects as bridges. You can use reverb, delay, or filter sweeps to 'blur' the passage between two incompatible keys. A well-timed reverb wash creates a sonic bridge that masks the dissonance just long enough for the transition to work. It's a pro technique that sounds incredibly smooth when executed well. Here's the golden rule: master the Camelot Wheel completely first. When you know it inside out, you can bend the rules with intention. There's a world of difference between someone who ignores key compatibility out of ignorance and someone who breaks the rules as a deliberate artistic choice. The best DJs in the world? They follow the Camelot Wheel about 80% of the time. The other 20%? That's where they create magic.",
         keyTakeaway:
-          "Break rules only when you can predict the result.",
+          "Master the rules first, then break them with intention. The most unforgettable DJ moments come from controlled contrast — not random chaos.",
         exercise: {
-          title: "A/B contrast test",
-          description: "Compare compatible vs intentional contrast mix.",
+          title: "The contrast experiment",
+          description: "Experience the difference between harmonic safety and intentional tension — this is where you start developing real artistic instincts!",
           steps: [
-            "Run one harmonic-safe transition.",
-            "Run one intentional contrast transition.",
-            "Compare musical impact and crowd feel.",
-          ],
-          estimatedTime: "10 minutes",
-        },
-        tips: ["Contrast should be intentional.", "Recovery plan always ready.", "Context matters."],
-      },
-      4: {
-        title: "Harmonic transition execution",
-        subtitle: "Apply key logic in full transition",
-        videoDescription: "Consolidate harmonic strategy in live blend.",
-        content:
-          "Combine key choice, phrasing, and EQ for a polished result.",
-        keyTakeaway:
-          "Harmonic mixing is strongest when integrated with timing and EQ.",
-        exercise: {
-          title: "3 harmonic transitions",
-          description: "Execute consistent key-aware blends.",
-          steps: [
-            "Prepare 3 compatible transitions.",
-            "Run all 3 in one take.",
-            "Review smoothness and correction points.",
+            "Run a transition between two harmonically compatible tracks (using the Camelot Wheel). Listen to how smooth and natural it sounds. That's your baseline.",
+            "Now try the same transition between two tracks with incompatible keys — listen to the clash. Then try it again, but this time add a reverb or filter sweep during the overlap to soften the dissonance. Notice the difference?",
+            "Finally, create a tension-resolution sequence: start with an incompatible blend (the tension), then immediately follow with a perfectly compatible transition (the resolution). Feel how the contrast makes the resolution hit even harder.",
           ],
           estimatedTime: "12 minutes",
         },
-        tips: ["Plan key path in advance.", "Use ears first.", "Keep transitions readable."],
+        tips: [
+          "Start with keys that are only slightly incompatible — don't jump to the opposite side of the Camelot Wheel right away. Small clashes are easier to control and can sound surprisingly cool.",
+          "Always have a recovery plan. If your intentional rule-break isn't landing, know which compatible key to jump to next so you can get back on safe ground quickly.",
+          "Study how DJs like Solomun, Dixon, or Jamie XX play with key tension in their sets — they're masters of controlled contrast and listening to them will train your instincts.",
+        ],
+      },
+      4: {
+        title: "The harmonic transition in action",
+        subtitle: "Putting key logic, EQ, and phrasing together in one clean move",
+        videoDescription: "Watch how all the pieces come together — key selection, EQ sculpting, phrase timing, and a confident execution that makes the whole thing sound effortless.",
+        content:
+          "This is where it all clicks. You're going to combine everything — key compatibility, EQ management, phrase timing — into one polished harmonic transition. Let me walk you through exactly how it goes. Your current track is in 8A (A minor). Your next track is in 9A (E minor) — compatible, let's go. Step one — Preparation (about 15 seconds before the transition). Track A is playing. You load Track B on the other deck. You check: 9A, compatible, perfect. You cut B's bass to zero and bring the highs up slightly. The crowd can feel something building. Step two — The headphone check (5 seconds). You cue Track B in your headphones and listen to both together. No clashing, no dissonance — the keys complement each other beautifully. You know it's going to work. Step three — The blend (about 8 seconds). You start bringing Track B's volume up while gently lowering Track A. Both tracks are playing together and it sounds harmonious — the crowd is locked in without even realizing a new track is entering. You gradually bring B's bass back in. Step four — The switch (2 seconds). You cut Track A cleanly. Track B takes over completely. The dancefloor erupts. Seamless. The whole thing takes about 30 seconds. And the result is genuinely magical. The big difference between this and a standard transition? Here, the two tracks are singing together instead of fighting each other. It's musical, not just mechanical. And that's exactly what makes a DJ sound truly professional.",
+        keyTakeaway:
+          "A well-executed harmonic transition is invisible to the crowd — and that's exactly the point. When nobody notices the track changed but everyone feels the energy shift, you've nailed it.",
+        exercise: {
+          title: "Execute three harmonic transitions in a row",
+          description: "Your Level 4 graduation — chain three key-compatible transitions in one take. This is where preparation meets performance and you prove to yourself that harmonic mixing is now part of your toolkit!",
+          steps: [
+            "Prepare a mini-set of 4 tracks with a planned Camelot key path (e.g., 8A → 8B → 9B → 10A). Make sure each consecutive pair is compatible. This planning step is just as important as the mixing!",
+            "Mix through all 3 transitions in one continuous take. For each transition, follow the full sequence: cut incoming bass, preview in headphones, blend in, swap the bass, cut the outgoing track. Focus on making each transition feel musical, not just technically correct.",
+            "Record the whole thing and listen back. For each transition, ask yourself: did the two tracks complement each other harmonically? Was there any moment of clash or mud? Rate each one honestly, then replay your weakest transition until it shines.",
+          ],
+          estimatedTime: "15 minutes",
+        },
+        tips: [
+          "Plan your key path before you start mixing. Knowing the harmonic journey in advance lets you focus entirely on execution instead of scrambling to find compatible tracks mid-set.",
+          "Always use your ears as the final judge — the Camelot Wheel is incredibly reliable, but every now and then two 'compatible' tracks just don't vibe together. If it sounds off, trust your hearing and move on.",
+          "Make harmonic awareness a habit, not a chore. After a few weeks of checking keys before every transition, it becomes second nature — like checking your mirrors when you drive.",
+        ],
       },
     },
   },
@@ -429,50 +445,50 @@ const EN_LEVEL_6_TO_10_OVERRIDES: Record<number, LocalizedModuleOverride> = {
     slides: {
       1: {
         title: "Energy architecture",
-        subtitle: "Intro, build, peak, release",
+        subtitle: "Intro, build, peak, release — the four phases every great set follows",
         videoDescription: "The difference between a DJ who plays great tracks and a DJ who delivers an unforgettable experience? It's energy architecture — and you're about to learn it.",
         content:
-          "Think about the best DJ set you've ever heard. Chances are it wasn't just a random collection of bangers — it was a journey. It started somewhere calm, built anticipation, hit incredible peaks, gave you moments to breathe, and left you wanting more. That's energy architecture, and it's what separates a playlist from a performance. The four phases are your building blocks: Intro sets the mood and pulls people in. Build creates anticipation — the energy is rising and the crowd can feel something coming. Peak is the climax — maximum intensity, maximum release. And the cooldown brings things back down gracefully, leaving a lasting impression. You don't have to be rigid about this structure, but having it as your starting framework means every set has intentional shape instead of random energy spikes.",
+          "Think about the best DJ set you've ever heard. Chances are it wasn't just a random collection of bangers — it was a journey. It started somewhere calm, built anticipation, hit incredible peaks, gave you moments to breathe, and left you wanting more. That's energy architecture, and it's what separates a playlist from a performance. Here are the four phases that every great DJ uses, whether they're playing a warehouse or a festival main stage. Phase 1 — The Intro (first 10-15 minutes). You're setting the mood. Energy sits around 30-40%. Simple grooves, clear melodies, nothing too aggressive. People are arriving, settling in, starting to feel the vibe. No rush. Phase 2 — The Build (15-45 minutes). Now you start constructing. Energy climbs to 50-70%. The tempo nudges up gently. You add layers — more complex rhythms, bigger synths, building anticipation. The crowd is engaging more and more, and they can feel something coming. Phase 3 — The Peak (45-75 minutes). This is the moment. Energy hits 90-100%. Maximum intensity, maximum release. Everything you've built toward lands right here. This is why people came — that moment of collective euphoria on the dancefloor. Phase 4 — The Cooldown (last 15 minutes). You bring everyone back to earth, gently. Energy drifts back down to 30-50%. The tempo eases off. People catch their breath, smile at each other, and carry that feeling home. Why does this matter so much? Because a set without structure is like a movie without a plot — people drift away. A well-architected set is a complete emotional experience, and that's what makes people remember your name.",
         keyTakeaway:
-          "A great set tells a story with energy. When you control the pacing — intro, build, peak, release — the crowd goes on a journey instead of just hearing songs.",
+          "Intro, Build, Peak, Cooldown. When you structure your set like a story with these four phases, the crowd doesn't just hear songs — they live an experience they'll remember.",
         exercise: {
           title: "Design your dream mini-set",
           description: "Let's architect a set on paper before you play it! This is how the big-name DJs prepare — and it's more fun than you'd expect.",
           steps: [
-            "Define your 4 energy phases: what mood does each one have? What BPM range and energy level fits each? Imagine the crowd's face at each stage.",
-            "Assign 2-3 tracks from your library to each phase. Think about how each track's energy and key fits the story you're trying to tell.",
-            "Plan your transition strategy between phases. The shift from Build to Peak is especially important — how will you make that moment land? What about the come-down after Peak?",
+            "Define your 4 energy phases with specific numbers: what BPM range, what energy percentage (30%, 60%, 100%, etc.), and what mood does each phase carry? Imagine the crowd's face at each stage.",
+            "Assign 2-3 tracks from your library to each phase. Think about how each track's energy, BPM, and Camelot key fits the story you're trying to tell. Use what you learned in Level 4 — plan compatible key paths between phases too.",
+            "Plan your transition strategy between phases. The shift from Build to Peak is especially critical — how will you make that climactic moment land? And the cooldown after Peak needs to feel like a gentle exhale, not a sudden stop.",
           ],
           estimatedTime: "10 minutes",
         },
         tips: [
-          "Think journey, not playlist. A playlist is a list of good songs. A set is a story told with music. Always ask yourself: where am I taking the listener?",
-          "Pacing is everything. The best DJs know when to push hard and when to let the crowd breathe. Non-stop bangers actually kills energy — people need contrast to feel the peaks.",
-          "Leave room to adapt. Your energy map is a guide, not a script. If the moment calls for a change, trust your instincts and adjust on the fly.",
+          "Think journey, not playlist. A playlist is a list of good songs. A set is a story told with music. Always ask yourself: where am I taking the listener next, and why?",
+          "Pacing is everything. The best DJs know when to push hard and when to let the crowd breathe. Non-stop bangers actually kills energy — people need contrast to feel the peaks. A quiet moment makes the next drop hit ten times harder.",
+          "Leave room to adapt. Your energy map is a guide, not a script. If the moment calls for a change, trust your instincts and adjust on the fly. The structure keeps you grounded; your ears keep you alive.",
         ],
       },
       2: {
-        title: "Adapt in real time",
-        subtitle: "When to push, hold, or reset",
+        title: "Reading the room and adapting",
+        subtitle: "When to push, hold, or reset — the art of real-time decisions",
         videoDescription: "Your plan meets reality — here's how to read the room and make smart decisions on the fly without losing your set's direction.",
         content:
-          "Here's the truth every experienced DJ knows: no set goes exactly as planned, and that's actually a good thing. Your energy map is your compass, but the crowd is the terrain, and terrain changes. Maybe you planned a big build but the crowd is already at peak energy — do you push harder or ride the wave? Maybe your chill intro is losing people's attention — do you accelerate or trust the process? These are the decisions that make live DJing an art, not just a playlist. The skill is reading the room and making adjustments without losing your overall direction. Think of three simple moves: Push (increase energy/tempo/intensity), Hold (stay at the current level because it's working), or Reset (drop things down to create breathing room and set up a bigger peak). Every few transitions, check in with the room and consciously choose one of these three.",
+          "Here's the truth every experienced DJ knows: no set goes exactly as planned, and that's actually a good thing. Your energy map is your compass, but the crowd is the terrain — and terrain changes. The first skill is learning to read the dancefloor. People jumping, hands in the air, big smiles? You're in the sweet spot — keep pushing or ride the wave. People standing still, chatting at the bar, checking their phones? Energy is off — you need to adjust. A few people starting to move? That's a spark — feed it carefully and it'll catch fire. Reading body language becomes instinctive over time, but you have to actively practice it. Now, the adaptation framework. Think of three simple moves: Push (increase energy, bump the BPM up by 2-4, go for a bigger track), Hold (stay at the current level because it's working — don't fix what isn't broken), or Reset (drop things down to create breathing room and set up a bigger peak later). Every few transitions, check in with the room and consciously choose one of these three. Maybe you planned a big build but the crowd is already at peak energy — do you push harder or ride the wave? Maybe your chill intro is losing people's attention — do you accelerate or trust the process? These are the decisions that make live DJing an art. And here's the real secret: the best DJs never have a 100% fixed setlist. They have a direction, a vibe they're chasing, and a library of tracks ready for any situation. They adapt constantly to what they see and feel. That's the invisible art of DJing — and it's what makes a live set infinitely better than a pre-recorded mix.",
         keyTakeaway:
-          "Flexibility within structure is what makes a DJ feel live and connected. Plan your journey, but let the crowd guide how fast you travel.",
+          "Flexibility within structure is what makes a DJ feel live and connected. Plan your journey, but let the crowd guide how fast you travel. Your eyes and ears are your most important tools.",
         exercise: {
           title: "The DJ decision game",
           description: "Practice making push/hold/reset decisions in real time — this drill builds the read-the-room instincts that separate bedroom DJs from real performers!",
           steps: [
-            "Start mixing your planned set, but set a checkpoint every 2 transitions. At each checkpoint, pause mentally and imagine a crowd reaction — are they feeling it? Getting bored? Going wild?",
-            "Based on your imagined crowd state, consciously choose: Push (pick a higher-energy next track), Hold (stay on course), or Reset (drop the energy to build back up).",
-            "After the set, review your decisions. Did each push/hold/reset feel intentional and motivated? Would you make the same call again? This reflection is where the learning really happens.",
+            "Start mixing your planned set, but set a checkpoint every 2 transitions. At each checkpoint, pause mentally and imagine a crowd reaction — are they feeling it? Getting bored? Going wild? Be specific: picture actual people dancing, standing still, or leaving.",
+            "Based on your imagined crowd state, consciously choose: Push (pick a higher-energy next track, bump BPM up), Hold (stay on course — the vibe is right), or Reset (drop the energy with a mellower track to build back up stronger).",
+            "After the set, review your decisions. Did each push/hold/reset feel intentional and motivated? Would you make the same call again? Try noting what triggered each decision — this reflection builds the instincts you'll rely on in a real booth.",
           ],
           estimatedTime: "10 minutes",
         },
         tips: [
-          "Stay observant and present. It's easy to get lost in your own headphones and forget you're playing for people. Check in with the room constantly.",
-          "Make your decisions quickly and commit to them. A confident wrong call is better than a hesitant right one — audiences feel your energy.",
-          "Protect your momentum. The worst thing you can do is kill a good vibe with an indecisive transition. When in doubt, hold what's working.",
+          "Stay observant and present. It's easy to get lost in your own headphones and forget you're playing for people. Make it a habit to look up from the decks every 30 seconds — the dancefloor is giving you constant feedback.",
+          "Make your decisions quickly and commit to them. A confident wrong call is better than a hesitant right one — audiences feel your energy and your confidence. If you made the wrong choice, adjust at the next checkpoint.",
+          "Protect your momentum. The worst thing you can do is kill a good vibe with an indecisive transition. When in doubt, hold what's working. You can always push harder on the next transition — but a broken groove is hard to recover from.",
         ],
       },
       3: {
@@ -480,23 +496,23 @@ const EN_LEVEL_6_TO_10_OVERRIDES: Record<number, LocalizedModuleOverride> = {
         subtitle: "Run and review a complete mini-set",
         videoDescription: "This is your Level 5 final — a complete mini-set from intro to outro, recorded and reviewed. You're about to see how far you've come!",
         content:
-          "This is it — the culmination of everything you've built across all five levels. You're going to play a complete mini-set with intentional energy architecture, live adaptation decisions, clean transitions, harmonic awareness, and solid EQ work. Record the whole thing, because you're going to review it like a pro afterward. The review is just as important as the performance. Listen for your strong moments — the transitions where everything clicked — and your weak spots where energy dipped or timing wavered. This isn't about being perfect; it's about having awareness of your own mixing. Every pro DJ records their sets and reviews them. It's how they find their blind spots and level up session after session. When you can play a structured mini-set, review it honestly, fix the weak points, and replay it better — you've developed a practice habit that will compound forever.",
+          "This is it — the culmination of everything you've built across all five levels. You're going to play a complete mini-set with intentional energy architecture, live adaptation decisions, clean transitions, harmonic awareness, and solid EQ work. Record the whole thing, because you're going to review it like a pro afterward. Here's your game plan: pick 8-10 tracks that follow a clear progression. Start low — maybe 120 BPM, chill groove, compatible Camelot keys. Build gradually: nudge the BPM up by 2 every couple of tracks, add layers of energy, follow the Camelot path you planned. Hit your peak around track 6 or 7 — everything firing, maximum intensity. Then bring it back down for the last 2-3 tracks, easing the energy and tempo back to a place of calm. The review is just as important as the performance. Listen for your strong moments — the transitions where everything clicked, the harmonic blends that sounded seamless — and your weak spots where energy dipped, timing wavered, or keys clashed. This isn't about being perfect; it's about developing awareness of your own mixing and building a feedback loop that accelerates your growth. Every pro DJ records their sets and reviews them. It's how they find their blind spots and level up session after session. When you can play a structured mini-set, review it honestly, fix the weak points, and replay it better — you've developed the single most powerful practice habit in DJing. This habit will compound forever.",
         keyTakeaway:
           "Recording and reviewing your sets is the single most powerful improvement habit in DJing. It turns every session into a learning opportunity and every weakness into a clear action item.",
         exercise: {
           title: "The mini-set masterclass",
-          description: "Your Level 5 graduation! Play a full 25-minute mini-set, then review it like a pro coach would. This is where everything comes together!",
+          description: "Your Level 5 graduation! Play a full 25-minute mini-set with planned energy architecture, then review it like a pro coach would. This is where everything comes together!",
           steps: [
-            "Hit record and play your full planned mini-set in one take — intro through outro, no stopping. Trust your preparation and let the music flow.",
-            "Listen back and mark your 2 strongest moments (the transitions that made you smile) and 2 weakest moments (where things felt off). Be honest but kind with yourself!",
-            "Rebuild the weak transitions with specific fixes — was it timing? EQ? Track selection? Key clash? Fix the root cause and replay those sections until they shine.",
+            "Hit record and play your full planned mini-set in one take — intro through peak through outro, no stopping. Follow your energy map: start mellow, build up, hit the peak, bring it down. Trust your preparation and let the music flow.",
+            "Listen back and mark your 2 strongest moments (the transitions that made you smile — maybe a perfect harmonic blend or a bass swap that just clicked) and 2 weakest moments (where things felt off — maybe a key clash or a timing drift). Be honest but kind with yourself!",
+            "Rebuild the weak transitions with specific fixes — was it timing? EQ? Track selection? Key clash? Energy mismatch? Fix the root cause and replay those sections until they shine. Then run the full set again and compare.",
           ],
-          estimatedTime: "12 minutes",
+          estimatedTime: "15 minutes",
         },
         tips: [
           "Record every single full run. Even the messy ones. Comparing this week's recording to last week's is the most motivating thing in the world when you can actually hear your progress.",
-          "Score your own set honestly but fairly. You're not comparing yourself to Carl Cox — you're comparing yourself to yesterday's you. That's the only benchmark that matters.",
-          "Make this a weekly ritual. One structured mini-set per week, recorded and reviewed, will make you better faster than hours of aimless noodling on the decks.",
+          "Score your own set honestly but fairly. You're not comparing yourself to Carl Cox — you're comparing yourself to yesterday's you. That's the only benchmark that matters. Growth is personal.",
+          "Make this a weekly ritual. One structured mini-set per week, recorded and reviewed, will make you better faster than hours of aimless noodling on the decks. Consistency beats talent every single time.",
         ],
       },
     },
@@ -1323,6 +1339,58 @@ Ordinateur → **USB** → contrôleur → **MASTER OUT** → enceintes actives 
       ...level1ModuleFlx4.slides[2],
       videoDescription:
         "Tu vois le tempo affiché dans Rekordbox et la grille sur la waveform — super utile pour relier l'oreille et l'écran, que tu sois sur FLX3 ou XDJ-RX.",
+      content: `**OK, là on rentre dans le vif du sujet.** Le BPM, c'est LE concept fondamental du DJing. Mais t'inquiète, c'est beaucoup plus simple que ça en a l'air.
+
+**Le BPM (Beats Per Minute), c'est quoi ?**
+C'est tout simplement le nombre de battements par minute. C'est le pouls de ta musique, son rythme cardiaque.
+
+**Imagine deux métronomes :**
+- Métronome 1 : 120 clics par minute
+- Métronome 2 : 140 clics par minute
+- Résultat : chaos total ! Ça claque dans tous les sens.
+
+**Les BPM par genre (pour te repérer) :**
+- House : 120–130 BPM (le groove régulier, parfait pour débuter)
+- Techno : 125–140 BPM (un peu plus rapide, plus d'énergie)
+- Hip-Hop : 85–115 BPM (plus lent, plus groovy)
+- Drum & Bass : 160–180 BPM (là ça envoie du lourd !)
+
+**Le secret du DJing, c'est ça :**
+Deux morceaux au **même BPM** = ils sonnent bien ensemble. Deux BPM différents = le chaos. C'est aussi simple que ça.
+
+**Sur ta DDJ-FLX3**
+- Le tempo est affiché par deck dans Rekordbox (ex. 124,0). Après analyse, ce chiffre doit correspondre à ce que tu entends.
+- Le **fader de tempo** est bien visible en façade — tu peux ajuster finement. La zone **Smart CFX** te permet de colorer le son, mais on verra ça plus tard ; pour l'instant, concentre-toi sur le BPM.
+- Le bouton **Sync** est là pour t'aider au début — et c'est OK de l'utiliser ! Mais entraîne-toi aussi à **sentir** le décalage au casque.
+
+**Sur ton XDJ-RX**
+- Le BPM s'affiche directement sur **l'écran** du lecteur, sans ordinateur. C'est la logique club !
+- Tu ajustes le tempo avec le **fader pitch** ou via les **molettes** selon le modèle. Le retour visuel à l'écran te confirme le BPM en temps réel.
+- Entraîne-toi à **sentir** le décalage au casque — quand tu mixeras sans laptop, c'est ce réflexe-là qui te sauvera.
+
+**Tu retiens juste ça pour l'instant :**
+Le BPM c'est le rythme. Deux rythmes identiques = harmonie. Deux rythmes différents = on court à la catastrophe. Simple, efficace, fondamental.`,
+      keyTakeaway:
+        "Le BPM c'est le pouls de ta musique. Deux morceaux au même BPM = magie. Sur FLX3 tu le vois dans Rekordbox, sur XDJ-RX c'est direct à l'écran — même réflexe, même principe !",
+      exercise: {
+        title: "Ressens le BPM avec ton corps",
+        description:
+          "Avant même de toucher ta FLX3 ou ton XDJ-RX, apprends à sentir le rythme — c'est ton meilleur outil !",
+        steps: [
+          "Choisis un morceau que tu kiffes et lance-le.",
+          "Tape du pied ou hoche la tête sur chaque battement : 1-2-3-4, 1-2-3-4…",
+          "Compte les battements pendant 15 secondes.",
+          "Multiplie par 4 → tu as le BPM approximatif !",
+          "Vérifie avec Rekordbox (FLX3) ou directement sur l'écran (XDJ-RX) : t'étais proche ?",
+          "Recommence avec 4 autres morceaux de styles différents — tu vas voir, ton oreille s'affine vite.",
+        ],
+        estimatedTime: "5 minutes",
+      },
+      tips: [
+        "Sur FLX3, repère bien le fader de tempo par deck — c'est lui que tu vas manipuler au prochain cours pour aligner les BPM.",
+        "Sur XDJ-RX, l'écran te donne le BPM sans ordi : habitue-toi à lire l'affichage plutôt que le laptop.",
+        "Les morceaux du même genre ont souvent des BPM proches — c'est pour ça que les DJs mixent par genre au début.",
+      ],
     },
     {
       ...level1ModuleFlx4.slides[3],
@@ -1368,6 +1436,66 @@ C'est là que ça devient vraiment fun : tu commences à **contrôler** ta musiq
       ...level1ModuleFlx4.slides[4],
       videoDescription:
         "Transition type « drop mix » : inspiration pour enchaîner proprement une fois le tempo aligné. Applique ça sur ta FLX3 ou ton XDJ-RX !",
+      content: `**C'est le moment que tu attendais : ta toute première transition !** Tout ce qu'on a vu avant, c'était pour arriver là. Tu es prêt.
+
+**Voilà comment ça se passe, étape par étape :**
+
+**Étape 1 — Préparation (30 secondes avant)**
+- Le morceau A tourne sur le deck A (ex. 124 BPM)
+- Tu charges le morceau B sur le deck B
+- Tu ajustes le pitch pour que B soit aussi à 124 BPM
+- Tu écoutes B au casque avec le bouton **Cue**
+
+**Étape 2 — Écoute et calage (10 secondes)**
+- Tu écoutes A et B ensemble dans ton casque
+- Tu vérifies que les kicks tombent en même temps
+- Si ça décale un peu, tu donnes un petit coup de jog pour recaler
+- Quand c'est calé → on passe à la suite !
+
+**Étape 3 — Le mix (5-10 secondes)**
+- Tu montes doucement le channel fader de B
+- Tu baisses progressivement celui de A
+- Les deux morceaux jouent ensemble — et ça sonne bien !
+- Le public ne se rend même pas compte que tu changes de morceau
+
+**Étape 4 — La bascule (1-2 secondes)**
+- Tu coupes complètement A
+- B prend le contrôle
+- C'est fait ! Ta première transition !
+
+**Petit bonus selon ta machine :**
+- **FLX3** : tu as accès au **Smart CFX** pour ajouter un filtre ou un écho pendant la transition — ça rend le passage encore plus smooth. Teste-le une fois que la transition de base est propre.
+- **XDJ-RX** : navigue dans tes morceaux directement à l'écran et sélectionne le prochain titre depuis la clé USB. L'avantage ? Pas d'ordi à gérer, tu restes 100 % concentré sur le mix.
+
+**La vérité :**
+- Ça a l'air compliqué écrit comme ça, mais en vrai ça devient naturel très vite
+- Ta première transition sera peut-être pas parfaite — et c'est **totalement normal**
+- Même les plus grands DJs ont galéré au début
+- L'important c'est de s'entraîner, de s'amuser, et de recommencer
+
+**Tu viens de franchir un cap énorme.** Tu sais maintenant préparer tes morceaux, brancher ta table, comprendre le BPM, ajuster le pitch, et faire une transition. C'est la base de TOUT le DJing. Le reste, c'est de la pratique et de la créativité !`,
+      keyTakeaway:
+        "Préparer, écouter, mixer, basculer — c'est tout ! Que ce soit sur FLX3 ou XDJ-RX, la méthode est identique. Sois fier de toi, tu es officiellement DJ !",
+      exercise: {
+        title: "Fais ta première vraie transition sur FLX3 ou XDJ-RX",
+        description:
+          "C'est le grand moment — lance-toi, on y croit !",
+        steps: [
+          "Charge deux morceaux au BPM proche (max 3 BPM d'écart) sur les decks A et B.",
+          "Aligne le tempo de B sur celui de A avec le pitch.",
+          "Lance B et écoute-le au casque avec le bouton Cue. Tape du pied pour vérifier que les beats collent.",
+          "Quand tu sens que c'est calé, monte doucement le fader de B.",
+          "Baisse progressivement le fader de A pendant 8 temps (compte dans ta tête : 1-2-3-4-5-6-7-8).",
+          "Coupe A. B joue tout seul. Félicitations, t'as fait ta première transition !",
+          "Recommence 3 fois avec des morceaux différents — chaque fois, ça sera plus facile.",
+        ],
+        estimatedTime: "10 minutes",
+      },
+      tips: [
+        "Sur FLX3, le Smart CFX peut adoucir une transition : teste un filtre passe-bas en montant le fader de B.",
+        "Sur XDJ-RX, prépare ta clé USB avec les morceaux dans l'ordre — ça te fait gagner un temps fou en mix.",
+        "Enregistre tes sessions ! Réécouter, c'est le meilleur moyen de progresser.",
+      ],
     },
   ],
 };
