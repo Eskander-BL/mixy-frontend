@@ -3557,16 +3557,20 @@ function pickQuizQuestions(
 export default function QuizPage() {
   const [, params] = useRoute("/quiz/:level");
   const [, navigate] = useLocation();
-  const { refreshProgress, completedLevels, hasActiveSubscription, courseTrack, skillLevel } =
+  const { refreshProgress, completedLevels, hasActiveSubscription, courseTrack, skillLevel, learningProfile } =
     useProgress();
   const { language } = useLanguageContext();
   const isFr = language === "fr";
   const submitQuizMutation = trpc.dj.submitQuiz.useMutation();
+  const saveOnboardingMutation = trpc.dj.saveOnboarding.useMutation();
+  const utils = trpc.useUtils();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
   const [savingProgress, setSavingProgress] = useState(false);
+  const [showTierComplete, setShowTierComplete] = useState(false);
+  const [upgrading, setUpgrading] = useState(false);
 
   const level = params?.level ? parseInt(params.level) : 1;
   const questions = pickQuizQuestions(level, skillLevel, language);
@@ -3683,9 +3687,50 @@ export default function QuizPage() {
     if (hasActiveSubscription) {
       const totalLevels = getAllModules(courseTrack, skillLevel, language).length;
       const nextLevel = level + 1;
-      navigate(nextLevel <= totalLevels ? `/course/${nextLevel}` : "/dashboard");
+      if (nextLevel > totalLevels && skillLevel !== "advanced") {
+        setShowTierComplete(true);
+      } else {
+        navigate(nextLevel <= totalLevels ? `/course/${nextLevel}` : "/dashboard");
+      }
     } else {
       navigate(`/paywall/${level}`);
+    }
+  };
+
+  const nextTier = skillLevel === "beginner" ? "intermediate" : "advanced";
+  const nextTierLabel = isFr
+    ? nextTier === "intermediate" ? "Intermédiaire" : "Professionnel"
+    : nextTier === "intermediate" ? "Intermediate" : "Professional";
+  const currentTierLabel = isFr
+    ? skillLevel === "beginner" ? "Débutant" : skillLevel === "intermediate" ? "Intermédiaire" : "Professionnel"
+    : skillLevel === "beginner" ? "Beginner" : skillLevel === "intermediate" ? "Intermediate" : "Professional";
+
+  const handleUpgradeTier = async () => {
+    const userIdRaw = localStorage.getItem("userId");
+    if (!userIdRaw) return;
+    const uid = parseInt(userIdRaw, 10);
+    if (!Number.isFinite(uid) || uid <= 0) return;
+
+    setUpgrading(true);
+    try {
+      await saveOnboardingMutation.mutateAsync({
+        userId: uid,
+        level: nextTier as "beginner" | "intermediate" | "advanced",
+        goal: learningProfile?.goal ?? "fun",
+        equipment: learningProfile?.equipment ?? "none",
+        problem: "unknown",
+        equipmentModel: learningProfile?.targetDeck ?? undefined,
+      });
+
+      localStorage.setItem(
+        "userProgress",
+        JSON.stringify({ currentLevel: 1, completedLevels: [], scores: {} }),
+      );
+      void utils.dj.getProgress.invalidate({ userId: uid });
+      refreshProgress();
+      navigate("/dashboard");
+    } catch {
+      setUpgrading(false);
     }
   };
 
@@ -3700,6 +3745,59 @@ export default function QuizPage() {
     }
     navigate(`/course/${level}`);
   };
+
+  if (showTierComplete) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white flex items-center justify-center p-4">
+        <Confetti intensity="high" />
+        <Card className="max-w-2xl w-full p-8 border-0 shadow-sm text-center">
+          <div className="mb-4 flex justify-center quiz-mascot-animate">
+            <img src={brand.excellent} alt="" className="h-40 md:h-48 w-auto max-w-[300px] object-contain" aria-hidden />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {isFr ? `Bravo ! Tu as terminé le parcours ${currentTierLabel} !` : `Amazing! You completed the ${currentTierLabel} path!`}
+          </h1>
+          <p className="text-gray-600 mb-6">
+            {isFr
+              ? `Tu as validé les 10 niveaux avec succès. Tu es prêt pour passer au parcours ${nextTierLabel} — la suite logique de ton apprentissage.`
+              : `You validated all 10 levels successfully. You're ready for the ${nextTierLabel} path — the natural continuation of your learning journey.`}
+          </p>
+          <div className="bg-primary/5 p-5 rounded-lg mb-6 border border-primary/20 text-left space-y-2">
+            <p className="text-sm text-gray-700">
+              {isFr
+                ? `Le parcours ${nextTierLabel} reprend exactement là où tu en es. Le contenu est plus avancé, les techniques plus poussées, et les exercices calibrés pour ton nouveau niveau.`
+                : `The ${nextTierLabel} path picks up exactly where you left off. The content is more advanced, the techniques deeper, and the exercises calibrated for your new level.`}
+            </p>
+            <p className="text-sm text-gray-700">
+              {isFr
+                ? "Ton matériel et tes préférences restent les mêmes — tout s'adapte automatiquement."
+                : "Your gear and preferences stay the same — everything adapts automatically."}
+            </p>
+          </div>
+          <Button
+            onClick={() => void handleUpgradeTier()}
+            disabled={upgrading}
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mb-3 py-6 text-lg flex items-center justify-center gap-2"
+          >
+            {upgrading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                {isFr ? "Chargement..." : "Loading..."}
+              </>
+            ) : (
+              <>
+                {isFr ? `Commencer le parcours ${nextTierLabel}` : `Start the ${nextTierLabel} path`}
+                <ChevronRight size={18} />
+              </>
+            )}
+          </Button>
+          <Button onClick={() => navigate("/dashboard")} variant="outline" className="w-full">
+            {isFr ? "Retour au dashboard" : "Back to dashboard"}
+          </Button>
+        </Card>
+      </div>
+    );
+  }
 
   if (showResults) {
     const getResultContent = () => {

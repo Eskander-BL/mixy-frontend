@@ -114,6 +114,35 @@ export default function Dashboard() {
     { enabled: !!localStorage.getItem("userId") }
   );
   const contactMutation = trpc.dj.contact.useMutation();
+  const saveOnboardingMutation = trpc.dj.saveOnboarding.useMutation();
+  const utils = trpc.useUtils();
+  const [upgrading, setUpgrading] = useState(false);
+
+  const handleUpgradeTier = async () => {
+    const uid = userIdNum;
+    if (!Number.isFinite(uid) || uid <= 0) return;
+    const nextTier = skillLevel === "beginner" ? "intermediate" : "advanced";
+    setUpgrading(true);
+    try {
+      await saveOnboardingMutation.mutateAsync({
+        userId: uid,
+        level: nextTier as "beginner" | "intermediate" | "advanced",
+        goal: learningProfile?.goal ?? "fun",
+        equipment: learningProfile?.equipment ?? "none",
+        problem: "unknown",
+        equipmentModel: learningProfile?.targetDeck ?? undefined,
+      });
+      localStorage.setItem(
+        "userProgress",
+        JSON.stringify({ currentLevel: 1, completedLevels: [], scores: {} }),
+      );
+      void utils.dj.getProgress.invalidate({ userId: uid });
+      refreshProgress();
+      window.location.reload();
+    } catch {
+      setUpgrading(false);
+    }
+  };
 
   useEffect(() => {
     const rawUserId = localStorage.getItem("userId");
@@ -390,6 +419,54 @@ export default function Dashboard() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6 md:py-12">
+        {completedLevels.length >= totalLevels && skillLevel !== "advanced" && (
+          <Card className="p-5 md:p-6 mb-6 border border-primary/30 bg-gradient-to-r from-primary/5 to-amber-50 shadow-sm rounded-[5px]">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-base md:text-lg font-bold text-gray-900">
+                  {isFr
+                    ? `Tu as terminé les 10 niveaux ${skillLevel === "beginner" ? "Débutant" : "Intermédiaire"} !`
+                    : `You completed all 10 ${skillLevel === "beginner" ? "Beginner" : "Intermediate"} levels!`}
+                </p>
+                <p className="text-sm text-gray-600 mt-1">
+                  {isFr
+                    ? `Le parcours ${skillLevel === "beginner" ? "Intermédiaire" : "Professionnel"} t'attend — c'est la suite directe de ton apprentissage.`
+                    : `The ${skillLevel === "beginner" ? "Intermediate" : "Professional"} path awaits — it's the direct continuation of your learning.`}
+                </p>
+              </div>
+              <Button
+                onClick={() => void handleUpgradeTier()}
+                disabled={upgrading}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 shrink-0"
+              >
+                {upgrading ? (
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-1.5" />
+                ) : (
+                  <ArrowRight size={16} className="mr-1.5" />
+                )}
+                {isFr
+                  ? `Passer au ${skillLevel === "beginner" ? "Intermédiaire" : "Professionnel"}`
+                  : `Move to ${skillLevel === "beginner" ? "Intermediate" : "Professional"}`}
+              </Button>
+            </div>
+          </Card>
+        )}
+
+        {completedLevels.length >= totalLevels && skillLevel === "advanced" && (
+          <Card className="p-5 md:p-6 mb-6 border border-emerald-300 bg-gradient-to-r from-emerald-50 to-amber-50 shadow-sm rounded-[5px]">
+            <p className="text-base md:text-lg font-bold text-gray-900">
+              {isFr
+                ? "Bravo ! Tu as terminé tout le parcours Mixy AI !"
+                : "Congratulations! You've completed the entire Mixy AI path!"}
+            </p>
+            <p className="text-sm text-gray-600 mt-1">
+              {isFr
+                ? "Tu maîtrises les bases, les techniques intermédiaires et le niveau professionnel. Continue à pratiquer et développe ton propre style !"
+                : "You've mastered the fundamentals, intermediate techniques, and professional level. Keep practicing and develop your own style!"}
+            </p>
+          </Card>
+        )}
+
         <div className="mb-3 md:mb-4">
           <h2 className="text-lg md:text-xl font-bold text-gray-900">{isFr ? "Tes niveaux" : "Your levels"}</h2>
           <p className="text-sm text-gray-600 mt-1">
