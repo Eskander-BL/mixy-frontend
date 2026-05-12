@@ -5,6 +5,8 @@
 
 import { level4Module, level5Module } from "./courses-progressive-extended";
 import { buildAcceleratedLevels123 } from "./courses-accelerated-first-levels";
+import { buildIntermediateLevels4to10 } from "./courses-intermediate-levels";
+import { buildProLevels4to10 } from "./courses-pro-levels";
 import type { CourseTrackId, TargetDeck } from "./learning-profile";
 import type { Language } from "./i18n";
 
@@ -3073,7 +3075,10 @@ export function getAllModules(
   }
   const accelTier = skillTier === "advanced" ? "advanced" : "intermediate";
   const accelerated = buildAcceleratedLevels123(track, accelTier, language);
-  return injectEquipmentPersonalization(withStageProgression(localizeModules([...accelerated, ...tailFromLevel4], language)), targetDeck, language);
+  const tail4to10 = skillTier === "advanced"
+    ? buildProLevels4to10(language)
+    : buildIntermediateLevels4to10(language);
+  return injectEquipmentPersonalization([...accelerated, ...tail4to10], targetDeck, language);
 }
 
 /** Défaut = parcours majoritaire FLX4 (communauté Instagram), utilisateur débutant. */
