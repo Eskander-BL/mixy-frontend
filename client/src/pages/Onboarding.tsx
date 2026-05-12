@@ -195,6 +195,7 @@ export default function Onboarding() {
             void utils.dj.getProgress.invalidate({ userId });
           }
           localStorage.setItem("userProgress", JSON.stringify(progressPayload));
+          if (formData.name.trim()) localStorage.setItem("mixyUserName", formData.name.trim());
           navigate("/dashboard");
         },
         onError: () => {
@@ -213,6 +214,7 @@ export default function Onboarding() {
             void utils.dj.getProgress.invalidate({ userId });
           }
           localStorage.setItem("userProgress", JSON.stringify(progressPayload));
+          if (formData.name.trim()) localStorage.setItem("mixyUserName", formData.name.trim());
           navigate("/dashboard");
         },
       }

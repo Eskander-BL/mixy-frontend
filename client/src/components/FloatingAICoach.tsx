@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import { useLocation } from "wouter";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
-import { getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
+import { getAllModules, getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
 import { brand } from "@/assets/brand-assets";
 import { useProgress } from "@/contexts/ProgressContext";
 import { useLanguageContext } from "@/contexts/LanguageContext";
@@ -75,6 +75,7 @@ export default function FloatingAICoach() {
 
   const handleSendMessage = (content: string) => {
     setMessages((prev) => [...prev, { role: "user", content }]);
+    const allModules = getAllModules(courseTrack, skillLevel, language, learningProfile?.targetDeck, learningProfile?.goal);
     chatMutation.mutate({
       userMessage: content,
       currentLevel: level,
@@ -83,6 +84,11 @@ export default function FloatingAICoach() {
       language,
       skillLevel,
       weakLevels: quizInsightsQuery.data?.weakLevels ?? [],
+      userName: localStorage.getItem("mixyUserName") || undefined,
+      equipment: learningProfile?.targetDeck || undefined,
+      goal: learningProfile?.goal || undefined,
+      completedLevels: completedLevels.length > 0 ? completedLevels : undefined,
+      totalLevels: allModules.length,
     });
   };
 
