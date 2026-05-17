@@ -76,7 +76,7 @@ export default function CoursePage() {
   const isFirstSlide = currentSlide === 1;
   const isLastSlide = currentSlide === module.totalSlides;
   const progressPercentage = (currentSlide / module.totalSlides) * 100;
-  const pathCallout = getLearningCallout(learningProfile, level, currentSlide, language);
+  const pathCallout = getLearningCallout(learningProfile, level, currentSlide, language, skillLevel);
   const previousRecap =
     currentSlide === 1 ? getPreviousLevelRecap(level, courseTrack, skillLevel, language) : null;
 

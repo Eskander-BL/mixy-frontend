@@ -1,6 +1,7 @@
 import type { CourseModule } from "@/lib/courses-progressive";
 import type { CourseTrackId } from "@/lib/learning-profile";
 import type { Language } from "@/lib/i18n";
+import { buildIntermediateLevel1IntroSlides } from "@/lib/courses-intermediate-level1-intro";
 
 export type ExperienceAccelerationTier = "intermediate" | "advanced";
 
@@ -32,18 +33,18 @@ export function buildAcceleratedLevels123(
             ? `Multi-event prep & Rekordbox power workflows${badge}`
             : `Prépa multi-événements & workflows Rekordbox avancés${badge}`)
         : (en
-            ? `Rekordbox workflow & serious prep${badge}`
-            : `Workflow Rekordbox & préparation sérieuse${badge}`),
+            ? `Your intermediate path — let's sync up${badge}`
+            : `Ton parcours intermédiaire — on fait le point${badge}`),
       description: isAdvanced
         ? (en
             ? `At this stage, preparation means different sets for different contexts — let's build your gig-ready system (${deck}).`
             : `À ton niveau, préparer = des sets différents pour des contextes différents — construisons ton système prêt pour le gig (${deck}).`)
         : (en
-            ? `You already know the basics — let's lock down organization, grids and routing (${deck}).`
-            : `Tu connais déjà les bases : on verrouille l'organisation, les grilles et le routage (${deck}).`),
+            ? `We recap the beginner path together, then level up step by step — no jargon overload (${deck}).`
+            : `On récapitule le parcours débutant ensemble, puis on monte en niveau petit à petit — sans jargon (${deck}).`),
       userLevels: ["intermediate", "advanced"],
-      totalSlides: 3,
-      estimatedDuration: en ? "22 minutes" : "22 minutes",
+      totalSlides: isAdvanced ? 3 : 6,
+      estimatedDuration: isAdvanced ? (en ? "22 minutes" : "22 minutes") : (en ? "28 minutes" : "28 minutes"),
       slides: isAdvanced
         ? [
             {
@@ -289,224 +290,7 @@ Si tu as fait le travail des slides 1 et 2, ton système de tags et tes playlist
                   ],
             },
           ]
-        : [
-            {
-              slideNumber: 1,
-              title: en
-                ? "Performance vs Export — library hygiene"
-                : "Performance vs Export — hygiène de bibliothèque",
-              subtitle: en
-                ? "What changes when you're aiming for a real set (not a TikTok demo)"
-                : "Ce qui change quand tu vises une vraie exécution (pas une démo TikTok)",
-              videoUrl: "https://www.youtube.com/embed/fa3sLTn0Wek",
-              videoDescription: en
-                ? "Rekordbox overview: collection, analysis, backup playlists before loading the deck."
-                : "Vue d'ensemble Rekordbox : collection, analyse, playlists de secours avant de charger la table.",
-              content: en
-                ? `**You're past the "getting to know your gear" phase** — now it's about making your prep bulletproof before every session.
-
-**Export**
-- Lock in BPM / grid **before** you start fighting it during the mix.
-- Prepare **backup playlists** (down-tempo / plan B) even for a small live set.
-- On ${deck}, build a routine: import → analyze → verify grid on 10 seconds kick by kick.
-
-**Performance**
-- Everything you prepare on the Export side becomes your **tactical reflexes** on the headphones.
-- No shame in using **Key Lock / Master Tempo** for moderate adjustments; if you stretch the pitch too far, the audio can sound "metallic" — disable Key Lock for a few seconds or come back to a safe range.
-
-**Quick pre-set checklist**
-1. Genre / BPM selection you can handle confidently.
-2. **Hot cues** that are readable and named.
-3. A "rescue" folder (3 easy transitions that save your night).`
-                : `**Tu n'es plus en « découverte matériel »** : tu veux fiabiliser la préparation avant chaque session.
-
-**Export**
-- Tu cadres BPM / grille **avant** de te battre pendant le mix.
-- Tu prépares des **playlists de secours** (down-tempo / plan B) même pour un petit live.
-- Sur ${deck}, garde une routine : import → analyse → vérif grille sur 10 secondes kick par kick.
-
-**Performance**
-- Tout ce que tu prépares côté Export devient tes **réflexes tactiques** au casque.
-- Zéro honte à utiliser **Key Lock/Master Tempo** sur des ajustements modérés ; si tu tires trop le pitch, le son peut « métalliser » — désactive alors Key Lock quelques secondes ou reviens dans une plage saine.
-
-**Check express avant set**
-1. Sélection genre/BPM maîtrisables.
-2. **Hot cues** lisibles et nommés.
-3. Un dossier « secours » (3 transitions faciles qui sauvent ta soirée).`,
-              keyTakeaway: en
-                ? "A solid session starts with an analyzed library and backup plans — even for an experienced DJ."
-                : "Une session solide commence par une bibliothèque analysée et des plans B — même pour un DJ confirmé.",
-              exercise: {
-                title: en
-                  ? "Audit 10 tracks before your next session"
-                  : "Audit 10 pistes avant ta prochaine session",
-                description: en
-                  ? "Fix everything that would cost you time during the mix."
-                  : "Corrige tout ce qui te ferait perdre du temps pendant le mix.",
-                steps: en
-                  ? [
-                      "Pick 10 tracks from your ideal set.",
-                      "For each track: verify the grid + set 4 hot cues (intro, buildup, drop, safe out).",
-                      "Write down where you plan two 'parachute' transitions at close BPMs.",
-                      "Export or back up locally if you're playing from USB.",
-                    ]
-                  : [
-                      "Choisis 10 morceaux de ton set idéal.",
-                      "Pour chaque piste : vérifie grille + pose 4 hot cues (intro, buildup, drop, safe out).",
-                      "Note sur papier où tu prévois deux transitions « parachute » BPM proches.",
-                      "Exports ou sauvegardes locales si tu lis sur clé/USB.",
-                    ],
-                estimatedTime: "18 minutes",
-              },
-              tips: en
-                ? [
-                    `${deck}: same Rekordbox logic, only the physical access to controls changes (Shift / menus).`,
-                    "If you stream, plan for offline access before a paid event.",
-                    "A playlist named _panic_ saves you psychologically.",
-                  ]
-                : [
-                    `${deck} : même logique Rekordbox, change seulement l'accès physique aux contrôles (Shift / menus).`,
-                    "Si tu streamings, anticipe hors-ligne avant un event payant.",
-                    "Une playlist nommée _panic_ te sauve psychologiquement.",
-                  ],
-            },
-            {
-              slideNumber: 2,
-              title: en
-                ? "Monitoring, trim and your first level plan"
-                : "Monitoring, trim et premier plan de niveaux",
-              subtitle: en
-                ? "Hear clearly what the audience will get — before you commit to a serious transition"
-                : "Entendre clairement ce que le public aura — avant d'attaquer une transition sérieuse",
-              videoUrl: "https://www.youtube.com/embed/kZKBeztMbZY",
-              videoDescription: en
-                ? "Pre-cue vs master, trims and avoiding clipping when two tracks are heating up."
-                : "Pré-cue vs master, trims et éviter la saturation quand deux pistes chauffent.",
-              content: en
-                ? `**Monitoring**
-- **Split cue** or balanced headphones: your ear should catch AT LEAST drums + overall tonality before bringing in the next track.
-- **Don't rely on colored waveforms alone;** your ears are the final QA.
-
-**Volume / trims**
-- Adjust your **input gain** so your tracks look and sound similar before you start the transition.
-- Mixy workshop rule: avoid two **subs** at the same time until you've cleaned the mask.
-
-**Simple plan on ${deck}**
-1. Load the next track while you're still holding the outgoing intro.
-2. Set up the transition tool (EQ, filter, or short loop) before you commit.`
-                : `**Monitoring**
-- **Split cue** ou casque équilibré : ton oreille doit capter AU MOINS drums + tonalité générale avant d'introduire le prochain titre.
-- **Ne te fie pas qu'aux waveforms colorées ;** tes oreilles restent le QA final.
-
-**Volume / trims**
-- Ajuste ton **gain d'entrée** pour que tes morceaux aient une tête analogue entre eux avant de faire la transition.
-- Règle d'atelier Mixy : évite deux **subs** au même moment tant que tu n'as pas nettoyé le masque.
-
-**Plan simple sur ${deck}**
-1. Charger la prochaine piste pendant que tu tiens encore l'intro sortante.
-2. Préparer l'instrument de transition (EQ, filtre, ou loop court) avant d'attaquer.`,
-              keyTakeaway: en
-                ? "Clean trim → you gain EQ headroom; clean monitoring → you avoid front-of-house accidents."
-                : "Trim propre → tu gagnes de la dynamique EQ ; monitoring propre → tu évites les accidents en façade.",
-              exercise: {
-                title: en
-                  ? "Headphones-only exercise (10 min)"
-                  : "Exercice casque-only (10 min)",
-                description: en
-                  ? "Understand the common low-end without speakers."
-                  : "Comprends la masse basse commune sans PA.",
-                steps: en
-                  ? [
-                      "Two tracks at a close BPM loaded on A/B.",
-                      "Simple match on headphones (beat + tonality).",
-                      "Cut the lows on B to -∞, bring up B's volume while keeping A on the master.",
-                      "Note at what point the two kicks still clash — that's your cue to fix tomorrow.",
-                    ]
-                  : [
-                      "Deux morceaux au BPM proche chargés sur A/B.",
-                      "Match simple au casque (beat + tonalité).",
-                      "Descends les basses de B à -∞, monte le volume de B en gardant A sur le master.",
-                      "Note à quel moment les deux kicks se battent encore — c'est ton repère à corriger demain.",
-                    ],
-                estimatedTime: "10 minutes",
-              },
-              tips: [
-                en
-                  ? "Intermediate: note how much BPM you can correct without artifacts on your deck."
-                  : "Inter : note combien tu peux corriger BPM sans artefacts sur ta table.",
-              ],
-            },
-            {
-              slideNumber: 3,
-              title: en
-                ? "Pro Challenge: Speed Prep"
-                : "Défi Pratique : Speed Prep",
-              subtitle: en
-                ? "10 tracks, 15 minutes, zero excuses — your prep game under pressure"
-                : "10 morceaux, 15 minutes, zéro excuse — ta prépa sous pression",
-              videoUrl: "https://www.youtube.com/embed/YAnNBcGYsDk",
-              videoDescription: en
-                ? "Speed preparation workflow: grids, hot cues, and energy labels in record time."
-                : "Workflow de préparation rapide : grilles, hot cues et labels d'énergie en temps record.",
-              content: en
-                ? `**Here's the truth nobody tells you:** the DJs who look effortless on stage spent hours being obsessive in Rekordbox. But obsessive doesn't mean slow — it means systematic. This challenge tests whether your workflow is actually efficient or just familiar.
-
-**The Rules**
-You get 15 minutes to fully prepare 10 tracks. That's 90 seconds per track. Sounds tight? It is. But if your routine is dialed in — analyze, verify grid, set 4 hot cues, tag energy — you'll make it with time to spare. If you can't, your workflow has fat to trim.
-
-**What "Fully Prepared" Means**
-Each track needs: a verified beatgrid (kick by kick on the first 8 bars), 4 named hot cues (intro, buildup, drop, safe out), an energy label (1–5), and one note about a known "safe pair" transition. That's the minimum standard for a track you'd play at a real gig.
-
-**Why Speed Matters**
-Because one day you'll get a last-minute booking. Or you'll discover 5 new tracks the morning of a gig. The DJs who can prep fast without cutting corners are the ones who stay ready for anything.`
-                : `**Voici la vérité que personne ne te dit :** les DJs qui ont l'air détendus sur scène ont passé des heures à être obsessionnels dans Rekordbox. Mais obsessionnel ne veut pas dire lent — ça veut dire systématique. Ce challenge teste si ton workflow est vraiment efficace ou juste habituel.
-
-**Les règles**
-Tu as 15 minutes pour préparer complètement 10 morceaux. Ça fait 90 secondes par morceau. Ça semble serré ? Ça l'est. Mais si ta routine est rodée — analyse, vérifie la grille, pose 4 hot cues, tag l'énergie — tu finiras avec du temps en rab. Si tu n'y arrives pas, ton workflow a du gras à couper.
-
-**Ce que "complètement préparé" veut dire**
-Chaque morceau doit avoir : une beatgrid vérifiée (kick par kick sur les 8 premières mesures), 4 hot cues nommés (intro, buildup, drop, safe out), un label d'énergie (1–5), et une note sur une paire de transition « sûre » connue. C'est le standard minimum pour un morceau que tu jouerais en vrai gig.
-
-**Pourquoi la vitesse compte**
-Parce qu'un jour tu auras un booking de dernière minute. Ou tu découvriras 5 nouveaux morceaux le matin d'un gig. Les DJs qui préparent vite sans couper les coins sont ceux qui restent prêts pour tout.`,
-              keyTakeaway: en
-                ? "Speed prep isn't about rushing — it's about having a system so solid that thoroughness becomes automatic."
-                : "La prépa rapide, ce n'est pas bâcler — c'est avoir un système tellement solide que la rigueur devient automatique.",
-              exercise: {
-                title: en
-                  ? "The 15-Minute Speed Prep"
-                  : "Le Speed Prep en 15 minutes",
-                description: en
-                  ? "Prepare a 10-track mini-set from scratch with perfect grids, hot cues, and energy labels."
-                  : "Prépare un mini-set de 10 morceaux from scratch avec grilles parfaites, hot cues et labels d'énergie.",
-                steps: en
-                  ? [
-                      "Pick 10 tracks you haven't fully prepped yet — no easy picks from your comfort zone.",
-                      "Set a 15-minute timer. For each track: analyze → verify grid (first 8 bars) → set 4 hot cues → tag energy (1–5).",
-                      "For each track, write one sentence: 'This pairs well with [track name] because [reason].'",
-                      "When the timer rings, count how many tracks are 100 % done. Your target: 8 out of 10 minimum.",
-                    ]
-                  : [
-                      "Choisis 10 morceaux que tu n'as pas encore complètement préparés — pas de choix faciles dans ta zone de confort.",
-                      "Lance un chrono de 15 minutes. Pour chaque morceau : analyse → vérifie grille (8 premières mesures) → pose 4 hot cues → tag énergie (1–5).",
-                      "Pour chaque morceau, écris une phrase : 'Ce morceau se marie bien avec [nom] parce que [raison].'",
-                      "Quand le chrono sonne, compte combien de morceaux sont 100 % prêts. Ton objectif : 8 sur 10 minimum.",
-                    ],
-                estimatedTime: "15 minutes",
-              },
-              tips: en
-                ? [
-                    "If you're consistently slow on gridding, batch-analyze first and only manually fix the ones Rekordbox got wrong.",
-                    "Create a hot cue color code and stick to it: e.g., green = intro, blue = buildup, red = drop, yellow = safe out.",
-                    "After the challenge, note which step ate the most time — that's where you need to build a faster habit.",
-                  ]
-                : [
-                    "Si le gridding te ralentit systématiquement, lance l'analyse en batch d'abord et ne corrige manuellement que ceux que Rekordbox a ratés.",
-                    "Crée un code couleur de hot cues et respecte-le : ex. vert = intro, bleu = buildup, rouge = drop, jaune = safe out.",
-                    "Après le challenge, note quelle étape a mangé le plus de temps — c'est là que tu dois construire une habitude plus rapide.",
-                  ],
-            },
-          ],
+        : buildIntermediateLevel1IntroSlides(deck, en),
     },
 
     // ── Level 2 ──────────────────────────────────────────────────────────

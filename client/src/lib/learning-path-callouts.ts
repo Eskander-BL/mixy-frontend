@@ -21,8 +21,11 @@ export function getLearningCallout(
   level: number,
   slideNumber: number,
   language: Language = "en",
+  skillLevel: "beginner" | "intermediate" | "advanced" = "beginner",
 ): LearningCallout | null {
   if (!profile) return null;
+  // Encadrés « premier pas / Instagram » réservés au parcours débutant
+  if (skillLevel !== "beginner") return null;
 
   const { equipment, targetDeck } = profile;
   const deck = targetDeck ?? "undecided";
