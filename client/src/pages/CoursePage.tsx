@@ -3,7 +3,6 @@ import { useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
-import { brand } from "@/assets/brand-assets";
 import {
   getModuleByLevel,
   getPreviousLevelRecap,
@@ -263,36 +262,15 @@ export default function CoursePage() {
                 })}
               </div>
 
-              {slide.illustrations && slide.illustrations.length > 0 && (
-                <div className="mt-8 space-y-4">
-                  {slide.illustrations.map((fig, i) => (
-                    <figure key={i} className="overflow-hidden rounded-lg border bg-muted/30">
-                      <img
-                        src={fig.url}
-                        alt={fig.alt}
-                        className="w-full max-h-80 object-contain bg-white"
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        onError={(e) => {
-                          const img = e.currentTarget;
-                          if (img.dataset.fallbackApplied === "true") return;
-                          img.dataset.fallbackApplied = "true";
-                          img.src = brand.mixyReadCrop;
-                        }}
-                      />
-                      {fig.caption ? (
-                        <figcaption className="px-3 py-2 text-xs text-muted-foreground border-t bg-muted/20">
-                          {fig.caption}
-                        </figcaption>
-                      ) : null}
-                    </figure>
-                  ))}
-                </div>
-              )}
-
               {/* Exercise */}
               {slide.exercise && (
-                <div className="mt-8 p-5 bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 rounded-xl">
+                <div className="mt-8 p-5 bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 rounded-xl">
+                  <p className="text-xl md:text-2xl font-black uppercase tracking-tight text-indigo-700 mb-1">
+                    {isFr ? "À toi de jouer" : "Your turn"}
+                  </p>
+                  <p className="text-xs font-semibold uppercase text-indigo-500 mb-4">
+                    {isFr ? "Exercice pratique" : "Hands-on exercise"}
+                  </p>
                   <div className="flex items-center gap-2 mb-3">
                     <span className="text-lg">🎧</span>
                     <h4 className="font-bold text-gray-900">{slide.exercise.title}</h4>

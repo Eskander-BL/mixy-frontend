@@ -132,7 +132,7 @@ export const translations = {
       subscribe: "Subscribe Now",
       paymentMethod: "Secure payment with Stripe",
       cancelAnytime:
-        "Cancel anytime: we stop renewals only — you keep full access until the end of your paid month. No extra cancellation fee.",
+        "Cancel anytime, no fee. You keep access until the end of the month you've already paid for.",
       legalBeforeSubscribe: "By paying, you accept the ",
       legalLinkLabel: "terms and legal notice",
       consentImmediateLabel:
@@ -316,7 +316,7 @@ export const translations = {
       subscribe: "S'abonner Maintenant",
       paymentMethod: "Paiement sécurisé avec Stripe",
       cancelAnytime:
-        "Annulation à tout moment : on arrête seulement les renouvellements — tu gardes l’accès jusqu’à la fin du mois déjà payé, sans frais d’annulation.",
+        "Annulation à tout moment, sans frais. Tu gardes l'accès jusqu'à la fin du mois déjà payé.",
       legalBeforeSubscribe: "En payant, tu acceptes les ",
       legalLinkLabel: "CGU et mentions légales",
       consentImmediateLabel:
