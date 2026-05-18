@@ -1478,11 +1478,11 @@ C'est normal si tout n'est pas clair du premier coup. L'important c'est de manip
       title: "Le BPM : le pouls de ta musique",
       subtitle: "Comprendre le rythme fondamental qui guide chaque mix",
       videoUrl: "https://www.youtube.com/watch?v=DPM4udeiDZQ",
-      videoStart: 86,
       videoByLanguage: {
+        fr: { url: "https://www.youtube.com/watch?v=DPM4udeiDZQ" },
         en: { url: "https://www.youtube.com/shorts/s8G3Buce89g" },
       },
-      videoDescription: "BPM — vidéo FR ou Short EN selon ta langue.",
+      videoDescription: "BPM — vidéo longue en français, Short en anglais.",
       content: `**OK, là on rentre dans le vif du sujet.** Le BPM, c'est LE concept fondamental du DJing. Mais t'inquiète, c'est beaucoup plus simple que ça en a l'air.
 
 **Le BPM (Beats Per Minute), c'est quoi ?**
@@ -1535,16 +1535,20 @@ Le BPM c'est le rythme. Deux rythmes identiques = harmonie. Deux rythmes différ
       title: "Le Pitch : ton outil d'alignement",
       subtitle: "Maîtrise le fader qui rend le beatmatching possible",
       videoUrl: "https://www.youtube.com/watch?v=tRbQS9dkEr8",
-      videoStart: 580,
-      videoEnd: 630,
       videoByLanguage: {
+        fr: {
+          url: "https://www.youtube.com/watch?v=tRbQS9dkEr8",
+          start: 580,
+          end: 630,
+        },
         en: {
           url: "https://www.youtube.com/watch?v=TP9ioJQN5Hk",
           start: 3558,
           end: 3726,
         },
       },
-      videoDescription: "Beat Sync — segment FR 9:40→10:30 ou EN 59:18→1:02:06.",
+      videoDescription:
+        "Beat Sync — FR : 9:40→10:30 (vidéo française) · EN : 59:18→1:02:06 (vidéo anglaise).",
       content: `**Maintenant qu'on a compris le BPM, on passe à l'outil qui va te permettre de tout aligner : le Pitch.**
 
 **Le problème :**
@@ -1595,9 +1599,12 @@ C'est là que ça devient vraiment fun : tu commences à **contrôler** ta musiq
       title: "Ta toute première transition !",
       subtitle: "Préparer, écouter, mixer, basculer — tu es prêt",
       videoUrl: "https://www.youtube.com/watch?v=tRbQS9dkEr8",
-      videoStart: 580,
-      videoEnd: 630,
       videoByLanguage: {
+        fr: {
+          url: "https://www.youtube.com/watch?v=tRbQS9dkEr8",
+          start: 580,
+          end: 630,
+        },
         en: {
           url: "https://www.youtube.com/watch?v=TP9ioJQN5Hk",
           start: 3558,
@@ -1605,7 +1612,7 @@ C'est là que ça devient vraiment fun : tu commences à **contrôler** ta musiq
         },
       },
       videoDescription:
-        "Première transition & Beat Sync — même extrait que l'étape précédente.",
+        "Première transition — même extrait Beat Sync que l'étape précédente (FR ou EN selon ta langue).",
       content: `**C'est le moment que tu attendais : ta toute première transition !** Tout ce qu'on a vu avant, c'était pour arriver là. Tu es prêt.
 
 **Voilà comment ça se passe, étape par étape :**

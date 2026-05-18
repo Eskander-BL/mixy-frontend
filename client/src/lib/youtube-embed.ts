@@ -63,15 +63,16 @@ export function resolveSlideVideo(
   if (localized?.url) {
     return {
       url: localized.url,
-      start: localized.start ?? slide.videoStart,
-      end: localized.end ?? slide.videoEnd,
+      start: localized.start,
+      end: localized.end,
     };
   }
 
-  const url = slide.videoUrl;
-  const start =
-    slide.videoStart ?? extractYoutubeStartFromUrl(url);
-  return { url, start, end: slide.videoEnd };
+  return {
+    url: slide.videoUrl,
+    start: slide.videoStart,
+    end: slide.videoEnd,
+  };
 }
 
 export function buildYoutubeEmbedSrc(
