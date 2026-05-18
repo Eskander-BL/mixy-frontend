@@ -17,7 +17,7 @@ export function buildAcceleratedLevels123(
   const deck =
     track === "flx4"
       ? "DDJ-FLX4"
-      : "DDJ-FLX3 ou XDJ-RX";
+      : "XDJ-RX";
   const en = language === "en";
   const badge = en
     ? (tier === "advanced" ? " — advanced track" : " — intermediate track")

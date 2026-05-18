@@ -33,7 +33,7 @@ const STEPS: OnboardingStep[] = [
   "summary",
 ];
 
-const TARGET_DECK_CHOICES = ["flx4", "flx3", "xdj_rx", "other", "undecided"] as const satisfies readonly TargetDeck[];
+const TARGET_DECK_CHOICES = ["flx4", "xdj_rx", "undecided"] as const satisfies readonly TargetDeck[];
 
 export default function Onboarding() {
   useDocumentTitle("Onboarding");
@@ -278,17 +278,13 @@ export default function Onboarding() {
   const targetDeckLabels: Record<TargetDeck, string> = isFr
     ? {
         flx4: "DDJ-FLX4 — idéal pour bien débuter avec Rekordbox",
-        flx3: "DDJ-FLX3 — plus de fonctions, plus « pro »",
         xdj_rx: "XDJ-RX (RX2 / RX3) — tout-en-un, USB + écrans intégrés",
-        other: "Autre contrôleur / autre marque",
-        undecided: "Je ne sais pas encore",
+        undecided: "Pas encore de platine",
       }
     : {
         flx4: "DDJ-FLX4 — ideal to start with Rekordbox",
-        flx3: "DDJ-FLX3 — more functions, more pro-oriented",
         xdj_rx: "XDJ-RX (RX2 / RX3) — all-in-one, USB + built-in screens",
-        other: "Other controller / other brand",
-        undecided: "I am not sure yet",
+        undecided: "No deck yet",
       };
 
   const canContinueFromEquipment = () => {
@@ -678,27 +674,25 @@ export default function Onboarding() {
                     {isFr ? (
                       <>
                         Quelle table vises-tu ? (obligatoire — le <strong>niveau 1</strong> du cours suivra ce
-                        choix : FLX4 d’un côté, FLX3 + XDJ-RX de l’autre)
+                        choix : FLX4 d’un côté, XDJ-RX de l’autre)
                       </>
                     ) : (
                       <>
                         Which deck are you targeting? (required — <strong>level 1</strong> follows this choice:
-                        FLX4 on one side, FLX3 + XDJ-RX on the other)
+                        FLX4 on one side, XDJ-RX on the other)
                       </>
                     )}
                   </p>
                   <p className="text-xs text-amber-900/90">
                     {isFr ? (
                       <>
-                        <strong>Deux introductions niveau 1</strong> : la FLX4 a une surface plus simple (beaucoup
-                        via Shift) ; la FLX3 et l’XDJ-RX partagent un niveau 1 plus « club » (plus de boutons
-                        visibles ou écrans type CDJ). Ensuite, même progression pour tous.
+                        <strong>Deux introductions niveau 1</strong> : la FLX4 (contrôleur + ordinateur) et l’XDJ-RX
+                        (tout-en-un, clés USB, écrans type CDJ). Ensuite, même progression pour tous.
                       </>
                     ) : (
                       <>
-                        <strong>Two level-1 intros</strong>: FLX4 has a simpler surface (many actions via Shift),
-                        while FLX3 and XDJ-RX share a more club-oriented level 1 (more visible buttons or CDJ-like
-                        screens). After that, progression is shared.
+                        <strong>Two level-1 intros</strong>: FLX4 (controller + laptop) and XDJ-RX (all-in-one, USB
+                        sticks, CDJ-style screens). After that, progression is shared.
                       </>
                     )}
                   </p>
@@ -909,24 +903,23 @@ export default function Onboarding() {
               <p className="text-xs text-gray-600 text-center leading-relaxed">
                 {isFr ? (
                   <>
-                    Le <strong>niveau 1</strong> est celui de <strong>ta table</strong> (FLX4 ou parcours FLX3 /
-                    XDJ-RX) ; ensuite, tu suis une progression commune par compétences avec des recommandations
-                    adaptées à ton matériel.
+                    Le <strong>niveau 1</strong> est celui de <strong>ta table</strong> (FLX4 ou XDJ-RX) ; ensuite, tu
+                    suis une progression commune par compétences avec des recommandations adaptées à ton matériel.
                   </>
                 ) : (
                   <>
-                    <strong>Level 1</strong> is tied to <strong>your deck</strong> (FLX4 or FLX3 / XDJ-RX path);
-                    then you follow a shared skill progression with recommendations adapted to your setup.
+                    <strong>Level 1</strong> is tied to <strong>your deck</strong> (FLX4 or XDJ-RX); then you follow a
+                    shared skill progression with recommendations adapted to your setup.
                   </>
                 )}
               </p>
 
-              {(formData.targetDeck === null || formData.targetDeck === "other") && (
+              {formData.targetDeck === "undecided" && (
                 <div className="bg-amber-50 border border-amber-300 rounded-lg p-3 mt-2">
                   <p className="text-xs text-amber-900 text-center leading-relaxed">
                     {isFr
-                      ? "Le contenu est basé sur les contrôleurs Pioneer (DDJ-FLX4/FLX3/XDJ-RX), mais les concepts de mix s'appliquent à tout matériel. Les techniques de beatmatch, EQ, harmonie et lecture de foule sont universelles."
-                      : "Course content references Pioneer controllers (DDJ-FLX4/FLX3/XDJ-RX), but mixing concepts apply to all gear. Beatmatching, EQ, harmony, and crowd reading are universal skills."}
+                      ? "Sans platine pour l'instant, on te guide sur le parcours FLX4 (le plus simple pour débuter). Les concepts de mix restent universels."
+                      : "With no deck yet, we guide you on the FLX4 path (simplest to start). Mixing concepts stay universal."}
                   </p>
                 </div>
               )}

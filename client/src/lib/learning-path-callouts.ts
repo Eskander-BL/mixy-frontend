@@ -64,30 +64,6 @@ export function getLearningCallout(
         ],
       };
     }
-    if (deck === "flx3") {
-      return {
-        title: deckFocusTitle(equipment, "DDJ-FLX3", language),
-        lines: fr
-          ? [
-              "La DDJ-FLX3 monte d'un cran : Smart CFX, usage plus « club », plus de marge dans Rekordbox (jusqu'à 4 decks en écran selon tes réglages).",
-              "Même fondamentaux qu'avec la FLX4 : BPM, EQ, phrasing — les noms et dispositions changent un peu ; les rappels te guident étape par étape.",
-              "Sans table, prépare Hot Cues et playlists dans Rekordbox : tu seras déjà avancé le jour où tu branches la bête.",
-            ]
-          : [
-              "The DDJ-FLX3 steps it up: Smart CFX, more of a 'club' feel, more headroom in Rekordbox (up to 4 decks on screen depending on your settings).",
-              "Same fundamentals as the FLX4: BPM, EQ, phrasing — names and layouts differ slightly; the reminders guide you step by step.",
-              "Without gear, prepare Hot Cues and playlists in Rekordbox: you'll already be ahead the day you plug it in.",
-            ],
-        links: [
-          {
-            label: fr ? "Fiche produit FLX3 (Pioneer)" : "FLX3 product page (Pioneer)",
-            href: fr
-              ? "https://www.pioneerdj.com/fr-fr/product/controller/archive/ddj-flx3/black/overview/"
-              : "https://www.pioneerdj.com/en/product/controller/archive/ddj-flx3/black/overview/",
-          },
-        ],
-      };
-    }
     if (deck === "xdj_rx") {
       return {
         title: deckFocusTitle(equipment, "XDJ-RX", language),
@@ -124,14 +100,14 @@ export function getLearningCallout(
         : (equipment === "none" ? "No gear yet?" : "Pick a target for more precise advice"),
       lines: fr
         ? [
-            "Beaucoup débutent en FLX4 (budget plus léger, très pédagogique) ; la FLX3 vise plus haut si tu veux garder ta table longtemps.",
+            "Beaucoup débutent en FLX4 (budget plus léger, très pédagogique).",
             "Un XDJ-RX, c'est un investissement intermédiaire / pro : tout-en-un, pratique si tu n'aimes pas le laptop sur le plateau.",
-            "Repasse par l'onboarding et choisis FLX4, FLX3 ou XDJ-RX — les recommandations suivront ; tu peux changer plus tard.",
+            "Repasse par l'onboarding et choisis FLX4 ou XDJ-RX — les recommandations suivront ; tu peux changer plus tard.",
           ]
         : [
-            "Many beginners start with the FLX4 (lighter budget, very beginner-friendly); the FLX3 aims higher if you want to keep your gear long-term.",
+            "Many beginners start with the FLX4 (lighter budget, very beginner-friendly).",
             "An XDJ-RX is an intermediate/pro investment: all-in-one, handy if you don't like a laptop on the decks.",
-            "Go back to onboarding and pick FLX4, FLX3 or XDJ-RX — recommendations will follow; you can change later.",
+            "Go back to onboarding and pick FLX4 or XDJ-RX — recommendations will follow; you can change later.",
           ],
       links: [
         {
@@ -165,16 +141,16 @@ export function getLearningCallout(
         ],
       };
     }
-    if (equipment === "none") {
+    if (equipment === "none" && deck === "flx4") {
       return {
-        title: fr ? "Quand tu auras ta table (FLX / contrôleur)" : "When you get your gear (FLX / controller)",
+        title: fr ? "Quand tu auras ta FLX4" : "When you get your FLX4",
         lines: fr
           ? [
-              "USB vers le PC, Master vers des enceintes actives (entrée ligne), casque sur la prise DJ — même logique FLX3 / FLX4.",
+              "USB vers le PC, Master vers des enceintes actives (entrée ligne), casque sur la prise DJ.",
               "Pour l'appart : enceintes « monitor » ou petites enceintes actives ; étale les basses pour les voisins.",
             ]
           : [
-              "USB to your PC, Master to active speakers (line input), headphones on the DJ jack — same logic for FLX3 / FLX4.",
+              "USB to your PC, Master to active speakers (line input), headphones on the DJ jack.",
               "For home use: monitor speakers or small active speakers; roll off the bass for your neighbours.",
             ],
         links: [
@@ -188,13 +164,11 @@ export function getLearningCallout(
   }
 
   if (equipment === "controller" || equipment === "none") {
-    if (level === 1 && slideNumber >= 3 && (deck === "flx4" || deck === "flx3" || deck === "xdj_rx")) {
+    if (level === 1 && slideNumber >= 3 && (deck === "flx4" || deck === "xdj_rx")) {
       const title =
         deck === "flx4"
           ? (fr ? "FLX4 + Rekordbox — rappel" : "FLX4 + Rekordbox — reminder")
-          : deck === "flx3"
-            ? (fr ? "FLX3 + Rekordbox — rappel" : "FLX3 + Rekordbox — reminder")
-            : (fr ? "XDJ-RX + Rekordbox — rappel" : "XDJ-RX + Rekordbox — reminder");
+          : (fr ? "XDJ-RX + Rekordbox — rappel" : "XDJ-RX + Rekordbox — reminder");
 
       const lines =
         deck === "xdj_rx"

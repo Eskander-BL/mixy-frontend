@@ -72,7 +72,7 @@ interface ProgressContextType {
   learningProfile: MixyLearningProfile | null;
   /** Niveau DJ déclaré à l’onboarding (beginner = parcours fondations 1–3, autre = parcours accéléré 1–3). */
   skillLevel: UserLevel;
-  /** Niveau 1 : contenu FLX4 vs FLX3/XDJ-RX ; niveaux suivants identiques. */
+  /** Niveau 1 : contenu FLX4 vs XDJ-RX ; niveaux suivants identiques. */
   courseTrack: CourseTrackId;
   refreshProgress: () => void;
 }

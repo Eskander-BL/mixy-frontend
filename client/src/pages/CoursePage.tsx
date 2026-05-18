@@ -15,6 +15,7 @@ import { LearningPathCallout } from "@/components/LearningPathCallout";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useLanguageContext } from "@/contexts/LanguageContext";
+import { buildYoutubeEmbedSrc, resolveSlideVideo } from "@/lib/youtube-embed";
 
 export default function CoursePage() {
   const [, params] = useRoute("/course/:level");
@@ -80,8 +81,13 @@ export default function CoursePage() {
   const previousRecap =
     currentSlide === 1 ? getPreviousLevelRecap(level, courseTrack, skillLevel, language) : null;
 
-  const finalVideoUrl = slide.videoUrl
-    ? slide.videoUrl.replace("youtube.com/watch?v=", "youtube.com/embed/")
+  const slideVideo = resolveSlideVideo(slide, language);
+  const embedSrc = slideVideo.url
+    ? buildYoutubeEmbedSrc(slideVideo.url, {
+        start: slideVideo.start,
+        end: slideVideo.end,
+        captionsLang: language,
+      })
     : null;
 
   const handleNextSlide = () => {
@@ -177,11 +183,11 @@ export default function CoursePage() {
             {/* Video */}
             <Card className="border-0 shadow-sm overflow-hidden rounded-xl">
               <div className="aspect-video bg-black flex items-center justify-center">
-                {finalVideoUrl ? (
+                {embedSrc ? (
                   <iframe
                     width="100%"
                     height="100%"
-                    src={`${finalVideoUrl.replace("/watch?v=", "/embed/")}${isFr ? "?cc_load_policy=1&cc_lang_pref=fr" : ""}`}
+                    src={embedSrc}
                     title={slide.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

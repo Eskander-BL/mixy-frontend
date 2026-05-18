@@ -1,12 +1,12 @@
 /**
- * Profil d'apprentissage — matériel ciblé (FLX4 / FLX3 / XDJ-RX / autre).
+ * Profil d'apprentissage — matériel ciblé (FLX4 / XDJ-RX / pas encore décidé).
  * Stocké en local (pas de migration DB requise).
  */
 
-export type TargetDeck = "flx4" | "flx3" | "xdj_rx" | "other" | "undecided";
+export type TargetDeck = "flx4" | "xdj_rx" | "undecided";
 
-/** Parcours niveau 1 : contenu séparé. Niveaux 2+ identiques dans l’app. */
-export type CourseTrackId = "flx4" | "flx3_xdj";
+/** Parcours niveau 1 : contenu séparé. Niveaux 2+ identiques dans l'app. */
+export type CourseTrackId = "flx4" | "xdj_rx";
 
 export type EquipmentKind = "none" | "controller" | "turntables" | "other";
 
@@ -20,18 +20,25 @@ export interface MixyLearningProfile {
   updatedAt: number;
 }
 
-/** FLX3 et XDJ-RX partagent un parcours niveau 1 (ergonomie proche CDJ). FLX4 = autre parcours. */
+/** Anciennes valeurs onboarding (FLX3 / autre) → profil actuel. */
+export function normalizeTargetDeck(deck: string | null | undefined): TargetDeck | null {
+  if (deck === null || deck === undefined) return null;
+  if (deck === "flx3" || deck === "other") return "xdj_rx";
+  if (deck === "flx4" || deck === "xdj_rx" || deck === "undecided") return deck;
+  return null;
+}
+
 export function getCourseTrackFromProfile(profile: MixyLearningProfile | null): CourseTrackId {
   const d = profile?.targetDeck;
-  if (d === "flx3" || d === "xdj_rx") return "flx3_xdj";
+  if (d === "xdj_rx") return "xdj_rx";
   return "flx4";
 }
 
 export function courseTrackLabel(track: CourseTrackId, language: "fr" | "en" = "fr"): string {
   if (language === "en") {
-    return track === "flx4" ? "Level 1 — DDJ-FLX4" : "Level 1 — DDJ-FLX3 & XDJ-RX";
+    return track === "flx4" ? "Level 1 — DDJ-FLX4" : "Level 1 — XDJ-RX";
   }
-  return track === "flx4" ? "Niveau 1 — DDJ-FLX4" : "Niveau 1 — DDJ-FLX3 & XDJ-RX";
+  return track === "flx4" ? "Niveau 1 — DDJ-FLX4" : "Niveau 1 — XDJ-RX";
 }
 
 /** @deprecated Use `courseTrackLabel` with a language parameter instead. */
@@ -50,9 +57,10 @@ export function readMixyLearningProfile(): MixyLearningProfile | null {
       goal === "fun" || goal === "party" || goal === "club" || goal === "pro"
         ? goal
         : null;
+    const targetDeck = normalizeTargetDeck(p.targetDeck as string | null | undefined);
     return {
       equipment: p.equipment as EquipmentKind,
-      targetDeck: (p.targetDeck as TargetDeck) ?? null,
+      targetDeck,
       goal: validGoal,
       updatedAt: typeof p.updatedAt === "number" ? p.updatedAt : Date.now(),
     };
@@ -89,20 +97,7 @@ export function coerceMixyLearningProfileFromRemote(data: unknown): MixyLearning
   ) {
     return null;
   }
-  const td = o.targetDeck;
-  let targetDeck: TargetDeck | null = null;
-  if (td === null || td === undefined) targetDeck = null;
-  else if (
-    td === "flx4" ||
-    td === "flx3" ||
-    td === "xdj_rx" ||
-    td === "other" ||
-    td === "undecided"
-  ) {
-    targetDeck = td;
-  } else {
-    return null;
-  }
+  const targetDeck = normalizeTargetDeck(o.targetDeck as string | null | undefined);
   const g = o.goal;
   const goal: UserGoal | null =
     g === "fun" || g === "party" || g === "club" || g === "pro" ? g : null;
@@ -119,12 +114,8 @@ export function targetDeckLabel(deck: TargetDeck | null, language: "fr" | "en" =
     switch (deck) {
       case "flx4":
         return "DDJ-FLX4";
-      case "flx3":
-        return "DDJ-FLX3";
       case "xdj_rx":
-        return "XDJ-RX (all-in-one)";
-      case "other":
-        return "Other gear";
+        return "XDJ-RX (RX2 / RX3)";
       case "undecided":
         return "Not decided yet";
       default:
@@ -134,12 +125,8 @@ export function targetDeckLabel(deck: TargetDeck | null, language: "fr" | "en" =
   switch (deck) {
     case "flx4":
       return "DDJ-FLX4";
-    case "flx3":
-      return "DDJ-FLX3";
     case "xdj_rx":
-      return "XDJ-RX (tout-en-un)";
-    case "other":
-      return "Autre matériel";
+      return "XDJ-RX (RX2 / RX3)";
     case "undecided":
       return "Pas encore décidé";
     default:
@@ -151,8 +138,7 @@ export function targetDeckLabel(deck: TargetDeck | null, language: "fr" | "en" =
 export const targetDeckLabelFr = (deck: TargetDeck | null) => targetDeckLabel(deck, "fr");
 
 /** Indicatif France / Europe — toujours vérifier prix promo / occasion chez un revendeur. */
-export const GEAR_PRICE_RANGE_FR: Record<"flx4" | "flx3" | "xdj_rx", string> = {
+export const GEAR_PRICE_RANGE_FR: Record<"flx4" | "xdj_rx", string> = {
   flx4: "≈ 200 € – 400 €",
-  flx3: "≈ 2 000 € – 2 500 €",
   xdj_rx: "≈ 1 500 € – 2 500 € (XDJ-RX selon modèle RX2 / RX3, neuf ou occasion)",
 };
