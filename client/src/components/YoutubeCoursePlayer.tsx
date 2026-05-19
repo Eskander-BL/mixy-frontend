@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Language } from "@/lib/i18n";
@@ -76,6 +76,20 @@ function loadYoutubeIframeApi(): Promise<void> {
   return youtubeApiPromise;
 }
 
+/** Nettoie le lecteur sans laisser React et l’API YouTube se battre sur le DOM. */
+function teardownYoutubePlayer(player: YT.Player | null, mount: HTMLDivElement | null) {
+  if (player) {
+    try {
+      player.destroy();
+    } catch {
+      /* destroy peut échouer si le nœud est déjà retiré */
+    }
+  }
+  if (mount) {
+    mount.replaceChildren();
+  }
+}
+
 function formatTimestamp(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
@@ -103,7 +117,6 @@ export function YoutubeCoursePlayer({
 }: YoutubeCoursePlayerProps) {
   const mountRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<YT.Player | null>(null);
-  const [instanceKey, setInstanceKey] = useState(0);
 
   const segmentMode = hasSegmentBounds(start, end);
   const startSec = Math.max(0, Math.floor(start ?? 0));
@@ -128,7 +141,7 @@ export function YoutubeCoursePlayer({
       await loadYoutubeIframeApi();
       if (cancelled || !mountRef.current) return;
 
-      playerRef.current?.destroy();
+      teardownYoutubePlayer(playerRef.current, mountRef.current);
       playerRef.current = null;
 
       const playerVars: YT.PlayerVars = {
@@ -189,12 +202,17 @@ export function YoutubeCoursePlayer({
     return () => {
       cancelled = true;
       if (intervalId) clearInterval(intervalId);
-      playerRef.current?.destroy();
+      teardownYoutubePlayer(playerRef.current, mountRef.current);
       playerRef.current = null;
     };
-  }, [videoId, startSec, endSec, captionsLang, segmentMode, instanceKey]);
+  }, [videoId, startSec, endSec, captionsLang, segmentMode]);
 
-  const replaySegment = () => setInstanceKey((k) => k + 1);
+  const replaySegment = useCallback(() => {
+    const player = playerRef.current;
+    if (!player) return;
+    player.seekTo(startSec, true);
+    player.playVideo();
+  }, [startSec]);
 
   if (!segmentMode) {
     const embedSrc = buildYoutubeEmbedSrc(rawUrl, { captionsLang });
@@ -215,7 +233,6 @@ export function YoutubeCoursePlayer({
   return (
     <div className="flex h-full w-full flex-col">
       <div
-        key={instanceKey}
         ref={mountRef}
         className="min-h-0 w-full flex-1 [&>iframe]:h-full [&>iframe]:w-full"
       />
