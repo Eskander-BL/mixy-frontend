@@ -97,6 +97,78 @@ export function hasSegmentBounds(start?: number, end?: number): boolean {
   return (start != null && start > 0) || (end != null && end > 0);
 }
 
+/** Ex. EN « 59 min 18 » · FR « 9 min 40 » · « 1 h 2 min 6 » si nécessaire. */
+export function formatVideoTimestamp(seconds: number, language: Language): string {
+  const total = Math.max(0, Math.floor(seconds));
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+
+  if (language === "fr") {
+    if (h > 0) {
+      return s > 0 ? `${h} h ${m} min ${s} s` : m > 0 ? `${h} h ${m} min` : `${h} h`;
+    }
+    if (m > 0) return s > 0 ? `${m} min ${s} s` : `${m} min`;
+    return `${s} s`;
+  }
+
+  if (h > 0) {
+    return s > 0 ? `${h} h ${m} min ${s} sec` : m > 0 ? `${h} h ${m} min` : `${h} h`;
+  }
+  if (m > 0) return s > 0 ? `${m} min ${s} sec` : `${m} min`;
+  return `${s} sec`;
+}
+
+/** Plage d’extrait pour la légende sous la vidéo, ex. « (from 59 min 18 sec to 1 h 2 min 6 sec) ». */
+export function formatVideoSegmentRange(
+  start: number | undefined,
+  end: number | undefined,
+  language: Language,
+): string | null {
+  if (!hasSegmentBounds(start, end)) return null;
+
+  const startSec = start != null && start > 0 ? Math.floor(start) : 0;
+  const endSec = end != null && end > 0 ? Math.floor(end) : undefined;
+
+  if (endSec == null && startSec === 0) return null;
+
+  if (language === "fr") {
+    if (endSec != null && startSec > 0) {
+      return `(de ${formatVideoTimestamp(startSec, language)} à ${formatVideoTimestamp(endSec, language)})`;
+    }
+    if (endSec != null) {
+      return `(jusqu'à ${formatVideoTimestamp(endSec, language)})`;
+    }
+    if (startSec > 0) {
+      return `(à partir de ${formatVideoTimestamp(startSec, language)})`;
+    }
+    return null;
+  }
+
+  if (endSec != null && startSec > 0) {
+    return `(from ${formatVideoTimestamp(startSec, language)} to ${formatVideoTimestamp(endSec, language)})`;
+  }
+  if (endSec != null) {
+    return `(up to ${formatVideoTimestamp(endSec, language)})`;
+  }
+  if (startSec > 0) {
+    return `(from ${formatVideoTimestamp(startSec, language)})`;
+  }
+  return null;
+}
+
+export function buildVideoDescriptionWithSegment(
+  description: string,
+  start: number | undefined,
+  end: number | undefined,
+  language: Language,
+): string {
+  const range = formatVideoSegmentRange(start, end, language);
+  if (!range) return description.trim();
+  const base = description.trim();
+  return base ? `${base} ${range}` : range;
+}
+
 export function buildYoutubeEmbedSrc(
   rawUrl: string,
   options?: { start?: number; end?: number; captionsLang?: Language },

@@ -16,6 +16,7 @@ import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import {
+  buildVideoDescriptionWithSegment,
   extractYoutubeVideoId,
   resolveSlideVideo,
   resolveSlideVideoLanguage,
@@ -89,6 +90,12 @@ export default function CoursePage() {
   const slideVideo = resolveSlideVideo(slide, language);
   const youtubeVideoId = slideVideo.url ? extractYoutubeVideoId(slideVideo.url) : null;
   const showEnglishVideoHint = language === "fr" && resolveSlideVideoLanguage(slide, language) === "en";
+  const videoCaption = buildVideoDescriptionWithSegment(
+    slide.videoDescription,
+    slideVideo.start,
+    slideVideo.end,
+    language,
+  );
 
   const handleNextSlide = () => {
     if (!isLastSlide) {
@@ -209,11 +216,11 @@ export default function CoursePage() {
                 )}
               </div>
               <div className="p-6 bg-white">
-                {slide.videoDescription ? (
-                  <p className="text-sm text-gray-600">{slide.videoDescription}</p>
+                {videoCaption ? (
+                  <p className="text-sm text-gray-600">{videoCaption}</p>
                 ) : null}
                 {showEnglishVideoHint ? (
-                  <p className={`text-xs text-gray-400 ${slide.videoDescription ? "mt-1" : ""}`}>
+                  <p className={`text-xs text-gray-400 ${videoCaption ? "mt-1" : ""}`}>
                     Vidéo en anglais — active les sous-titres auto si besoin.
                   </p>
                 ) : null}
