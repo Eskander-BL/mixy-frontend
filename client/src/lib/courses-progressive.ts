@@ -1719,9 +1719,6 @@ export const level2Module: CourseModule = {
       title: "Les 3 bandes de fréquences",
       subtitle: "Comprends ce que tu entends vraiment dans un morceau",
       videoUrl: "https://www.youtube.com/watch?v=Fd9jEpFG6II",
-      videoByLanguage: {
-        en: { url: "https://www.youtube.com/watch?v=-jRCizG7Ito" },
-      },
       videoDescription:
         "Découvre les trois couches d'un morceau que tu peux contrôler avec l'EQ — ça va changer ta façon d'écouter la musique !",
       content: `**Allez, on passe au niveau supérieur !** Tu sais déjà lancer tes morceaux et faire une transition. Maintenant on va apprendre à **sculpter le son** — et crois-moi, c'est là que ça devient vraiment intéressant.
@@ -3152,6 +3149,7 @@ const XDJ_RX_SLIDE_VIDEOS: Partial<
   2: {
     1: {
       fr: { url: "https://www.youtube.com/watch?v=n3Ti_QLri6k" },
+      en: { url: "https://www.youtube.com/watch?v=-jRCizG7Ito" },
     },
     2: {
       fr: {
