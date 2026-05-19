@@ -55,10 +55,104 @@ export function parseYoutubeTimeParam(value: string): number | undefined {
   return total > 0 ? total : undefined;
 }
 
-/** Langue réelle de la vidéo affichée (utile pour le bandeau sous-titres). */
+/**
+ * Catalogue des IDs YouTube connus (curation Mixy).
+ * Sert à détecter si la vidéo jouée est EN ou FR pour les sous-titres.
+ */
+const VIDEO_LANGUAGE_BY_ID: Record<string, Language> = {
+  H31hjTx3bXY: "en",
+  "25JAaIdJwnM": "en",
+  IVMFK0iNqQE: "en",
+  EIUd_xdBYGs: "en",
+  fa3sLTn0Wek: "en",
+  kZKBeztMbZY: "en",
+  "3Gn8p0taPUg": "en",
+  EQeEyyipaDE: "en",
+  SR1xPdJs1k4: "en",
+  PRPwKxnBmc8: "en",
+  jHaANgaTClU: "en",
+  Fd9jEpFG6II: "en",
+  "pV-NJndPFtw": "en",
+  Lk0a6U6m2Zg: "en",
+  vdbcvsUKY2s: "en",
+  dYRZ7821G90: "en",
+  "Xzvid-d1c9E": "en",
+  AxkIQi81JP0: "en",
+  gxq36qom2LI: "en",
+  YgL1tn6zOEw: "en",
+  "1sC-sZhSxU8": "en",
+  "hjkTkb-_7mQ": "en",
+  "7JAoRPqQZYw": "en",
+  "-DOYZcBwS08": "en",
+  Es95BK3pluQ: "en",
+  j9Ky8zpsqvY: "en",
+  TStRW1KpBe4: "en",
+  ycC2sHErdis: "en",
+  nQKuZyD0Y2s: "en",
+  "7Wtbc-1y1zc": "en",
+  a3m8l4q3Pq8: "en",
+  "8IF_HGw7IFk": "en",
+  "u_ny-pIfNe8": "en",
+  "-CblGWcr87k": "en",
+  kHll7t87xik: "en",
+  SIeWfe2OBkc: "en",
+  s8G3Buce89g: "en",
+  TP9ioJQN5Hk: "en",
+  GXfiJmNfcjQ: "en",
+  n3Ti_QLri6k: "en",
+  Ubm9R3VKEqg: "fr",
+  FlDeqQMj9II: "fr",
+  DPM4udeiDZQ: "fr",
+  tRbQS9dkEr8: "fr",
+};
+
+export function getVideoLanguageForUrl(url: string): Language | null {
+  const id = extractYoutubeVideoId(url);
+  if (!id) return null;
+  return VIDEO_LANGUAGE_BY_ID[id] ?? null;
+}
+
+function pickSlideVideoConfig(config?: SlideVideoConfig): SlideVideoConfig | null {
+  if (!config?.url) return null;
+  return {
+    url: config.url,
+    start: config.start,
+    end: config.end,
+  };
+}
+
+/**
+ * Choix de la vidéo selon la langue d’interface :
+ * - EN → version anglaise uniquement, jamais la piste FR dédiée.
+ * - FR → piste FR si définie, sinon version EN (sous-titres FR côté lecteur).
+ */
+export function resolveSlideVideo(slide: Slide, appLanguage: Language): SlideVideoConfig {
+  const fallback: SlideVideoConfig = {
+    url: slide.videoUrl,
+    start: slide.videoStart,
+    end: slide.videoEnd,
+  };
+
+  if (appLanguage === "en") {
+    return pickSlideVideoConfig(slide.videoByLanguage?.en) ?? fallback;
+  }
+
+  return (
+    pickSlideVideoConfig(slide.videoByLanguage?.fr) ??
+    pickSlideVideoConfig(slide.videoByLanguage?.en) ??
+    fallback
+  );
+}
+
+/** Langue réelle de la vidéo affichée (catalogue ou comparaison des URLs FR/EN). */
 export function resolveSlideVideoLanguage(slide: Slide, appLanguage: Language): Language {
   const resolved = resolveSlideVideo(slide, appLanguage);
-  const resolvedId = resolved.url ? extractYoutubeVideoId(resolved.url) : null;
+  if (!resolved.url) return appLanguage;
+
+  const fromCatalog = getVideoLanguageForUrl(resolved.url);
+  if (fromCatalog) return fromCatalog;
+
+  const resolvedId = extractYoutubeVideoId(resolved.url);
   const byLang = slide.videoByLanguage;
   if (!byLang || !resolvedId) return appLanguage;
 
@@ -71,26 +165,6 @@ export function resolveSlideVideoLanguage(slide: Slide, appLanguage: Language): 
   }
 
   return appLanguage;
-}
-
-export function resolveSlideVideo(
-  slide: Slide,
-  language: Language,
-): SlideVideoConfig {
-  const localized = slide.videoByLanguage?.[language];
-  if (localized?.url) {
-    return {
-      url: localized.url,
-      start: localized.start,
-      end: localized.end,
-    };
-  }
-
-  return {
-    url: slide.videoUrl,
-    start: slide.videoStart,
-    end: slide.videoEnd,
-  };
 }
 
 export function hasSegmentBounds(start?: number, end?: number): boolean {
@@ -186,13 +260,16 @@ export function frenchCaptionEmbedParams(): Record<string, string> {
   };
 }
 
+/** Interface EN : pas de sous-titres forcés à l’ouverture. */
+export function disableCaptionEmbedParams(): Record<string, string> {
+  return { cc_load_policy: "0" };
+}
+
 export function buildYoutubeEmbedSrc(
   rawUrl: string,
   options?: {
     start?: number;
     end?: number;
-    /** @deprecated Utiliser autoFrenchCaptions */
-    captionsLang?: Language;
     autoFrenchCaptions?: boolean;
   },
 ): string | null {
@@ -206,13 +283,11 @@ export function buildYoutubeEmbedSrc(
   if (options?.end != null && options.end > 0) {
     params.set("end", String(Math.floor(options.end)));
   }
-  const wantFrenchCaptions =
-    options?.autoFrenchCaptions === true ||
-    options?.captionsLang === "fr";
-  if (wantFrenchCaptions) {
-    for (const [key, value] of Object.entries(frenchCaptionEmbedParams())) {
-      params.set(key, value);
-    }
+  const captionParams = options?.autoFrenchCaptions
+    ? frenchCaptionEmbedParams()
+    : disableCaptionEmbedParams();
+  for (const [key, value] of Object.entries(captionParams)) {
+    params.set(key, value);
   }
   const q = params.toString();
   return `https://www.youtube.com/embed/${id}${q ? `?${q}` : ""}`;

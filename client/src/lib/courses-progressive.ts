@@ -3367,59 +3367,9 @@ export type RecommendedLearningVideo = {
 
 type LanguageVideoCatalog = Record<Language, Record<number, RecommendedLearningVideo>>;
 
-function extractYouTubeId(url: string): string | null {
-  const embedMatch = url.match(/youtube\.com\/embed\/([A-Za-z0-9_-]+)/);
-  if (embedMatch?.[1]) return embedMatch[1];
-  const watchMatch = url.match(/[?&]v=([A-Za-z0-9_-]+)/);
-  if (watchMatch?.[1]) return watchMatch[1];
-  return null;
-}
+import { getVideoLanguageForUrl } from "./youtube-embed";
 
-const VIDEO_LANGUAGE_BY_ID: Record<string, Language> = {
-  H31hjTx3bXY: "en",
-  "25JAaIdJwnM": "en",
-  IVMFK0iNqQE: "en",
-  EIUd_xdBYGs: "en",
-  fa3sLTn0Wek: "en",
-  kZKBeztMbZY: "en",
-  "3Gn8p0taPUg": "en",
-  EQeEyyipaDE: "en",
-  SR1xPdJs1k4: "en",
-  PRPwKxnBmc8: "en",
-  jHaANgaTClU: "en",
-  Fd9jEpFG6II: "en",
-  "pV-NJndPFtw": "en",
-  Lk0a6U6m2Zg: "en",
-  vdbcvsUKY2s: "en",
-  dYRZ7821G90: "en",
-  "Xzvid-d1c9E": "en",
-  AxkIQi81JP0: "en",
-  gxq36qom2LI: "en",
-  YgL1tn6zOEw: "en",
-  "1sC-sZhSxU8": "en",
-  "hjkTkb-_7mQ": "en",
-  "7JAoRPqQZYw": "en",
-  "-DOYZcBwS08": "en",
-  Es95BK3pluQ: "en",
-  j9Ky8zpsqvY: "en",
-  TStRW1KpBe4: "en",
-  ycC2sHErdis: "en",
-  nQKuZyD0Y2s: "en",
-  "7Wtbc-1y1zc": "en",
-  a3m8l4q3Pq8: "en",
-  "8IF_HGw7IFk": "en",
-  "u_ny-pIfNe8": "en",
-  "-CblGWcr87k": "en",
-  kHll7t87xik: "en",
-  Ubm9R3VKEqg: "fr",
-  FlDeqQMj9II: "fr",
-};
-
-export function getVideoLanguageForUrl(url: string): Language | null {
-  const id = extractYouTubeId(url);
-  if (!id) return null;
-  return VIDEO_LANGUAGE_BY_ID[id] ?? null;
-}
+export { getVideoLanguageForUrl } from "./youtube-embed";
 
 export function resolveSlideVideoUrlForLanguage(url: string, language: Language): string | null {
   const detected = getVideoLanguageForUrl(url);

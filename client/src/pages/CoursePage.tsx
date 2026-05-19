@@ -20,6 +20,7 @@ import {
   extractYoutubeVideoId,
   resolveSlideVideo,
   resolveSlideVideoLanguage,
+  shouldAutoFrenchCaptions,
 } from "@/lib/youtube-embed";
 import { YoutubeCoursePlayer } from "@/components/YoutubeCoursePlayer";
 
@@ -90,8 +91,8 @@ export default function CoursePage() {
   const slideVideo = resolveSlideVideo(slide, language);
   const youtubeVideoId = slideVideo.url ? extractYoutubeVideoId(slideVideo.url) : null;
   const slideVideoLanguage = resolveSlideVideoLanguage(slide, language);
-  const showEnglishVideoHint = language === "fr" && slideVideoLanguage === "en";
-  const autoFrenchCaptions = showEnglishVideoHint;
+  const autoFrenchCaptions = shouldAutoFrenchCaptions(language, slideVideoLanguage);
+  const showEnglishVideoHint = autoFrenchCaptions;
   const videoCaption = buildVideoDescriptionWithSegment(
     slide.videoDescription,
     slideVideo.start,

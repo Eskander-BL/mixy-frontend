@@ -152,6 +152,8 @@ export function YoutubeCoursePlayer({
         playerVars.cc_load_policy = 1;
         playerVars.cc_lang_pref = "fr";
         playerVars.hl = "fr";
+      } else {
+        playerVars.cc_load_policy = 0;
       }
 
       playerRef.current = new window.YT!.Player(mountRef.current, {
