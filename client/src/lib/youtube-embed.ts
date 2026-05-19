@@ -75,6 +75,10 @@ export function resolveSlideVideo(
   };
 }
 
+export function hasSegmentBounds(start?: number, end?: number): boolean {
+  return (start != null && start > 0) || (end != null && end > 0);
+}
+
 export function buildYoutubeEmbedSrc(
   rawUrl: string,
   options?: { start?: number; end?: number; captionsLang?: Language },
