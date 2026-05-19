@@ -1402,7 +1402,7 @@ export const level1ModuleXdjRx: CourseModule = {
           end: 303,
         },
         en: {
-          url: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
+          url: "https://www.youtube.com/watch?v=SIeWfe2OBkc&t=158s",
           start: 20,
           end: 303,
         },
@@ -1462,7 +1462,7 @@ C'est normal si tout n'est pas clair du premier coup. L'important c'est de manip
           end: 303,
         },
         en: {
-          url: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
+          url: "https://www.youtube.com/watch?v=SIeWfe2OBkc&t=158s",
           start: 20,
           end: 303,
         },
