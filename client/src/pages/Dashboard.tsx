@@ -68,7 +68,7 @@ function LevelBadge({ score, isFr }: { score?: number; isFr: boolean }) {
         : { color: "bg-amber-600", symbol: "●", label: isFr ? "Bronze" : "Bronze" };
   return (
     <div
-      className={`absolute -top-1.5 -right-1.5 w-6 h-6 ${badge.color} rounded-full flex items-center justify-center shadow-sm`}
+      className={`absolute top-3 right-3 z-10 w-6 h-6 ${badge.color} rounded-full flex items-center justify-center shadow-sm`}
       title={badge.label}
     >
       <span className="text-[10px] font-bold text-white leading-none">{badge.symbol}</span>
@@ -489,14 +489,14 @@ export default function Dashboard() {
           <h2 className="text-lg md:text-xl font-bold text-gray-900">{isFr ? "Tes niveaux" : "Your levels"}</h2>
           <p className="text-sm text-gray-600 mt-1">
             {isFr
-              ? "Obtiens au moins 50 % au quiz pour débloquer le niveau suivant. Descends pour voir ta progression."
-              : "Score at least 50% on the quiz to unlock the next level. Scroll down to see your full progress."}
+              ? "Obtiens au moins 50 % au quiz pour débloquer le niveau suivant."
+              : "Score at least 50% on the quiz to unlock the next level."}
           </p>
         </div>
 
         <div
           ref={levelsScrollRef}
-          className="max-h-[min(60vh,520px)] overflow-y-auto space-y-3 scroll-smooth pr-1 -mr-1 [scrollbar-width:thin]"
+          className="max-h-[min(60vh,520px)] overflow-y-auto overflow-x-hidden space-y-3 scroll-smooth pr-1 [scrollbar-width:thin]"
         >
           {levelStrip.map((lvl) => {
             const mod = modulesForUser.find((m) => m.level === lvl) ?? modulesForUser[0];
@@ -577,11 +577,11 @@ export default function Dashboard() {
             if (isValidated) {
               const levelScore = savedScores[String(lvl)] as number | undefined;
               return (
-                <div key={lvl} className="relative">
-                <LevelBadge score={levelScore} isFr={isFr} />
+                <div key={lvl}>
                 <Card
-                  className="p-4 md:p-5 border border-emerald-200/80 bg-gradient-to-b from-emerald-50/50 to-white shadow-sm rounded-[5px] w-full"
+                  className="relative p-4 md:p-5 pr-12 border border-emerald-200/80 bg-gradient-to-b from-emerald-50/50 to-white shadow-sm rounded-[5px] w-full"
                 >
+                  <LevelBadge score={levelScore} isFr={isFr} />
                   <div className="flex items-start gap-2 mb-1.5">
                     <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0 mt-0.5" aria-hidden />
                     <div className="min-w-0">
