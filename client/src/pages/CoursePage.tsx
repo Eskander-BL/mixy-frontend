@@ -89,7 +89,9 @@ export default function CoursePage() {
 
   const slideVideo = resolveSlideVideo(slide, language);
   const youtubeVideoId = slideVideo.url ? extractYoutubeVideoId(slideVideo.url) : null;
-  const showEnglishVideoHint = language === "fr" && resolveSlideVideoLanguage(slide, language) === "en";
+  const slideVideoLanguage = resolveSlideVideoLanguage(slide, language);
+  const showEnglishVideoHint = language === "fr" && slideVideoLanguage === "en";
+  const autoFrenchCaptions = showEnglishVideoHint;
   const videoCaption = buildVideoDescriptionWithSegment(
     slide.videoDescription,
     slideVideo.start,
@@ -197,7 +199,7 @@ export default function CoursePage() {
                     title={slide.title}
                     start={slideVideo.start}
                     end={slideVideo.end}
-                    captionsLang={language}
+                    autoFrenchCaptions={autoFrenchCaptions}
                     isFr={isFr}
                   />
                 ) : (
@@ -221,7 +223,7 @@ export default function CoursePage() {
                 ) : null}
                 {showEnglishVideoHint ? (
                   <p className={`text-xs text-gray-400 ${videoCaption ? "mt-1" : ""}`}>
-                    Vidéo en anglais — active les sous-titres auto si besoin.
+                    Vidéo en anglais — les sous-titres français se lancent automatiquement si la vidéo les propose sur YouTube.
                   </p>
                 ) : null}
               </div>

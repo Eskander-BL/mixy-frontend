@@ -169,9 +169,32 @@ export function buildVideoDescriptionWithSegment(
   return base ? `${base} ${range}` : range;
 }
 
+/** App en français + vidéo en anglais → sous-titres FR auto si disponibles sur YouTube. */
+export function shouldAutoFrenchCaptions(
+  appLanguage: Language,
+  videoLanguage: Language,
+): boolean {
+  return appLanguage === "fr" && videoLanguage === "en";
+}
+
+/** Paramètres YouTube pour forcer l’affichage des sous-titres français. */
+export function frenchCaptionEmbedParams(): Record<string, string> {
+  return {
+    cc_load_policy: "1",
+    cc_lang_pref: "fr",
+    hl: "fr",
+  };
+}
+
 export function buildYoutubeEmbedSrc(
   rawUrl: string,
-  options?: { start?: number; end?: number; captionsLang?: Language },
+  options?: {
+    start?: number;
+    end?: number;
+    /** @deprecated Utiliser autoFrenchCaptions */
+    captionsLang?: Language;
+    autoFrenchCaptions?: boolean;
+  },
 ): string | null {
   const id = extractYoutubeVideoId(rawUrl);
   if (!id) return null;
@@ -183,9 +206,13 @@ export function buildYoutubeEmbedSrc(
   if (options?.end != null && options.end > 0) {
     params.set("end", String(Math.floor(options.end)));
   }
-  if (options?.captionsLang === "fr") {
-    params.set("cc_load_policy", "1");
-    params.set("cc_lang_pref", "fr");
+  const wantFrenchCaptions =
+    options?.autoFrenchCaptions === true ||
+    options?.captionsLang === "fr";
+  if (wantFrenchCaptions) {
+    for (const [key, value] of Object.entries(frenchCaptionEmbedParams())) {
+      params.set(key, value);
+    }
   }
   const q = params.toString();
   return `https://www.youtube.com/embed/${id}${q ? `?${q}` : ""}`;

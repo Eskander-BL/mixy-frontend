@@ -22,6 +22,7 @@ namespace YT {
     playsinline?: number;
     cc_load_policy?: number;
     cc_lang_pref?: string;
+    hl?: string;
   }
 
   export interface PlayerOptions {
@@ -32,6 +33,7 @@ namespace YT {
     events?: {
       onReady?: (event: { target: Player }) => void;
       onStateChange?: (event: { data: number; target: Player }) => void;
+      onApiChange?: (event: { target: Player }) => void;
     };
   }
 
@@ -42,6 +44,7 @@ namespace YT {
     seekTo: (seconds: number, allowSeekAhead: boolean) => void;
     getCurrentTime: () => number;
     getPlayerState: () => number;
+    setOption?: (module: string, option: string, value: { languageCode: string }) => void;
   }
 
   export interface PlayerConstructor {
@@ -96,9 +99,18 @@ type YoutubeCoursePlayerProps = {
   title: string;
   start?: number;
   end?: number;
-  captionsLang?: Language;
+  /** App FR + vidéo EN : activer les sous-titres français automatiquement. */
+  autoFrenchCaptions?: boolean;
   isFr: boolean;
 };
+
+function applyFrenchCaptions(player: YT.Player) {
+  try {
+    player.setOption?.("captions", "track", { languageCode: "fr" });
+  } catch {
+    /* setOption indisponible ou piste FR absente */
+  }
+}
 
 export function YoutubeCoursePlayer({
   videoId,
@@ -106,7 +118,7 @@ export function YoutubeCoursePlayer({
   title,
   start,
   end,
-  captionsLang,
+  autoFrenchCaptions = false,
   isFr,
 }: YoutubeCoursePlayerProps) {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -136,9 +148,10 @@ export function YoutubeCoursePlayer({
         modestbranding: 1,
         playsinline: 1,
       };
-      if (captionsLang === "fr") {
+      if (autoFrenchCaptions) {
         playerVars.cc_load_policy = 1;
         playerVars.cc_lang_pref = "fr";
+        playerVars.hl = "fr";
       }
 
       playerRef.current = new window.YT!.Player(mountRef.current, {
@@ -149,6 +162,10 @@ export function YoutubeCoursePlayer({
         events: {
           onReady: (event) => {
             if (startSec > 0) event.target.seekTo(startSec, true);
+            if (autoFrenchCaptions) applyFrenchCaptions(event.target);
+          },
+          onApiChange: (event) => {
+            if (autoFrenchCaptions) applyFrenchCaptions(event.target);
           },
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.ENDED) {
@@ -190,7 +207,7 @@ export function YoutubeCoursePlayer({
       teardownYoutubePlayer(playerRef.current, mountRef.current);
       playerRef.current = null;
     };
-  }, [videoId, startSec, endSec, captionsLang, segmentMode]);
+  }, [videoId, startSec, endSec, autoFrenchCaptions, segmentMode]);
 
   const replaySegment = useCallback(() => {
     const player = playerRef.current;
@@ -200,7 +217,7 @@ export function YoutubeCoursePlayer({
   }, [startSec]);
 
   if (!segmentMode) {
-    const embedSrc = buildYoutubeEmbedSrc(rawUrl, { captionsLang });
+    const embedSrc = buildYoutubeEmbedSrc(rawUrl, { autoFrenchCaptions });
     if (!embedSrc) return null;
     return (
       <iframe
