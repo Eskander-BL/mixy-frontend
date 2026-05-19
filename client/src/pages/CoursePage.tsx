@@ -15,7 +15,11 @@ import { LearningPathCallout } from "@/components/LearningPathCallout";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import { useLanguageContext } from "@/contexts/LanguageContext";
-import { extractYoutubeVideoId, resolveSlideVideo } from "@/lib/youtube-embed";
+import {
+  extractYoutubeVideoId,
+  resolveSlideVideo,
+  resolveSlideVideoLanguage,
+} from "@/lib/youtube-embed";
 import { YoutubeCoursePlayer } from "@/components/YoutubeCoursePlayer";
 
 export default function CoursePage() {
@@ -84,6 +88,7 @@ export default function CoursePage() {
 
   const slideVideo = resolveSlideVideo(slide, language);
   const youtubeVideoId = slideVideo.url ? extractYoutubeVideoId(slideVideo.url) : null;
+  const showEnglishVideoHint = language === "fr" && resolveSlideVideoLanguage(slide, language) === "en";
 
   const handleNextSlide = () => {
     if (!isLastSlide) {
@@ -204,12 +209,14 @@ export default function CoursePage() {
                 )}
               </div>
               <div className="p-6 bg-white">
-                <p className="text-sm text-gray-600">{slide.videoDescription}</p>
-                {isFr && (
-                  <p className="text-xs text-gray-400 mt-1">
+                {slide.videoDescription ? (
+                  <p className="text-sm text-gray-600">{slide.videoDescription}</p>
+                ) : null}
+                {showEnglishVideoHint ? (
+                  <p className={`text-xs text-gray-400 ${slide.videoDescription ? "mt-1" : ""}`}>
                     Vidéo en anglais — active les sous-titres auto si besoin.
                   </p>
-                )}
+                ) : null}
               </div>
             </Card>
 

@@ -55,6 +55,24 @@ export function parseYoutubeTimeParam(value: string): number | undefined {
   return total > 0 ? total : undefined;
 }
 
+/** Langue réelle de la vidéo affichée (utile pour le bandeau sous-titres). */
+export function resolveSlideVideoLanguage(slide: Slide, appLanguage: Language): Language {
+  const resolved = resolveSlideVideo(slide, appLanguage);
+  const resolvedId = resolved.url ? extractYoutubeVideoId(resolved.url) : null;
+  const byLang = slide.videoByLanguage;
+  if (!byLang || !resolvedId) return appLanguage;
+
+  const frId = byLang.fr?.url ? extractYoutubeVideoId(byLang.fr.url) : null;
+  const enId = byLang.en?.url ? extractYoutubeVideoId(byLang.en.url) : null;
+
+  if (frId && enId && frId !== enId) {
+    if (resolvedId === enId) return "en";
+    if (resolvedId === frId) return "fr";
+  }
+
+  return appLanguage;
+}
+
 export function resolveSlideVideo(
   slide: Slide,
   language: Language,

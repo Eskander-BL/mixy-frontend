@@ -90,12 +90,6 @@ function teardownYoutubePlayer(player: YT.Player | null, mount: HTMLDivElement |
   }
 }
 
-function formatTimestamp(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return `${m}:${s.toString().padStart(2, "0")}`;
-}
-
 type YoutubeCoursePlayerProps = {
   videoId: string;
   rawUrl: string;
@@ -121,15 +115,6 @@ export function YoutubeCoursePlayer({
   const segmentMode = hasSegmentBounds(start, end);
   const startSec = Math.max(0, Math.floor(start ?? 0));
   const endSec = end != null && end > 0 ? Math.floor(end) : undefined;
-
-  const segmentLabel =
-    startSec > 0 && endSec != null
-      ? `${formatTimestamp(startSec)} – ${formatTimestamp(endSec)}`
-      : startSec > 0
-        ? `${formatTimestamp(startSec)}+`
-        : endSec != null
-          ? `→ ${formatTimestamp(endSec)}`
-          : "";
 
   useEffect(() => {
     if (!segmentMode || !mountRef.current) return;
@@ -236,12 +221,7 @@ export function YoutubeCoursePlayer({
         ref={mountRef}
         className="min-h-0 w-full flex-1 [&>iframe]:h-full [&>iframe]:w-full"
       />
-      <div className="flex shrink-0 items-center justify-center gap-2 border-t border-white/10 bg-black/80 px-3 py-2">
-        {segmentLabel ? (
-          <span className="text-xs text-white/70">
-            {isFr ? "Extrait" : "Clip"} {segmentLabel}
-          </span>
-        ) : null}
+      <div className="flex shrink-0 items-center justify-center border-t border-white/10 bg-black/80 px-3 py-2">
         <Button
           type="button"
           variant="secondary"

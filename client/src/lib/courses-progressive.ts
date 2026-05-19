@@ -1221,8 +1221,7 @@ export const level1ModuleFlx4: CourseModule = {
       title: "Bienvenue dans le monde du DJing !",
       subtitle: "Rekordbox, ta FLX4 et tes tout premiers réflexes",
       videoUrl: "https://www.youtube.com/watch?v=fa3sLTn0Wek",
-      videoDescription:
-        "Découvre le mode Performance de Rekordbox avant de brancher ta FLX4 (FR/EN — même vidéo).",
+      videoDescription: "Découvre le mode Performance de Rekordbox avant de brancher ta FLX4.",
       content: `**Hey, bienvenue ! Tu es officiellement en route pour devenir DJ.**
 
 Aujourd'hui, on découvre Rekordbox et ta **DDJ-FLX4** — un contrôleur compact idéal pour débuter.
@@ -1262,7 +1261,7 @@ Le logiciel qui relie ton ordi à ta table : morceaux, BPM, waveforms.
       title: "On branche la FLX4",
       subtitle: "USB + casque + enceintes",
       videoUrl: "https://www.youtube.com/watch?v=EIUd_xdBYGs",
-      videoDescription: "Branchement FLX4 : USB, Master, casque (FR/EN — même vidéo).",
+      videoDescription: "Branchement FLX4 : USB, Master et casque.",
       content: `**Branchement propre = son propre.**
 
 **Chaîne FLX4**
@@ -1293,7 +1292,7 @@ PC → **USB** → FLX4 → **Master** → enceintes actives (LINE). **Casque** 
       title: "Le BPM : le pouls de ta musique",
       subtitle: "Comprendre le rythme fondamental",
       videoUrl: "https://www.youtube.com/shorts/s8G3Buce89g",
-      videoDescription: "BPM en bref — Short YouTube (FR/EN — même vidéo).",
+      videoDescription: "Comprendre le BPM, le pouls de tes morceaux.",
       content: `**Le BPM = battements par minute.** Deux morceaux au **même BPM** sonnent ensemble.
 
 **Repères genre**
@@ -1319,7 +1318,7 @@ Le BPM s'affiche dans Rekordbox ; le **fader tempo** est en façade. Le bouton *
       title: "Le Pitch : ton outil d'alignement",
       subtitle: "Tempo & beatmatch sur FLX4",
       videoUrl: "https://www.youtube.com/watch?v=GXfiJmNfcjQ",
-      videoDescription: "Tempo / beatmatch sur FLX4 (FR/EN — même vidéo).",
+      videoDescription: "Utiliser le pitch pour aligner deux morceaux sur ta FLX4.",
       content: `**Problème** : A à 120 BPM, B à 128 BPM — ça ne colle pas.
 **Solution** : le **pitch** ralentit ou accélère B pour matcher A.
 
@@ -1342,7 +1341,7 @@ Sur la **FLX4**, le pitch est en façade par deck. Active **Key Lock** dans Reko
       title: "Ta toute première transition !",
       subtitle: "Préparer, écouter, mixer, basculer",
       videoUrl: "https://www.youtube.com/watch?v=GXfiJmNfcjQ",
-      videoDescription: "Première transition — même vidéo que l'étape tempo / beatmatch.",
+      videoDescription: "Ta première transition : préparer, écouter, mixer, basculer.",
       content: `**Étapes**
 1. A joue, B chargé, pitch aligné, **Cue** B au casque
 2. Vérifie que les kicks collent (jog si besoin)
@@ -1388,8 +1387,7 @@ export const level1ModuleXdjRx: CourseModule = {
       videoUrl: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
       videoStart: 20,
       videoEnd: 303,
-      videoDescription:
-        "Introduction Rekordbox & XDJ-RX (segment 0:20 → 5:03). Sous-titres FR/EN sur YouTube.",
+      videoDescription: "Introduction à Rekordbox et à ton XDJ-RX.",
       content: `**Hey, bienvenue ! Tu es officiellement en route pour devenir DJ.**
 
 Pas de stress, on va tout voir ensemble. Aujourd'hui, on découvre Rekordbox et ton setup (XDJ-RX) — des machines qu'on retrouve dans beaucoup de clubs et de soirées.
@@ -1437,8 +1435,7 @@ C'est normal si tout n'est pas clair du premier coup. L'important c'est de manip
       videoUrl: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
       videoStart: 20,
       videoEnd: 303,
-      videoDescription:
-        "Branchement & prise en main XDJ-RX (même vidéo, segment 0:20 → 5:03).",
+      videoDescription: "Branchement et prise en main de l'XDJ-RX.",
       content: `**Allez, on branche tout !** C'est pas la partie la plus fun, mais un branchement propre = un son propre. Et ça, ça change tout.
 
 **XDJ-RX (sans PC en mix)**
@@ -1482,7 +1479,7 @@ C'est normal si tout n'est pas clair du premier coup. L'important c'est de manip
         fr: { url: "https://www.youtube.com/watch?v=DPM4udeiDZQ" },
         en: { url: "https://www.youtube.com/shorts/s8G3Buce89g" },
       },
-      videoDescription: "BPM — vidéo longue en français, Short en anglais.",
+      videoDescription: "Comprendre le BPM, le pouls de tes morceaux.",
       content: `**OK, là on rentre dans le vif du sujet.** Le BPM, c'est LE concept fondamental du DJing. Mais t'inquiète, c'est beaucoup plus simple que ça en a l'air.
 
 **Le BPM (Beats Per Minute), c'est quoi ?**
@@ -1547,8 +1544,7 @@ Le BPM c'est le rythme. Deux rythmes identiques = harmonie. Deux rythmes différ
           end: 3726,
         },
       },
-      videoDescription:
-        "Beat Sync — FR : 9:40→10:30 (vidéo française) · EN : 59:18→1:02:06 (vidéo anglaise).",
+      videoDescription: "Utiliser le pitch pour aligner deux morceaux.",
       content: `**Maintenant qu'on a compris le BPM, on passe à l'outil qui va te permettre de tout aligner : le Pitch.**
 
 **Le problème :**
@@ -1611,8 +1607,7 @@ C'est là que ça devient vraiment fun : tu commences à **contrôler** ta musiq
           end: 3726,
         },
       },
-      videoDescription:
-        "Première transition — même extrait Beat Sync que l'étape précédente (FR ou EN selon ta langue).",
+      videoDescription: "Ta première transition : préparer, écouter, mixer, basculer.",
       content: `**C'est le moment que tu attendais : ta toute première transition !** Tout ce qu'on a vu avant, c'était pour arriver là. Tu es prêt.
 
 **Voilà comment ça se passe, étape par étape :**
