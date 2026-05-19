@@ -95,7 +95,7 @@ const VIDEO_LANGUAGE_BY_ID: Record<string, Language> = {
   "u_ny-pIfNe8": "en",
   "-CblGWcr87k": "en",
   kHll7t87xik: "en",
-  SIeWfe2OBkc: "en",
+  SIeWfe2OBkc: "fr",
   s8G3Buce89g: "en",
   TP9ioJQN5Hk: "en",
   GXfiJmNfcjQ: "en",
@@ -260,9 +260,22 @@ export function frenchCaptionEmbedParams(): Record<string, string> {
   };
 }
 
-/** Interface EN : pas de sous-titres forcés à l’ouverture. */
-export function disableCaptionEmbedParams(): Record<string, string> {
-  return { cc_load_policy: "0" };
+/** Interface EN : pas de sous-titres, UI lecteur en anglais. */
+export function englishPlayerEmbedParams(): Record<string, string> {
+  return { cc_load_policy: "0", hl: "en" };
+}
+
+/** Interface FR + vidéo déjà en français : pas de sous-titres forcés. */
+export function frenchPlayerEmbedParams(): Record<string, string> {
+  return { cc_load_policy: "0", hl: "fr" };
+}
+
+export function youtubePlayerEmbedParams(
+  appLanguage: Language,
+  autoFrenchCaptions: boolean,
+): Record<string, string> {
+  if (autoFrenchCaptions) return frenchCaptionEmbedParams();
+  return appLanguage === "en" ? englishPlayerEmbedParams() : frenchPlayerEmbedParams();
 }
 
 export function buildYoutubeEmbedSrc(
@@ -270,6 +283,7 @@ export function buildYoutubeEmbedSrc(
   options?: {
     start?: number;
     end?: number;
+    appLanguage?: Language;
     autoFrenchCaptions?: boolean;
   },
 ): string | null {
@@ -283,10 +297,11 @@ export function buildYoutubeEmbedSrc(
   if (options?.end != null && options.end > 0) {
     params.set("end", String(Math.floor(options.end)));
   }
-  const captionParams = options?.autoFrenchCaptions
-    ? frenchCaptionEmbedParams()
-    : disableCaptionEmbedParams();
-  for (const [key, value] of Object.entries(captionParams)) {
+  const playerParams = youtubePlayerEmbedParams(
+    options?.appLanguage ?? "fr",
+    options?.autoFrenchCaptions === true,
+  );
+  for (const [key, value] of Object.entries(playerParams)) {
     params.set(key, value);
   }
   const q = params.toString();

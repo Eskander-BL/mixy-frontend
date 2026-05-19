@@ -2,7 +2,11 @@ import { useCallback, useEffect, useRef } from "react";
 import { RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Language } from "@/lib/i18n";
-import { buildYoutubeEmbedSrc, hasSegmentBounds } from "@/lib/youtube-embed";
+import {
+  buildYoutubeEmbedSrc,
+  hasSegmentBounds,
+  youtubePlayerEmbedParams,
+} from "@/lib/youtube-embed";
 
 /** Types minimaux API YouTube IFrame (pas de dépendance @types/youtube). */
 namespace YT {
@@ -101,6 +105,7 @@ type YoutubeCoursePlayerProps = {
   end?: number;
   /** App FR + vidéo EN : activer les sous-titres français automatiquement. */
   autoFrenchCaptions?: boolean;
+  appLanguage: Language;
   isFr: boolean;
 };
 
@@ -119,6 +124,7 @@ export function YoutubeCoursePlayer({
   start,
   end,
   autoFrenchCaptions = false,
+  appLanguage,
   isFr,
 }: YoutubeCoursePlayerProps) {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -148,13 +154,12 @@ export function YoutubeCoursePlayer({
         modestbranding: 1,
         playsinline: 1,
       };
-      if (autoFrenchCaptions) {
-        playerVars.cc_load_policy = 1;
-        playerVars.cc_lang_pref = "fr";
-        playerVars.hl = "fr";
-      } else {
-        playerVars.cc_load_policy = 0;
+      const embedParams = youtubePlayerEmbedParams(appLanguage, autoFrenchCaptions);
+      if (embedParams.cc_load_policy) {
+        playerVars.cc_load_policy = Number(embedParams.cc_load_policy) as 0 | 1;
       }
+      if (embedParams.cc_lang_pref) playerVars.cc_lang_pref = embedParams.cc_lang_pref;
+      if (embedParams.hl) playerVars.hl = embedParams.hl;
 
       playerRef.current = new window.YT!.Player(mountRef.current, {
         videoId,
@@ -209,7 +214,7 @@ export function YoutubeCoursePlayer({
       teardownYoutubePlayer(playerRef.current, mountRef.current);
       playerRef.current = null;
     };
-  }, [videoId, startSec, endSec, autoFrenchCaptions, segmentMode]);
+  }, [videoId, startSec, endSec, autoFrenchCaptions, appLanguage, segmentMode]);
 
   const replaySegment = useCallback(() => {
     const player = playerRef.current;
@@ -219,7 +224,12 @@ export function YoutubeCoursePlayer({
   }, [startSec]);
 
   if (!segmentMode) {
-    const embedSrc = buildYoutubeEmbedSrc(rawUrl, { autoFrenchCaptions });
+    const embedSrc = buildYoutubeEmbedSrc(rawUrl, {
+      start: startSec > 0 ? startSec : undefined,
+      end: endSec,
+      appLanguage,
+      autoFrenchCaptions,
+    });
     if (!embedSrc) return null;
     return (
       <iframe

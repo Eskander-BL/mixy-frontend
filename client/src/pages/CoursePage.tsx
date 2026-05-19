@@ -201,6 +201,7 @@ export default function CoursePage() {
                     start={slideVideo.start}
                     end={slideVideo.end}
                     autoFrenchCaptions={autoFrenchCaptions}
+                    appLanguage={language}
                     isFr={isFr}
                   />
                 ) : (

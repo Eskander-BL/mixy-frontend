@@ -1221,6 +1221,10 @@ export const level1ModuleFlx4: CourseModule = {
       title: "Bienvenue dans le monde du DJing !",
       subtitle: "Rekordbox, ta FLX4 et tes tout premiers réflexes",
       videoUrl: "https://www.youtube.com/watch?v=fa3sLTn0Wek",
+      videoByLanguage: {
+        fr: { url: "https://www.youtube.com/watch?v=fa3sLTn0Wek" },
+        en: { url: "https://www.youtube.com/watch?v=fa3sLTn0Wek" },
+      },
       videoDescription: "Découvre le mode Performance de Rekordbox avant de brancher ta FLX4.",
       content: `**Hey, bienvenue ! Tu es officiellement en route pour devenir DJ.**
 
@@ -1261,6 +1265,10 @@ Le logiciel qui relie ton ordi à ta table : morceaux, BPM, waveforms.
       title: "On branche la FLX4",
       subtitle: "USB + casque + enceintes",
       videoUrl: "https://www.youtube.com/watch?v=EIUd_xdBYGs",
+      videoByLanguage: {
+        fr: { url: "https://www.youtube.com/watch?v=EIUd_xdBYGs" },
+        en: { url: "https://www.youtube.com/watch?v=EIUd_xdBYGs" },
+      },
       videoDescription: "Branchement FLX4 : USB, Master et casque.",
       content: `**Branchement propre = son propre.**
 
@@ -1387,6 +1395,14 @@ export const level1ModuleXdjRx: CourseModule = {
       videoUrl: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
       videoStart: 20,
       videoEnd: 303,
+      videoByLanguage: {
+        fr: {
+          url: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
+          start: 20,
+          end: 303,
+        },
+        en: { url: "https://www.youtube.com/watch?v=fa3sLTn0Wek" },
+      },
       videoDescription: "Introduction à Rekordbox et à ton XDJ-RX.",
       content: `**Hey, bienvenue ! Tu es officiellement en route pour devenir DJ.**
 
@@ -1435,6 +1451,14 @@ C'est normal si tout n'est pas clair du premier coup. L'important c'est de manip
       videoUrl: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
       videoStart: 20,
       videoEnd: 303,
+      videoByLanguage: {
+        fr: {
+          url: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
+          start: 20,
+          end: 303,
+        },
+        en: { url: "https://www.youtube.com/watch?v=EIUd_xdBYGs" },
+      },
       videoDescription: "Branchement et prise en main de l'XDJ-RX.",
       content: `**Allez, on branche tout !** C'est pas la partie la plus fun, mais un branchement propre = un son propre. Et ça, ça change tout.
 
