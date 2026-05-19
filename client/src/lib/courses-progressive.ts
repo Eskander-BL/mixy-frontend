@@ -1401,7 +1401,11 @@ export const level1ModuleXdjRx: CourseModule = {
           start: 20,
           end: 303,
         },
-        en: { url: "https://www.youtube.com/watch?v=fa3sLTn0Wek" },
+        en: {
+          url: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
+          start: 20,
+          end: 303,
+        },
       },
       videoDescription: "Introduction à Rekordbox et à ton XDJ-RX.",
       content: `**Hey, bienvenue ! Tu es officiellement en route pour devenir DJ.**
@@ -1457,7 +1461,11 @@ C'est normal si tout n'est pas clair du premier coup. L'important c'est de manip
           start: 20,
           end: 303,
         },
-        en: { url: "https://www.youtube.com/watch?v=EIUd_xdBYGs" },
+        en: {
+          url: "https://www.youtube.com/watch?v=SIeWfe2OBkc",
+          start: 20,
+          end: 303,
+        },
       },
       videoDescription: "Branchement et prise en main de l'XDJ-RX.",
       content: `**Allez, on branche tout !** C'est pas la partie la plus fun, mais un branchement propre = un son propre. Et ça, ça change tout.
