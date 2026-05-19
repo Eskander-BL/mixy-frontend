@@ -100,6 +100,7 @@ const VIDEO_LANGUAGE_BY_ID: Record<string, Language> = {
   TP9ioJQN5Hk: "en",
   GXfiJmNfcjQ: "en",
   n3Ti_QLri6k: "en",
+  "-jRCizG7Ito": "en",
   Ubm9R3VKEqg: "fr",
   FlDeqQMj9II: "fr",
   DPM4udeiDZQ: "fr",
