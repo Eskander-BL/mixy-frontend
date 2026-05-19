@@ -3113,6 +3113,71 @@ const GOAL_CONTENT: Record<UserGoal, Record<number, { fr: string; en: string }>>
   },
 };
 
+/**
+ * Vidéos par niveau / slide — uniquement pour utilisateurs XDJ-RX (niveaux 2+ communs au contenu).
+ */
+const XDJ_RX_SLIDE_VIDEOS: Partial<
+  Record<number, Partial<Record<number, Partial<Record<Language, SlideVideoConfig>>>>>
+> = {
+  2: {
+    1: {
+      fr: { url: "https://www.youtube.com/watch?v=n3Ti_QLri6k" },
+    },
+    2: {
+      fr: {
+        url: "https://www.youtube.com/watch?v=pV-NJndPFtw",
+        start: 338,
+        end: 466,
+      },
+      en: {
+        url: "https://www.youtube.com/watch?v=pV-NJndPFtw",
+        start: 338,
+        end: 466,
+      },
+    },
+  },
+};
+
+function patchSlideDeckVideos(
+  slide: Slide,
+  overrides: Partial<Record<Language, SlideVideoConfig>>,
+): Slide {
+  const videoByLanguage = { ...slide.videoByLanguage };
+  if (overrides.fr?.url) videoByLanguage.fr = overrides.fr;
+  if (overrides.en?.url) videoByLanguage.en = overrides.en;
+  if (!overrides.fr?.url && !overrides.en?.url) return slide;
+
+  const fallback = overrides.fr ?? overrides.en!;
+  return {
+    ...slide,
+    videoUrl: fallback.url,
+    videoStart: undefined,
+    videoEnd: undefined,
+    videoByLanguage: videoByLanguage,
+  };
+}
+
+function injectDeckVideoPersonalization(
+  modules: CourseModule[],
+  targetDeck: TargetDeck | null | undefined,
+): CourseModule[] {
+  if (targetDeck !== "xdj_rx") return modules;
+
+  return modules.map((module) => {
+    const levelVideos = XDJ_RX_SLIDE_VIDEOS[module.level];
+    if (!levelVideos) return module;
+
+    return {
+      ...module,
+      slides: module.slides.map((slide) => {
+        const slideOverrides = levelVideos[slide.slideNumber];
+        if (!slideOverrides) return slide;
+        return patchSlideDeckVideos(slide, slideOverrides);
+      }),
+    };
+  });
+}
+
 function injectEquipmentPersonalization(
   modules: CourseModule[],
   targetDeck: TargetDeck | null | undefined,
@@ -3234,7 +3299,10 @@ export function getAllModules(
 
   const personalize = (modules: CourseModule[]) =>
     injectGoalPersonalization(
-      injectEquipmentPersonalization(modules, targetDeck, language),
+      injectDeckVideoPersonalization(
+        injectEquipmentPersonalization(modules, targetDeck, language),
+        targetDeck,
+      ),
       goal,
       language,
     );
