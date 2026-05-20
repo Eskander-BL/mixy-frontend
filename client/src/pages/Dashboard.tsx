@@ -33,31 +33,6 @@ import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
 import { toast } from "sonner";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 
-function useStreak() {
-  const [streak, setStreak] = useState(1);
-  useEffect(() => {
-    try {
-      const today = new Date().toISOString().split("T")[0];
-      const stored = JSON.parse(localStorage.getItem("mixyStreak") || '{"count":1,"lastDate":""}');
-      const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
-
-      if (stored.lastDate === today) {
-        setStreak(stored.count);
-      } else if (stored.lastDate === yesterday) {
-        const newCount = stored.count + 1;
-        localStorage.setItem("mixyStreak", JSON.stringify({ count: newCount, lastDate: today }));
-        setStreak(newCount);
-      } else {
-        localStorage.setItem("mixyStreak", JSON.stringify({ count: 1, lastDate: today }));
-        setStreak(1);
-      }
-    } catch {
-      setStreak(1);
-    }
-  }, []);
-  return streak;
-}
-
 function LevelBadge({ score, isFr }: { score?: number; isFr: boolean }) {
   if (!score || score < 50) return null;
   const badge =
@@ -111,8 +86,37 @@ export default function Dashboard() {
   const [contactMessage, setContactMessage] = useState("");
   const [returnFromPayment, setReturnFromPayment] = useState(false);
   const [showPathDialog, setShowPathDialog] = useState(false);
-  const streak = useStreak();
-  const savedScores = useMemo(() => getScoresFromStorage(), []);
+  const [streak, setStreak] = useState(1);
+
+  const userIdNum = useMemo(
+    () => Number.parseInt(typeof window !== "undefined" ? localStorage.getItem("userId") || "0" : "0", 10),
+    [],
+  );
+
+  const progressQuery = trpc.dj.getProgress.useQuery(
+    { userId: userIdNum },
+    { enabled: Number.isFinite(userIdNum) && userIdNum > 0 },
+  );
+
+  const syncStreakMutation = trpc.dj.syncStreak.useMutation({
+    onSuccess: (data) => setStreak(data.streak),
+  });
+
+  useEffect(() => {
+    if (!Number.isFinite(userIdNum) || userIdNum <= 0) return;
+    syncStreakMutation.mutate({ userId: userIdNum });
+  }, [userIdNum]);
+
+  const levelScores = useMemo(() => {
+    const merged: Record<string, number> = { ...getScoresFromStorage() };
+    const remote = progressQuery.data?.quizScoresByLevel ?? {};
+    for (const [lvl, score] of Object.entries(remote)) {
+      if (typeof score === "number" && Number.isFinite(score)) {
+        merged[String(lvl)] = score;
+      }
+    }
+    return merged;
+  }, [progressQuery.data?.quizScoresByLevel]);
 
   const userProfileQuery = trpc.dj.getUserProfile.useQuery(
     { userId: parseInt(localStorage.getItem("userId") || "0") },
@@ -197,10 +201,6 @@ export default function Dashboard() {
   const modulesForUser = useMemo(
     () => getAllModules(courseTrack, skillLevel, languagePref, learningProfile?.targetDeck, learningProfile?.goal),
     [courseTrack, skillLevel, languagePref, learningProfile?.targetDeck, learningProfile?.goal]
-  );
-  const userIdNum = useMemo(
-    () => Number.parseInt(typeof window !== "undefined" ? localStorage.getItem("userId") || "0" : "0", 10),
-    []
   );
   const totalLevels = modulesForUser.length;
   const progressPercentage = (completedLevels.length / totalLevels) * 100;
@@ -575,7 +575,7 @@ export default function Dashboard() {
             }
 
             if (isValidated) {
-              const levelScore = savedScores[String(lvl)] as number | undefined;
+              const levelScore = levelScores[String(lvl)] as number | undefined;
               return (
                 <div key={lvl}>
                 <Card
