@@ -121,6 +121,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     { userId: userId ?? 0 },
     { enabled: (userId ?? 0) > 0 }
   );
+  const recoverProgressFromLocalMut = trpc.dj.recoverProgressFromLocal.useMutation();
 
   const subscriptionQuery = trpc.stripe.getSubscriptionStatus.useQuery(
     { userId: userId ?? 0 },
@@ -177,6 +178,33 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   useEffect(() => {
     applyMergedProgress();
   }, [applyMergedProgress]);
+
+  // Recovery path: if this device has higher local completed levels than server data,
+  // push them once to backend so other devices (phone/mac) recover the same progression.
+  const recoverySyncRef = useRef<string>("");
+  useEffect(() => {
+    if (!userId || userId <= 0) return;
+    if (recoverProgressFromLocalMut.isPending) return;
+    const apiCompleted = normalizeApiCompleted(getProgressQuery.data?.completedLevels);
+    const localCompleted = readLocalCompletedLevels();
+    if (localCompleted.length === 0) return;
+    const localOnly = localCompleted
+      .filter((lvl) => !apiCompleted.includes(lvl))
+      .filter((lvl) => Number.isFinite(lvl) && lvl >= 1)
+      .sort((a, b) => a - b);
+    if (localOnly.length === 0) return;
+    const key = `${userId}:${localOnly.join(",")}`;
+    if (recoverySyncRef.current === key) return;
+    recoverySyncRef.current = key;
+    recoverProgressFromLocalMut.mutate(
+      { userId, completedLevels: localOnly },
+      {
+        onSuccess: () => {
+          void getProgressQuery.refetch().then((res) => applyMergedProgress(res.data ?? getProgressQuery.data));
+        },
+      },
+    );
+  }, [applyMergedProgress, getProgressQuery, recoverProgressFromLocalMut, userId]);
 
   const refreshProgress = useCallback(() => {
     // Recalcule immédiatement avec les sources actuelles (notamment localStorage qui vient
