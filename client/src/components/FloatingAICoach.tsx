@@ -11,21 +11,71 @@ import { useLanguageContext } from "@/contexts/LanguageContext";
 
 const SYSTEM_PRIMER: Message = { role: "system", content: "You are Mixy Coach." };
 
-function buildGreeting(language: "fr" | "en", userName: string | null): Message {
+function buildGreeting(
+  language: "fr" | "en",
+  userName: string | null,
+  skillLevel?: "beginner" | "intermediate" | "advanced",
+  targetDeck?: "flx4" | "xdj_rx" | "undecided" | null,
+  goal?: "fun" | "party" | "club" | "pro" | null,
+): Message {
   const name = userName?.trim();
+  const levelFr =
+    skillLevel === "advanced"
+      ? "avancé"
+      : skillLevel === "intermediate"
+        ? "intermédiaire"
+        : "débutant";
+  const levelEn =
+    skillLevel === "advanced"
+      ? "advanced"
+      : skillLevel === "intermediate"
+        ? "intermediate"
+        : "beginner";
+  const deckFr =
+    targetDeck === "flx4"
+      ? "DDJ-FLX4"
+      : targetDeck === "xdj_rx"
+        ? "XDJ-RX"
+        : targetDeck === "undecided"
+          ? "deck pas encore choisi"
+          : "deck non renseigné";
+  const deckEn =
+    targetDeck === "flx4"
+      ? "DDJ-FLX4"
+      : targetDeck === "xdj_rx"
+        ? "XDJ-RX"
+        : targetDeck === "undecided"
+          ? "deck not chosen yet"
+          : "deck not specified";
+  const goalFr =
+    goal === "pro"
+      ? "devenir DJ pro"
+      : goal === "club"
+        ? "apprendre le mix en club"
+        : goal === "party"
+          ? "gérer des soirées entre amis"
+          : "mixer pour le fun";
+  const goalEn =
+    goal === "pro"
+      ? "become a pro DJ"
+      : goal === "club"
+        ? "learn club mixing"
+        : goal === "party"
+          ? "play house parties"
+          : "mix for fun";
   if (language === "fr") {
     return {
       role: "assistant",
       content: name
-        ? `Hello ${name} ! Sur quoi tu veux qu’on bosse aujourd’hui ? (cours, BPM, transitions, équipement…)`
-        : "Salut, je suis ton coach Mixy. Pose-moi une question sur le DJing ou ton cours.",
+        ? `Hello ${name} ! Je te vois en niveau ${levelFr}, avec ${deckFr}, objectif ${goalFr}. Je suis là pour t'aider dans ton apprentissage : pose-moi toutes tes questions (BPM, transitions, EQ, structure de set…), je te guide pas à pas.`
+        : "Salut, je suis ton coach Mixy. Je peux t'aider sur ton cours, BPM, transitions, EQ et préparation de set.",
     };
   }
   return {
     role: "assistant",
     content: name
-      ? `Hello ${name}! What do you want to work on today? (course, BPM, transitions, gear…)`
-      : "Hey, I'm your Mixy coach. Ask me anything about DJing or your current course.",
+      ? `Hello ${name}! I can see you're ${levelEn}, using ${deckEn}, and aiming to ${goalEn}. I'm here to support your learning: ask me anything (BPM, transitions, EQ, set structure), and I'll coach you step by step.`
+      : "Hey, I'm your Mixy coach. I can help with your course, BPM, transitions, EQ, and set preparation.",
   };
 }
 
@@ -38,7 +88,7 @@ export default function FloatingAICoach() {
   const [historyLoaded, setHistoryLoaded] = useState(false);
   const [messages, setMessages] = useState<Message[]>(() => [
     SYSTEM_PRIMER,
-    buildGreeting(language === "fr" ? "fr" : "en", null),
+    buildGreeting(language === "fr" ? "fr" : "en", null, skillLevel, learningProfile?.targetDeck, learningProfile?.goal),
   ]);
 
   const userId = Number.parseInt(localStorage.getItem("userId") || "0", 10);
@@ -62,7 +112,10 @@ export default function FloatingAICoach() {
     if (!hasUserId) {
       setMessages((prev) => {
         if (prev.length >= 2 && prev[1].role === "assistant") {
-          return [SYSTEM_PRIMER, buildGreeting(isFr ? "fr" : "en", userName)];
+          return [
+            SYSTEM_PRIMER,
+            buildGreeting(isFr ? "fr" : "en", userName, skillLevel, learningProfile?.targetDeck, learningProfile?.goal),
+          ];
         }
         return prev;
       });
@@ -72,7 +125,10 @@ export default function FloatingAICoach() {
 
     const rows = historyQuery.data ?? [];
     if (rows.length === 0) {
-      setMessages([SYSTEM_PRIMER, buildGreeting(isFr ? "fr" : "en", userName)]);
+      setMessages([
+        SYSTEM_PRIMER,
+        buildGreeting(isFr ? "fr" : "en", userName, skillLevel, learningProfile?.targetDeck, learningProfile?.goal),
+      ]);
     } else {
       setMessages([
         SYSTEM_PRIMER,
@@ -80,17 +136,30 @@ export default function FloatingAICoach() {
       ]);
     }
     setHistoryLoaded(true);
-  }, [hasUserId, historyQuery.data, historyQuery.isLoading, historyLoaded, isFr, userName]);
+  }, [
+    hasUserId,
+    historyQuery.data,
+    historyQuery.isLoading,
+    historyLoaded,
+    isFr,
+    learningProfile?.goal,
+    learningProfile?.targetDeck,
+    skillLevel,
+    userName,
+  ]);
 
   useEffect(() => {
     if (historyLoaded) return;
     setMessages((prev) => {
       if (prev.length === 2 && prev[1].role === "assistant") {
-        return [SYSTEM_PRIMER, buildGreeting(isFr ? "fr" : "en", userName)];
+        return [
+          SYSTEM_PRIMER,
+          buildGreeting(isFr ? "fr" : "en", userName, skillLevel, learningProfile?.targetDeck, learningProfile?.goal),
+        ];
       }
       return prev;
     });
-  }, [historyLoaded, isFr, userName]);
+  }, [historyLoaded, isFr, learningProfile?.goal, learningProfile?.targetDeck, skillLevel, userName]);
 
   const level = useMemo(() => {
     const match = location.match(/\/course\/(\d+)/);
