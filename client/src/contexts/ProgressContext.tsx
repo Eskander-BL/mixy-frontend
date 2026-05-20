@@ -10,7 +10,11 @@ import {
   type CourseTrackId,
 } from "@/lib/learning-profile";
 import { useLanguageContext } from "@/contexts/LanguageContext";
-import { readLocalCompletedLevelsForTier } from "@/lib/tier-progress-storage";
+import {
+  readCachedSkillLevel,
+  readLocalCompletedLevelsForTier,
+  persistCachedSkillLevel,
+} from "@/lib/tier-progress-storage";
 
 const TOTAL_LEVELS = allModules.length;
 
@@ -74,8 +78,9 @@ interface ProgressContextType {
 
 const ProgressContext = createContext<ProgressContextType | undefined>(undefined);
 
+const initialSkillForLocal = readCachedSkillLevel();
 const initialLocalCompleted = (() => {
-  const local = readLocalCompletedLevelsForTier("beginner");
+  const local = readLocalCompletedLevelsForTier(initialSkillForLocal);
   return [...new Set(local)].sort((a, b) => a - b);
 })();
 
@@ -93,7 +98,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     getActiveLevelFromCompleted(initialLocalCompleted, TOTAL_LEVELS)
   );
   const [completedLevels, setCompletedLevels] = useState<number[]>(() => initialLocalCompleted);
-  const [skillLevel, setSkillLevel] = useState<UserLevel>("beginner");
+  const [skillLevel, setSkillLevel] = useState<UserLevel>(initialSkillForLocal);
   const [learningProfile, setLearningProfile] = useState(() =>
     typeof window !== "undefined" ? readMixyLearningProfile() : null
   );
@@ -123,6 +128,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
       const api = apiData ?? getProgressQuery.data;
       const nextSkill = normalizeSkillLevel(api?.skillLevel);
       setSkillLevel(nextSkill);
+      persistCachedSkillLevel(nextSkill);
 
       const pathTrack = getCourseTrackFromProfile(learningProfile);
       const lengthForPath = getAllModules(pathTrack, nextSkill).length;

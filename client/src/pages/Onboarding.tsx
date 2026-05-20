@@ -11,7 +11,7 @@ import type { TargetDeck } from "@/lib/learning-profile";
 import { persistMixyLearningProfile, readMixyLearningProfile } from "@/lib/learning-profile";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
-import { writeTierProgress } from "@/lib/tier-progress-storage";
+import { writeTierProgress, persistCachedSkillLevel } from "@/lib/tier-progress-storage";
 import type { UserLevel } from "@/lib/courses-progressive";
 
 type OnboardingStep =
@@ -230,6 +230,7 @@ export default function Onboarding() {
               completedLevels: [],
               scores: {},
             });
+            persistCachedSkillLevel(formData.level as UserLevel);
           }
           finishOnboarding();
         },
@@ -240,6 +241,7 @@ export default function Onboarding() {
               completedLevels: [],
               scores: {},
             });
+            persistCachedSkillLevel(formData.level as UserLevel);
           }
           finishOnboarding();
         },

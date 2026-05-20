@@ -35,7 +35,11 @@ import {
   type UserGoal,
 } from "@/lib/learning-profile";
 import type { UserLevel } from "@/lib/courses-progressive";
-import { readLocalScoresForTier, writeTierProgress } from "@/lib/tier-progress-storage";
+import {
+  readLocalScoresForTier,
+  writeTierProgress,
+  persistCachedSkillLevel,
+} from "@/lib/tier-progress-storage";
 import { Label } from "@/components/ui/label";
 import { CompleteAccountCard } from "@/components/CompleteAccountCard";
 import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
@@ -205,6 +209,10 @@ export default function Dashboard() {
     try {
       const targetDeck =
         equipment === "none" || equipment === "controller" ? editDeck : null;
+      if (editSkill !== skillLevel) {
+        writeTierProgress(editSkill, { completedLevels: [], scores: {} });
+        persistCachedSkillLevel(editSkill);
+      }
       await saveOnboardingMutation.mutateAsync({
         userId: userIdNum,
         level: editSkill,
@@ -229,9 +237,13 @@ export default function Dashboard() {
       void utils.dj.getProgress.invalidate({ userId: userIdNum });
       refreshProgress();
       toast.success(
-        isFr
-          ? "Parcours mis à jour. Ta progression est conservée."
-          : "Path updated. Your progress is unchanged.",
+        editSkill !== skillLevel
+          ? isFr
+            ? "Palier mis à jour. Tu recommences au niveau 1 de ce palier ; ta progression sur les autres paliers est conservée."
+            : "Tier updated. You start at level 1 of this tier; progress on your other tiers is kept."
+          : isFr
+            ? "Parcours mis à jour."
+            : "Path updated.",
       );
       setShowEditPathDialog(false);
     } catch {

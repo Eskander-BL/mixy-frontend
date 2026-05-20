@@ -41,11 +41,31 @@ function readStored(): StoredUserProgressV2 {
     }
     const legacy = parseLegacyFlat(parsed);
     if (legacy) {
-      return { byTier: { beginner: legacy } };
+      const migrated: StoredUserProgressV2 = { byTier: { beginner: legacy } };
+      writeStored(migrated);
+      return migrated;
     }
     return { byTier: {} };
   } catch {
     return { byTier: {} };
+  }
+}
+
+export function readCachedSkillLevel(): SkillTier {
+  try {
+    const v = localStorage.getItem("mixySkillLevel");
+    if (v === "intermediate" || v === "advanced") return v;
+  } catch {
+    /* ignore */
+  }
+  return "beginner";
+}
+
+export function persistCachedSkillLevel(skillLevel: SkillTier) {
+  try {
+    localStorage.setItem("mixySkillLevel", skillLevel);
+  } catch {
+    /* storage full */
   }
 }
 
