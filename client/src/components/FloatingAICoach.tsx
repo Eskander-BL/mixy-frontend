@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { X } from "lucide-react";
+import { Lock, X } from "lucide-react";
 import { useLocation } from "wouter";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
+import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { getAllModules, getModuleByLevel, getSlideFromModule } from "@/lib/courses-progressive";
 import { brand } from "@/assets/brand-assets";
@@ -29,7 +30,7 @@ function buildGreeting(language: "fr" | "en", userName: string | null): Message 
 }
 
 export default function FloatingAICoach() {
-  const [location] = useLocation();
+  const [location, navigate] = useLocation();
   const { courseTrack, skillLevel, completedLevels, learningProfile, userName } = useProgress();
   const { language } = useLanguageContext();
   const isFr = language === "fr";
@@ -47,6 +48,14 @@ export default function FloatingAICoach() {
     { userId },
     { enabled: hasUserId, staleTime: 60_000 },
   );
+
+  const quotaQuery = trpc.ai.getChatQuota.useQuery(
+    { userId },
+    { enabled: hasUserId },
+  );
+  const quota = quotaQuery.data;
+  const isQuotaBlocked = !!quota && !quota.subscribed && quota.blocked;
+  const showQuotaBanner = !!quota && !quota.subscribed && !quota.blocked;
 
   useEffect(() => {
     if (historyLoaded) return;
@@ -148,9 +157,30 @@ export default function FloatingAICoach() {
       setMessages((prev) => [...prev, { role: "assistant", content: response }]);
       if (hasUserId) {
         void utils.ai.getHistory.invalidate({ userId });
+        void utils.ai.getChatQuota.invalidate({ userId });
       }
     },
-    onError: () => {
+    onError: (error) => {
+      const quotaExceeded = error?.message === "CHAT_QUOTA_EXCEEDED";
+      if (quotaExceeded && hasUserId) {
+        void utils.ai.getChatQuota.invalidate({ userId });
+        // On retire la dernière question posée par l'utilisateur (elle n'a pas été traitée)
+        // et on remplace par un message paywall persistant.
+        setMessages((prev) => {
+          const last = prev[prev.length - 1];
+          const trimmed = last?.role === "user" ? prev.slice(0, -1) : prev;
+          return [
+            ...trimmed,
+            {
+              role: "assistant",
+              content: isFr
+                ? "Tu as utilisé tes 5 questions gratuites avec Mixy Coach 🦊. Passe à l’abonnement pour discuter avec moi 24/7, débloquer les niveaux 2 à 10 et avoir mes conseils perso à la demande."
+                : "You've used your 5 free questions with Mixy Coach 🦊. Subscribe to chat with me 24/7, unlock levels 2 to 10 and get personalized advice on demand.",
+            },
+          ];
+        });
+        return;
+      }
       setMessages((prev) => [
         ...prev,
         {
@@ -228,6 +258,47 @@ export default function FloatingAICoach() {
               height={"440px"}
               placeholder={language === "fr" ? "Pose ta question..." : "Ask your question..."}
               assistantAvatarSrc={brand.chatBot}
+              inputBanner={
+                showQuotaBanner ? (
+                  <div className="rounded-md bg-amber-50 border border-amber-200 text-amber-900 text-[12px] px-2.5 py-1.5 flex items-center justify-between gap-2">
+                    <span className="leading-snug">
+                      {isFr
+                        ? `Il te reste ${quota?.remaining ?? 0} message${(quota?.remaining ?? 0) > 1 ? "s" : ""} gratuit${(quota?.remaining ?? 0) > 1 ? "s" : ""}.`
+                        : `${quota?.remaining ?? 0} free message${(quota?.remaining ?? 0) > 1 ? "s" : ""} left.`}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => navigate("/paywall/2")}
+                      className="shrink-0 text-[12px] font-semibold underline underline-offset-2 hover:opacity-80"
+                    >
+                      {isFr ? "Passer pro" : "Go pro"}
+                    </button>
+                  </div>
+                ) : null
+              }
+              inputReplacement={
+                isQuotaBlocked ? (
+                  <div className="rounded-md border border-amber-200 bg-amber-50 p-3">
+                    <div className="flex items-start gap-2">
+                      <div className="mt-0.5 size-5 shrink-0 rounded-full bg-amber-100 flex items-center justify-center">
+                        <Lock className="size-3 text-amber-700" />
+                      </div>
+                      <div className="flex-1 text-[12px] text-amber-900 leading-snug">
+                        {isFr
+                          ? "Quota gratuit atteint (5 questions). Débloque le chat avec Mixy Coach 24/7 ainsi que les niveaux 2 à 10."
+                          : "Free quota reached (5 questions). Unlock 24/7 chat with Mixy Coach and levels 2 to 10."}
+                      </div>
+                    </div>
+                    <Button
+                      type="button"
+                      onClick={() => navigate("/paywall/2")}
+                      className="mt-2 h-9 w-full bg-primary text-primary-foreground hover:bg-primary/90 text-sm"
+                    >
+                      {isFr ? "Débloquer Mixy Coach — 4,99€/mois" : "Unlock Mixy Coach — 4.99€/mo"}
+                    </Button>
+                  </div>
+                ) : undefined
+              }
             />
           </div>
         </div>

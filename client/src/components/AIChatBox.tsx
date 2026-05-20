@@ -62,6 +62,18 @@ export type AIChatBoxProps = {
    * Optional image for assistant avatar (replaces default sparkles icon).
    */
   assistantAvatarSrc?: string;
+
+  /**
+   * When provided, replaces the text input area with custom content
+   * (e.g. a paywall CTA when the free quota is exhausted).
+   */
+  inputReplacement?: React.ReactNode;
+
+  /**
+   * Optional content rendered just above the input/replacement area
+   * (e.g. a "X free messages left" banner).
+   */
+  inputBanner?: React.ReactNode;
 };
 
 /**
@@ -125,11 +137,13 @@ export function AIChatBox({
   emptyStateMessage = "Start a conversation with AI",
   suggestedPrompts,
   assistantAvatarSrc,
+  inputReplacement,
+  inputBanner,
 }: AIChatBoxProps) {
   const [input, setInput] = useState("");
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const inputAreaRef = useRef<HTMLFormElement>(null);
+  const inputAreaRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Filter out system messages
@@ -327,33 +341,41 @@ export function AIChatBox({
       </div>
 
       {/* Input Area */}
-      <form
-        ref={inputAreaRef}
-        onSubmit={handleSubmit}
-        className="flex gap-2 p-4 border-t bg-background/50 items-end"
-      >
-        <Textarea
-          ref={textareaRef}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder={placeholder}
-          className="flex-1 max-h-32 resize-none min-h-9"
-          rows={1}
-        />
-        <Button
-          type="submit"
-          size="icon"
-          disabled={!input.trim() || isLoading}
-          className="shrink-0 h-[38px] w-[38px]"
-        >
-          {isLoading ? (
-            <Loader2 className="size-4 animate-spin" />
-          ) : (
-            <Send className="size-4" />
-          )}
-        </Button>
-      </form>
+      <div ref={inputAreaRef} className="border-t bg-background/50">
+        {inputBanner && (
+          <div className="px-4 pt-3">{inputBanner}</div>
+        )}
+        {inputReplacement ? (
+          <div className="p-4">{inputReplacement}</div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="flex gap-2 p-4 items-end"
+          >
+            <Textarea
+              ref={textareaRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder={placeholder}
+              className="flex-1 max-h-32 resize-none min-h-9"
+              rows={1}
+            />
+            <Button
+              type="submit"
+              size="icon"
+              disabled={!input.trim() || isLoading}
+              className="shrink-0 h-[38px] w-[38px]"
+            >
+              {isLoading ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Send className="size-4" />
+              )}
+            </Button>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
