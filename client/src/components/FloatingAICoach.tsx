@@ -67,14 +67,14 @@ function buildGreeting(
     return {
       role: "assistant",
       content: name
-        ? `Hello ${name} ! Je te vois en niveau ${levelFr}, avec ${deckFr}, objectif ${goalFr}. Je suis là pour t'aider dans ton apprentissage : pose-moi toutes tes questions (BPM, transitions, EQ, structure de set…), je te guide pas à pas.`
+        ? `Hello ${name} ! Je te vois en niveau ${levelFr}, avec ${deckFr}, objectif ${goalFr}. Je suis là pour t'aider dans ton apprentissage : pose-moi toutes tes questions par rapport à ton apprentissage, je te guide pas à pas.`
         : "Salut, je suis ton coach Mixy. Je peux t'aider sur ton cours, BPM, transitions, EQ et préparation de set.",
     };
   }
   return {
     role: "assistant",
     content: name
-      ? `Hello ${name}! I can see you're ${levelEn}, using ${deckEn}, and aiming to ${goalEn}. I'm here to support your learning: ask me anything (BPM, transitions, EQ, set structure), and I'll coach you step by step.`
+      ? `Hello ${name}! I can see you're ${levelEn}, using ${deckEn}, and aiming to ${goalEn}. I'm here to support your learning: ask me anything about your learning journey, and I'll coach you step by step.`
       : "Hey, I'm your Mixy coach. I can help with your course, BPM, transitions, EQ, and set preparation.",
   };
 }
