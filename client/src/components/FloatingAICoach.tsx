@@ -209,7 +209,7 @@ export default function FloatingAICoach() {
   );
 
   const quizInsightsQuery = trpc.dj.getQuizInsights.useQuery(
-    { userId },
+    { userId, skillLevel },
     { enabled: hasUserId },
   );
 
