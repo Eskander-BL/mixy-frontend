@@ -27,7 +27,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { courseTrackLabel, targetDeckLabel } from "@/lib/learning-profile";
+import {
+  courseTrackLabel,
+  persistMixyLearningProfile,
+  targetDeckLabel,
+  type TargetDeck,
+  type UserGoal,
+} from "@/lib/learning-profile";
+import type { UserLevel } from "@/lib/courses-progressive";
+import { Label } from "@/components/ui/label";
 import { CompleteAccountCard } from "@/components/CompleteAccountCard";
 import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
 import { toast } from "sonner";
@@ -92,12 +100,24 @@ export default function Dashboard() {
   const [contactMessage, setContactMessage] = useState("");
   const [returnFromPayment, setReturnFromPayment] = useState(false);
   const [showPathDialog, setShowPathDialog] = useState(false);
+  const [showEditPathDialog, setShowEditPathDialog] = useState(false);
+  const [editPathSaving, setEditPathSaving] = useState(false);
+  const [editSkill, setEditSkill] = useState<UserLevel>("beginner");
+  const [editGoal, setEditGoal] = useState<UserGoal>("fun");
+  const [editDeck, setEditDeck] = useState<TargetDeck>("flx4");
   const [streak, setStreak] = useState(1);
 
   const userIdNum = useMemo(
     () => Number.parseInt(typeof window !== "undefined" ? localStorage.getItem("userId") || "0" : "0", 10),
     [],
   );
+
+  /** Compte email créé (pas seulement invité navigateur). */
+  const isRegisteredAccount = useMemo(() => {
+    if (!Number.isFinite(userIdNum) || userIdNum <= 0) return false;
+    if (typeof window === "undefined") return false;
+    return !localStorage.getItem("guestId");
+  }, [userIdNum]);
 
   const progressQuery = trpc.dj.getProgress.useQuery(
     { userId: userIdNum },
@@ -177,8 +197,63 @@ export default function Dashboard() {
   );
   const contactMutation = trpc.dj.contact.useMutation();
   const saveOnboardingMutation = trpc.dj.saveOnboarding.useMutation();
+  const saveLearningProfileMutation = trpc.dj.saveLearningProfile.useMutation();
   const utils = trpc.useUtils();
   const [upgrading, setUpgrading] = useState(false);
+
+  const openEditPathDialog = () => {
+    setEditSkill(skillLevel);
+    setEditGoal(learningProfile?.goal ?? "fun");
+    setEditDeck(learningProfile?.targetDeck ?? "flx4");
+    setShowEditPathDialog(true);
+  };
+
+  const handleSaveEditPath = async () => {
+    if (!Number.isFinite(userIdNum) || userIdNum <= 0) return;
+    const equipment = learningProfile?.equipment ?? "controller";
+    setEditPathSaving(true);
+    try {
+      const targetDeck =
+        equipment === "none" || equipment === "controller" ? editDeck : null;
+      await saveOnboardingMutation.mutateAsync({
+        userId: userIdNum,
+        level: editSkill,
+        goal: editGoal,
+        equipment,
+        problem: "unknown",
+        equipmentModel: targetDeck ?? undefined,
+      });
+      await saveLearningProfileMutation.mutateAsync({
+        userId: userIdNum,
+        profile: {
+          equipment,
+          targetDeck: targetDeck ?? undefined,
+          updatedAt: Date.now(),
+        },
+      });
+      persistMixyLearningProfile({
+        equipment,
+        targetDeck,
+        goal: editGoal,
+      });
+      void utils.dj.getProgress.invalidate({ userId: userIdNum });
+      refreshProgress();
+      toast.success(
+        isFr
+          ? "Parcours mis à jour. Ta progression est conservée."
+          : "Path updated. Your progress is unchanged.",
+      );
+      setShowEditPathDialog(false);
+    } catch {
+      toast.error(
+        isFr
+          ? "Impossible de mettre à jour le parcours. Réessaie."
+          : "Could not update your path. Try again.",
+      );
+    } finally {
+      setEditPathSaving(false);
+    }
+  };
 
   const handleUpgradeTier = async () => {
     const uid = userIdNum;
@@ -391,10 +466,18 @@ export default function Dashboard() {
               <button
                 type="button"
                 className={headerActionClass + " pl-2.5 pr-3"}
-                onClick={() => navigate("/onboarding?restart=1")}
+                onClick={() =>
+                  isRegisteredAccount ? openEditPathDialog() : navigate("/onboarding?restart=1")
+                }
               >
                 <Undo2 className="size-4 shrink-0 text-primary" aria-hidden />
-                {isFr ? "Retourner à l'onboarding" : "Back to onboarding"}
+                {isRegisteredAccount
+                  ? isFr
+                    ? "Modifier mon parcours"
+                    : "Edit my path"
+                  : isFr
+                    ? "Retourner à l'onboarding"
+                    : "Back to onboarding"}
               </button>
               <button
                 type="button"
@@ -772,6 +855,86 @@ export default function Dashboard() {
         </DialogContent>
       </Dialog>
 
+      <Dialog open={showEditPathDialog} onOpenChange={setShowEditPathDialog}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>{isFr ? "Modifier mon parcours" : "Edit my path"}</DialogTitle>
+            <DialogDescription>
+              {isFr
+                ? "Change ton niveau DJ, ta platine ou ton objectif. Tes niveaux déjà validés, tes badges et ton abonnement ne sont pas effacés."
+                : "Change your DJ level, deck, or goal. Completed levels, badges, and your subscription are not reset."}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label>{isFr ? "Niveau DJ" : "DJ level"}</Label>
+              <Select value={editSkill} onValueChange={(v) => setEditSkill(v as UserLevel)}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="beginner">{isFr ? "Débutant" : "Beginner"}</SelectItem>
+                  <SelectItem value="intermediate">{isFr ? "Intermédiaire" : "Intermediate"}</SelectItem>
+                  <SelectItem value="advanced">{isFr ? "Professionnel" : "Professional"}</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-xs text-muted-foreground">
+                {isFr
+                  ? "Ex. : le débutant te paraît trop facile → passe en Intermédiaire (quiz 1–3 plus exigeants)."
+                  : "E.g. beginner feels too easy → switch to Intermediate (quizzes 1–3 get harder)."}
+              </p>
+            </div>
+            {(learningProfile?.equipment === "none" ||
+              learningProfile?.equipment === "controller" ||
+              !learningProfile) && (
+              <div className="space-y-1.5">
+                <Label>{isFr ? "Platine / matériel" : "Deck / gear"}</Label>
+                <Select value={editDeck} onValueChange={(v) => setEditDeck(v as TargetDeck)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="flx4">DDJ-FLX4</SelectItem>
+                    <SelectItem value="xdj_rx">XDJ-RX</SelectItem>
+                    <SelectItem value="undecided">
+                      {isFr ? "Pas encore décidé" : "Not decided yet"}
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+            <div className="space-y-1.5">
+              <Label>{isFr ? "Objectif" : "Goal"}</Label>
+              <Select value={editGoal} onValueChange={(v) => setEditGoal(v as UserGoal)}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="fun">{isFr ? "Mix pour le fun" : "Mix for fun"}</SelectItem>
+                  <SelectItem value="party">{isFr ? "Soirées entre amis" : "House parties"}</SelectItem>
+                  <SelectItem value="club">{isFr ? "Apprendre le club" : "Learn club mixing"}</SelectItem>
+                  <SelectItem value="pro">{isFr ? "Devenir DJ pro" : "Become a pro DJ"}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button
+              type="button"
+              className="w-full"
+              disabled={editPathSaving}
+              onClick={() => void handleSaveEditPath()}
+            >
+              {editPathSaving
+                ? isFr
+                  ? "Enregistrement…"
+                  : "Saving…"
+                : isFr
+                  ? "Enregistrer"
+                  : "Save"}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <Dialog open={showPathDialog} onOpenChange={setShowPathDialog}>
         <DialogContent>
           <DialogHeader>
@@ -797,8 +960,8 @@ export default function Dashboard() {
             )}
             <p>
               {isFr
-                ? "Tu changes de mat\u00e9riel plus tard ? Pas de souci : relance simplement l\u2019onboarding pour mettre \u00e0 jour ton parcours."
-                : "Changing gear later? No worries: just relaunch the onboarding to update your path."}
+                ? "Tu changes de niveau, de platine ou d\u2019objectif ? Utilise le bouton \u00ab Modifier mon parcours \u00bb en haut : ta progression (niveaux, badges, abonnement) reste intacte."
+                : "Changing level, deck, or goal? Use the \u201cEdit my path\u201d button at the top: your progress (levels, badges, subscription) stays intact."}
             </p>
             <div className="border-t border-gray-200 pt-3 space-y-2">
               <p>
