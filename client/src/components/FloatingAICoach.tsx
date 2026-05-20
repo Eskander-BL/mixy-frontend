@@ -124,16 +124,39 @@ export default function FloatingAICoach() {
     if (historyQuery.isLoading) return;
 
     const rows = historyQuery.data ?? [];
+    // On affiche TOUJOURS un greeting personnalisé frais en haut, suivi de l'historique.
+    // Le greeting est généré à la volée à partir du profil onboarding actuel, donc il
+    // reflète les vraies infos (prénom, deck, niveau, objectif) à chaque ouverture.
+    const greeting = buildGreeting(
+      isFr ? "fr" : "en",
+      userName,
+      skillLevel,
+      learningProfile?.targetDeck,
+      learningProfile?.goal,
+    );
     if (rows.length === 0) {
-      setMessages([
-        SYSTEM_PRIMER,
-        buildGreeting(isFr ? "fr" : "en", userName, skillLevel, learningProfile?.targetDeck, learningProfile?.goal),
-      ]);
+      setMessages([SYSTEM_PRIMER, greeting]);
     } else {
-      setMessages([
-        SYSTEM_PRIMER,
-        ...rows.map<Message>((m) => ({ role: m.role, content: m.content })),
-      ]);
+      // On filtre l'ancien greeting (premier message assistant du même esprit) pour ne pas
+      // afficher 2 messages d'intro à la suite.
+      const filtered: Message[] = [];
+      let skippedFirstGreeting = false;
+      for (const m of rows) {
+        const content = m.content?.trim() ?? "";
+        if (
+          !skippedFirstGreeting &&
+          m.role === "assistant" &&
+          (content.startsWith("Hello") ||
+            content.startsWith("Salut") ||
+            content.startsWith("Hey, I'm your Mixy coach") ||
+            content.startsWith("Je te vois en niveau"))
+        ) {
+          skippedFirstGreeting = true;
+          continue;
+        }
+        filtered.push({ role: m.role, content: m.content });
+      }
+      setMessages([SYSTEM_PRIMER, greeting, ...filtered]);
     }
     setHistoryLoaded(true);
   }, [

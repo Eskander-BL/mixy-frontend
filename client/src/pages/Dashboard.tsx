@@ -34,13 +34,18 @@ import { toast } from "sonner";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 
 function LevelBadge({ score, isFr }: { score?: number; isFr: boolean }) {
-  if (!score || score < 50) return null;
-  const badge =
-    score >= 90
+  // Si le score est connu en local ou en base, badge bronze/argent/or selon la valeur.
+  // Si le niveau est validé mais score inconnu (cross-device, ancien compte), on rend
+  // quand même un badge "validé" pour que l'utilisateur n'ait pas l'impression de perdre
+  // sa progression.
+  const hasKnownScore = typeof score === "number" && Number.isFinite(score) && score >= 50;
+  const badge = hasKnownScore
+    ? score! >= 90
       ? { color: "bg-yellow-400", symbol: "★", label: isFr ? "Or" : "Gold" }
-      : score >= 70
+      : score! >= 70
         ? { color: "bg-gray-300", symbol: "✦", label: isFr ? "Argent" : "Silver" }
-        : { color: "bg-amber-600", symbol: "●", label: isFr ? "Bronze" : "Bronze" };
+        : { color: "bg-amber-600", symbol: "●", label: isFr ? "Bronze" : "Bronze" }
+    : { color: "bg-emerald-500", symbol: "✓", label: isFr ? "Validé" : "Validated" };
   return (
     <div
       className={`absolute top-3 right-3 z-10 w-6 h-6 ${badge.color} rounded-full flex items-center justify-center shadow-sm`}
@@ -605,9 +610,7 @@ export default function Dashboard() {
             }
 
             if (isValidated) {
-              // Si le score n'est pas encore en base, badge bronze par défaut (niveau validé).
-              const levelScore =
-                (levelScores[String(lvl)] as number | undefined) ?? 70;
+              const levelScore = levelScores[String(lvl)] as number | undefined;
               return (
                 <div key={lvl}>
                 <Card
