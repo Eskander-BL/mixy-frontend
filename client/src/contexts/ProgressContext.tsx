@@ -10,22 +10,9 @@ import {
   type CourseTrackId,
 } from "@/lib/learning-profile";
 import { useLanguageContext } from "@/contexts/LanguageContext";
+import { readLocalCompletedLevelsForTier } from "@/lib/tier-progress-storage";
 
 const TOTAL_LEVELS = allModules.length;
-
-function readLocalCompletedLevels(): number[] {
-  try {
-    const raw = localStorage.getItem("userProgress");
-    if (!raw) return [];
-    const p = JSON.parse(raw) as { completedLevels?: unknown };
-    if (!Array.isArray(p.completedLevels)) return [];
-    return p.completedLevels
-      .map((x) => (typeof x === "number" ? x : Number(x)))
-      .filter((n) => Number.isFinite(n) && n >= 1);
-  } catch {
-    return [];
-  }
-}
 
 function readStoredUserId(): number | null {
   try {
@@ -43,11 +30,6 @@ function normalizeApiCompleted(raw: unknown): number[] {
   return raw
     .map((x: unknown) => (typeof x === "number" ? x : (x as { level?: number })?.level))
     .filter((n): n is number => typeof n === "number" && Number.isFinite(n) && n >= 1);
-}
-
-function normalizeApiCurrentLevel(raw: unknown): number | null {
-  if (typeof raw !== "number" || !Number.isFinite(raw) || raw < 1) return null;
-  return Math.floor(raw);
 }
 
 /** Premier niveau pas encore validé (quiz ≥ 50 %, etc.) : c’est le seul « niveau actif ». */
@@ -93,7 +75,7 @@ interface ProgressContextType {
 const ProgressContext = createContext<ProgressContextType | undefined>(undefined);
 
 const initialLocalCompleted = (() => {
-  const local = readLocalCompletedLevels();
+  const local = readLocalCompletedLevelsForTier("beginner");
   return [...new Set(local)].sort((a, b) => a - b);
 })();
 
@@ -146,28 +128,12 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
       const lengthForPath = getAllModules(pathTrack, nextSkill).length;
 
       const apiCompleted = normalizeApiCompleted(api?.completedLevels);
-      const apiCurrentLevel = normalizeApiCurrentLevel(api?.currentLevel);
-      const apiLastCompleted =
-        typeof api?.lastCompletedLevel === "number" && Number.isFinite(api.lastCompletedLevel)
-          ? Math.max(0, Math.floor(api.lastCompletedLevel))
-          : null;
-      const apiCompletedFromProgress =
-        apiLastCompleted && apiLastCompleted > 0
-          ? Array.from({ length: apiLastCompleted }, (_, i) => i + 1)
-          : apiCurrentLevel && apiCurrentLevel > 1
-            ? Array.from({ length: apiCurrentLevel - 1 }, (_, i) => i + 1)
-            : [];
-      const localCompleted = readLocalCompletedLevels();
-      // Pour un utilisateur connecté : union (serveur ∪ local). Le serveur reste
-      // autoritaire pour le cross-device (nouvel appareil → localStorage vide → seul le serveur compte),
-      // tandis que le localStorage permet la mise à jour optimiste immédiate après un quiz validé
-      // (avant même que le refetch ne soit revenu).
-      // Pour un invité : uniquement le local (le serveur n'a rien sur lui de pertinent).
+      const localCompleted = readLocalCompletedLevelsForTier(nextSkill);
+      // Union serveur ∪ local pour le palier actif uniquement (completed_levels + quiz_results filtrés par skill_level).
+      // On n'utilise plus lastCompletedLevel / currentLevel globaux : ils mélangeaient les paliers DJ.
       const merged =
         (userId ?? 0) > 0
-          ? [...new Set([...apiCompleted, ...apiCompletedFromProgress, ...localCompleted])].sort(
-              (a, b) => a - b,
-            )
+          ? [...new Set([...apiCompleted, ...localCompleted])].sort((a, b) => a - b)
           : [...new Set(localCompleted)].sort((a, b) => a - b);
       setCompletedLevels(merged);
       setCurrentLevel(getActiveLevelFromCompleted(merged, lengthForPath));
@@ -186,25 +152,25 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
     if (!userId || userId <= 0) return;
     if (recoverProgressFromLocalMut.isPending) return;
     const apiCompleted = normalizeApiCompleted(getProgressQuery.data?.completedLevels);
-    const localCompleted = readLocalCompletedLevels();
+    const localCompleted = readLocalCompletedLevelsForTier(skillLevel);
     if (localCompleted.length === 0) return;
     const localOnly = localCompleted
       .filter((lvl) => !apiCompleted.includes(lvl))
       .filter((lvl) => Number.isFinite(lvl) && lvl >= 1)
       .sort((a, b) => a - b);
     if (localOnly.length === 0) return;
-    const key = `${userId}:${localOnly.join(",")}`;
+    const key = `${userId}:${skillLevel}:${localOnly.join(",")}`;
     if (recoverySyncRef.current === key) return;
     recoverySyncRef.current = key;
     recoverProgressFromLocalMut.mutate(
-      { userId, completedLevels: localOnly },
+      { userId, completedLevels: localOnly, skillLevel },
       {
         onSuccess: () => {
           void getProgressQuery.refetch().then((res) => applyMergedProgress(res.data ?? getProgressQuery.data));
         },
       },
     );
-  }, [applyMergedProgress, getProgressQuery, recoverProgressFromLocalMut, userId]);
+  }, [applyMergedProgress, getProgressQuery, recoverProgressFromLocalMut, skillLevel, userId]);
 
   const refreshProgress = useCallback(() => {
     // Recalcule immédiatement avec les sources actuelles (notamment localStorage qui vient

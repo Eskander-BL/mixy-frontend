@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { isLevelUnlockedForCourse, useProgress } from "@/contexts/ProgressContext";
+import { patchTierProgress, readTierProgress, writeTierProgress } from "@/lib/tier-progress-storage";
 import { trpc } from "@/lib/trpc";
 import { scrollAppMainToTop } from "@/lib/utils";
 import { getAllModules, getModuleByLevel } from "@/lib/courses-progressive";
@@ -3674,6 +3675,7 @@ export default function QuizPage() {
         clientScore,
         clientCorrect,
         clientTotal,
+        skillLevel,
       });
     } catch (e) {
       console.error("[Quiz] submitQuiz failed:", e);
@@ -3687,20 +3689,11 @@ export default function QuizPage() {
     }
     setSavingProgress(false);
 
-    let progress: { currentLevel: number; completedLevels: number[]; scores: Record<number, number> };
-    try {
-      progress = JSON.parse(
-        localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}',
-      );
-    } catch {
-      progress = { currentLevel: 1, completedLevels: [], scores: {} };
-    }
-
-    if (!progress.completedLevels.includes(level)) {
-      progress.completedLevels.push(level);
-    }
-    progress.scores[level] = score;
-    try { localStorage.setItem("userProgress", JSON.stringify(progress)); } catch { /* storage full */ }
+    const tierSnap = readTierProgress(skillLevel);
+    const completed = [...tierSnap.completedLevels];
+    if (!completed.includes(level)) completed.push(level);
+    const scores = { ...tierSnap.scores, [String(level)]: score };
+    patchTierProgress(skillLevel, { completedLevels: completed, scores });
     // Invalide la query getProgress pour forcer un refetch frais côté serveur, puis
     // refresh local immédiat (qui ré-applique l'union local + serveur — voir ProgressContext).
     void utils.dj.getProgress.invalidate({ userId: userIdNum });
@@ -3744,10 +3737,7 @@ export default function QuizPage() {
         equipmentModel: learningProfile?.targetDeck ?? undefined,
       });
 
-      localStorage.setItem(
-        "userProgress",
-        JSON.stringify({ currentLevel: 1, completedLevels: [], scores: {} }),
-      );
+      writeTierProgress(nextTier, { completedLevels: [], scores: {} });
       void utils.dj.getProgress.invalidate({ userId: uid });
       refreshProgress();
       navigate("/dashboard");
@@ -3757,16 +3747,10 @@ export default function QuizPage() {
   };
 
   const handleBackToCourse = () => {
-    const userId = localStorage.getItem("userId");
-    if (userId) {
-      try {
-        const progress = JSON.parse(
-          localStorage.getItem("userProgress") || '{"currentLevel":1,"completedLevels":[],"scores":{}}'
-        );
-        progress.scores[level] = score;
-        localStorage.setItem("userProgress", JSON.stringify(progress));
-      } catch { /* corrupted storage — ignore */ }
-    }
+    const tierSnap = readTierProgress(skillLevel);
+    patchTierProgress(skillLevel, {
+      scores: { ...tierSnap.scores, [String(level)]: score },
+    });
     navigate(`/course/${level}`);
   };
 

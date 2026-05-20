@@ -35,6 +35,7 @@ import {
   type UserGoal,
 } from "@/lib/learning-profile";
 import type { UserLevel } from "@/lib/courses-progressive";
+import { readLocalScoresForTier, writeTierProgress } from "@/lib/tier-progress-storage";
 import { Label } from "@/components/ui/label";
 import { CompleteAccountCard } from "@/components/CompleteAccountCard";
 import { SubscriptionManageCard } from "@/components/SubscriptionManageCard";
@@ -63,17 +64,6 @@ function LevelBadge({ score, isFr }: { score?: number; isFr: boolean }) {
       <span className="text-[10px] font-bold text-white leading-none">{badge.symbol}</span>
     </div>
   );
-}
-
-function getScoresFromStorage(): Record<string, number> {
-  try {
-    const raw = localStorage.getItem("userProgress");
-    if (!raw) return {};
-    const parsed = JSON.parse(raw);
-    return parsed.scores ?? {};
-  } catch {
-    return {};
-  }
 }
 
 export default function Dashboard() {
@@ -146,7 +136,7 @@ export default function Dashboard() {
     // les appareils convergent ; mais l'utilisateur voit immédiatement le bon badge sans
     // attendre le sync réseau.
     const merged: Record<string, number> = {};
-    const local = getScoresFromStorage();
+    const local = readLocalScoresForTier(skillLevel);
     for (const [lvl, score] of Object.entries(local)) {
       const num = Number(score);
       if (Number.isFinite(num)) merged[String(lvl)] = num;
@@ -162,7 +152,7 @@ export default function Dashboard() {
           : score;
     }
     return merged;
-  }, [progressQuery.data?.quizScoresByLevel]);
+  }, [progressQuery.data?.quizScoresByLevel, skillLevel]);
 
   // Envoie les scores locaux manquants en base (badges visibles sur tous les appareils).
   const quizScoresSyncRef = useRef("");
@@ -170,7 +160,7 @@ export default function Dashboard() {
     if (!Number.isFinite(userIdNum) || userIdNum <= 0) return;
     if (syncQuizScoresMutation.isPending) return;
     const remote = progressQuery.data?.quizScoresByLevel ?? {};
-    const local = getScoresFromStorage();
+    const local = readLocalScoresForTier(skillLevel);
     const pending = Object.entries(local)
       .map(([lvl, score]) => ({ level: Number(lvl), score: Number(score) }))
       .filter(({ level, score }) => {
@@ -188,8 +178,8 @@ export default function Dashboard() {
     const key = `${userIdNum}:${pending.map((p) => `${p.level}:${p.score}`).join(",")}`;
     if (quizScoresSyncRef.current === key) return;
     quizScoresSyncRef.current = key;
-    syncQuizScoresMutation.mutate({ userId: userIdNum, scores: pending });
-  }, [userIdNum, progressQuery.data?.quizScoresByLevel, syncQuizScoresMutation]);
+    syncQuizScoresMutation.mutate({ userId: userIdNum, skillLevel, scores: pending });
+  }, [userIdNum, progressQuery.data?.quizScoresByLevel, skillLevel, syncQuizScoresMutation]);
 
   const userProfileQuery = trpc.dj.getUserProfile.useQuery(
     { userId: parseInt(localStorage.getItem("userId") || "0") },
@@ -269,10 +259,7 @@ export default function Dashboard() {
         problem: "unknown",
         equipmentModel: learningProfile?.targetDeck ?? undefined,
       });
-      localStorage.setItem(
-        "userProgress",
-        JSON.stringify({ currentLevel: 1, completedLevels: [], scores: {} }),
-      );
+      writeTierProgress(nextTier, { completedLevels: [], scores: {} });
       void utils.dj.getProgress.invalidate({ userId: uid });
       refreshProgress();
       window.location.href = "/dashboard";
@@ -861,8 +848,8 @@ export default function Dashboard() {
             <DialogTitle>{isFr ? "Modifier mon parcours" : "Edit my path"}</DialogTitle>
             <DialogDescription>
               {isFr
-                ? "Change ton niveau DJ, ta platine ou ton objectif. Tes niveaux déjà validés, tes badges et ton abonnement ne sont pas effacés."
-                : "Change your DJ level, deck, or goal. Completed levels, badges, and your subscription are not reset."}
+                ? "Change ton palier DJ, ta platine ou ton objectif. Chaque palier (Débutant, Intermédiaire, Pro) a sa propre progression : en passant en Intermédiaire tu recommences au niveau 1 de ce palier, sans perdre ce que tu as fait en Débutant."
+                : "Change your DJ tier, deck, or goal. Each tier (Beginner, Intermediate, Pro) has its own progress: switching to Intermediate starts you at level 1 of that tier, without erasing your Beginner progress."}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">

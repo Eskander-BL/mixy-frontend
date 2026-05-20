@@ -11,6 +11,8 @@ import type { TargetDeck } from "@/lib/learning-profile";
 import { persistMixyLearningProfile, readMixyLearningProfile } from "@/lib/learning-profile";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
+import { writeTierProgress } from "@/lib/tier-progress-storage";
+import type { UserLevel } from "@/lib/courses-progressive";
 
 type OnboardingStep =
   | "language"
@@ -208,12 +210,6 @@ export default function Onboarding() {
     if (!userId) return;
 
     const restart = isRestartOnboarding();
-    const progressPayload = {
-      currentLevel: 1,
-      completedLevels: [] as number[],
-      scores: {} as Record<number, number>,
-    };
-
     const trimmedName = formData.name.trim();
     saveOnboardingMutation.mutate(
       {
@@ -230,14 +226,20 @@ export default function Onboarding() {
       {
         onSuccess: () => {
           if (!restart) {
-            localStorage.setItem("userProgress", JSON.stringify(progressPayload));
+            writeTierProgress(formData.level as UserLevel, {
+              completedLevels: [],
+              scores: {},
+            });
           }
           finishOnboarding();
         },
         onError: () => {
           // Fallback UX: l'utilisateur ne reste pas bloqué sur le dernier écran.
           if (!restart) {
-            localStorage.setItem("userProgress", JSON.stringify(progressPayload));
+            writeTierProgress(formData.level as UserLevel, {
+              completedLevels: [],
+              scores: {},
+            });
           }
           finishOnboarding();
         },
