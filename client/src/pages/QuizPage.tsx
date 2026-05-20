@@ -3654,6 +3654,15 @@ export default function QuizPage() {
     }
 
     const answers = questions.map((_, idx) => selectedAnswers[idx] ?? -1);
+    // Score autoritaire : on l'envoie au serveur pour éviter les divergences entre
+    // les multiples pools de questions (beginner / intermediate / pro, EN / FR) et la
+    // grille statique du backend.
+    let clientCorrect = 0;
+    questions.forEach((q, idx) => {
+      if (selectedAnswers[idx] === q.correctAnswer) clientCorrect++;
+    });
+    const clientTotal = questions.length;
+    const clientScore = Math.round((clientCorrect / clientTotal) * 100);
 
     setSavingProgress(true);
     try {
@@ -3662,6 +3671,9 @@ export default function QuizPage() {
         level,
         answers,
         acceleratedQuiz: skillLevel !== "beginner" && level <= 3,
+        clientScore,
+        clientCorrect,
+        clientTotal,
       });
     } catch (e) {
       console.error("[Quiz] submitQuiz failed:", e);

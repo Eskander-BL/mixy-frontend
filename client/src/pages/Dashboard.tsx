@@ -139,14 +139,17 @@ export default function Dashboard() {
     const local = getScoresFromStorage();
     const pending = Object.entries(local)
       .map(([lvl, score]) => ({ level: Number(lvl), score: Number(score) }))
-      .filter(
-        ({ level, score }) =>
-          Number.isFinite(level) &&
-          level >= 1 &&
-          Number.isFinite(score) &&
-          score >= 50 &&
-          remote[level] === undefined,
-      );
+      .filter(({ level, score }) => {
+        if (!Number.isFinite(level) || level < 1) return false;
+        if (!Number.isFinite(score) || score < 50) return false;
+        // On pousse vers le serveur si :
+        // - aucun score serveur connu pour ce niveau, OU
+        // - le score local est strictement supérieur au score serveur (cas des
+        //   anciens quiz sauvés à tort à 20-40% à cause du bug de grille de réponses).
+        const remoteScore = remote[level];
+        if (typeof remoteScore !== "number" || !Number.isFinite(remoteScore)) return true;
+        return score > remoteScore;
+      });
     if (pending.length === 0) return;
     const key = `${userIdNum}:${pending.map((p) => `${p.level}:${p.score}`).join(",")}`;
     if (quizScoresSyncRef.current === key) return;
