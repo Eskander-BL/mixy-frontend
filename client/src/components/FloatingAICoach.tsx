@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { useLocation } from "wouter";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
@@ -8,34 +8,80 @@ import { brand } from "@/assets/brand-assets";
 import { useProgress } from "@/contexts/ProgressContext";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 
+const SYSTEM_PRIMER: Message = { role: "system", content: "You are Mixy Coach." };
+
+function buildGreeting(language: "fr" | "en", userName: string | null): Message {
+  const name = userName?.trim();
+  if (language === "fr") {
+    return {
+      role: "assistant",
+      content: name
+        ? `Hello ${name} ! Sur quoi tu veux qu’on bosse aujourd’hui ? (cours, BPM, transitions, équipement…)`
+        : "Salut, je suis ton coach Mixy. Pose-moi une question sur le DJing ou ton cours.",
+    };
+  }
+  return {
+    role: "assistant",
+    content: name
+      ? `Hello ${name}! What do you want to work on today? (course, BPM, transitions, gear…)`
+      : "Hey, I'm your Mixy coach. Ask me anything about DJing or your current course.",
+  };
+}
+
 export default function FloatingAICoach() {
   const [location] = useLocation();
-  const { courseTrack, skillLevel, completedLevels, learningProfile } = useProgress();
+  const { courseTrack, skillLevel, completedLevels, learningProfile, userName } = useProgress();
   const { language } = useLanguageContext();
   const isFr = language === "fr";
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "system", content: "You are Mixy Coach." },
-    {
-      role: "assistant",
-      content:
-        language === "fr"
-          ? "Salut, je suis ton coach Mixy. Pose-moi une question sur le DJing ou ton cours."
-          : "Hey, I'm your Mixy coach. Ask me anything about DJing or your current course.",
-    },
+  const [historyLoaded, setHistoryLoaded] = useState(false);
+  const [messages, setMessages] = useState<Message[]>(() => [
+    SYSTEM_PRIMER,
+    buildGreeting(language === "fr" ? "fr" : "en", null),
   ]);
 
+  const userId = Number.parseInt(localStorage.getItem("userId") || "0", 10);
+  const hasUserId = Number.isFinite(userId) && userId > 0;
+
+  const historyQuery = trpc.ai.getHistory.useQuery(
+    { userId },
+    { enabled: hasUserId, staleTime: 60_000 },
+  );
+
   useEffect(() => {
-    setMessages(prev => {
-      const newGreeting = language === "fr"
-        ? "Salut, je suis ton coach Mixy. Pose-moi une question sur le DJing ou ton cours."
-        : "Hey, I'm your Mixy coach. Ask me anything about DJing or your current course.";
-      if (prev.length >= 2 && prev[1].role === "assistant" && prev[1].content !== newGreeting) {
-        return [prev[0], { ...prev[1], content: newGreeting }, ...prev.slice(2)];
+    if (historyLoaded) return;
+    if (!hasUserId) {
+      setMessages((prev) => {
+        if (prev.length >= 2 && prev[1].role === "assistant") {
+          return [SYSTEM_PRIMER, buildGreeting(isFr ? "fr" : "en", userName)];
+        }
+        return prev;
+      });
+      return;
+    }
+    if (historyQuery.isLoading) return;
+
+    const rows = historyQuery.data ?? [];
+    if (rows.length === 0) {
+      setMessages([SYSTEM_PRIMER, buildGreeting(isFr ? "fr" : "en", userName)]);
+    } else {
+      setMessages([
+        SYSTEM_PRIMER,
+        ...rows.map<Message>((m) => ({ role: m.role, content: m.content })),
+      ]);
+    }
+    setHistoryLoaded(true);
+  }, [hasUserId, historyQuery.data, historyQuery.isLoading, historyLoaded, isFr, userName]);
+
+  useEffect(() => {
+    if (historyLoaded) return;
+    setMessages((prev) => {
+      if (prev.length === 2 && prev[1].role === "assistant") {
+        return [SYSTEM_PRIMER, buildGreeting(isFr ? "fr" : "en", userName)];
       }
       return prev;
     });
-  }, [language]);
+  }, [historyLoaded, isFr, userName]);
 
   const level = useMemo(() => {
     const match = location.match(/\/course\/(\d+)/);
@@ -43,13 +89,54 @@ export default function FloatingAICoach() {
     return Number.parseInt(match[1], 10) || 1;
   }, [location]);
 
-  const module = getModuleByLevel(level, courseTrack, skillLevel, language, learningProfile?.targetDeck, learningProfile?.goal);
-  const slide = getSlideFromModule(level, 1, courseTrack, skillLevel, language, learningProfile?.targetDeck, learningProfile?.goal);
-  const userId = Number.parseInt(localStorage.getItem("userId") || "0", 10);
+  const module = getModuleByLevel(
+    level,
+    courseTrack,
+    skillLevel,
+    language,
+    learningProfile?.targetDeck,
+    learningProfile?.goal,
+  );
+  const slide = getSlideFromModule(
+    level,
+    1,
+    courseTrack,
+    skillLevel,
+    language,
+    learningProfile?.targetDeck,
+    learningProfile?.goal,
+  );
+
   const quizInsightsQuery = trpc.dj.getQuizInsights.useQuery(
     { userId },
-    { enabled: Number.isFinite(userId) && userId > 0 }
+    { enabled: hasUserId },
   );
+
+  // Backfill du prénom en base : si la base n'a pas encore notre prénom (ancien compte avant
+  // cette release) mais qu'on l'a dans le localStorage de l'onboarding, on le pousse une fois.
+  const updateNameMut = trpc.dj.updateName.useMutation();
+  const utils = trpc.useUtils();
+  const backfillRef = useRef(false);
+  useEffect(() => {
+    if (backfillRef.current) return;
+    if (!hasUserId) return;
+    const localName = (localStorage.getItem("mixyUserName") || "").trim();
+    if (!localName) return;
+    const remoteName = (userName || "").trim();
+    if (remoteName === localName) return;
+    backfillRef.current = true;
+    updateNameMut.mutate(
+      { userId, name: localName },
+      {
+        onSuccess: () => {
+          void utils.dj.getProgress.invalidate({ userId });
+        },
+        onError: () => {
+          backfillRef.current = false;
+        },
+      },
+    );
+  }, [hasUserId, userId, userName, updateNameMut, utils]);
 
   const chatMutation = trpc.ai.chat.useMutation({
     onSuccess: (result) => {
@@ -59,6 +146,9 @@ export default function FloatingAICoach() {
           ? "Je n'ai pas pu générer de réponse, réessaie dans un instant."
           : "I could not generate a response, please try again in a moment.");
       setMessages((prev) => [...prev, { role: "assistant", content: response }]);
+      if (hasUserId) {
+        void utils.ai.getHistory.invalidate({ userId });
+      }
     },
     onError: () => {
       setMessages((prev) => [
@@ -75,16 +165,24 @@ export default function FloatingAICoach() {
 
   const handleSendMessage = (content: string) => {
     setMessages((prev) => [...prev, { role: "user", content }]);
-    const allModules = getAllModules(courseTrack, skillLevel, language, learningProfile?.targetDeck, learningProfile?.goal);
+    const allModules = getAllModules(
+      courseTrack,
+      skillLevel,
+      language,
+      learningProfile?.targetDeck,
+      learningProfile?.goal,
+    );
     chatMutation.mutate({
+      userId: hasUserId ? userId : undefined,
       userMessage: content,
       currentLevel: level,
       courseTitle: module?.title ?? (isFr ? "Parcours DJ" : "DJ learning path"),
-      currentSlideContent: slide?.content ?? (isFr ? "Pas de slide active, coaching général." : "No active slide, general coaching."),
+      currentSlideContent:
+        slide?.content ?? (isFr ? "Pas de slide active, coaching général." : "No active slide, general coaching."),
       language,
       skillLevel,
       weakLevels: quizInsightsQuery.data?.weakLevels ?? [],
-      userName: localStorage.getItem("mixyUserName") || undefined,
+      userName: userName?.trim() || localStorage.getItem("mixyUserName") || undefined,
       equipment: learningProfile?.targetDeck || undefined,
       goal: learningProfile?.goal || undefined,
       completedLevels: completedLevels.length > 0 ? completedLevels : undefined,

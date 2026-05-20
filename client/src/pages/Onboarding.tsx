@@ -98,6 +98,7 @@ export default function Onboarding() {
             setUserId(validUserId);
             localStorage.setItem("guestId", result.guestId);
             localStorage.setItem("userId", String(validUserId));
+            window.dispatchEvent(new Event("mixy-auth-updated"));
             const lang = result.language;
             const userAlreadyChose = localStorage.getItem("language");
             if ((lang === "en" || lang === "fr") && !userAlreadyChose) {
@@ -168,9 +169,11 @@ export default function Onboarding() {
       scores: {},
     };
 
+    const trimmedName = formData.name.trim();
     saveOnboardingMutation.mutate(
       {
         userId,
+        name: trimmedName.length > 0 ? trimmedName : undefined,
         level: formData.level,
         goal: formData.goal,
         equipment: formData.equipment,

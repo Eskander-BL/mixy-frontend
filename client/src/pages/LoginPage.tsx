@@ -26,6 +26,7 @@ export default function LoginPage() {
         localStorage.setItem("userId", String(data.userId));
       }
       localStorage.removeItem("guestId");
+      window.dispatchEvent(new Event("mixy-auth-updated"));
       await utils.invalidate();
       toast.success(isFr ? "Connexion réussie" : "Signed in successfully");
       navigate("/dashboard");

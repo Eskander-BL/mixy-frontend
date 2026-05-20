@@ -27,6 +27,17 @@ function readLocalCompletedLevels(): number[] {
   }
 }
 
+function readStoredUserId(): number | null {
+  try {
+    const raw = localStorage.getItem("userId");
+    if (!raw) return null;
+    const parsed = Number.parseInt(raw, 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
 function normalizeApiCompleted(raw: unknown): number[] {
   if (!raw || !Array.isArray(raw)) return [];
   return raw
@@ -74,6 +85,8 @@ interface ProgressContextType {
   skillLevel: UserLevel;
   /** Niveau 1 : contenu FLX4 vs XDJ-RX ; niveaux suivants identiques. */
   courseTrack: CourseTrackId;
+  /** Prénom de l’utilisateur (depuis la base), null tant qu’on n’a pas encore l’info. */
+  userName: string | null;
   refreshProgress: () => void;
 }
 
@@ -91,6 +104,9 @@ function normalizeSkillLevel(raw: unknown): UserLevel {
 
 export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { language: ctxLang } = useLanguageContext();
+  const [userId, setUserId] = useState<number | null>(() =>
+    typeof window === "undefined" ? null : readStoredUserId(),
+  );
   const [currentLevel, setCurrentLevel] = useState<number>(() =>
     getActiveLevelFromCompleted(initialLocalCompleted, TOTAL_LEVELS)
   );
@@ -102,13 +118,13 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   const userLanguage: "en" | "fr" = ctxLang === "fr" ? "fr" : "en";
 
   const getProgressQuery = trpc.dj.getProgress.useQuery(
-    { userId: parseInt(localStorage.getItem("userId") || "0", 10) },
-    { enabled: !!localStorage.getItem("userId") }
+    { userId: userId ?? 0 },
+    { enabled: (userId ?? 0) > 0 }
   );
 
   const subscriptionQuery = trpc.stripe.getSubscriptionStatus.useQuery(
-    { userId: parseInt(localStorage.getItem("userId") || "0", 10) },
-    { enabled: !!localStorage.getItem("userId") }
+    { userId: userId ?? 0 },
+    { enabled: (userId ?? 0) > 0 }
   );
   const hasActiveSubscription = subscriptionQuery.data?.isActive === true;
 
@@ -141,13 +157,14 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
             ? Array.from({ length: apiCurrentLevel - 1 }, (_, i) => i + 1)
             : [];
       const localCompleted = readLocalCompletedLevels();
-      const merged = [...new Set([...apiCompleted, ...apiCompletedFromProgress, ...localCompleted])].sort(
-        (a, b) => a - b
-      );
+      const merged =
+        (userId ?? 0) > 0
+          ? [...new Set([...apiCompleted, ...apiCompletedFromProgress])].sort((a, b) => a - b)
+          : [...new Set(localCompleted)].sort((a, b) => a - b);
       setCompletedLevels(merged);
       setCurrentLevel(getActiveLevelFromCompleted(merged, lengthForPath));
     },
-    [getProgressQuery.data, learningProfile],
+    [getProgressQuery.data, learningProfile, userId],
   );
 
   useEffect(() => {
@@ -155,11 +172,31 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   }, [applyMergedProgress]);
 
   const refreshProgress = useCallback(() => {
+    if (!userId || userId <= 0) {
+      applyMergedProgress(null);
+      return;
+    }
     void subscriptionQuery.refetch();
     void getProgressQuery
       .refetch()
       .then((res) => applyMergedProgress(res.data ?? getProgressQuery.data));
-  }, [getProgressQuery, subscriptionQuery, applyMergedProgress]);
+  }, [getProgressQuery, subscriptionQuery, applyMergedProgress, userId]);
+
+  useEffect(() => {
+    const syncStoredUser = () => {
+      setUserId(readStoredUserId());
+    };
+
+    syncStoredUser();
+    window.addEventListener("storage", syncStoredUser);
+    window.addEventListener("focus", syncStoredUser);
+    window.addEventListener("mixy-auth-updated", syncStoredUser);
+    return () => {
+      window.removeEventListener("storage", syncStoredUser);
+      window.removeEventListener("focus", syncStoredUser);
+      window.removeEventListener("mixy-auth-updated", syncStoredUser);
+    };
+  }, []);
 
   useEffect(() => {
     const syncProfile = () => setLearningProfile(readMixyLearningProfile());
@@ -184,6 +221,15 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   }, [getProgressQuery.data?.learningProfile]);
 
 
+  const apiUserName = (getProgressQuery.data as { userName?: string | null } | undefined)?.userName ?? null;
+  const userName: string | null = (() => {
+    const trimmedApi = apiUserName?.trim() ?? "";
+    if (trimmedApi.length > 0) return trimmedApi;
+    if (typeof window === "undefined") return null;
+    const local = localStorage.getItem("mixyUserName")?.trim() ?? "";
+    return local.length > 0 ? local : null;
+  })();
+
   return (
     <ProgressContext.Provider
       value={{
@@ -194,6 +240,7 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
         learningProfile,
         skillLevel,
         courseTrack,
+        userName,
         refreshProgress,
       }}
     >

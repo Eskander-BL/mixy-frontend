@@ -29,6 +29,7 @@ export function CompleteAccountCard({ onSuccess, variant = "prominent" }: Props)
       if (data.userId) {
         localStorage.setItem("userId", String(data.userId));
       }
+      window.dispatchEvent(new Event("mixy-auth-updated"));
       await utils.invalidate();
       toast.success(
         isFr
