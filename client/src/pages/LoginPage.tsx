@@ -22,6 +22,10 @@ export default function LoginPage() {
 
   const loginMut = trpc.auth.loginWithEmail.useMutation({
     onSuccess: async (data) => {
+      // Purge la progression locale du visiteur précédent (compte invité ou autre compte sur cet
+      // appareil) : sinon, les niveaux locaux deviendraient visibles pour ce nouveau compte le
+      // temps que le serveur renvoie les vraies données.
+      localStorage.removeItem("userProgress");
       if (data.userId) {
         localStorage.setItem("userId", String(data.userId));
       }

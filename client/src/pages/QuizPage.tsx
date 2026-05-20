@@ -3689,6 +3689,9 @@ export default function QuizPage() {
     }
     progress.scores[level] = score;
     try { localStorage.setItem("userProgress", JSON.stringify(progress)); } catch { /* storage full */ }
+    // Invalide la query getProgress pour forcer un refetch frais côté serveur, puis
+    // refresh local immédiat (qui ré-applique l'union local + serveur — voir ProgressContext).
+    void utils.dj.getProgress.invalidate({ userId: userIdNum });
     refreshProgress();
 
     if (hasActiveSubscription) {

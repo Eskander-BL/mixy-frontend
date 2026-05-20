@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef, ReactNode } from "react";
 import { trpc } from "@/lib/trpc";
 import { allModules, getAllModules, type UserLevel } from "@/lib/courses-progressive";
 import {
@@ -157,9 +157,16 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
             ? Array.from({ length: apiCurrentLevel - 1 }, (_, i) => i + 1)
             : [];
       const localCompleted = readLocalCompletedLevels();
+      // Pour un utilisateur connecté : union (serveur ∪ local). Le serveur reste
+      // autoritaire pour le cross-device (nouvel appareil → localStorage vide → seul le serveur compte),
+      // tandis que le localStorage permet la mise à jour optimiste immédiate après un quiz validé
+      // (avant même que le refetch ne soit revenu).
+      // Pour un invité : uniquement le local (le serveur n'a rien sur lui de pertinent).
       const merged =
         (userId ?? 0) > 0
-          ? [...new Set([...apiCompleted, ...apiCompletedFromProgress])].sort((a, b) => a - b)
+          ? [...new Set([...apiCompleted, ...apiCompletedFromProgress, ...localCompleted])].sort(
+              (a, b) => a - b,
+            )
           : [...new Set(localCompleted)].sort((a, b) => a - b);
       setCompletedLevels(merged);
       setCurrentLevel(getActiveLevelFromCompleted(merged, lengthForPath));
@@ -172,8 +179,11 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
   }, [applyMergedProgress]);
 
   const refreshProgress = useCallback(() => {
+    // Recalcule immédiatement avec les sources actuelles (notamment localStorage qui vient
+    // d'être mis à jour après un quiz validé) pour que la navigation suivante voie l'état frais
+    // sans attendre la résolution du refetch réseau.
+    applyMergedProgress();
     if (!userId || userId <= 0) {
-      applyMergedProgress(null);
       return;
     }
     void subscriptionQuery.refetch();
@@ -197,6 +207,22 @@ export const ProgressProvider: React.FC<{ children: ReactNode }> = ({ children }
       window.removeEventListener("mixy-auth-updated", syncStoredUser);
     };
   }, []);
+
+  // Anti-contamination cross-utilisateur : si on bascule d'un userId N à un userId M différent
+  // (ex. user A se déconnecte, user B se connecte sur le même appareil), on purge la progression
+  // locale pour ne pas montrer les niveaux de A à B en attendant que le serveur réponde.
+  const lastUserIdRef = useRef<number | null>(userId);
+  useEffect(() => {
+    const prev = lastUserIdRef.current;
+    if (prev !== null && userId !== null && prev !== userId) {
+      try {
+        localStorage.removeItem("userProgress");
+      } catch {
+        // localStorage indisponible — ignorer.
+      }
+    }
+    lastUserIdRef.current = userId;
+  }, [userId]);
 
   useEffect(() => {
     const syncProfile = () => setLearningProfile(readMixyLearningProfile());
