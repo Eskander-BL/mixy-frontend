@@ -107,6 +107,12 @@ export default function Dashboard() {
     syncStreakMutation.mutate({ userId: userIdNum });
   }, [userIdNum]);
 
+  const syncQuizScoresMutation = trpc.dj.syncQuizScoresFromLocal.useMutation({
+    onSuccess: () => {
+      void progressQuery.refetch();
+    },
+  });
+
   const levelScores = useMemo(() => {
     const merged: Record<string, number> = { ...getScoresFromStorage() };
     const remote = progressQuery.data?.quizScoresByLevel ?? {};
@@ -117,6 +123,30 @@ export default function Dashboard() {
     }
     return merged;
   }, [progressQuery.data?.quizScoresByLevel]);
+
+  // Envoie les scores locaux manquants en base (badges visibles sur tous les appareils).
+  const quizScoresSyncRef = useRef("");
+  useEffect(() => {
+    if (!Number.isFinite(userIdNum) || userIdNum <= 0) return;
+    if (syncQuizScoresMutation.isPending) return;
+    const remote = progressQuery.data?.quizScoresByLevel ?? {};
+    const local = getScoresFromStorage();
+    const pending = Object.entries(local)
+      .map(([lvl, score]) => ({ level: Number(lvl), score: Number(score) }))
+      .filter(
+        ({ level, score }) =>
+          Number.isFinite(level) &&
+          level >= 1 &&
+          Number.isFinite(score) &&
+          score >= 50 &&
+          remote[level] === undefined,
+      );
+    if (pending.length === 0) return;
+    const key = `${userIdNum}:${pending.map((p) => `${p.level}:${p.score}`).join(",")}`;
+    if (quizScoresSyncRef.current === key) return;
+    quizScoresSyncRef.current = key;
+    syncQuizScoresMutation.mutate({ userId: userIdNum, scores: pending });
+  }, [userIdNum, progressQuery.data?.quizScoresByLevel, syncQuizScoresMutation]);
 
   const userProfileQuery = trpc.dj.getUserProfile.useQuery(
     { userId: parseInt(localStorage.getItem("userId") || "0") },
@@ -575,7 +605,9 @@ export default function Dashboard() {
             }
 
             if (isValidated) {
-              const levelScore = levelScores[String(lvl)] as number | undefined;
+              // Si le score n'est pas encore en base, badge bronze par défaut (niveau validé).
+              const levelScore =
+                (levelScores[String(lvl)] as number | undefined) ?? 70;
               return (
                 <div key={lvl}>
                 <Card
