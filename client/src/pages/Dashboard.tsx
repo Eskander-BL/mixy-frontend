@@ -120,12 +120,26 @@ export default function Dashboard() {
   });
 
   const levelScores = useMemo(() => {
-    const merged: Record<string, number> = { ...getScoresFromStorage() };
+    // On garde le score le plus élevé entre local et serveur. Cas typique : ancien score
+    // serveur sous-évalué (bug de grille de réponses pré-clientScore) vs vrai score local.
+    // Le sync auto plus bas pousse ensuite le local vers le serveur si supérieur, donc tous
+    // les appareils convergent ; mais l'utilisateur voit immédiatement le bon badge sans
+    // attendre le sync réseau.
+    const merged: Record<string, number> = {};
+    const local = getScoresFromStorage();
+    for (const [lvl, score] of Object.entries(local)) {
+      const num = Number(score);
+      if (Number.isFinite(num)) merged[String(lvl)] = num;
+    }
     const remote = progressQuery.data?.quizScoresByLevel ?? {};
     for (const [lvl, score] of Object.entries(remote)) {
-      if (typeof score === "number" && Number.isFinite(score)) {
-        merged[String(lvl)] = score;
-      }
+      if (typeof score !== "number" || !Number.isFinite(score)) continue;
+      const key = String(lvl);
+      const existing = merged[key];
+      merged[key] =
+        typeof existing === "number" && Number.isFinite(existing)
+          ? Math.max(existing, score)
+          : score;
     }
     return merged;
   }, [progressQuery.data?.quizScoresByLevel]);

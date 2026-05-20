@@ -86,6 +86,12 @@ export default function Onboarding() {
     if (storedGuestId && parsedUserId) {
       setGuestId(storedGuestId);
       setUserId(parsedUserId);
+    } else if (parsedUserId && !storedGuestId) {
+      // Utilisateur déjà enregistré (email + mot de passe) qui revient sur /onboarding :
+      // on ne crée surtout PAS un nouvel invité (ça écraserait son userId existant et
+      // déconnecterait sa progression sur cet appareil). On le renvoie vers le dashboard.
+      navigate("/dashboard");
+      return;
     } else {
       localStorage.removeItem("userId");
       localStorage.removeItem("guestId");
