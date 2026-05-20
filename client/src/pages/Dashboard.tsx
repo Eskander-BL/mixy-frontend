@@ -391,7 +391,7 @@ export default function Dashboard() {
               <button
                 type="button"
                 className={headerActionClass + " pl-2.5 pr-3"}
-                onClick={() => navigate("/onboarding")}
+                onClick={() => navigate("/onboarding?restart=1")}
               >
                 <Undo2 className="size-4 shrink-0 text-primary" aria-hidden />
                 {isFr ? "Retourner à l'onboarding" : "Back to onboarding"}

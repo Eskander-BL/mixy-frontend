@@ -8,7 +8,7 @@ import { ChevronRight } from "lucide-react";
 import { brand } from "@/assets/brand-assets";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import type { TargetDeck } from "@/lib/learning-profile";
-import { persistMixyLearningProfile } from "@/lib/learning-profile";
+import { persistMixyLearningProfile, readMixyLearningProfile } from "@/lib/learning-profile";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 import { toast } from "sonner";
 
@@ -78,6 +78,11 @@ export default function Onboarding() {
     return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
   };
 
+  const isRestartOnboarding = () => {
+    if (typeof window === "undefined") return false;
+    return new URLSearchParams(window.location.search).get("restart") === "1";
+  };
+
   useEffect(() => {
     const storedGuestId = localStorage.getItem("guestId");
     const storedUserId = localStorage.getItem("userId");
@@ -87,9 +92,22 @@ export default function Onboarding() {
       setGuestId(storedGuestId);
       setUserId(parsedUserId);
     } else if (parsedUserId && !storedGuestId) {
-      // Utilisateur déjà enregistré (email + mot de passe) qui revient sur /onboarding :
-      // on ne crée surtout PAS un nouvel invité (ça écraserait son userId existant et
-      // déconnecterait sa progression sur cet appareil). On le renvoie vers le dashboard.
+      if (isRestartOnboarding()) {
+        // Relance volontaire depuis le dashboard : mettre à jour matos / objectif / niveau
+        // sans créer un nouvel invité ni effacer la progression (voir handleSaveOnboarding).
+        setUserId(parsedUserId);
+        const localName = localStorage.getItem("mixyUserName")?.trim() ?? "";
+        const profile = readMixyLearningProfile();
+        setFormData((prev) => ({
+          ...prev,
+          ...(localName ? { name: localName } : {}),
+          ...(profile?.goal ? { goal: profile.goal } : {}),
+          ...(profile?.equipment ? { equipment: profile.equipment } : {}),
+          ...(profile?.targetDeck ? { targetDeck: profile.targetDeck } : {}),
+        }));
+        return;
+      }
+      // Accès direct à /onboarding sans ?restart=1 : évite de recréer un guest par erreur.
       navigate("/dashboard");
       return;
     } else {
@@ -166,13 +184,34 @@ export default function Onboarding() {
     });
   };
 
+  const finishOnboarding = () => {
+    const targetDeck =
+      formData.equipment === "none" || formData.equipment === "controller"
+        ? formData.targetDeck ?? "undecided"
+        : null;
+    persistMixyLearningProfile({
+      equipment: formData.equipment,
+      targetDeck,
+      goal: formData.goal,
+    });
+    if (userId) {
+      pushLearningProfileToServer(userId, formData.equipment, targetDeck);
+      void utils.dj.getProgress.invalidate({ userId });
+    }
+    if (formData.name.trim()) localStorage.setItem("mixyUserName", formData.name.trim());
+    window.dispatchEvent(new Event("mixy-learning-profile-updated"));
+    window.dispatchEvent(new Event("mixy-auth-updated"));
+    navigate("/dashboard");
+  };
+
   const handleSaveOnboarding = () => {
     if (!userId) return;
 
+    const restart = isRestartOnboarding();
     const progressPayload = {
       currentLevel: 1,
-      completedLevels: [],
-      scores: {},
+      completedLevels: [] as number[],
+      scores: {} as Record<number, number>,
     };
 
     const trimmedName = formData.name.trim();
@@ -190,41 +229,17 @@ export default function Onboarding() {
       },
       {
         onSuccess: () => {
-          const targetDeck =
-            formData.equipment === "none" || formData.equipment === "controller"
-              ? formData.targetDeck ?? "undecided"
-              : null;
-          persistMixyLearningProfile({
-            equipment: formData.equipment,
-            targetDeck,
-            goal: formData.goal,
-          });
-          if (userId) {
-            pushLearningProfileToServer(userId, formData.equipment, targetDeck);
-            void utils.dj.getProgress.invalidate({ userId });
+          if (!restart) {
+            localStorage.setItem("userProgress", JSON.stringify(progressPayload));
           }
-          localStorage.setItem("userProgress", JSON.stringify(progressPayload));
-          if (formData.name.trim()) localStorage.setItem("mixyUserName", formData.name.trim());
-          navigate("/dashboard");
+          finishOnboarding();
         },
         onError: () => {
           // Fallback UX: l'utilisateur ne reste pas bloqué sur le dernier écran.
-          const targetDeck =
-            formData.equipment === "none" || formData.equipment === "controller"
-              ? formData.targetDeck ?? "undecided"
-              : null;
-          persistMixyLearningProfile({
-            equipment: formData.equipment,
-            targetDeck,
-            goal: formData.goal,
-          });
-          if (userId) {
-            pushLearningProfileToServer(userId, formData.equipment, targetDeck);
-            void utils.dj.getProgress.invalidate({ userId });
+          if (!restart) {
+            localStorage.setItem("userProgress", JSON.stringify(progressPayload));
           }
-          localStorage.setItem("userProgress", JSON.stringify(progressPayload));
-          if (formData.name.trim()) localStorage.setItem("mixyUserName", formData.name.trim());
-          navigate("/dashboard");
+          finishOnboarding();
         },
       }
     );
