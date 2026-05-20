@@ -34,18 +34,19 @@ import { toast } from "sonner";
 import { useLanguageContext } from "@/contexts/LanguageContext";
 
 function LevelBadge({ score, isFr }: { score?: number; isFr: boolean }) {
-  // Si le score est connu en local ou en base, badge bronze/argent/or selon la valeur.
-  // Si le niveau est validé mais score inconnu (cross-device, ancien compte), on rend
-  // quand même un badge "validé" pour que l'utilisateur n'ait pas l'impression de perdre
-  // sa progression.
-  const hasKnownScore = typeof score === "number" && Number.isFinite(score) && score >= 50;
-  const badge = hasKnownScore
-    ? score! >= 90
+  // Si le score est connu (local ou base) on affiche bronze/argent/or selon la note.
+  // Si le niveau est validé mais score inconnu (cross-device, ancien compte avant
+  // persistance des scores), on affiche un badge Argent par défaut : un niveau validé
+  // l'a forcément été avec un score >= 50, donc on évite le badge bronze trompeur et on
+  // garde l'esthétique des badges DJ.
+  const effective =
+    typeof score === "number" && Number.isFinite(score) && score >= 50 ? score : 70;
+  const badge =
+    effective >= 90
       ? { color: "bg-yellow-400", symbol: "★", label: isFr ? "Or" : "Gold" }
-      : score! >= 70
+      : effective >= 70
         ? { color: "bg-gray-300", symbol: "✦", label: isFr ? "Argent" : "Silver" }
-        : { color: "bg-amber-600", symbol: "●", label: isFr ? "Bronze" : "Bronze" }
-    : { color: "bg-emerald-500", symbol: "✓", label: isFr ? "Validé" : "Validated" };
+        : { color: "bg-amber-600", symbol: "●", label: isFr ? "Bronze" : "Bronze" };
   return (
     <div
       className={`absolute top-3 right-3 z-10 w-6 h-6 ${badge.color} rounded-full flex items-center justify-center shadow-sm`}
