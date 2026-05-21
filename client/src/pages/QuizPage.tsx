@@ -3762,8 +3762,18 @@ export default function QuizPage() {
           <div className="mb-4 flex justify-center quiz-mascot-animate">
             <img src={brand.excellent} alt="" className="h-40 md:h-48 w-auto max-w-[300px] object-contain" aria-hidden />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {isFr ? `Bravo ! Tu as terminé le parcours ${currentTierLabel} !` : `Amazing! You completed the ${currentTierLabel} path!`}
+          <h1 className="text-2xl md:text-[1.625rem] font-bold text-gray-900 mb-2 leading-tight px-1">
+            {isFr ? (
+              <>
+                Bravo ! Tu as terminé le parcours {currentTierLabel}
+                {"\u00a0"}!
+              </>
+            ) : (
+              <>
+                Amazing! You completed the {currentTierLabel} path
+                {"\u00a0"}!
+              </>
+            )}
           </h1>
           <p className="text-gray-600 mb-6">
             {isFr
